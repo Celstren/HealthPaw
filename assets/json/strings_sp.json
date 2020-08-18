@@ -1,0 +1,133 @@
+{
+    "HealthPaw": "HealthPaw",
+
+    "Owner": "Dueño",
+    "Owners": "Dueños",
+
+    "Accept": "Aceptar",
+    "Close": "Cerrar",
+    "Register": "Registrar",
+    "Cancel": "Cancelar",
+    "Sounds": "Sonidos",
+    "Alerts": "Alertas",
+    "Record": "Grabar",
+    "PetsList": "Lista de Mascotas",
+    "Home": "Inicio",
+    "Profile": "Perfil",
+    "CardiacHistory": "Historial Cardiaco",
+    "History": "Historial",
+    "Names": "Nombres",
+    "BirthDay": "Fecha de nacimiento",
+    "Status": "Estado",
+    "EnvironmentalTemperature": "Temperatura Ambiental",
+    "Localization": "Localización",
+    "Calibrate": "Calibrar",
+    "Calibrated": "Calibrado",
+    "ConnectionConfirmed": "Conexión confirmada",
+    "Synchronize": "Sincronizar",
+
+    "Pets": "Mascotas",
+    "Collars": "Collares",
+
+    "StatusOverview": "Resumen de estado",
+    "HearthRate": "Ritmo Cardíaco",
+
+    "Login": "Ingresar",
+    "Username": "Nombre de usuario",
+    "Password": "Contraseña",
+    "Terms&ConditionsLabel": "Al continuar, estás aceptando nuestros Términos y Condiciones",
+
+    "DefaultSound": "Sonido Predeterminado",
+    "PlayingSound": "Reproduciendo Sonido",
+    "StopPlaying": "Dejar de reproducir",
+    "Play": "Reproducir",
+    "SendAudio": "Enviar audio",
+    "SendVoiceNote": "Enviar nota de voz",
+    "RecordVoiceNote": "Grabar nota de voz",
+    "KeepPressingToRecordVoiceNote": "Mantenga presionado para grabar la nota de voz",
+
+    "Notification": "Notificaciones",
+    "IncreasingHeartRate": "Ritmo cardiaco aumentando",
+    "BeatsPerMinute": "Pulsaciones por minuto",
+    "Recommendations": "Recomendaciones",
+    "AlertSend": "Alerta Enviada",
+
+    "HeartRateHistory": "Historial de ritmo cardíaco",
+    "Media": "Media",
+    "MaximumAbb": "Max",
+    "MinimumAbb": "Min",
+
+    "SyncWearable": "Sincronizar wearable",
+
+    "PhysicalActivityHistory": "Historial de actividad física",
+    "PetProile": "Perfil de mascota",
+    
+    "PetOverview": "Resumen de mascota",
+    "CardiacFrequency": "Frecuencia cardiaca",
+    "BreathFrequency": "Frecuencia respiratoria",
+    "PhysicalActivity": "Actividad física",
+
+    "TodaySoundIntensity": "Intensidad de sonido de hoy",
+    "TodayEnvironmentalTemperature": "Temperatura Ambiente de hoy",
+    "TodayPhysicalActivity": "Actividad física de hoy",
+    "BreathFrequencyHistory": "Historial de frecuencia respiratoria",
+
+    "AssignOwner": "Asignar Dueño",
+    "OwnerMail": "Correo Dueño",
+    "OwnerAssigned": "Dueño asignados",
+
+    "LocationOf": "La ubicación de",
+    "is": "es",
+
+    "User": "Usuario",
+    "Vets": "Veterinarios",
+
+    "RegisterVet": "Registrar Veterinario",
+    "Lastnames": "Apellidos",
+    "Password2": "Contraseña2",
+    "MobileNumber": "Celular",
+    "Email": "Correo Electrónico",
+
+    "AdministratorProfile": "Perfil de Administrador",
+
+    "RegisterForm": "Formato de Registro",
+
+    "RegisterPet": "Registrar mascota",
+
+    "Administrator": "Administrador",
+    "RegisterUsers": "Registro Usuarios",
+
+    "LocatePet": "Localizar mascota",
+
+    "SendMessage": "Enviar mensaje",
+    "SendNotification": "Redactar notificación",
+
+    "PetsAssigned": "Mascotas asignadas",
+
+    "BeatsPerMinuteUnits": "ppm",
+    "BreathsPerMinuteUnits": "rpm",
+    "DecibelsAbb": "dB",
+    "TemperatureUnits": "°C",
+
+    "Day": "Día",
+    "Month": "Mes",
+    "Year": "Año",
+
+    "pm": "pm",
+    "am": "am",
+
+    "SecondsAbb": "s",
+    "MinutesAbb": "Min",
+    "HourAbb": "h",
+
+    "Seconds": "Segundos",
+    "Minutes": "Minutos",
+    "Hour": "Horas",
+
+    "SuccessfulRegister": "Registro exitoso",
+    "CompleteFields": "Completar campos",
+    "PasswordsMatch": "Contraseñas coinciden",
+    "MessageSent": "Mensaje enviado",
+    "PasswordsNotMatch": "Contraseñas no coinciden",
+    "ValidEmail": "Correo válido"
+}

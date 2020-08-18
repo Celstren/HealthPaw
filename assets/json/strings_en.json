@@ -1,0 +1,133 @@
+{
+    "HealthPaw": "HealthPaw",
+
+    "Owner": "Owner",
+    "Owners": "Owners",
+
+    "Accept": "Accept",
+    "Close": "Close",
+    "Register": "Register",
+    "Cancel": "Cancel",
+    "Sounds": "Sounds",
+    "Alerts": "Alerts",
+    "Record": "Record",
+    "PetsList": "Pets List",
+    "Home": "Home",
+    "Profile": "Profile",
+    "CardiacHistory": "Cardiac History",
+    "History": "History",
+    "Names": "Names",
+    "BirthDay": "Date of birth",
+    "Status": "Status",
+    "EnvironmentalTemperature": "Environmental temperature",
+    "Localization": "Localization",
+    "Calibrate": "Calibrate",
+    "Calibrated": "Calibrated",
+    "Synchronize": "Synchronize",
+
+    "Pets": "Pets",
+    "Collars": "Collars",
+
+    "StatusOverview": "Status overview",
+    "HearthRate": "Hearth rate",
+
+    "Login": "Login",
+    "Username": "Username",
+    "Password": "Password",
+    "Terms&ConditionsLabel": "By continuing, you agree to Terms & Conditions",
+
+    "DefaultSound": "Default sound",
+    "PlayingSound": "Playing sound",
+    "StopPlaying": "Stop playing",
+    "Play": "Play",
+    "SendAudio": "Send audio",
+    "SendVoiceNote": "Send voice note",
+    "RecordVoiceNote": "Record voice note",
+    "KeepPressingToRecordVoiceNote": "Keep pressing to record voice note",
+
+    "Notification": "Notification",
+    "IncreasingHeartRate": "Increasing heart rate",
+    "BeatsPerMinute": "Beats per minute",
+    "Recommendations": "Recommendations",
+
+    "HeartRateHistory": "Heart Rate History",
+    "Media": "Media",
+    "MaximumAbb": "Max",
+    "MinimumAbb": "Min",
+
+    "SyncWearable": "Sync wearable",
+
+    "PhysicalActivityHistory": "Physical activity history",
+    "PetProile": "Pet proile",
+    
+    "PetOverview": "Pet overview",
+    "CardiacFrequency": "Cardiac fFrequency",
+    "BreathFrequency": "Breath frequency",
+    "PhysicalActivity": "Physical activity",
+
+    "TodaySoundIntensity": "Today sound intensity",
+    "TodayEnvironmentalTemperature": "Today environmental temperature",
+    "TodayPhysicalActivity": "Today physical activity",
+    "BreathFrequencyHistory": "Breath frequency history",
+
+    "AssignOwner": "Assign owner",
+    "OwnerMail": "Owner mail",
+    "OwnerAssigned": "Owner assigned",
+
+    "LocationOf": "The localization of ",
+    "is": "is",
+
+    "User": "User",
+    "Vets": "Vets",
+
+    "RegisterVet": "Register vet",
+    "Lastnames": "Lastname",
+    "Password2": "Password2",
+    "MobileNumber": "Mobile number",
+    "Email": "Email",
+
+    "AdministratorProfile": "Administrator profile",
+
+    "RegisterForm": "Register form",
+
+    "RegisterPet": "Register pet",
+
+    "Administrator": "Administrator",
+    "RegisterUsers": "Register users",
+
+    "LocatePet": "Locate pet",
+
+    "SendMessage": "Send message",
+    "SendNotification": "Send notification",
+
+    "PetsAssigned": "Pets assigned",
+
+    "BeatsPerMinuteUnits": "bpm",
+    "BreathsPerMinuteUnits": "bpm",
+    "DecibelsAbb": "dB",
+    "TemperatureUnits": "°F",
+
+    "Day": "Day",
+    "Month": "Month",
+    "Year": "Year",
+
+    "pm": "pm",
+    "am": "am",
+
+    "SecondsAbb": "s",
+    "MinutesAbb": "Min",
+    "HourAbb": "h",
+
+    "Seconds": "Seconds",
+    "Minutes": "Minutes",
+    "Hour": "Hours",
+
+    "SuccessfulRegister": "Successful Register",
+    "CompleteFields": "Complete Fields",
+    "PasswordsMatch": "Passwords Match",
+    "MessageSent": "Message Sent",
+    "PasswordsNotMatch": "Passwords Not Match",
+    "ValidEmail": "Valid Email",
+    "ConnectionConfirmed": "Connection Confirmed",
+    "AlertSend": "Alert Send"
+}
