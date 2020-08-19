@@ -1,6 +1,6 @@
 import 'package:HealthPaw/config/app_config.dart';
 import 'package:HealthPaw/config/strings/app_strings.dart';
-import 'package:HealthPaw/views/home/home_view.dart';
+import 'package:HealthPaw/views/auth/login/login.dart';
 import 'package:flutter/material.dart';
 
 class HealthPawApp extends StatefulWidget {
@@ -23,7 +23,7 @@ class _HealthPawAppState extends State<HealthPawApp> {
   void initializeConfig() async {
     await AppConfig.setAppLanguage();
     setState(() {
-      view = HomeView();
+      view = LoginView();
     });
   }
 
