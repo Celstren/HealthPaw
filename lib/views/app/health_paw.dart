@@ -2,6 +2,7 @@ import 'package:HealthPaw/config/app_config.dart';
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/views/auth/login/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HealthPawApp extends StatefulWidget {
   HealthPawApp({Key key}) : super(key: key);
@@ -11,7 +12,6 @@ class HealthPawApp extends StatefulWidget {
 }
 
 class _HealthPawAppState extends State<HealthPawApp> {
-
   Widget view = Scaffold();
 
   @override
@@ -29,7 +29,11 @@ class _HealthPawAppState extends State<HealthPawApp> {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    return MaterialApp(
       title: AppStrings.healthPaw,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

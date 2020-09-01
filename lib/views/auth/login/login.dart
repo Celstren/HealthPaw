@@ -3,7 +3,6 @@ import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/views/auth/login/widgets/login_logo.dart';
-import 'package:HealthPaw/views/auth/login/widgets/login_top.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -30,9 +29,12 @@ class _LoginViewState extends State<LoginView> {
         child: Column(
           children: <Widget>[
             CommonAppBar(title: AppStrings.login),
+            SizedBox(height: 40),
             LoginLogo(),
+            SizedBox(height: 40),
             RoundedButton(
               text: AppStrings.login,
+              size: Size(200, 50),
               press: () {},
             )
           ],

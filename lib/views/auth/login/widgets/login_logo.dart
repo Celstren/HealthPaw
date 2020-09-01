@@ -10,8 +10,8 @@ class LoginLogo extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 40),
       child: Center(
         child: Container(
-          height: 50,
-          width: 50,
+          height: 80,
+          width: 160,
           child: Placeholder(),
         ),
       ),
