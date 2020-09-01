@@ -3,6 +3,7 @@ import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
 import 'package:HealthPaw/views/auth/login/widgets/login_logo.dart';
+import 'package:HealthPaw/views/owner/owner.dart';
 import 'package:flutter/material.dart';
 
 class LoginContent extends StatefulWidget {
@@ -49,7 +50,7 @@ class _LoginContentState extends State<LoginContent> {
               text: AppStrings.login,
               size: Size(200, 50),
               style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-              press: () {},
+              press: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => OwnerView())),
             ),
             SizedBox(height: 50),
             Align(
