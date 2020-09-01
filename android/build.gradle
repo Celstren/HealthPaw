@@ -2,6 +2,10 @@ buildscript {
     repositories {
         google()
         jcenter()
+        ivy {
+            url "http://ivyrep.mbientlab.com"
+            layout "gradle"
+        }
     }
 
     dependencies {
@@ -15,6 +19,10 @@ allprojects {
         jcenter()
         ivy {
             url "https://mbientlab.com/releases/ivyrep"
+            layout "gradle"
+        }
+        ivy {
+            url "http://ivyrep.mbientlab.com"
             layout "gradle"
         }
     }

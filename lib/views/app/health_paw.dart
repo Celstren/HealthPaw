@@ -25,18 +25,28 @@ class _HealthPawAppState extends State<HealthPawApp> {
   // Get battery level.
   String _batteryLevel = 'Unknown battery level.';
 
-  Future<void> _getBatteryLevel() async {
-    String batteryLevel;
+  Future<void> _connectBoard() async {
     try {
-      final int result = await platform.invokeMethod('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
+      await platform.invokeMethod('connectBoard', {"boardId": "F0:80:F6:C8:E0:75"});
     } on PlatformException catch (e) {
-      batteryLevel = "Failed to get battery level: '${e.message}'.";
+      print("Fail to connect: $e");
     }
+  }
 
-    setState(() {
-      _batteryLevel = batteryLevel;
-    });
+  Future<void> _turnOffLed() async {
+    try {
+      await platform.invokeMethod('turnOffLed');
+    } on PlatformException catch (e) {
+      print("Fail to turn off: $e");
+    }
+  }
+
+  Future<void> _turnOnLed() async {
+    try {
+      await platform.invokeMethod('turnOnLed', {"colorId": 0});
+    } on PlatformException catch (e) {
+      print("Fail to turn on: $e");
+    }
   }
 
   void initializeConfig() async {
@@ -62,10 +72,19 @@ class _HealthPawAppState extends State<HealthPawApp> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 RaisedButton(
-                  child: Text('Get Battery Level'),
-                  onPressed: _getBatteryLevel,
+                  child: Text('Connect Board'),
+                  onPressed: _connectBoard,
                 ),
-                Text(_batteryLevel),
+                SizedBox(height: 20),
+                RaisedButton(
+                  child: Text('Turn On Led'),
+                  onPressed: _turnOnLed,
+                ),
+                SizedBox(height: 20),
+                RaisedButton(
+                  child: Text('Turn Off Led'),
+                  onPressed: _turnOffLed,
+                ),
               ],
             ),
           ),
