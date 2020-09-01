@@ -7,7 +7,6 @@ class LoginLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(vertical: 40),
       child: Center(
         child: Container(
           height: 80,

@@ -1,8 +1,7 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
-import 'package:HealthPaw/utils/widgets/rounded_button.dart';
-import 'package:HealthPaw/views/auth/login/widgets/login_logo.dart';
+import 'package:HealthPaw/views/auth/login/widgets/login_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -25,20 +24,11 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            CommonAppBar(title: AppStrings.login),
-            SizedBox(height: 40),
-            LoginLogo(),
-            SizedBox(height: 40),
-            RoundedButton(
-              text: AppStrings.login,
-              size: Size(200, 50),
-              press: () {},
-            )
-          ],
-        ),
+      body: Stack(
+        children: <Widget>[
+          LoginContent(),
+          CommonAppBar(title: AppStrings.login),
+        ],
       ),
       backgroundColor: AppColors.PrimaryWhite,
     ));
