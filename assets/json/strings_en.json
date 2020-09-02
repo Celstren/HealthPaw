@@ -5,6 +5,8 @@
     "Owners": "Owners",
 
     "Accept": "Accept",
+    "Connect": "Connect",
+    "Search": "Search",
     "Close": "Close",
     "Register": "Register",
     "Cancel": "Cancel",
@@ -30,6 +32,7 @@
 
     "StatusOverview": "Status overview",
     "HearthRate": "Hearth rate",
+    "PetStatus": "Pet Status",
 
     "Login": "Login",
     "Username": "Username",
@@ -56,9 +59,10 @@
     "MinimumAbb": "Min",
 
     "SyncWearable": "Sync wearable",
+    "CalibrateWearable": "Calibrate wearable",
 
     "PhysicalActivityHistory": "Physical activity history",
-    "PetProile": "Pet proile",
+    "PetProfile": "Pet Profile",
     
     "PetOverview": "Pet overview",
     "CardiacFrequency": "Cardiac fFrequency",
@@ -129,5 +133,7 @@
     "PasswordsNotMatch": "Passwords Not Match",
     "ValidEmail": "Valid Email",
     "ConnectionConfirmed": "Connection Confirmed",
+    "ConnectionFailed": "Conexión failed",
+    "ConnectionWaiting": "Waiting connection",
     "AlertSend": "Alert Send"
 }

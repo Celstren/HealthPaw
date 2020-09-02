@@ -5,6 +5,8 @@ class AppStrings {
   static final String owners                        = AppConfig.commonStringsJson["Owners"] ?? "";
   static final String owner                         = AppConfig.commonStringsJson["Owner"] ?? "";
   static final String accept                        = AppConfig.commonStringsJson["Accept"] ?? "";
+  static final String search                        = AppConfig.commonStringsJson["Search"] ?? "";
+  static final String connect                       = AppConfig.commonStringsJson["Connect"] ?? "";
   static final String close                         = AppConfig.commonStringsJson["Close"] ?? "";
   static final String register                      = AppConfig.commonStringsJson["Register"] ?? "";
   static final String cancel                        = AppConfig.commonStringsJson["Cancel"] ?? "";
@@ -22,13 +24,17 @@ class AppStrings {
   static final String environmentalTemperature      = AppConfig.commonStringsJson["EnvironmentalTemperature"] ?? "";
   static final String localization                  = AppConfig.commonStringsJson["Localization"] ?? "";
   static final String calibrate                     = AppConfig.commonStringsJson["Calibrate"] ?? "";
+  static final String calibrateWearable             = AppConfig.commonStringsJson["CalibrateWearable"] ?? "";
   static final String calibrated                    = AppConfig.commonStringsJson["Calibrated"] ?? "";
   static final String connectionConfirmed           = AppConfig.commonStringsJson["ConnectionConfirmed"] ?? "";
+  static final String connectionWaiting             = AppConfig.commonStringsJson["ConnectionWaiting"] ?? "";
+  static final String connectionFailed              = AppConfig.commonStringsJson["ConnectionFailed"] ?? "";
   static final String synchronize                   = AppConfig.commonStringsJson["Synchronize"] ?? "";
   static final String pets                          = AppConfig.commonStringsJson["Pets"] ?? "";
   static final String collars                       = AppConfig.commonStringsJson["Collars"] ?? "";
   static final String statusOverview                = AppConfig.commonStringsJson["StatusOverview"] ?? "";
   static final String hearthRate                    = AppConfig.commonStringsJson["HearthRate"] ?? "";
+  static final String petStatus                     = AppConfig.commonStringsJson["PetStatus"] ?? "";
   static final String login                         = AppConfig.commonStringsJson["Login"] ?? "";
   static final String username                      = AppConfig.commonStringsJson["Username"] ?? "";
   static final String password                      = AppConfig.commonStringsJson["Password"] ?? "";
@@ -52,7 +58,7 @@ class AppStrings {
   static final String minimumAbb                    = AppConfig.commonStringsJson["MinimumAbb"] ?? "";
   static final String syncWearable                  = AppConfig.commonStringsJson["SyncWearable"] ?? "";
   static final String physicalActivityHistory       = AppConfig.commonStringsJson["PhysicalActivityHistory"] ?? "";
-  static final String petProile                     = AppConfig.commonStringsJson["PetProile"] ?? "";
+  static final String petProfile                     = AppConfig.commonStringsJson["PetProfile"] ?? "";
   static final String petOverview                   = AppConfig.commonStringsJson["PetOverview"] ?? "";
   static final String cardiacFrequency              = AppConfig.commonStringsJson["CardiacFrequency"] ?? "";
   static final String breathFrequency               = AppConfig.commonStringsJson["BreathFrequency"] ?? "";

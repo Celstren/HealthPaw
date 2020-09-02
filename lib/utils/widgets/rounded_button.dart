@@ -13,7 +13,7 @@ class RoundedButton extends StatelessWidget {
     this.text,
     this.press,
     this.color = AppColors.PrimaryLightBlue,
-    this.style, 
+    this.style,
     this.size,
   }) : super(key: key);
 
@@ -25,12 +25,14 @@ class RoundedButton extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(29),
         child: FlatButton(
-          padding: EdgeInsets.symmetric(horizontal: 40),
+          padding: EdgeInsets.zero,
           color: color,
           onPressed: press,
-          child: Text(
-            text,
-            style: style ?? AppTextStyle.blackStyle(fontSize: 12),
+          child: Center(
+            child: Text(
+              text,
+              style: style ?? AppTextStyle.blackStyle(fontSize: 12),
+            ),
           ),
         ),
       ),

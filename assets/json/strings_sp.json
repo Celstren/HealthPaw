@@ -5,6 +5,8 @@
     "Owners": "Dueños",
 
     "Accept": "Aceptar",
+    "Connect": "Conectar",
+    "Search": "Buscar",
     "Close": "Cerrar",
     "Register": "Registrar",
     "Cancel": "Cancelar",
@@ -23,7 +25,6 @@
     "Localization": "Localización",
     "Calibrate": "Calibrar",
     "Calibrated": "Calibrado",
-    "ConnectionConfirmed": "Conexión confirmada",
     "Synchronize": "Sincronizar",
 
     "Pets": "Mascotas",
@@ -31,6 +32,7 @@
 
     "StatusOverview": "Resumen de estado",
     "HearthRate": "Ritmo Cardíaco",
+    "PetStatus": "Estado Mascota",
 
     "Login": "Ingresar",
     "Username": "Nombre de usuario",
@@ -50,7 +52,6 @@
     "IncreasingHeartRate": "Ritmo cardiaco aumentando",
     "BeatsPerMinute": "Pulsaciones por minuto",
     "Recommendations": "Recomendaciones",
-    "AlertSend": "Alerta Enviada",
 
     "HeartRateHistory": "Historial de ritmo cardíaco",
     "Media": "Media",
@@ -58,6 +59,7 @@
     "MinimumAbb": "Min",
 
     "SyncWearable": "Sincronizar wearable",
+    "CalibrateWearable": "Calibrar wearable",
 
     "PhysicalActivityHistory": "Historial de actividad física",
     "PetProile": "Perfil de mascota",
@@ -129,5 +131,9 @@
     "PasswordsMatch": "Contraseñas coinciden",
     "MessageSent": "Mensaje enviado",
     "PasswordsNotMatch": "Contraseñas no coinciden",
-    "ValidEmail": "Correo válido"
+    "ValidEmail": "Correo válido",
+    "ConnectionConfirmed": "Conexión confirmada",
+    "ConnectionFailed": "Conexión fallida",
+    "ConnectionWaiting": "Esperando conexión",
+    "AlertSend": "Alerta Enviada"
 }
