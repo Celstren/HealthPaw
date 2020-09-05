@@ -11,14 +11,14 @@ class PetOverviewContent extends StatefulWidget {
 }
 
 class _PetOverviewContentState extends State<PetOverviewContent> {
-
-  Widget _buildOverviewField({String label = "", double unit, String unitMetric = ""}) {
+  Widget _buildOverviewField(
+      {String label = "", double unit, String unitMetric = ""}) {
     return SizedBox(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           SizedBox(
-            width: 120,
+            width: 200,
             child: Text(
               "$label:",
               style: AppTextStyle.blackStyle(
@@ -46,15 +46,27 @@ class _PetOverviewContentState extends State<PetOverviewContent> {
     return SingleChildScrollView(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 20),
-            PetAvatar(name: "Firulays"),
-            SizedBox(height: 10),
-            _buildOverviewField(label: AppStrings.cardiacFrequency, unit: 100, unitMetric: AppStrings.beatsPerMinute),
-            _buildOverviewField(label: AppStrings.breathFrequency, unit: 20, unitMetric: AppStrings.breathsPerMinuteUnits),
-            _buildOverviewField(label: AppStrings.physicalActivity, unit: 50, unitMetric: AppStrings.minimumAbb),
-          ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 20),
+              PetAvatar(name: "Firulays"),
+              SizedBox(height: 10),
+              _buildOverviewField(
+                  label: AppStrings.cardiacFrequency,
+                  unit: 100,
+                  unitMetric: AppStrings.beatsPerMinuteUnits),
+              _buildOverviewField(
+                  label: AppStrings.breathFrequency,
+                  unit: 20,
+                  unitMetric: AppStrings.breathsPerMinuteUnits),
+              _buildOverviewField(
+                  label: AppStrings.physicalActivity,
+                  unit: 50,
+                  unitMetric: AppStrings.minimumAbb),
+            ],
+          ),
         ),
       ),
     );

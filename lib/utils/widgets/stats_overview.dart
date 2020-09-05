@@ -1,5 +1,6 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class StatsOverview extends StatefulWidget {
@@ -56,45 +57,44 @@ class _StatsOverviewState extends State<StatsOverview> {
     );
   }
 
-  Widget _buildRuleMetric () {
+  Widget _buildRuleMetric() {
     return SizedBox(
-            child: Column(
+      child: Column(
+        children: <Widget>[
+          Text(
+            AppStrings.average,
+            style: AppTextStyle.blackStyle(
+                fontSize: AppFontSizes.text12,
+                fontFamily: AppFonts.Montserrat_Bold),
+          ),
+          Container(
+            height: 10,
+            width: 300,
+            decoration: BoxDecoration(
+              border: Border.all(color: AppColors.PrimaryBlack, width: 1.0),
+            ),
+          ),
+          SizedBox(
+            width: 330,
+            child: Row(
               children: <Widget>[
-                Text(
-                  AppStrings.average,
-                  style: AppTextStyle.blackStyle(
-                      fontSize: AppFontSizes.text12,
-                      fontFamily: AppFonts.Montserrat_Bold),
-                ),
-                Container(
-                  height: 10,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    border:
-                        Border.all(color: AppColors.PrimaryBlack, width: 1.0),
-                  ),
-                ),
-                SizedBox(
-                  width: 330,
-                  child: Row(
-                    children: <Widget>[
-                      _buildUnitMetrics(_units[0]),
-                      SizedBox(width: 30),
-                      _buildUnitMetrics(_units[1]),
-                      SizedBox(width: 30),
-                      _buildUnitMetrics(_units[2]),
-                      SizedBox(width: 30),
-                      _buildUnitMetrics(_units[3]),
-                      SizedBox(width: 30),
-                      _buildUnitMetrics(_units[4]),
-                      SizedBox(width: 30),
-                      _buildUnitMetrics(_units[5]),
-                    ],
-                  ),
-                ),
+                _buildUnitMetrics(_units[0]),
+                SizedBox(width: 30),
+                _buildUnitMetrics(_units[1]),
+                SizedBox(width: 30),
+                _buildUnitMetrics(_units[2]),
+                SizedBox(width: 30),
+                _buildUnitMetrics(_units[3]),
+                SizedBox(width: 30),
+                _buildUnitMetrics(_units[4]),
+                SizedBox(width: 30),
+                _buildUnitMetrics(_units[5]),
               ],
             ),
-          );
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildRate({String label = "", double unit = 0.0}) {
@@ -147,13 +147,17 @@ class _StatsOverviewState extends State<StatsOverview> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 10),
-                        child: Text(
-                          "200 ${widget.metricUnit}",
-                          style: AppTextStyle.blackStyle(
-                            fontSize: 36,
-                            fontFamily: AppFonts.Montserrat_Bold,
+                      ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: 140),
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 10),
+                          child: AutoSizeText(
+                            "200 ${widget.metricUnit}",
+                            maxLines: 1,
+                            style: AppTextStyle.blackStyle(
+                              fontSize: 36,
+                              fontFamily: AppFonts.Montserrat_Bold,
+                            ),
                           ),
                         ),
                       ),
@@ -182,10 +186,18 @@ class _StatsOverviewState extends State<StatsOverview> {
             child: Placeholder(),
           ),
           SizedBox(height: 50),
-          widget.media ? _buildRate(label: AppStrings.media, unit: 20) : SizedBox(),
-          widget.max ? _buildRate(label: AppStrings.maximumAbb, unit: 20) : SizedBox(),
-          widget.min ? _buildRate(label: AppStrings.minimumAbb, unit: 20) : SizedBox(),
-          !widget.media && !widget.max && !widget.min ? SizedBox() : SizedBox(height: 50),
+          widget.media
+              ? _buildRate(label: AppStrings.media, unit: 20)
+              : SizedBox(),
+          widget.max
+              ? _buildRate(label: AppStrings.maximumAbb, unit: 20)
+              : SizedBox(),
+          widget.min
+              ? _buildRate(label: AppStrings.minimumAbb, unit: 20)
+              : SizedBox(),
+          !widget.media && !widget.max && !widget.min
+              ? SizedBox()
+              : SizedBox(height: 50),
         ],
       ),
     );
