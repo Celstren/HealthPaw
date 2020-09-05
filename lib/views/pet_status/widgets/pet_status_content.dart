@@ -11,36 +11,68 @@ class PetStatusContent extends StatefulWidget {
 }
 
 class _PetStatusContentState extends State<PetStatusContent> {
+  double divisionSize = 30;
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-       children: <Widget>[
-         CircularButton(
-           size: 80,
-           press: () {},
-           label: AppStrings.statusOverview,
-           icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
-         ),
-         CircularButton(
-           size: 80,
-           press: () {},
-           label: AppStrings.hearthRate,
-           icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
-         ),
-         CircularButton(
-           size: 80,
-           press: () {},
-           label: AppStrings.breathFrequency,
-           icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
-         ),
-         CircularButton(
-           size: 80,
-           press: () {},
-           label: AppStrings.physicalActivity,
-           icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
-         ),
-       ],
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      child: SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          SizedBox(height: divisionSize),
+          CircularButton(
+            size: 80,
+            press: () {},
+            label: AppStrings.statusOverview,
+            icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
+          ),
+          SizedBox(height: divisionSize),
+          CircularButton(
+            size: 80,
+            press: () {},
+            label: AppStrings.hearthRate,
+            icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
+          ),
+          SizedBox(height: divisionSize),
+          CircularButton(
+            size: 80,
+            press: () {},
+            label: AppStrings.breathFrequency,
+            icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
+          ),
+          SizedBox(height: divisionSize),
+          CircularButton(
+            size: 80,
+            press: () {},
+            label: AppStrings.physicalActivity,
+            icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
+          ),
+          SizedBox(height: divisionSize),
+          CircularButton(
+            size: 80,
+            press: () {},
+            label: AppStrings.sounds,
+            icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
+          ),
+          SizedBox(height: divisionSize),
+          CircularButton(
+            size: 80,
+            press: () {},
+            label: AppStrings.environmentalTemperature,
+            icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
+          ),
+          SizedBox(height: divisionSize),
+          CircularButton(
+            size: 80,
+            press: () {},
+            label: AppStrings.localization,
+            icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
+          ),
+          SizedBox(height: divisionSize),
+        ],
+      ),
+    ),
     );
   }
 }

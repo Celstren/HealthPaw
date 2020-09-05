@@ -17,6 +17,7 @@
     "Home": "Home",
     "Profile": "Profile",
     "CardiacHistory": "Cardiac History",
+    "BreathHistory": "Breath History",
     "History": "History",
     "Names": "Names",
     "BirthDay": "Date of birth",
@@ -26,6 +27,7 @@
     "Calibrate": "Calibrate",
     "Calibrated": "Calibrated",
     "Synchronize": "Synchronize",
+    "Average": "Average",
 
     "Pets": "Pets",
     "Collars": "Collars",

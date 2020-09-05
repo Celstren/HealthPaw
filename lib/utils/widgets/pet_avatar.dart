@@ -12,7 +12,7 @@ class PetAvatar extends StatelessWidget {
     return Container(
       child: Column(
         children: <Widget>[
-          CircularAvatar(size: 125, path: path, initialName: "A"),
+          CircularAvatar(size: 100, path: path, initialName: "A"),
           SizedBox(height: 20),
           Text(
             name,

@@ -17,6 +17,7 @@ class AppStrings {
   static final String home                          = AppConfig.commonStringsJson["Home"] ?? "";
   static final String profile                       = AppConfig.commonStringsJson["Profile"] ?? "";
   static final String cardiacHistory                = AppConfig.commonStringsJson["CardiacHistory"] ?? "";
+  static final String breathHistory                 = AppConfig.commonStringsJson["BreathHistory"] ?? "";
   static final String history                       = AppConfig.commonStringsJson["History"] ?? "";
   static final String names                         = AppConfig.commonStringsJson["Names"] ?? "";
   static final String birthDay                      = AppConfig.commonStringsJson["BirthDay"] ?? "";
@@ -30,6 +31,7 @@ class AppStrings {
   static final String connectionWaiting             = AppConfig.commonStringsJson["ConnectionWaiting"] ?? "";
   static final String connectionFailed              = AppConfig.commonStringsJson["ConnectionFailed"] ?? "";
   static final String synchronize                   = AppConfig.commonStringsJson["Synchronize"] ?? "";
+  static final String average                       = AppConfig.commonStringsJson["Average"] ?? "";
   static final String pets                          = AppConfig.commonStringsJson["Pets"] ?? "";
   static final String collars                       = AppConfig.commonStringsJson["Collars"] ?? "";
   static final String statusOverview                = AppConfig.commonStringsJson["StatusOverview"] ?? "";
