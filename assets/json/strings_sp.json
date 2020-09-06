@@ -9,6 +9,8 @@
     "Search": "Buscar",
     "Close": "Cerrar",
     "Register": "Registrar",
+    "Modify": "Modificar",
+    "Deactivate": "Deshabilitar",
     "Cancel": "Cancelar",
     "Sounds": "Sonidos",
     "Alerts": "Alertas",
@@ -65,6 +67,9 @@
 
     "PhysicalActivityHistory": "Historial de actividad física",
     "PetProile": "Perfil de mascota",
+    "OwnerProfile": "Perfil Dueño",
+    "ModifyOwnerProfile": "Modificar Perfil Dueño",
+    "DeactivateUser": "Deshabilitar usuario",
     
     "PetOverview": "Resumen de mascota",
     "CardiacFrequency": "Frecuencia cardiaca",
@@ -129,6 +134,8 @@
     "Hour": "Horas",
 
     "SuccessfulRegister": "Registro exitoso",
+    "SuccessfulModify": "Modificación exitosa",
+    "SuccessfulDeactivate": "Deshabilitación exitosa",
     "CompleteFields": "Completar campos",
     "PasswordsMatch": "Contraseñas coinciden",
     "MessageSent": "Mensaje enviado",
@@ -137,5 +144,24 @@
     "ConnectionConfirmed": "Conexión confirmada",
     "ConnectionFailed": "Conexión fallida",
     "ConnectionWaiting": "Esperando conexión",
-    "AlertSend": "Alerta Enviada"
+    "AlertSend": "Alerta Enviada",
+
+    "TheField": "El campo",
+    "IsInvalid": "es inválido",
+    "paswordConstraints": "La contraseña debe tener mínimo 8 caracteres, 1 mayúscula, 1 minúscula y 1 número",
+
+    "EnterName": "Ingrese nombre",
+    "EnterLastname": "Ingrese apellido",
+    "EnterUsername": "Ingrese nombre de usuario",
+    "EnterPassword": "Ingrese contraseña",
+    "EnterMobile": "Ingrese número de celular",
+    "EnterBirthday": "Ingrese fecha de nacimiento",
+    "EnterEmail": "Ingrese correo electrónico",
+
+    "AskDeactivateAccount": "¿Desea deshabilitar la cuenta?",
+    "PetType": "Tipo de Mascota",
+    "Dog": "Perro",
+    "Cat": "Gato",
+    
+    "Ok": "Ok"
 }

@@ -35,6 +35,7 @@ class _LoginContentState extends State<LoginContent> {
               leftLabelStyle: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
               leftLabelWidth: 120,
               style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
+              borderRadius: AppBorderRadius.all(radius: AppRadius.radius30),
             ),
             SizedBox(height: 40),
             TextFieldContainer(
@@ -44,13 +45,14 @@ class _LoginContentState extends State<LoginContent> {
               leftLabelStyle: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
               leftLabelWidth: 120,
               style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
+              borderRadius: AppBorderRadius.all(radius: AppRadius.radius30),
             ),
             SizedBox(height: 50),
             RoundedButton(
               text: AppStrings.login,
               size: Size(200, 50),
               style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-              press: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => EnvironmentTemperatureView())),
+              onPress: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => EnvironmentTemperatureView())),
             ),
             SizedBox(height: 50),
             Align(

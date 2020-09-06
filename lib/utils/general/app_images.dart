@@ -1,4 +1,4 @@
-class AppImages {
+class AppAvatarImages {
   static const String Avatar1   = "assets/avatars/man1.png";
   static const String Avatar2   = "assets/avatars/woman1.png";
   static const String Avatar3   = "assets/avatars/man2.png";
@@ -63,4 +63,9 @@ class AppImages {
         break;
     }
   }
+}
+
+class AppImages {
+  static const String DogImage   = "assets/avatars/pets/dog.jpg";
+  static const String CatImage   = "assets/avatars/pets/cat.jpg";
 }

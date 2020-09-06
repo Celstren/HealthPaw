@@ -19,7 +19,7 @@ class CommonAppBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.PrimaryLightBlue,
         borderRadius:
-            AppBorderRadius.onlyBottom(bottomRadius: AppBorderRadius.radius15),
+            AppBorderRadius.onlyBottom(bottomRadius: AppRadius.radius15),
       ),
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: _content(),
@@ -76,7 +76,7 @@ class CommonAppBar extends StatelessWidget {
                 title,
                 style: AppTextStyle.whiteStyle(
                     fontSize: AppFontSizes.title24,
-                    fontFamily: AppFonts.Montserrat_Black),
+                    fontFamily: AppFonts.Montserrat_Bold),
               ),
             ),
     );

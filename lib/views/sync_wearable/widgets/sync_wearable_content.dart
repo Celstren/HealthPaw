@@ -40,7 +40,7 @@ class _SyncWearableContentState extends State<SyncWearableContent> {
       text: AppStrings.connect,
       size: Size(200, 50),
       style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18, fontFamily: AppFonts.Montserrat_Bold),
-      press: () {},
+      onPress: () {},
     );
   }
 

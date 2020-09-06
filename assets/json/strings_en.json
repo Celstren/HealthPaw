@@ -9,6 +9,8 @@
     "Search": "Search",
     "Close": "Close",
     "Register": "Register",
+    "Modify": "Modify",
+    "Deactivate": "Deactivate",
     "Cancel": "Cancel",
     "Sounds": "Sounds",
     "Alerts": "Alerts",
@@ -65,6 +67,9 @@
 
     "PhysicalActivityHistory": "Physical activity history",
     "PetProfile": "Pet Profile",
+    "OwnerProfile": "Owner Profile",
+    "ModifyOwnerProfile": "Modify Owner Profile",
+    "DeactivateUser": "Deactivate user",
     
     "PetOverview": "Pet overview",
     "CardiacFrequency": "Cardiac fFrequency",
@@ -129,6 +134,8 @@
     "Hour": "Hours",
 
     "SuccessfulRegister": "Successful Register",
+    "SuccessfulModify": "Successful Modify",
+    "SuccessfulDeactivate": "Successful Deactivate",
     "CompleteFields": "Complete Fields",
     "PasswordsMatch": "Passwords Match",
     "MessageSent": "Message Sent",
@@ -137,5 +144,24 @@
     "ConnectionConfirmed": "Connection Confirmed",
     "ConnectionFailed": "Conexión failed",
     "ConnectionWaiting": "Waiting connection",
-    "AlertSend": "Alert Send"
+    "AlertSend": "Alert Send",
+
+    "TheField": "The field",
+    "IsInvalid": "is invalid",
+    "paswordConstraints": "Password must contain 8 characters minimum, 1 uppercase, 1 lowercase and 1 number",
+
+    "EnterName": "Enter name",
+    "EnterLastname": "Enter lastname",
+    "EnterUsername": "Enter username",
+    "EnterPassword": "Enter password",
+    "EnterMobile": "Enter mobile number",
+    "EnterBirthday": "Enter birthday",
+    "EnterEmail": "Enter email",
+
+    "AskDeactivateAccount": "Would you like to deactivate account?",
+    "PetType": "Pet Type",
+    "Dog": "Dog",
+    "Cat": "Cat",
+    
+    "Ok": "Ok"
 }

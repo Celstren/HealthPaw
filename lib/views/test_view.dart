@@ -1,4 +1,11 @@
 import 'package:HealthPaw/utils/general/app_text_styles.dart';
+import 'package:HealthPaw/views/auth/register/register.dart';
+import 'package:HealthPaw/views/default_sounds/default_sounds.dart';
+import 'package:HealthPaw/views/modify_owner_profile/modify_owner_profile.dart';
+import 'package:HealthPaw/views/modify_pet/modify_pet.dart';
+import 'package:HealthPaw/views/owner_menu/owner_menu.dart';
+import 'package:HealthPaw/views/owner_profile/owner_profile.dart';
+import 'package:HealthPaw/views/select_pet_type/select_pet_type.dart';
 import 'package:flutter/material.dart';
 
 import 'package:HealthPaw/views/breath_history/breath_history.dart';
@@ -29,7 +36,7 @@ class _TestViewState extends State<TestView> {
       child: RoundedButton(
         style: AppTextStyle.whiteStyle(),
         text: text,
-        press: () => Navigator.of(context)
+        onPress: () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => view)),
       ),
     );
@@ -45,6 +52,12 @@ class _TestViewState extends State<TestView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 widgetOption(text: "Login View", view: LoginView()),
+                widgetOption(text: "Register View", view: RegisterView()),
+                widgetOption(text: "Owner Profile", view: OwnerProfileView()),
+                widgetOption(text: "Modify Owner Profile", view: ModifyOwnerProfileView()),
+                widgetOption(text: "Owner Menu", view: OwnerMenuView()),
+                widgetOption(text: "Select Pet Type", view: SelectPetTypeView()),
+                widgetOption(text: "Modify Pet", view: ModifyPetView()),
                 widgetOption(text: "Breath History", view: BreathHistoryView()),
                 widgetOption(
                     text: "Calibrate Wearable", view: CalibrateWearableView()),
@@ -58,6 +71,7 @@ class _TestViewState extends State<TestView> {
                 widgetOption(text: "Pet Status", view: PetStatusView()),
                 widgetOption(text: "Sounds", view: SoundsView()),
                 widgetOption(text: "Sync Wearable", view: SyncWearableView()),
+                widgetOption(text: "Default Sounds", view: DefaultSoundsView()),
               ],
             ),
           ),

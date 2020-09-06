@@ -46,7 +46,7 @@ class CalibrateWearableItem extends StatelessWidget {
                     style: AppTextStyle.whiteStyle(
                         fontSize: AppFontSizes.text16,
                         fontFamily: AppFonts.Montserrat_Bold),
-                    press: () {},
+                    onPress: () {},
                   )
                 ],
               )),

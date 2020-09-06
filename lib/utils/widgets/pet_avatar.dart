@@ -14,13 +14,13 @@ class PetAvatar extends StatelessWidget {
         children: <Widget>[
           CircularAvatar(size: 100, path: path, initialName: "A"),
           SizedBox(height: 20),
-          Text(
+          name != null && name.isNotEmpty ? Text(
             name,
             style: AppTextStyle.blackStyle(
               fontSize: AppFontSizes.subitle20,
               fontFamily: AppFonts.Montserrat_Bold,
             ),
-          ),
+          ) : SizedBox(),
         ],
       ),
     );

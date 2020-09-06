@@ -23,11 +23,11 @@ class _OwnerNavigationBarState extends State<OwnerNavigationBar> {
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.tv),
-          title: Text(AppStrings.home),
+          label: AppStrings.home,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          title: Text(AppStrings.profile),
+          label: AppStrings.profile,
         ),
       ],
     );
