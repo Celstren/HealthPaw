@@ -1,4 +1,5 @@
 import 'package:HealthPaw/utils/general/app_text_styles.dart';
+import 'package:HealthPaw/views/auth/login_web/login.dart';
 import 'package:flutter/material.dart';
 
 import 'package:HealthPaw/views/breath_history/breath_history.dart';
@@ -22,7 +23,6 @@ class TestView extends StatefulWidget {
 }
 
 class _TestViewState extends State<TestView> {
-
   Widget widgetOption({String text, Widget view}) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20),
@@ -37,7 +37,8 @@ class _TestViewState extends State<TestView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
+    return SafeArea(
+      child: Scaffold(
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: SingleChildScrollView(
@@ -58,10 +59,12 @@ class _TestViewState extends State<TestView> {
                 widgetOption(text: "Pet Status", view: PetStatusView()),
                 widgetOption(text: "Sounds", view: SoundsView()),
                 widgetOption(text: "Sync Wearable", view: SyncWearableView()),
+                widgetOption(text: "Login Web", view: LoginWebView()),
               ],
             ),
           ),
         ),
-      ),);
+      ),
+    );
   }
 }
