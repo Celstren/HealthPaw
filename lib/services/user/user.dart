@@ -22,6 +22,7 @@ class UserService {
     } catch (e) {
       print(e);
     }
+    return false;
   }
 
   static Future<bool> addPetToUser(
@@ -33,5 +34,6 @@ class UserService {
     } catch (e) {
       print(e);
     }
+    return false;
   }
 }

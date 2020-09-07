@@ -11,13 +11,13 @@ class PetListContent extends StatefulWidget {
 
 class _PetListContentState extends State<PetListContent> {
   List<Pet> _pets = [
-    Pet(name: "Firulais 1", birthDay: DateTime.now()),
-    Pet(name: "Firulais 2", birthDay: DateTime.now()),
-    Pet(name: "Firulais 3", birthDay: DateTime.now()),
-    Pet(name: "Firulais 4", birthDay: DateTime.now()),
-    Pet(name: "Firulais 5", birthDay: DateTime.now()),
-    Pet(name: "Firulais 6", birthDay: DateTime.now()),
-    Pet(name: "Firulais 7", birthDay: DateTime.now()),
+    Pet(namevar: "Firulais 1", birthDay: DateTime.now()),
+    Pet(namevar: "Firulais 2", birthDay: DateTime.now()),
+    Pet(namevar: "Firulais 3", birthDay: DateTime.now()),
+    Pet(namevar: "Firulais 4", birthDay: DateTime.now()),
+    Pet(namevar: "Firulais 5", birthDay: DateTime.now()),
+    Pet(namevar: "Firulais 6", birthDay: DateTime.now()),
+    Pet(namevar: "Firulais 7", birthDay: DateTime.now()),
   ];
 
   @override

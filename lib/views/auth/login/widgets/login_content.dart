@@ -7,7 +7,6 @@ import 'package:HealthPaw/views/auth/login/logic/login_form.dart';
 import 'package:HealthPaw/views/auth/login/logic/login_request.dart';
 import 'package:HealthPaw/views/auth/login/widgets/login_logo.dart';
 import 'package:HealthPaw/views/auth/register/register.dart';
-import 'package:HealthPaw/views/main_menu/main_menu.dart';
 import 'package:flutter/material.dart';
 
 class LoginContent extends StatefulWidget {

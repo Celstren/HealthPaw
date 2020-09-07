@@ -31,5 +31,6 @@ class PetService {
     } catch (e) {
       print(e);
     }
+    return false;
   }
 }

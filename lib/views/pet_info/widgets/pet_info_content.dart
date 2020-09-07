@@ -59,7 +59,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
   @override
   void initState() {
     if (widget.pet != null) {
-      petNameController = TextEditingController(text: widget.pet.name);
+      petNameController = TextEditingController(text: widget.pet.namevar);
       birthDayController = widget.pet.birthDay;
     }
     super.initState();
