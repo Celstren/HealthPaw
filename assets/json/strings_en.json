@@ -5,16 +5,23 @@
     "Owners": "Owners",
 
     "Accept": "Accept",
+    "Connect": "Connect",
+    "Search": "Search",
     "Close": "Close",
     "Register": "Register",
+    "Modify": "Modify",
+    "Deactivate": "Deactivate",
     "Cancel": "Cancel",
     "Sounds": "Sounds",
     "Alerts": "Alerts",
     "Record": "Record",
+    "Variables": "Variables",
     "PetsList": "Pets List",
     "Home": "Home",
     "Profile": "Profile",
     "CardiacHistory": "Cardiac History",
+    "BreathHistory": "Breath History",
+    "TemperatureHistory": "Historial oF Temperature",
     "History": "History",
     "Names": "Names",
     "BirthDay": "Date of birth",
@@ -24,12 +31,14 @@
     "Calibrate": "Calibrate",
     "Calibrated": "Calibrated",
     "Synchronize": "Synchronize",
+    "Average": "Average",
 
     "Pets": "Pets",
     "Collars": "Collars",
 
     "StatusOverview": "Status overview",
     "HearthRate": "Hearth rate",
+    "PetStatus": "Pet Status",
 
     "Login": "Login",
     "Username": "Username",
@@ -56,9 +65,13 @@
     "MinimumAbb": "Min",
 
     "SyncWearable": "Sync wearable",
+    "CalibrateWearable": "Calibrate wearable",
 
     "PhysicalActivityHistory": "Physical activity history",
-    "PetProile": "Pet proile",
+    "PetProfile": "Pet Profile",
+    "OwnerProfile": "Owner Profile",
+    "ModifyOwnerProfile": "Modify Owner Profile",
+    "DeactivateUser": "Deactivate user",
     
     "PetOverview": "Pet overview",
     "CardiacFrequency": "Cardiac fFrequency",
@@ -68,7 +81,11 @@
     "TodaySoundIntensity": "Today sound intensity",
     "TodayEnvironmentalTemperature": "Today environmental temperature",
     "TodayPhysicalActivity": "Today physical activity",
+    "TodayBreathFrequency": "Today breath frequency",
+    "TodayHearthRate": "Today hearth rate",
     "BreathFrequencyHistory": "Breath frequency history",
+    "SoundHistory": "History of intensity of sound",
+    "EnvironmentalTemperatureHistory": "Environmental Temperature History",
 
     "AssignOwner": "Assign owner",
     "OwnerMail": "Owner mail",
@@ -91,6 +108,7 @@
     "RegisterForm": "Register form",
 
     "RegisterPet": "Register pet",
+    "ModifyPet": "Modify pet",
 
     "Administrator": "Administrator",
     "RegisterUsers": "Register users",
@@ -123,11 +141,46 @@
     "Hour": "Hours",
 
     "SuccessfulRegister": "Successful Register",
+    "SuccessfulModify": "Successful Modify",
+    "SuccessfulDeactivate": "Successful Deactivate",
     "CompleteFields": "Complete Fields",
     "PasswordsMatch": "Passwords Match",
     "MessageSent": "Message Sent",
     "PasswordsNotMatch": "Passwords Not Match",
     "ValidEmail": "Valid Email",
     "ConnectionConfirmed": "Connection Confirmed",
-    "AlertSend": "Alert Send"
+    "ConnectionFailed": "Conexión failed",
+    "ConnectionWaiting": "Waiting connection",
+    "AlertSend": "Alert Send",
+
+    "TheField": "The field",
+    "IsInvalid": "is invalid",
+    "paswordConstraints": "Password must contain 8 characters minimum, 1 uppercase, 1 lowercase and 1 number",
+
+    "EnterName": "Enter name",
+    "EnterLastname": "Enter lastname",
+    "EnterUsername": "Enter username",
+    "EnterPassword": "Enter password",
+    "EnterMobile": "Enter mobile number",
+    "EnterBirthday": "Enter birthday",
+    "EnterEmail": "Enter email",
+
+    "AskDeactivateAccount": "Would you like to deactivate account?",
+    "PetType": "Pet Type",
+    "Dog": "Dog",
+    "Cat": "Cat",
+    
+    "ViewOverview": "View Overview",
+    "ViewHearthRate": "View Hearth Rate",
+    "HistoryHearthRate": "History Hearth Rate",
+    "ViewBreathRate": "View Breath Rate",
+    "HistoryBreathRate": "History Breath Rate",
+    "ViewPhysicalActivity": "View Physical Activity",
+    "HistoryPhysicalActivity": "History Physical Activity",
+    "ViewSound": "View Sound",
+    "HistorySound": "History Sound",
+    "ViewTemperature": "View Temperature",
+    "HistoryTemperature": "History Temperature",
+    
+    "Ok": "Ok"
 }
