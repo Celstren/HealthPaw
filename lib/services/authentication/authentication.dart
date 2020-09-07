@@ -13,6 +13,19 @@ class AuthenticationService {
     return false;
   }
 
+  static Future<bool> loginUser(User user) async {
+    try {
+      Response response = await dioClient.post("user", data: {
+        "documentNumber": user.documentNumber,
+        "password": user.password
+      });
+      return response.statusCode == 201;
+    } catch (e) {
+      print(e);
+    }
+    return false;
+  }
+
   static Future<bool> registerTestUser() async {
     try {
       Response response = await dioClient.post("user", data: {

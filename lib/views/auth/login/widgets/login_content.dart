@@ -1,7 +1,10 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:HealthPaw/utils/widgets/loading_screen.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
+import 'package:HealthPaw/views/auth/login/logic/login_form.dart';
+import 'package:HealthPaw/views/auth/login/logic/login_request.dart';
 import 'package:HealthPaw/views/auth/login/widgets/login_logo.dart';
 import 'package:HealthPaw/views/auth/register/register.dart';
 import 'package:HealthPaw/views/main_menu/main_menu.dart';
@@ -15,8 +18,21 @@ class LoginContent extends StatefulWidget {
 }
 
 class _LoginContentState extends State<LoginContent> {
-  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController documentNumberController =
+      TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  LoginForm _loginForm = LoginForm();
+
+  void _submit() async {
+    if (_loginForm.validForm) {
+      displayLoadingScreen(context);
+      LoginRequest.createUserRequest(context, _loginForm.result);
+    } else {
+      setState(() {
+        _loginForm.validateValues();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +46,7 @@ class _LoginContentState extends State<LoginContent> {
             LoginLogo(),
             SizedBox(height: 60),
             TextFieldContainer(
-              controller: usernameController,
+              controller: documentNumberController,
               backgroundColor: AppColors.PrimaryLightBlue,
               leftLabel: "${AppStrings.user}:",
               leftLabelStyle:
@@ -59,8 +75,9 @@ class _LoginContentState extends State<LoginContent> {
                   size: Size(160, 50),
                   style:
                       AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-                  onPress: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => MainMenuView())),
+                  onPress: () => _submit,
+                  // onPress: () => Navigator.of(context).pushReplacement(
+                  //     MaterialPageRoute(builder: (context) => MainMenuView())),
                 ),
                 RoundedButton(
                   text: AppStrings.register,
