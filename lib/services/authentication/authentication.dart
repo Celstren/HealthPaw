@@ -15,7 +15,7 @@ class AuthenticationService {
 
   static Future<bool> loginUser(User user) async {
     try {
-      Response response = await dioClient.post("user", data: {
+      Response response = await dioClient.post("user/login/", data: {
         "documentNumber": user.documentNumber,
         "password": user.password
       });
