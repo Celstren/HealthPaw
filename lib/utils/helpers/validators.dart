@@ -1,6 +1,6 @@
 class Validators {
   static const Pattern _numberPattern = r"^[0-9]*$";
-  static const Pattern _emailPattern = r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$";
+  static const Pattern _emailPattern = r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";
   static const Pattern _phonePattern = r"^[+][0-9]{1,}$";
   static const Pattern _passwordPattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$";
 

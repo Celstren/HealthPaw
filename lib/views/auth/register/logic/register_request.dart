@@ -9,6 +9,37 @@ class RegisterRequest {
   static void createUserRequest(BuildContext context, User user) async {
     bool success =
           await AuthenticationService.registerUser(user);
+    Navigator.pop(context);
+      if (success) {
+        showCustomDialog(
+          context: context,
+          child: CustomDialog(
+            backgroundColor: Colors.transparent,
+            child: OkDialog(
+              title: AppStrings.successfulRegister,
+              okText: AppStrings.close,
+              onPress: () => Navigator.pop(context),
+            ),
+          ),
+        );
+      } else {
+        showCustomDialog(
+          context: context,
+          child: CustomDialog(
+            backgroundColor: Colors.transparent,
+            child: OkDialog(
+              title: AppStrings.failedRegister,
+              okText: AppStrings.close,
+              onPress: () => Navigator.pop(context),
+            ),
+          ),
+        );
+      }
+  }
+  
+  static void createTestUserRequest(BuildContext context, User user) async {
+    bool success =
+          await AuthenticationService.registerTestUser();
       if (success) {
         showCustomDialog(
           context: context,

@@ -43,6 +43,7 @@
 
     "Login": "Login",
     "Username": "Username",
+    "DocumentNumber": "DocumentNumber",
     "Password": "Password",
     "Terms&ConditionsLabel": "By continuing, you agree to Terms & Conditions",
 
@@ -162,6 +163,7 @@
     "EnterName": "Enter name",
     "EnterLastname": "Enter lastname",
     "EnterUsername": "Enter username",
+    "EnterDocumentNumber": "Enter document number",
     "EnterPassword": "Enter password",
     "EnterMobile": "Enter mobile number",
     "EnterBirthday": "Enter birthday",

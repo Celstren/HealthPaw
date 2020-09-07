@@ -44,6 +44,7 @@ class AppStrings {
   static final String petStatus                         = AppConfig.commonStringsJson["PetStatus"] ?? "";
   static final String login                             = AppConfig.commonStringsJson["Login"] ?? "";
   static final String username                          = AppConfig.commonStringsJson["Username"] ?? "";
+  static final String documentNumber                    = AppConfig.commonStringsJson["DocumentNumber"] ?? "";
   static final String password                          = AppConfig.commonStringsJson["Password"] ?? "";
   static final String termsConditionsLabel              = AppConfig.commonStringsJson["Terms&ConditionsLabel"] ?? "";
   static final String defaultSound                      = AppConfig.commonStringsJson["DefaultSound"] ?? "";
@@ -129,6 +130,7 @@ class AppStrings {
   static final String enterName                         = AppConfig.commonStringsJson["EnterName"] ?? "";
   static final String enterLastname                     = AppConfig.commonStringsJson["EnterLastname"] ?? "";
   static final String enterUsername                     = AppConfig.commonStringsJson["EnterUsername"] ?? "";
+  static final String enterDocumentNumber               = AppConfig.commonStringsJson["EnterDocumentNumber"] ?? "";
   static final String enterPassword                     = AppConfig.commonStringsJson["EnterPassword"] ?? "";
   static final String enterMobile                       = AppConfig.commonStringsJson["EnterMobile"] ?? "";
   static final String enterBirthday                     = AppConfig.commonStringsJson["EnterBirthday"] ?? "";
