@@ -36,34 +36,4 @@ class RegisterRequest {
         );
       }
   }
-  
-  static void createTestUserRequest(BuildContext context, User user) async {
-    bool success =
-          await AuthenticationService.registerTestUser();
-      if (success) {
-        showCustomDialog(
-          context: context,
-          child: CustomDialog(
-            backgroundColor: Colors.transparent,
-            child: OkDialog(
-              title: AppStrings.successfulRegister,
-              okText: AppStrings.close,
-              onPress: () {},
-            ),
-          ),
-        );
-      } else {
-        showCustomDialog(
-          context: context,
-          child: CustomDialog(
-            backgroundColor: Colors.transparent,
-            child: OkDialog(
-              title: AppStrings.failedRegister,
-              okText: AppStrings.close,
-              onPress: () {},
-            ),
-          ),
-        );
-      }
-  }
 }
