@@ -3,14 +3,14 @@ import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/circular_button.dart';
 import 'package:flutter/material.dart';
 
-class OwnerMenuContent extends StatefulWidget {
-  OwnerMenuContent({Key key}) : super(key: key);
+class MainMenuContent extends StatefulWidget {
+  MainMenuContent({Key key}) : super(key: key);
 
   @override
-  _OwnerMenuContentState createState() => _OwnerMenuContentState();
+  _MainMenuContentState createState() => _MainMenuContentState();
 }
 
-class _OwnerMenuContentState extends State<OwnerMenuContent> {
+class _MainMenuContentState extends State<MainMenuContent> {
   @override
   Widget build(BuildContext context) {
     return Column(

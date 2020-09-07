@@ -1,14 +1,15 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/views/owner_profile/owner_profile.dart';
 import 'package:flutter/material.dart';
 
-class OwnerNavigationBar extends StatefulWidget {
-  OwnerNavigationBar({Key key}) : super(key: key);
+class MainNavigationBar extends StatefulWidget {
+  MainNavigationBar({Key key}) : super(key: key);
 
   @override
-  _OwnerNavigationBarState createState() => _OwnerNavigationBarState();
+  _MainNavigationBarState createState() => _MainNavigationBarState();
 }
 
-class _OwnerNavigationBarState extends State<OwnerNavigationBar> {
+class _MainNavigationBarState extends State<MainNavigationBar> {
   int indexSelected = 0;
 
   @override
@@ -18,6 +19,12 @@ class _OwnerNavigationBarState extends State<OwnerNavigationBar> {
       onTap: (int index) {
         setState(() {
           indexSelected = index;
+          if (index == 1) {
+            Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    OwnerProfileView()));
+          } 
         });
       },
       items: <BottomNavigationBarItem>[

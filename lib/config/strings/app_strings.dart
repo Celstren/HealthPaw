@@ -26,6 +26,7 @@ class AppStrings {
   static final String names                             = AppConfig.commonStringsJson["Names"] ?? "";
   static final String birthDay                          = AppConfig.commonStringsJson["BirthDay"] ?? "";
   static final String status                            = AppConfig.commonStringsJson["Status"] ?? "";
+  static final String menu                              = AppConfig.commonStringsJson["Menu"] ?? "";
   static final String environmentalTemperature          = AppConfig.commonStringsJson["EnvironmentalTemperature"] ?? "";
   static final String localization                      = AppConfig.commonStringsJson["Localization"] ?? "";
   static final String calibrate                         = AppConfig.commonStringsJson["Calibrate"] ?? "";
