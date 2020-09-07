@@ -69,30 +69,25 @@ class AppSimpleTextField extends StatelessWidget {
   }
 }
 
-class AppDateTextField extends StatefulWidget {
+class AppDateTextField extends StatelessWidget {
   final String title;
   final TextStyle titleStyle;
   final DateTime controller;
   final Function(DateTime) onSelected;
   final String hint;
-  final bool isValid;
   final String errorMsg;
-  AppDateTextField(
+  final bool isValid;
+  const AppDateTextField(
       {Key key,
       this.title = "",
+      this.titleStyle,
       this.controller,
       this.onSelected,
-      this.hint = "",
-      this.isValid = true,
-      this.errorMsg = "",
-      this.titleStyle})
+      this.hint,
+      this.errorMsg,
+      this.isValid})
       : super(key: key);
 
-  @override
-  _AppDateTextFieldState createState() => _AppDateTextFieldState();
-}
-
-class _AppDateTextFieldState extends State<AppDateTextField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -100,18 +95,18 @@ class _AppDateTextFieldState extends State<AppDateTextField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(widget.title,
-              style: widget.titleStyle ??
+          Text(title,
+              style: titleStyle ??
                   AppTextStyle.blackStyle(fontWeight: FontWeight.bold)),
           GestureDetector(
             onTap: () async {
               DateTime dateSelected = await showDatePicker(
                   context: context,
-                  initialDate: widget.controller ?? DateTime.now(),
+                  initialDate: controller ?? DateTime.now(),
                   firstDate: DateTime(DateTime.now().year - 100),
                   lastDate: DateTime.now());
-              if (dateSelected != null && widget.onSelected != null) {
-                widget.onSelected(dateSelected);
+              if (dateSelected != null && onSelected != null) {
+                onSelected(dateSelected);
               }
             },
             child: Container(
@@ -126,9 +121,9 @@ class _AppDateTextFieldState extends State<AppDateTextField> {
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
                   child: Text(
-                    widget.controller != null
-                        ? DateFormat("dd/MM/yyyy").format(widget.controller)
-                        : widget.hint,
+                    controller != null
+                        ? DateFormat("dd/MM/yyyy").format(controller)
+                        : hint,
                     style: AppTextStyle.blackStyle(
                         fontSize: AppFontSizes.subitle16),
                     textAlign: TextAlign.left,
@@ -137,9 +132,9 @@ class _AppDateTextFieldState extends State<AppDateTextField> {
               ),
             ),
           ),
-          widget.isValid
+          isValid
               ? SizedBox()
-              : Text(widget.errorMsg,
+              : Text(errorMsg,
                   style: AppTextStyle.redStyle(fontSize: AppFontSizes.text12)),
         ],
       ),

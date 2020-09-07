@@ -5,11 +5,13 @@ class CommonAppBar extends StatelessWidget {
   final String title;
   final bool showHeader;
   final bool showLogout;
+  final Function handleBack;
   const CommonAppBar(
       {Key key,
       this.title = "",
       this.showHeader = false,
-      this.showLogout = false})
+      this.showLogout = false,
+      this.handleBack})
       : super(key: key);
 
   @override
@@ -22,31 +24,31 @@ class CommonAppBar extends StatelessWidget {
             AppBorderRadius.onlyBottom(bottomRadius: AppRadius.radius15),
       ),
       padding: EdgeInsets.symmetric(horizontal: 15),
-      child: _content(),
+      child: _content(context),
     );
   }
 
-  Widget _content() {
+  Widget _content(BuildContext context) {
     if (!showHeader) return _bottomContent();
     return SizedBox(
       height: 120,
       child: Column(
         children: [
-          _headerContent(),
+          _headerContent(context),
           _bottomContent(),
         ],
       ),
     );
   }
 
-  Widget _headerContent() {
+  Widget _headerContent(BuildContext context) {
     return Container(
       height: 50,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(Icons.arrow_back, size: 40, color: AppColors.PrimaryWhite),
+          FlatButton(onPressed: () => handleBack != null ? handleBack() : Navigator.pop(context), child: Icon(Icons.arrow_back, size: 40, color: AppColors.PrimaryWhite)),
           _actions(),
         ],
       ),

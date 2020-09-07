@@ -18,19 +18,19 @@ class _OwnerMenuContentState extends State<OwnerMenuContent> {
        children: <Widget>[
          CircularButton(
            size: 80,
-           press: () {},
+           onPress: () {},
            label: AppStrings.registerPet,
            icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
          ),
          CircularButton(
            size: 80,
-           press: () {},
+           onPress: () {},
            label: AppStrings.pets,
            icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
          ),
          CircularButton(
            size: 80,
-           press: () {},
+           onPress: () {},
            label: AppStrings.collars,
            icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
          ),

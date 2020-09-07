@@ -3,14 +3,14 @@ import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/utils/widgets/stats_overview.dart';
 import 'package:flutter/material.dart';
 
-class SoundsContent extends StatefulWidget {
-  SoundsContent({Key key}) : super(key: key);
+class SoundHistoryContent extends StatefulWidget {
+  SoundHistoryContent({Key key}) : super(key: key);
 
   @override
-  _SoundsContentState createState() => _SoundsContentState();
+  _SoundHistoryContentState createState() => _SoundHistoryContentState();
 }
 
-class _SoundsContentState extends State<SoundsContent> {
+class _SoundHistoryContentState extends State<SoundHistoryContent> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -23,8 +23,7 @@ class _SoundsContentState extends State<SoundsContent> {
             SizedBox(height: 10),
             StatsOverview(
               metricUnit: AppStrings.decibelsAbb,
-              subtitle: AppStrings.todaySoundIntensity,
-              min: false,
+              subtitle: AppStrings.soundHistory,
             ),
           ],
         ),

@@ -1,16 +1,17 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/config/strings/app_units.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/utils/widgets/stats_overview.dart';
 import 'package:flutter/material.dart';
 
-class SoundsContent extends StatefulWidget {
-  SoundsContent({Key key}) : super(key: key);
+class EnvironmentTemperatureHistoryContent extends StatefulWidget {
+  EnvironmentTemperatureHistoryContent({Key key}) : super(key: key);
 
   @override
-  _SoundsContentState createState() => _SoundsContentState();
+  _EnvironmentTemperatureHistoryContentState createState() => _EnvironmentTemperatureHistoryContentState();
 }
 
-class _SoundsContentState extends State<SoundsContent> {
+class _EnvironmentTemperatureHistoryContentState extends State<EnvironmentTemperatureHistoryContent> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -22,9 +23,9 @@ class _SoundsContentState extends State<SoundsContent> {
             PetAvatar(name: "Firulays"),
             SizedBox(height: 10),
             StatsOverview(
-              metricUnit: AppStrings.decibelsAbb,
-              subtitle: AppStrings.todaySoundIntensity,
-              min: false,
+              metricUnit: AppStrings.temperatureUnits,
+              units: AppUnits.temperatureMetricUnits,
+              subtitle: AppStrings.environmentalTemperatureHistory,
             ),
           ],
         ),

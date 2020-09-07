@@ -15,11 +15,13 @@
     "Sounds": "Sonidos",
     "Alerts": "Alertas",
     "Record": "Grabar",
+    "Variables": "Variables",
     "PetsList": "Lista de Mascotas",
     "Home": "Inicio",
     "Profile": "Perfil",
     "CardiacHistory": "Historial Cardiaco",
     "BreathHistory": "Historial Respiratorio",
+    "TemperatureHistory": "Historia de Temperatura",
     "History": "Historial",
     "Names": "Nombres",
     "BirthDay": "Fecha de nacimiento",
@@ -66,7 +68,7 @@
     "CalibrateWearable": "Calibrar wearable",
 
     "PhysicalActivityHistory": "Historial de actividad física",
-    "PetProile": "Perfil de mascota",
+    "PetProfile": "Perfil de mascota",
     "OwnerProfile": "Perfil Dueño",
     "ModifyOwnerProfile": "Modificar Perfil Dueño",
     "DeactivateUser": "Deshabilitar usuario",
@@ -76,10 +78,14 @@
     "BreathFrequency": "Frecuencia respiratoria",
     "PhysicalActivity": "Actividad física",
 
-    "TodaySoundIntensity": "Intensidad de sonido de hoy",
+    "TodaySoundIntensity": "Intensidad de sonido de Hoy",
     "TodayEnvironmentalTemperature": "Temperatura Ambiente de hoy",
     "TodayPhysicalActivity": "Actividad física de hoy",
+    "TodayBreathFrequency": "Frecuencia respiratoria de hoy",
+    "TodayHearthRate": "Ritmo cardiaco de hoy",
     "BreathFrequencyHistory": "Historial de frecuencia respiratoria",
+    "SoundHistory": "Historial de intensidad de sonido",
+    "EnvironmentalTemperatureHistory": "Historial de Temperatura Ambiente",
 
     "AssignOwner": "Asignar Dueño",
     "OwnerMail": "Correo Dueño",
@@ -102,6 +108,7 @@
     "RegisterForm": "Formato de Registro",
 
     "RegisterPet": "Registrar mascota",
+    "ModifyPet": "Modificar mascota",
 
     "Administrator": "Administrador",
     "RegisterUsers": "Registro Usuarios",
@@ -162,6 +169,18 @@
     "PetType": "Tipo de Mascota",
     "Dog": "Perro",
     "Cat": "Gato",
+    
+    "ViewOverview": "Visualizar Resumen",
+    "ViewHearthRate": "Visualizar Ritmo Cardiaco",
+    "HistoryHearthRate": "Historial Ritmo Cardiaco",
+    "ViewBreathRate": "Visualizar Frecuencia Respiratoria",
+    "HistoryBreathRate": "Historial Frecuencia Respiratoria",
+    "ViewPhysicalActivity": "Visualizar Actividad Física",
+    "HistoryPhysicalActivity": "Historial Actividad Física",
+    "ViewSound": "Visualizar Sonido",
+    "HistorySound": "Historial Sonido",
+    "ViewTemperature": "Visualizar Temperatura",
+    "HistoryTemperature": "Historial Temperatura",
     
     "Ok": "Ok"
 }

@@ -18,13 +18,13 @@ class _OwnerContentState extends State<OwnerContent> {
        children: <Widget>[
          CircularButton(
            size: 80,
-           press: () {},
+           onPress: () {},
            label: AppStrings.pets,
            icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
          ),
          CircularButton(
            size: 80,
-           press: () {},
+           onPress: () {},
            label: AppStrings.collars,
            icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
          ),

@@ -1,16 +1,18 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/config/strings/app_units.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/utils/widgets/stats_overview.dart';
+import 'package:HealthPaw/views/breath_history/breath_history.dart';
 import 'package:flutter/material.dart';
 
-class SoundsContent extends StatefulWidget {
-  SoundsContent({Key key}) : super(key: key);
+class BreathTodayContent extends StatefulWidget {
+  BreathTodayContent({Key key}) : super(key: key);
 
   @override
-  _SoundsContentState createState() => _SoundsContentState();
+  _BreathTodayContentState createState() => _BreathTodayContentState();
 }
 
-class _SoundsContentState extends State<SoundsContent> {
+class _BreathTodayContentState extends State<BreathTodayContent> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -22,9 +24,10 @@ class _SoundsContentState extends State<SoundsContent> {
             PetAvatar(name: "Firulays"),
             SizedBox(height: 10),
             StatsOverview(
-              metricUnit: AppStrings.decibelsAbb,
-              subtitle: AppStrings.todaySoundIntensity,
-              min: false,
+              metricUnit: AppStrings.breathsPerMinuteUnits,
+              units: AppUnits.breathMetricUnits,
+              subtitle: AppStrings.todayBreathFrequency,
+              history: BreathHistoryView(backToToday: true),
             ),
           ],
         ),

@@ -1,26 +1,26 @@
-import 'package:HealthPaw/views/breath_history/widgets/breath_history_content.dart';
-import 'package:HealthPaw/views/breath_today/breath_today.dart';
+import 'package:HealthPaw/views/cardiac_history/widgets/cardiac_history_content.dart';
+import 'package:HealthPaw/views/cardiac_today/cardiac_today.dart';
 import 'package:flutter/material.dart';
 
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
 
-class BreathHistoryView extends StatefulWidget {
+class CardiacHistoryView extends StatefulWidget {
   final bool backToToday;
-  BreathHistoryView({Key key, this.backToToday = false}) : super(key: key);
+  CardiacHistoryView({Key key, this.backToToday = false}) : super(key: key);
 
   @override
-  _BreathHistoryViewState createState() => _BreathHistoryViewState();
+  _CardiacHistoryViewState createState() => _CardiacHistoryViewState();
 }
 
-class _BreathHistoryViewState extends State<BreathHistoryView> {
+class _CardiacHistoryViewState extends State<CardiacHistoryView> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
         if (widget.backToToday) {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (BuildContext context) => BreathTodayView()));
+              builder: (BuildContext context) => CardiacTodayView()));
           return false;
         }
         return true;
@@ -30,16 +30,16 @@ class _BreathHistoryViewState extends State<BreathHistoryView> {
           body: Column(
             children: <Widget>[
               CommonAppBar(
-                title: AppStrings.breathHistory,
+                title: AppStrings.cardiacHistory,
                 showHeader: true,
                 handleBack: widget.backToToday
                     ? () => Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                BreathTodayView()))
+                                CardiacTodayView()))
                     : null,
               ),
-              Expanded(child: BreathHistoryContent()),
+              Expanded(child: CardiacHistoryContent()),
             ],
           ),
         ),

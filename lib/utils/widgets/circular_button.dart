@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class CircularButton extends StatelessWidget {
   final Widget icon;
   final String label;
-  final Function press;
+  final Function onPress;
   final Color color;
   final TextStyle style;
   final double size;
@@ -13,7 +13,7 @@ class CircularButton extends StatelessWidget {
     Key key,
     this.icon,
     this.label = "",
-    this.press,
+    this.onPress,
     this.color = AppColors.PrimaryWhite,
     this.style,
     this.size = 100,
@@ -24,7 +24,7 @@ class CircularButton extends StatelessWidget {
     return Column(
       children: <Widget>[
         GestureDetector(
-          onTap: press,
+          onTap: onPress,
           child: Container(
             height: size,
             width: size,
@@ -43,7 +43,10 @@ class CircularButton extends StatelessWidget {
           ),
         ),
         SizedBox(height: 15),
-        Text(label, style: AppTextStyle.blackStyle(fontSize: AppFontSizes.text14, fontWeight: FontWeight.bold)),
+        SizedBox(
+          width: 120,
+          child: Text(label, textAlign: TextAlign.center, style: AppTextStyle.blackStyle(fontSize: AppFontSizes.text12, fontWeight: FontWeight.bold)),
+        ),
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -8,20 +9,22 @@ class StatsOverview extends StatefulWidget {
   final String metricUnit;
   final List<int> units;
   final Widget iconStat;
-  final bool ruleMetrics;
   final bool media;
   final bool max;
   final bool min;
+  final Widget history;
+  final bool reduceData;
   StatsOverview(
       {Key key,
       this.metricUnit = "",
       this.units,
       this.iconStat,
       this.subtitle = "",
-      this.ruleMetrics = true,
       this.media = true,
       this.max = true,
-      this.min = true})
+      this.min = true,
+      this.history,
+      this.reduceData = false})
       : super(key: key);
 
   @override
@@ -29,7 +32,7 @@ class StatsOverview extends StatefulWidget {
 }
 
 class _StatsOverviewState extends State<StatsOverview> {
-  List<int> _units = [1, 2, 3, 4, 5, 6];
+  List<int> _units;
   Widget _iconStat = Placeholder();
 
   @override
@@ -50,7 +53,7 @@ class _StatsOverviewState extends State<StatsOverview> {
         child: Text(
           "$unit",
           style: AppTextStyle.blackStyle(
-              fontSize: AppFontSizes.subitle18,
+              fontSize: AppFontSizes.text14,
               fontFamily: AppFonts.Montserrat_Bold),
         ),
       ),
@@ -126,6 +129,99 @@ class _StatsOverviewState extends State<StatsOverview> {
     );
   }
 
+  Widget _buildGraphStadistics() {
+    return Column(
+      children: <Widget>[
+        SizedBox(
+          height: 200,
+          width: 320,
+          child: Placeholder(),
+        ),
+        SizedBox(height: 50),
+        Row(
+          mainAxisAlignment: widget.history != null
+              ? MainAxisAlignment.spaceEvenly
+              : MainAxisAlignment.center,
+          children: <Widget>[
+            Column(children: <Widget>[
+              widget.media
+                  ? _buildRate(label: AppStrings.media, unit: 20)
+                  : SizedBox(),
+              widget.max
+                  ? _buildRate(label: AppStrings.maximumAbb, unit: 20)
+                  : SizedBox(),
+              widget.min
+                  ? _buildRate(label: AppStrings.minimumAbb, unit: 20)
+                  : SizedBox(),
+              !widget.media && !widget.max && !widget.min
+                  ? SizedBox()
+                  : SizedBox(height: 50),
+            ]),
+            widget.history != null
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      RoundedButton(
+                        size: Size(100, 30),
+                        text: AppStrings.history,
+                        style: AppTextStyle.whiteStyle(
+                            fontSize: AppFontSizes.text12),
+                        onPress: () => Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    widget.history)),
+                      ),
+                    ],
+                  )
+                : SizedBox(),
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget _buildShortStadisctics() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(
+          height: 80,
+          width: 350,
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: Placeholder(),
+                ),
+                SizedBox(
+                  height: 50,
+                  child: Text(
+                    "42 ${widget.metricUnit}",
+                    style: AppTextStyle.blackStyle(
+                      fontSize: AppFontSizes.title24,
+                      fontFamily: AppFonts.Montserrat_Bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 20),
+        RoundedButton(
+          size: Size(160, 30),
+          text: AppStrings.history,
+          style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text12),
+          onPress: () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context) => widget.history)),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -168,7 +264,9 @@ class _StatsOverviewState extends State<StatsOverview> {
             ),
           ),
           SizedBox(height: 10),
-          widget.ruleMetrics ? _buildRuleMetric() : SizedBox(),
+          widget.units != null && widget.units.isNotEmpty
+              ? _buildRuleMetric()
+              : SizedBox(),
           SizedBox(height: 20),
           Center(
             child: Text(
@@ -180,24 +278,9 @@ class _StatsOverviewState extends State<StatsOverview> {
             ),
           ),
           SizedBox(height: 20),
-          SizedBox(
-            height: 200,
-            width: 320,
-            child: Placeholder(),
-          ),
-          SizedBox(height: 50),
-          widget.media
-              ? _buildRate(label: AppStrings.media, unit: 20)
-              : SizedBox(),
-          widget.max
-              ? _buildRate(label: AppStrings.maximumAbb, unit: 20)
-              : SizedBox(),
-          widget.min
-              ? _buildRate(label: AppStrings.minimumAbb, unit: 20)
-              : SizedBox(),
-          !widget.media && !widget.max && !widget.min
-              ? SizedBox()
-              : SizedBox(height: 50),
+          widget.reduceData
+              ? _buildShortStadisctics()
+              : _buildGraphStadistics(),
         ],
       ),
     );

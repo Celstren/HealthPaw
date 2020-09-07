@@ -1,6 +1,8 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:HealthPaw/utils/widgets/overview_field.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
+import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
 class PetOverviewContent extends StatefulWidget {
@@ -11,36 +13,6 @@ class PetOverviewContent extends StatefulWidget {
 }
 
 class _PetOverviewContentState extends State<PetOverviewContent> {
-  Widget _buildOverviewField(
-      {String label = "", double unit, String unitMetric = ""}) {
-    return SizedBox(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          SizedBox(
-            width: 200,
-            child: Text(
-              "$label:",
-              style: AppTextStyle.blackStyle(
-                fontSize: AppFontSizes.subitle18,
-                fontFamily: AppFonts.Montserrat_Bold,
-              ),
-            ),
-          ),
-          SizedBox(
-            child: Text(
-              "${unit.toStringAsFixed(0)} $unitMetric",
-              style: AppTextStyle.blackStyle(
-                fontSize: AppFontSizes.subitle18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -52,19 +24,33 @@ class _PetOverviewContentState extends State<PetOverviewContent> {
             children: <Widget>[
               SizedBox(height: 20),
               PetAvatar(name: "Firulays"),
-              SizedBox(height: 10),
-              _buildOverviewField(
+              SizedBox(height: 40),
+              OverviewField(
+                  width: 400,
+                  orientation: OverviewFieldOrientation.Horizontal,
                   label: AppStrings.cardiacFrequency,
-                  unit: 100,
-                  unitMetric: AppStrings.beatsPerMinuteUnits),
-              _buildOverviewField(
-                  label: AppStrings.breathFrequency,
-                  unit: 20,
-                  unitMetric: AppStrings.breathsPerMinuteUnits),
-              _buildOverviewField(
+                  text: "100 ${AppStrings.beatsPerMinuteUnits}"),
+              SizedBox(height: 40),
+              OverviewField(
+                width: 400,
+                orientation: OverviewFieldOrientation.Horizontal,
+                label: AppStrings.breathFrequency,
+                text: "20 ${AppStrings.breathsPerMinuteUnits}",
+              ),
+              SizedBox(height: 40),
+              OverviewField(
+                  width: 400,
+                  orientation: OverviewFieldOrientation.Horizontal,
                   label: AppStrings.physicalActivity,
-                  unit: 50,
-                  unitMetric: AppStrings.minimumAbb),
+                  text: "50 ${AppStrings.minimumAbb}"),
+              SizedBox(height: 40),
+              RoundedButton(
+                size: Size(150, 30),
+                text: AppStrings.variables,
+                style: AppTextStyle.whiteStyle(
+                    fontSize: AppFontSizes.text14, fontWeight: FontWeight.bold),
+                onPress: () {},
+              ),
             ],
           ),
         ),

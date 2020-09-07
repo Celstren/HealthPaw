@@ -2,7 +2,7 @@ import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/general/app_images.dart';
 import 'package:HealthPaw/utils/widgets/circular_asset_image_button.dart';
-import 'package:HealthPaw/views/modify_pet/modify_pet.dart';
+import 'package:HealthPaw/views/pet_info/pet_info.dart';
 import 'package:flutter/material.dart';
 
 enum PetType { Dog, Cat }
@@ -17,7 +17,7 @@ class SelectPetTypeContent extends StatefulWidget {
 class _SelectPetTypeContentState extends State<SelectPetTypeContent> {
 
   void displayModifyPetView(PetType petType) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => ModifyPetView()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => PetInfoView()));
   }
 
   @override

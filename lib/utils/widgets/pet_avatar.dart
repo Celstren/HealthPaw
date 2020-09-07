@@ -5,15 +5,17 @@ import 'package:flutter/material.dart';
 class PetAvatar extends StatelessWidget {
   final String path;
   final String name;
-  const PetAvatar({Key key, this.path = "", this.name = ""}) : super(key: key);
+  final double size;
+  const PetAvatar({Key key, this.path = "", this.name = "", this.size = 100}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+        mainAxisAlignment: name != null && name.isNotEmpty ? MainAxisAlignment.start : MainAxisAlignment.center,
         children: <Widget>[
-          CircularAvatar(size: 100, path: path, initialName: "A"),
-          SizedBox(height: 20),
+          CircularAvatar(size: size, path: path, initialName: "A"),
+          name != null && name.isNotEmpty ? SizedBox(height: 20) : SizedBox(),
           name != null && name.isNotEmpty ? Text(
             name,
             style: AppTextStyle.blackStyle(

@@ -1,17 +1,16 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
-import 'package:HealthPaw/config/strings/app_units.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/utils/widgets/stats_overview.dart';
 import 'package:flutter/material.dart';
 
-class EnvironmentTemperatureContent extends StatefulWidget {
-  EnvironmentTemperatureContent({Key key}) : super(key: key);
+class PhysicalActivityHistoryContent extends StatefulWidget {
+  PhysicalActivityHistoryContent({Key key}) : super(key: key);
 
   @override
-  _EnvironmentTemperatureContentState createState() => _EnvironmentTemperatureContentState();
+  _PhysicalActivityHistoryContentState createState() => _PhysicalActivityHistoryContentState();
 }
 
-class _EnvironmentTemperatureContentState extends State<EnvironmentTemperatureContent> {
+class _PhysicalActivityHistoryContentState extends State<PhysicalActivityHistoryContent> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -23,9 +22,8 @@ class _EnvironmentTemperatureContentState extends State<EnvironmentTemperatureCo
             PetAvatar(name: "Firulays"),
             SizedBox(height: 10),
             StatsOverview(
-              metricUnit: AppStrings.temperatureUnits,
-              units: AppUnits.temperatureMetricUnits,
-              subtitle: AppStrings.todayEnvironmentalTemperature,
+              metricUnit: AppStrings.minutesAbb,
+              subtitle: AppStrings.physicalActivityHistory,
             ),
           ],
         ),

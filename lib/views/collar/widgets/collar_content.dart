@@ -18,13 +18,13 @@ class _CollarContentState extends State<CollarContent> {
        children: <Widget>[
          CircularButton(
            size: 80,
-           press: () {},
+           onPress: () {},
            label: AppStrings.synchronize,
            icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
          ),
          CircularButton(
            size: 80,
-           press: () {},
+           onPress: () {},
            label: AppStrings.calibrate,
            icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
          ),
