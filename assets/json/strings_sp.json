@@ -142,6 +142,7 @@
     "Hour": "Horas",
 
     "SuccessfulRegister": "Registro exitoso",
+    "FailedRegister": "Registro fallido. Vuelva a intentar",
     "SuccessfulModify": "Modificación exitosa",
     "SuccessfulDeactivate": "Deshabilitación exitosa",
     "CompleteFields": "Completar campos",

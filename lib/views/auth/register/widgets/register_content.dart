@@ -1,4 +1,5 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/services/authentication/authentication.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
@@ -22,19 +23,36 @@ class _RegisterContentState extends State<RegisterContent> {
   bool obscurePassword1 = true;
   bool obscurePassword2 = true;
 
-  void _submit() {
+  void _submit() async {
     if (_registerForm.validForm) {
-      showCustomDialog(
-        context: context,
-        child: CustomDialog(
-          backgroundColor: Colors.transparent,
-          child: OkDialog(
-            title: AppStrings.successfulRegister,
-            okText: AppStrings.close,
-            onPress: () {},
+      bool success =
+          await AuthenticationService.registerUser(_registerForm.result);
+
+      if (success) {
+        showCustomDialog(
+          context: context,
+          child: CustomDialog(
+            backgroundColor: Colors.transparent,
+            child: OkDialog(
+              title: AppStrings.successfulRegister,
+              okText: AppStrings.close,
+              onPress: () {},
+            ),
           ),
-        ),
-      );
+        );
+      } else {
+        showCustomDialog(
+          context: context,
+          child: CustomDialog(
+            backgroundColor: Colors.transparent,
+            child: OkDialog(
+              title: AppStrings.failedRegister,
+              okText: AppStrings.close,
+              onPress: () {},
+            ),
+          ),
+        );
+      }
     } else {
       setState(() {
         _registerForm.validateValues();

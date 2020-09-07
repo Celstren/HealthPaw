@@ -1,3 +1,4 @@
+import 'package:HealthPaw/models/user/user.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:flutter/material.dart';
 
@@ -73,4 +74,12 @@ class RegisterForm {
     "birthday": date,
     "email": email,
   };
+
+  User get result => User(
+    name: name,
+    lastName: lastname,
+    password: password,
+    email: email,
+    phone: int.tryParse(mobile),
+  );
 }

@@ -115,6 +115,7 @@ class AppStrings {
   static final String minutes                           = AppConfig.commonStringsJson["Minutes"] ?? "";
   static final String hour                              = AppConfig.commonStringsJson["Hour"] ?? "";
   static final String successfulRegister                = AppConfig.commonStringsJson["SuccessfulRegister"] ?? "";
+  static final String failedRegister                    = AppConfig.commonStringsJson["FailedRegister"] ?? "";
   static final String successfulModify                  = AppConfig.commonStringsJson["SuccessfulModify"] ?? "";
   static final String successfulDeactivate              = AppConfig.commonStringsJson["SuccessfulDeactivate"] ?? "";
   static final String completeFields                    = AppConfig.commonStringsJson["CompleteFields"] ?? "";
