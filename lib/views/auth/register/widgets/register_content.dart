@@ -6,6 +6,7 @@ import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
 import 'package:HealthPaw/views/auth/register/logic/register_form.dart';
+import 'package:HealthPaw/views/auth/register/logic/register_request.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -25,34 +26,7 @@ class _RegisterContentState extends State<RegisterContent> {
 
   void _submit() async {
     if (_registerForm.validForm) {
-      bool success =
-          await AuthenticationService.registerUser(_registerForm.result);
-
-      if (success) {
-        showCustomDialog(
-          context: context,
-          child: CustomDialog(
-            backgroundColor: Colors.transparent,
-            child: OkDialog(
-              title: AppStrings.successfulRegister,
-              okText: AppStrings.close,
-              onPress: () {},
-            ),
-          ),
-        );
-      } else {
-        showCustomDialog(
-          context: context,
-          child: CustomDialog(
-            backgroundColor: Colors.transparent,
-            child: OkDialog(
-              title: AppStrings.failedRegister,
-              okText: AppStrings.close,
-              onPress: () {},
-            ),
-          ),
-        );
-      }
+      RegisterRequest.createUserRequest(context, _registerForm.result);
     } else {
       setState(() {
         _registerForm.validateValues();
