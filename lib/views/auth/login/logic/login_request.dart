@@ -6,10 +6,8 @@ import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:flutter/material.dart';
 
 class LoginRequest {
-  static void createUserRequest(BuildContext context, User user) async {
+  static void verifyUser(BuildContext context, User user) async {
     bool success = await AuthenticationService.loginUser(user);
-    print("HTTP OKE?");
-    print(success);
     Navigator.pop(context);
     if (success) {
       showCustomDialog(
@@ -32,35 +30,6 @@ class LoginRequest {
             title: AppStrings.failedRegister,
             okText: AppStrings.close,
             onPress: () => Navigator.pop(context),
-          ),
-        ),
-      );
-    }
-  }
-
-  static void createTestUserRequest(BuildContext context, User user) async {
-    bool success = await AuthenticationService.registerTestUser();
-    if (success) {
-      showCustomDialog(
-        context: context,
-        child: CustomDialog(
-          backgroundColor: Colors.transparent,
-          child: OkDialog(
-            title: AppStrings.successfulRegister,
-            okText: AppStrings.close,
-            onPress: () {},
-          ),
-        ),
-      );
-    } else {
-      showCustomDialog(
-        context: context,
-        child: CustomDialog(
-          backgroundColor: Colors.transparent,
-          child: OkDialog(
-            title: AppStrings.failedRegister,
-            okText: AppStrings.close,
-            onPress: () {},
           ),
         ),
       );

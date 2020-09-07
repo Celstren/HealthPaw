@@ -25,7 +25,7 @@ class _LoginContentState extends State<LoginContent> {
   void _submit() async {
     if (_loginForm.validForm) {
       displayLoadingScreen(context);
-      LoginRequest.createUserRequest(context, _loginForm.result);
+      LoginRequest.verifyUser(context, _loginForm.result);
     } else {
       setState(() {
         _loginForm.validateValues();
