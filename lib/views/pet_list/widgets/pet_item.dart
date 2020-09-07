@@ -32,7 +32,7 @@ class PetItem extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              pet?.name ?? "",
+              pet?.namevar ?? "",
               style: AppTextStyle.blackStyle(
                   fontSize: AppFontSizes.subitle18,
                   fontWeight: FontWeight.bold),

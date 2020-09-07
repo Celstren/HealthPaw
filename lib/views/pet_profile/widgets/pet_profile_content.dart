@@ -30,7 +30,7 @@ class _PetProfileContentState extends State<PetProfileContent> {
               Center(child: PetAvatar()),
               SizedBox(height: 10),
               OverviewField(
-                  label: AppStrings.names, text: widget.pet?.name ?? ""),
+                  label: AppStrings.names, text: widget.pet?.namevar ?? ""),
               SizedBox(height: 20),
               OverviewField(
                   label: AppStrings.birthDay,

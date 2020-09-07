@@ -1,10 +1,10 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
-import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
-import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
+import 'package:HealthPaw/utils/widgets/loading_screen.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
 import 'package:HealthPaw/views/auth/register/logic/register_form.dart';
+import 'package:HealthPaw/views/auth/register/logic/register_request.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -22,19 +22,10 @@ class _RegisterContentState extends State<RegisterContent> {
   bool obscurePassword1 = true;
   bool obscurePassword2 = true;
 
-  void _submit() {
+  void _submit() async {
     if (_registerForm.validForm) {
-      showCustomDialog(
-        context: context,
-        child: CustomDialog(
-          backgroundColor: Colors.transparent,
-          child: OkDialog(
-            title: AppStrings.successfulRegister,
-            okText: AppStrings.close,
-            onPress: () {},
-          ),
-        ),
-      );
+      displayLoadingScreen(context);
+      RegisterRequest.createUserRequest(context, _registerForm.result);
     } else {
       setState(() {
         _registerForm.validateValues();
@@ -97,6 +88,23 @@ class _RegisterContentState extends State<RegisterContent> {
                 if (!_registerForm.validUsernameValue) {
                   setState(() {
                     _registerForm.validUsernameValue = true;
+                  });
+                }
+              },
+            ),
+            separation,
+            _registerTextField(
+              controller: _registerForm.documentNumberController,
+              title: "${AppStrings.documentNumber}:",
+              hint: AppStrings.enterDocumentNumber,
+              errorMsg:
+                  "${AppStrings.theField} ${AppStrings.documentNumber} ${AppStrings.isInvalid}",
+              isValid: _registerForm.validDocumentNumberValue,
+              inputFormatters: [LengthLimitingTextInputFormatter(20)],
+              onChanged: (value) {
+                if (!_registerForm.validDocumentNumberValue) {
+                  setState(() {
+                    _registerForm.validDocumentNumberValue = true;
                   });
                 }
               },
@@ -227,14 +235,14 @@ class _RegisterContentState extends State<RegisterContent> {
               children: <Widget>[
                 RoundedButton(
                   text: AppStrings.register,
-                  size: Size(200, 50),
+                  size: Size(160, 50),
                   style:
                       AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
                   onPress: _submit,
                 ),
                 RoundedButton(
                   text: AppStrings.cancel,
-                  size: Size(200, 50),
+                  size: Size(160, 50),
                   style:
                       AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
                   onPress: () => Navigator.pop(context),

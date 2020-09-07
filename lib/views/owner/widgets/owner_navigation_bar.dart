@@ -20,21 +20,19 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
         setState(() {
           indexSelected = index;
           if (index == 1) {
-            Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    OwnerProfileView()));
-          } 
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => OwnerProfileView()));
+          }
         });
       },
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.tv),
-          label: AppStrings.home,
+          title: Text(AppStrings.home),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: AppStrings.profile,
+          title: Text(AppStrings.profile),
         ),
       ],
     );

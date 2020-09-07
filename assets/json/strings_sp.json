@@ -43,6 +43,7 @@
 
     "Login": "Ingresar",
     "Username": "Nombre de usuario",
+    "DocumentNumber": "Documento de Identidad",
     "Password": "Contraseña",
     "Terms&ConditionsLabel": "Al continuar, estás aceptando nuestros Términos y Condiciones",
 
@@ -142,6 +143,7 @@
     "Hour": "Horas",
 
     "SuccessfulRegister": "Registro exitoso",
+    "FailedRegister": "Registro fallido. Vuelva a intentar",
     "SuccessfulModify": "Modificación exitosa",
     "SuccessfulDeactivate": "Deshabilitación exitosa",
     "CompleteFields": "Completar campos",
@@ -161,6 +163,7 @@
     "EnterName": "Ingrese nombre",
     "EnterLastname": "Ingrese apellido",
     "EnterUsername": "Ingrese nombre de usuario",
+    "EnterDocumentNumber": "Ingrese documento de identidad",
     "EnterPassword": "Ingrese contraseña",
     "EnterMobile": "Ingrese número de celular",
     "EnterBirthday": "Ingrese fecha de nacimiento",
