@@ -11,7 +11,8 @@ class CommonAppBar extends StatelessWidget {
       this.title = "",
       this.showHeader = false,
       this.showLogout = false,
-      this.handleBack})
+      this.handleBack,
+      })
       : super(key: key);
 
   @override

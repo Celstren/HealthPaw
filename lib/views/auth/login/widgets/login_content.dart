@@ -3,7 +3,8 @@ import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
 import 'package:HealthPaw/views/auth/login/widgets/login_logo.dart';
-import 'package:HealthPaw/views/environment_temperature_today/environment_temperature_today.dart';
+import 'package:HealthPaw/views/auth/register/register.dart';
+import 'package:HealthPaw/views/main_menu/main_menu.dart';
 import 'package:flutter/material.dart';
 
 class LoginContent extends StatefulWidget {
@@ -32,7 +33,8 @@ class _LoginContentState extends State<LoginContent> {
               controller: usernameController,
               backgroundColor: AppColors.PrimaryLightBlue,
               leftLabel: "${AppStrings.user}:",
-              leftLabelStyle: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
+              leftLabelStyle:
+                  AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
               leftLabelWidth: 120,
               style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
               borderRadius: AppBorderRadius.all(radius: AppRadius.radius30),
@@ -42,17 +44,33 @@ class _LoginContentState extends State<LoginContent> {
               controller: passwordController,
               backgroundColor: AppColors.PrimaryLightBlue,
               leftLabel: "${AppStrings.password}:",
-              leftLabelStyle: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
+              leftLabelStyle:
+                  AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
               leftLabelWidth: 120,
               style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
               borderRadius: AppBorderRadius.all(radius: AppRadius.radius30),
             ),
             SizedBox(height: 50),
-            RoundedButton(
-              text: AppStrings.login,
-              size: Size(200, 50),
-              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-              onPress: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => EnvironmentTemperatureTodayView())),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                RoundedButton(
+                  text: AppStrings.login,
+                  size: Size(160, 50),
+                  style:
+                      AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
+                  onPress: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => MainMenuView())),
+                ),
+                RoundedButton(
+                  text: AppStrings.register,
+                  size: Size(160, 50),
+                  style:
+                      AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
+                  onPress: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => RegisterView())),
+                ),
+              ],
             ),
             SizedBox(height: 50),
             Align(

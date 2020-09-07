@@ -1,7 +1,6 @@
 import 'package:HealthPaw/config/app_config.dart';
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/views/auth/login/login.dart';
-import 'package:HealthPaw/views/test_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -41,7 +40,7 @@ class _HealthPawAppState extends State<HealthPawApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TestView(),
+      home: view,
     );
   }
 }
