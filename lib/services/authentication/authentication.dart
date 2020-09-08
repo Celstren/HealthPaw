@@ -21,8 +21,6 @@ class AuthenticationService {
         "documentNumber": user.documentNumber,
         "password": user.password
       });
-      print('test');
-      print(User.fromJson(response.data).toJson());
       //TODO: return user data when success
       if (response.statusCode == 201)
         Preferences.setUser = User.fromJson(response.data);

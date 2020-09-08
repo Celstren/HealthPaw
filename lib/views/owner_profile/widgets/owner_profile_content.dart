@@ -1,10 +1,16 @@
+import 'dart:convert';
+
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/data/shared_preferences/preferences.dart';
+import 'package:HealthPaw/models/user/user.dart';
+import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/two_options_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class OwnerProfileContent extends StatefulWidget {
   OwnerProfileContent({Key key}) : super(key: key);
@@ -14,6 +20,15 @@ class OwnerProfileContent extends StatefulWidget {
 }
 
 class _OwnerProfileContentState extends State<OwnerProfileContent> {
+  String name = "";
+  String documentNumber = "";
+  String secondLastName = "";
+  String lastName = "";
+  String email = "";
+  String phone = "";
+  String dayofRegistration = "";
+  String birthDay = "";
+  String namevar = "";
 
   void showAskDeactivateAccountDialog() {
     showCustomDialog(
@@ -24,9 +39,8 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
           title: AppStrings.askDeactivateAccount,
           leftOptionText: AppStrings.accept,
           rightOptionText: AppStrings.close,
-          onLeftPress: () {
-            Navigator.pop(context);
-            showDeactivateSuccessDialog();
+          onLeftPress: () async {
+            if (await deactivateRequest()) showDeactivateSuccessDialog();
           },
           onRightPress: () => Navigator.pop(context),
         ),
@@ -42,12 +56,20 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
         child: OkDialog(
           title: AppStrings.successfulDeactivate,
           okText: AppStrings.close,
-          onPress: () {},
+          onPress: () => Navigator.pop(context),
         ),
       ),
     );
   }
-  
+
+  Future<bool> deactivateRequest() async {
+    Map valueMap = json.decode(Preferences.getUser);
+    User user = User.fromJson(valueMap);
+    bool res = await UserService.deactivateUser(
+        user.documentNumber, {"active": false});
+    return res;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -65,14 +87,14 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(height: 20),
-                      _buildOverviewField(
-                          label: AppStrings.names, text: "Jose Miguel"),
+                      _buildOverviewField(label: AppStrings.names, text: name),
                       SizedBox(height: 10),
                       _buildOverviewField(
-                          label: AppStrings.lastnames, text: "Cruz Muñoz"),
+                          label: AppStrings.lastnames,
+                          text: lastName + secondLastName),
                       SizedBox(height: 10),
                       _buildOverviewField(
-                          label: AppStrings.mobileNumber, text: "957486878"),
+                          label: AppStrings.mobileNumber, text: phone),
                     ],
                   ),
                   Column(
@@ -97,11 +119,9 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
                 ],
               ),
               SizedBox(height: 10),
-              _buildOverviewField(
-                  label: AppStrings.birthDay, text: "04/07/1994"),
+              _buildOverviewField(label: AppStrings.birthDay, text: birthDay),
               SizedBox(height: 10),
-              _buildOverviewField(
-                  label: AppStrings.email, text: "jmcruz@hotmail.com"),
+              _buildOverviewField(label: AppStrings.email, text: email),
               SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -128,7 +148,29 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
       ),
     );
   }
-  
+
+  void getData() async {
+    Map valueMap = json.decode(Preferences.getUser);
+    User user =
+        await UserService.getUser(User.fromJson(valueMap).documentNumber);
+    final DateFormat formatter = DateFormat('dd/MM/yyyy');
+    final String formatted = formatter.format(user.birthDay);
+    setState(() {
+      birthDay = formatted;
+      name = user.name;
+      lastName = user.lastName;
+      secondLastName = user.lastName;
+      email = user.email;
+      phone = user.phone.toString();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   Widget _buildOverviewField({String label = "", String text = ""}) {
     return SizedBox(
       child: Column(

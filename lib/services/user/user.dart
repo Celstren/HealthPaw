@@ -25,6 +25,17 @@ class UserService {
     return false;
   }
 
+  static Future<bool> deactivateUser(
+      String id, Map<String, dynamic> data) async {
+    try {
+      Response response = await dioClient.put("user/" + id, data: data);
+      return response.statusCode == 200;
+    } catch (e) {
+      print(e);
+    }
+    return false;
+  }
+
   static Future<bool> addPetToUser(
       String id, String petName, String petId) async {
     try {
