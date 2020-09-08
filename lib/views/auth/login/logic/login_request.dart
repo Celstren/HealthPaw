@@ -16,7 +16,7 @@ class LoginRequest {
         child: CustomDialog(
           backgroundColor: Colors.transparent,
           child: OkDialog(
-            title: AppStrings.successfulRegister,
+            title: AppStrings.successfulLogin,
             okText: AppStrings.close,
             onPress: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => MainMenuView())),
@@ -29,7 +29,7 @@ class LoginRequest {
         child: CustomDialog(
           backgroundColor: Colors.transparent,
           child: OkDialog(
-            title: AppStrings.failedRegister,
+            title: AppStrings.failedLogin,
             okText: AppStrings.close,
             onPress: () => Navigator.pop(context),
           ),
