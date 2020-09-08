@@ -143,7 +143,9 @@
     "Hour": "Hours",
 
     "SuccessfulRegister": "Successful Register",
+    "SuccessfulLogin": "Successful Login",
     "FailedRegister": "Failed register. Try again",
+    "FailedLogin": "Failed login. Try again",
     "SuccessfulModify": "Successful Modify",
     "SuccessfulDeactivate": "Successful Deactivate",
     "CompleteFields": "Complete Fields",
