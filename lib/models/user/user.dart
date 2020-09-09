@@ -41,7 +41,7 @@ class User {
         image: json["image"] ?? "",
         password: json["password"] ?? "",
         email: json["email"] ?? "",
-        phone: json["phone"],
+        phone: int.parse(json["phone"].toString()),
         documentNumber: json["documentNumber"] ?? "",
         birthDay: DateTime.parse(json["birthDay"]),
         type: json["type"] ?? 1,

@@ -25,7 +25,7 @@ class UserService {
     return false;
   }
 
-  static Future<bool> deactivateUser(
+  static Future<bool> updateDynamic(
       String id, Map<String, dynamic> data) async {
     try {
       Response response = await dioClient.put("user/" + id, data: data);

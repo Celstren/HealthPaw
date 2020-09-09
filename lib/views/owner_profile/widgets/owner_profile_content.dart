@@ -9,6 +9,7 @@ import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/two_options_dialog.dart';
+import 'package:HealthPaw/views/modify_owner_profile/modify_owner_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -65,8 +66,8 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
   Future<bool> deactivateRequest() async {
     Map valueMap = json.decode(Preferences.getUser);
     User user = User.fromJson(valueMap);
-    bool res = await UserService.deactivateUser(
-        user.documentNumber, {"active": false});
+    bool res =
+        await UserService.updateDynamic(user.documentNumber, {"active": false});
     return res;
   }
 
@@ -131,7 +132,9 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
                     size: Size(150, 40),
                     style:
                         AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-                    onPress: showAskDeactivateAccountDialog,
+                    onPress: () => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                            builder: (context) => ModifyOwnerProfileView())),
                   ),
                   RoundedButton(
                     text: AppStrings.deactivate,
