@@ -7,6 +7,7 @@ import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/circular_button.dart';
 import 'package:HealthPaw/views/pet_info/pet_info.dart';
 import 'package:HealthPaw/views/pet_list/pet_list.dart';
+import 'package:HealthPaw/views/select_pet_type/select_pet_type.dart';
 import 'package:flutter/material.dart';
 
 class MainMenuContent extends StatefulWidget {
@@ -17,11 +18,11 @@ class MainMenuContent extends StatefulWidget {
 }
 
 class _MainMenuContentState extends State<MainMenuContent> {
-  User user;
+  User user = User();
   void check() {
-    if (user.pets.length == 0) {
+    if (user?.pets?.length == 0) {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => PetInfoView()));
+          .push(MaterialPageRoute(builder: (context) => SelectPetTypeView()));
     } else {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => PetListView()));
@@ -42,13 +43,13 @@ class _MainMenuContentState extends State<MainMenuContent> {
         CircularButton(
           size: 80,
           onPress: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => PetInfoView())),
+              .push(MaterialPageRoute(builder: (context) => SelectPetTypeView())),
           label: AppStrings.registerPet,
           icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
         ),
         CircularButton(
           size: 80,
-          onPress: () => check(),
+          onPress: check,
           label: AppStrings.pets,
           icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
         ),

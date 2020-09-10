@@ -12,6 +12,7 @@ class PetService {
       return null;
     } catch (e) {
       print(e);
+      return null;
     }
   }
 
@@ -37,9 +38,9 @@ class PetService {
     }
   }
 
-  static Future<bool> updatePet(String id, Pet pet) async {
+  static Future<bool> updatePet(Pet pet) async {
     try {
-      Response response = await dioClient.put("pet/" + id, data: pet.toJson());
+      Response response = await dioClient.put("pet/" + pet.id, data: pet.toJson());
       return response.statusCode == 200;
     } catch (e) {
       print(e);

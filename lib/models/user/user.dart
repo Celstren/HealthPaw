@@ -41,7 +41,7 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => User(
         name: json["namevar"] ?? "",
         lastName: json["lastName"] ?? "",
-        pets: json["pets"] != null ? List<UserPet>.from(json["pets"].map((x) => UserPet.fromJson(x))) : [],
+        pets: json["pets"] != null ? json["pets"].map<UserPet>((x) => UserPet.fromJson(x)).toList() : [],
         secondLastName: json["secondLastName"] ?? "",
         image: json["image"] ?? "",
         password: json["password"] ?? "",

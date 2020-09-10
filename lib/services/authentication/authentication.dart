@@ -1,4 +1,5 @@
 //import 'package:HealthPaw/data/shared_preferences/preferences.dart';
+import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/user/user.dart';
 import 'package:HealthPaw/services/config/dioClient.dart';
@@ -45,7 +46,7 @@ class AuthenticationService {
     } catch (e) {
       print(e);
     }
-    showCustomDialog(context: context, builder: (context) => OkDialog(title: "Error al cerrar sesión", okText: "Ok", onPress: () => Navigator.pop(context)));
+    showCustomDialog(context: context, builder: (context) => OkDialog(title: AppStrings.logoutFail, okText: AppStrings.ok, onPress: () => Navigator.pop(context)));
     return ;
   }
 }

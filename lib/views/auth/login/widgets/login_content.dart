@@ -48,9 +48,9 @@ class _LoginContentState extends State<LoginContent> {
                 hint: AppStrings.enterUsername,
                 errorMsg:
                     "${AppStrings.theField} ${AppStrings.user} ${AppStrings.isInvalid}",
-                isValid: _loginForm.validDocumentNumber,
+                isValid: _loginForm.validDocumentNumberValue,
                 onChanged: (value) {
-                  if (!_loginForm.validDocumentNumber) {
+                  if (!_loginForm.validDocumentNumberValue) {
                     setState(() {
                       _loginForm.validDocumentNumberValue = true;
                     });
@@ -63,9 +63,9 @@ class _LoginContentState extends State<LoginContent> {
                 hint: AppStrings.enterPassword,
                 errorMsg:
                     "${AppStrings.theField} ${AppStrings.password} ${AppStrings.isInvalid}",
-                isValid: _loginForm.validPassword,
+                isValid: _loginForm.validPasswordValue,
                 onChanged: (value) {
-                  if (!_loginForm.validPassword) {
+                  if (!_loginForm.validPasswordValue) {
                     setState(() {
                       _loginForm.validPasswordValue = true;
                     });

@@ -60,6 +60,8 @@ class AppStrings {
   static final String beatsPerMinute                    = AppConfig.commonStringsJson["BeatsPerMinute"] ?? "";
   static final String recommendations                   = AppConfig.commonStringsJson["Recommendations"] ?? "";
   static final String alertSend                         = AppConfig.commonStringsJson["AlertSend"] ?? "";
+  static final String fetchPetFail                      = AppConfig.commonStringsJson["FetchPetFail"] ?? "";
+  static final String logoutFail                        = AppConfig.commonStringsJson["LogoutFail"] ?? "";
   static final String hearthRateHistory                 = AppConfig.commonStringsJson["HeartRateHistory"] ?? "";
   static final String media                             = AppConfig.commonStringsJson["Media"] ?? "";
   static final String maximumAbb                        = AppConfig.commonStringsJson["MaximumAbb"] ?? "";
@@ -120,6 +122,7 @@ class AppStrings {
   static final String failedLogin                       = AppConfig.commonStringsJson["FailedLogin"] ?? "";
   static final String failedRegister                    = AppConfig.commonStringsJson["FailedRegister"] ?? "";
   static final String successfulModify                  = AppConfig.commonStringsJson["SuccessfulModify"] ?? "";
+  static final String failedModify                      = AppConfig.commonStringsJson["FailedModify"] ?? "";
   static final String successfulDeactivate              = AppConfig.commonStringsJson["SuccessfulDeactivate"] ?? "";
   static final String completeFields                    = AppConfig.commonStringsJson["CompleteFields"] ?? "";
   static final String passwordsMatch                    = AppConfig.commonStringsJson["PasswordsMatch"] ?? "";

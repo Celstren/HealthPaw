@@ -1,5 +1,10 @@
+import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/models/pet/pet.dart';
+import 'package:HealthPaw/services/pet/pet.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
+import 'package:HealthPaw/utils/widgets/loading_screen.dart';
+import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/views/pet_info/pet_info.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +12,17 @@ import 'package:flutter/material.dart';
 class PetItem extends StatelessWidget {
   final Pet pet;
   const PetItem({Key key, this.pet}) : super(key: key);
+
+  void fetchPetData(BuildContext context) async {
+    displayLoadingScreen(context);
+    Pet petData = await PetService.getPet(pet.id);
+    Navigator.pop(context);
+    if (petData != null) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => PetInfoView(pet: petData)));
+    } else {
+      showCustomDialog(context: context, builder: (context) => OkDialog(title: AppStrings.fetchPetFail, okText: AppStrings.ok, onPress: () => Navigator.pop(context,)));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +62,7 @@ class PetItem extends StatelessWidget {
             ),
             child: FlatButton(
                 padding: EdgeInsets.zero,
-                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => PetInfoView(pet: pet))),
+                onPressed: () => fetchPetData(context),
                 child: Center(
                     child: Icon(Icons.edit,
                         size: 30, color: AppColors.PrimaryBlack))),

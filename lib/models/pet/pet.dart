@@ -19,15 +19,15 @@ class Pet {
   String id;
   String namevar;
   String breed;
-  int size;
-  int weigth;
+  num size;
+  num weigth;
   String image;
   DateTime birthDay;
   String petType;
 
   factory Pet.fromJson(Map<String, dynamic> json) => Pet(
         id: json["id"] ?? "",
-        namevar: json["namevar"] ?? "",
+        namevar: json["name"] ?? "",
         breed: json["breed"] ?? "",
         size: json["size"] ?? 0,
         weigth: json["weigth"] ?? 0,
@@ -37,7 +37,6 @@ class Pet {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id ?? "",
         "namevar": namevar ?? "",
         "breed": breed ?? "",
         "size": size ?? 0,

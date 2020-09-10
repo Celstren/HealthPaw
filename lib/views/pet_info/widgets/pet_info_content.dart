@@ -52,19 +52,46 @@ class _PetInfoContentState extends State<PetInfoContent> {
               ? AppStrings.successfulModify
               : AppStrings.successfulRegister,
           okText: AppStrings.close,
-          onPress: () => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                  builder: (BuildContext context) => MainMenuView())),
+            onPress: () => Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (BuildContext context) => MainMenuView()), (route) => false),
         ),
       ),
     );
   }
 
+    void showModifyFailDialog() {
+      showCustomDialog(
+        context: context,
+        child: CustomDialog(
+          backgroundColor: Colors.transparent,
+          child: OkDialog(
+            title: widget.pet != null
+                ? AppStrings.failedModify
+                : AppStrings.failedRegister,
+            okText: AppStrings.close,
+            onPress: () => Navigator.pop(context),
+          ),
+        ),
+      );
+    }
+
   void _submit() async {
     if (validatedPetName && validatedBirthDay) {
       displayLoadingScreen(context);
-      if (await createPetRequest()) {
+      if (widget.pet != null) {
+        bool success = await modifyPetRequest();
+        Navigator.pop(context);
+        if (success) {
+          showModifySuccessDialog();
+        } else {
+          showModifyFailDialog();
+        }
+        return;
+      } else if (await createPetRequest()) {
+        Navigator.pop(context);
         showModifySuccessDialog();
+        return;
       }
     } else {
       setState(() {
@@ -84,6 +111,15 @@ class _PetInfoContentState extends State<PetInfoContent> {
           user.documentNumber, pet.namevar, id);
     } else
       return false;
+  }
+
+  Future<bool> modifyPetRequest() async {
+    Pet pet = widget.pet;
+    pet.namevar = petNameController.value.text.trim();
+    pet.birthDay = birthDayController;
+    bool success = await PetService.updatePet(pet);
+    if (!success) return false;
+    return await UserService.editPetToUser(user.documentNumber, pet.namevar, pet.id);
   }
 
   @override
