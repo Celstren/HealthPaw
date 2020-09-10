@@ -6,40 +6,43 @@ String petToJson(Pet data) => json.encode(data.toJson());
 
 class Pet {
   Pet({
-    this.namevar,
-    this.breed,
-    this.size,
-    this.weigth,
-    this.image,
+    this.id = "",
+    this.namevar = "",
+    this.breed = "",
+    this.size = 0,
+    this.weigth = 0,
+    this.image = "",
     this.birthDay,
-    this.petType,
+    this.petType = "",
   });
 
+  String id;
   String namevar;
   String breed;
-  int size;
-  int weigth;
+  num size;
+  num weigth;
   String image;
   DateTime birthDay;
   String petType;
 
   factory Pet.fromJson(Map<String, dynamic> json) => Pet(
-        namevar: json["namevar"],
-        breed: json["breed"],
-        size: json["size"],
-        weigth: json["weigth"],
-        image: json["image"],
-        birthDay: DateTime.parse(json["birthDay"]),
-        petType: json["petType"],
+        id: json["id"] ?? "",
+        namevar: json["name"] ?? "",
+        breed: json["breed"] ?? "",
+        size: json["size"] ?? 0,
+        weigth: json["weigth"] ?? 0,
+        image: json["image"] ?? "",
+        birthDay: DateTime.tryParse(json["birthDay"]),
+        petType: json["petType"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
-        "namevar": namevar,
-        "breed": breed,
-        "size": size,
-        "weigth": weigth,
-        "image": image,
-        "birthDay": birthDay.toIso8601String(),
-        "petType": petType,
+        "namevar": namevar ?? "",
+        "breed": breed ?? "",
+        "size": size ?? 0,
+        "weigth": weigth ?? 0,
+        "image": image ?? "",
+        "birthDay": birthDay?.toIso8601String() ?? "",
+        "petType": petType ?? "",
       };
 }

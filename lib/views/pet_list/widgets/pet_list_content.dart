@@ -1,4 +1,6 @@
+import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/pet/pet.dart';
+import 'package:HealthPaw/models/user/user.dart';
 import 'package:HealthPaw/views/pet_list/widgets/pet_item.dart';
 import 'package:flutter/material.dart';
 
@@ -10,15 +12,22 @@ class PetListContent extends StatefulWidget {
 }
 
 class _PetListContentState extends State<PetListContent> {
-  List<Pet> _pets = [
-    Pet(namevar: "Firulais 1", birthDay: DateTime.now()),
-    Pet(namevar: "Firulais 2", birthDay: DateTime.now()),
-    Pet(namevar: "Firulais 3", birthDay: DateTime.now()),
-    Pet(namevar: "Firulais 4", birthDay: DateTime.now()),
-    Pet(namevar: "Firulais 5", birthDay: DateTime.now()),
-    Pet(namevar: "Firulais 6", birthDay: DateTime.now()),
-    Pet(namevar: "Firulais 7", birthDay: DateTime.now()),
-  ];
+  List<Pet> _pets = [];
+
+  @override
+  void initState() {
+    initData();
+    super.initState();
+  }
+
+  void initData() async {
+    User user = await Preferences.getUser;
+    if (user != null && user.pets != null) {
+      setState(() {
+        _pets = user.pets.map<Pet>((e) => e.toPet).toList();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -143,8 +143,11 @@
     "Hour": "Horas",
 
     "SuccessfulRegister": "Registro exitoso",
+    "SuccessfulLogin": "Ingreso exitoso",
     "FailedRegister": "Registro fallido. Vuelva a intentar",
+    "FailedLogeo": "Ingreso fallido. Vuelva a intentar",
     "SuccessfulModify": "Modificación exitosa",
+    "FailedModify": "Modificación fallida",
     "SuccessfulDeactivate": "Deshabilitación exitosa",
     "CompleteFields": "Completar campos",
     "PasswordsMatch": "Contraseñas coinciden",
@@ -155,6 +158,8 @@
     "ConnectionFailed": "Conexión fallida",
     "ConnectionWaiting": "Esperando conexión",
     "AlertSend": "Alerta Enviada",
+    "FetchPetFail": "Fallo traer datos de mascota",
+    "LogoutFail": "Fallo al cerrar sesión",
 
     "TheField": "El campo",
     "IsInvalid": "es inválido",

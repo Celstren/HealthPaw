@@ -36,15 +36,14 @@ class _SelectPetTypeContentState extends State<SelectPetTypeContent> {
         SizedBox(height: 20),
         Expanded(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            SizedBox(height: 80),
             CircularAssetImageButton(
               size: 80,
               label: AppStrings.dog,
               path: AppImages.DogImage,
               onPress: () => displayModifyPetView(PetType.Dog),
             ),
-            SizedBox(height: 60),
             CircularAssetImageButton(
               size: 80,
               label: AppStrings.cat,

@@ -143,8 +143,11 @@
     "Hour": "Hours",
 
     "SuccessfulRegister": "Successful Register",
+    "SuccessfulLogin": "Successful Login",
     "FailedRegister": "Failed register. Try again",
-    "SuccessfulModify": "Successful Modify",
+    "FailedLogin": "Failed login. Try again",
+    "SuccessfulModify": "Successful Edit",
+    "FailedModify": "Edit Failed",
     "SuccessfulDeactivate": "Successful Deactivate",
     "CompleteFields": "Complete Fields",
     "PasswordsMatch": "Passwords Match",
@@ -155,6 +158,8 @@
     "ConnectionFailed": "Conexión failed",
     "ConnectionWaiting": "Waiting connection",
     "AlertSend": "Alert Send",
+    "FetchPetFail": "Failed to fetch pet data",
+    "LogoutFail": "Logout failed",
 
     "TheField": "The field",
     "IsInvalid": "is invalid",

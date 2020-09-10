@@ -14,7 +14,9 @@ class AppSimpleTextField extends StatelessWidget {
   final Function(String) onSubmitted;
   final String hint;
   final bool isValid;
+  final bool obscureText;
   final String errorMsg;
+  final Widget suffixIcon;
 
   const AppSimpleTextField(
       {Key key,
@@ -27,7 +29,10 @@ class AppSimpleTextField extends StatelessWidget {
       this.hint = "",
       this.isValid = true,
       this.errorMsg = "",
-      this.titleStyle})
+      this.titleStyle,
+      this.obscureText = false,
+      this.suffixIcon,
+      })
       : super(key: key);
 
   @override
@@ -53,6 +58,7 @@ class AppSimpleTextField extends StatelessWidget {
             inputFormatters: inputFormatters,
             onChanged: onChanged,
             onSubmitted: onSubmitted,
+            obscureText: obscureText,
             backgroundColor: AppColors.PrimaryWhite,
             hint: hint,
             hintStyle:
@@ -61,6 +67,7 @@ class AppSimpleTextField extends StatelessWidget {
             borderRadius: AppBorderRadius.all(radius: AppRadius.radius5),
             border: AppBorder.blackBorder,
             collapsed: true,
+            suffixIcon: suffixIcon,
           ),
           _validationSection,
         ],

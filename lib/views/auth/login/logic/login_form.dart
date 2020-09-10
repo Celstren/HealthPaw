@@ -15,7 +15,7 @@ class LoginForm {
   bool validDocumentNumberValue = true;
   bool validPasswordValue = true;
 
-  bool get validPassword => Validators.validPassword(password);
+  bool get validPassword => Validators.validString(password);
   bool get validDocumentNumber => Validators.validString(documentNumber);
   bool get validForm => this.validPassword && this.validDocumentNumberValue;
 
