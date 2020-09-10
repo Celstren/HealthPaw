@@ -27,7 +27,7 @@ class Pet {
 
   factory Pet.fromJson(Map<String, dynamic> json) => Pet(
         id: json["id"] ?? "",
-        namevar: json["name"] ?? "",
+        namevar: json["namevar"] ?? "",
         breed: json["breed"] ?? "",
         size: json["size"] ?? 0,
         weigth: json["weigth"] ?? 0,

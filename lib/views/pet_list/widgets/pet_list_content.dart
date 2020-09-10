@@ -21,7 +21,7 @@ class _PetListContentState extends State<PetListContent> {
   }
 
   void initData() async {
-    User user = await Preferences.getUser;
+    User user = Preferences.getUser;
     if (user != null && user.pets != null) {
       setState(() {
         _pets = user.pets.map<Pet>((e) => e.toPet).toList();
