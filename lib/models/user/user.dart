@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:HealthPaw/models/pet/pet.dart';
+
 User userFromJson(String str) => User.fromJson(json.decode(str));
 
 String userToJson(User data) => json.encode(data.toJson());
@@ -39,7 +41,7 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => User(
         name: json["namevar"] ?? "",
         lastName: json["lastName"] ?? "",
-        pets: List<UserPet>.from(json["pets"].map((x) => UserPet.fromJson(x))),
+        pets: json["pets"] != null ? List<UserPet>.from(json["pets"].map((x) => UserPet.fromJson(x))) : [],
         secondLastName: json["secondLastName"] ?? "",
         image: json["image"] ?? "",
         password: json["password"] ?? "",
@@ -85,4 +87,5 @@ class UserPet {
         "id": id,
         "namevar": namevar,
       };
+  Pet get toPet => Pet(id: this.id, namevar: this.namevar);
 }

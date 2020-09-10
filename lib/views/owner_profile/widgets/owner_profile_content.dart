@@ -64,10 +64,8 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
   }
 
   Future<bool> deactivateRequest() async {
-    Map valueMap = json.decode(Preferences.getUser);
-    User user = User.fromJson(valueMap);
     bool res =
-        await UserService.updateDynamic(user.documentNumber, {"active": false});
+        await UserService.updateDynamic(Preferences.getUser.documentNumber, {"active": false});
     return res;
   }
 
@@ -153,9 +151,8 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
   }
 
   void getData() async {
-    Map valueMap = json.decode(Preferences.getUser);
     User user =
-        await UserService.getUser(User.fromJson(valueMap).documentNumber);
+        await UserService.getUser(Preferences.getUser.documentNumber);
     final DateFormat formatter = DateFormat('dd/MM/yyyy');
     final String formatted = formatter.format(user.birthDay);
     setState(() {

@@ -24,6 +24,7 @@ class Preferences {
   static Future<void> initPrefs() async => _prefs = await SharedPreferences.getInstance();
 
   static set setUser(User user)  => _prefs.setString(PreferencesKeys.USER, jsonEncode(user.toJson()));
-  static get getUser             => _prefs.getString(PreferencesKeys.USER);
+  static User get getUser        => _prefs.getString(PreferencesKeys.USER) != null ? User.fromJson(jsonDecode(_prefs.getString(PreferencesKeys.USER))) : null;
 
+  static Future<bool> clear() async => await _prefs.clear();
 }

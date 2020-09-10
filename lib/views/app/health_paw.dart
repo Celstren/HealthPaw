@@ -1,7 +1,9 @@
 import 'package:HealthPaw/config/app_config.dart';
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
+import 'package:HealthPaw/models/user/user.dart';
 import 'package:HealthPaw/views/auth/login/login.dart';
+import 'package:HealthPaw/views/main_menu/main_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -24,8 +26,13 @@ class _HealthPawAppState extends State<HealthPawApp> {
   void initializeConfig() async {
     await AppConfig.setAppLanguage();
     await Preferences.initPrefs();
+    User user = Preferences.getUser;
     setState(() {
-      view = LoginView();
+      if (user == null) {
+        view = LoginView();
+      } else {
+        view = MainMenuView();
+      }
     });
   }
 

@@ -63,9 +63,8 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
   }
 
   void getData() async {
-    Map valueMap = json.decode(Preferences.getUser);
     User user =
-        await UserService.getUser(User.fromJson(valueMap).documentNumber);
+        await UserService.getUser(Preferences.getUser.documentNumber);
     final DateFormat formatter = DateFormat('dd/MM/yyyy');
     final String formatted = formatter.format(user.birthDay);
     setState(() {

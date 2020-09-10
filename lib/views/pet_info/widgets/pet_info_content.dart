@@ -83,7 +83,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
       return await UserService.addPetToUser(
           user.documentNumber, pet.namevar, id);
     } else
-      false;
+      return false;
   }
 
   @override
@@ -92,8 +92,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
       petNameController = TextEditingController(text: widget.pet.namevar);
       birthDayController = widget.pet.birthDay;
     }
-    Map valueMap = json.decode(Preferences.getUser);
-    user = User.fromJson(valueMap);
+    user = Preferences.getUser;
     super.initState();
   }
 

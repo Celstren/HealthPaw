@@ -7,7 +7,6 @@ import 'package:HealthPaw/views/auth/login/logic/login_form.dart';
 import 'package:HealthPaw/views/auth/login/logic/login_request.dart';
 import 'package:HealthPaw/views/auth/login/widgets/login_logo.dart';
 import 'package:HealthPaw/views/auth/register/register.dart';
-import 'package:HealthPaw/views/main_menu/main_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -118,7 +117,6 @@ class _LoginContentState extends State<LoginContent> {
       String hint = "",
       String errorMsg = "",
       bool isValid = true,
-      bool isPasswordConfirmation = false,
       List<TextInputFormatter> inputFormatters,
       bool obscureText = false,
       Widget suffixIcon,
@@ -143,7 +141,7 @@ class _LoginContentState extends State<LoginContent> {
         style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
         borderRadius: AppBorderRadius.all(radius: AppRadius.radius30),
         suffixIcon: suffixIcon,
-        leftLabel: "${title}:",
+        leftLabel: "$title:",
         leftLabelStyle: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
         leftLabelWidth: 120,
       ),

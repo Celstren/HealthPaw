@@ -18,8 +18,11 @@ class LoginRequest {
           child: OkDialog(
             title: AppStrings.successfulLogin,
             okText: AppStrings.close,
-            onPress: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => MainMenuView())),
+            onPress: () {
+              Navigator.pop(context);
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => MainMenuView()));
+            },
           ),
         ),
       );

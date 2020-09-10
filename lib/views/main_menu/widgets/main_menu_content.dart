@@ -31,8 +31,7 @@ class _MainMenuContentState extends State<MainMenuContent> {
   @override
   void initState() {
     super.initState();
-    Map valueMap = json.decode(Preferences.getUser);
-    user = User.fromJson(valueMap);
+    user = Preferences.getUser;
   }
 
   @override
