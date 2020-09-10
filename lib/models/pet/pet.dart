@@ -24,22 +24,22 @@ class Pet {
   String petType;
 
   factory Pet.fromJson(Map<String, dynamic> json) => Pet(
-        namevar: json["namevar"],
-        breed: json["breed"],
-        size: json["size"],
-        weigth: json["weigth"],
-        image: json["image"],
-        birthDay: DateTime.parse(json["birthDay"]),
-        petType: json["petType"],
+        namevar: json["namevar"] ?? "",
+        breed: json["breed"] ?? "",
+        size: json["size"] ?? 0,
+        weigth: json["weigth"] ?? 0,
+        image: json["image"] ?? "",
+        birthDay: DateTime.tryParse(json["birthDay"]),
+        petType: json["petType"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
-        "namevar": namevar,
-        "breed": breed,
-        "size": size,
-        "weigth": weigth,
-        "image": image,
-        "birthDay": birthDay.toIso8601String(),
-        "petType": petType,
+        "namevar": namevar ?? "",
+        "breed": breed ?? "",
+        "size": size ?? 0,
+        "weigth": weigth ?? 0,
+        "image": image ?? "",
+        "birthDay": birthDay?.toIso8601String() ?? "",
+        "petType": petType ?? "",
       };
 }

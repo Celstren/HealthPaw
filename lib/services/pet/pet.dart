@@ -13,6 +13,17 @@ class PetService {
     return false;
   }
 
+  static Future<List<Pet>> listPets() async {
+    try {
+      Response response = await dioClient.get("pet");
+      List<Pet> pets = response.data.map<Pet>((e) => Pet.fromJson(e)).toList();
+      return pets;
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
+
   static Future<Pet> getPet(String id) async {
     try {
       Response response = await dioClient.get("pet/" + id);
