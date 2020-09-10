@@ -1,3 +1,5 @@
+//import 'package:HealthPaw/data/shared_preferences/preferences.dart';
+import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/user/user.dart';
 import 'package:HealthPaw/services/config/dioClient.dart';
 import 'package:dio/dio.dart';
@@ -19,6 +21,9 @@ class AuthenticationService {
         "documentNumber": user.documentNumber,
         "password": user.password
       });
+      //TODO: return user data when success
+      if (response.statusCode == 201)
+        Preferences.setUser = User.fromJson(response.data);
       return response.statusCode == 201;
     } catch (e) {
       print(e);

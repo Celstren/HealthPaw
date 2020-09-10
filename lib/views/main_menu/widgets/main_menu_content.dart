@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/data/shared_preferences/preferences.dart';
+import 'package:HealthPaw/models/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/circular_button.dart';
+import 'package:HealthPaw/views/pet_info/pet_info.dart';
+import 'package:HealthPaw/views/pet_list/pet_list.dart';
 import 'package:flutter/material.dart';
 
 class MainMenuContent extends StatefulWidget {
@@ -11,30 +17,49 @@ class MainMenuContent extends StatefulWidget {
 }
 
 class _MainMenuContentState extends State<MainMenuContent> {
+  User user;
+  void check() {
+    if (user.pets.length == 0) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => PetInfoView()));
+    } else {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => PetListView()));
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Map valueMap = json.decode(Preferences.getUser);
+    user = User.fromJson(valueMap);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-       children: <Widget>[
-         CircularButton(
-           size: 80,
-           onPress: () {},
-           label: AppStrings.registerPet,
-           icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
-         ),
-         CircularButton(
-           size: 80,
-           onPress: () {},
-           label: AppStrings.pets,
-           icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
-         ),
-         CircularButton(
-           size: 80,
-           onPress: () {},
-           label: AppStrings.collars,
-           icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
-         ),
-       ],
+      children: <Widget>[
+        CircularButton(
+          size: 80,
+          onPress: () => Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => PetInfoView())),
+          label: AppStrings.registerPet,
+          icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
+        ),
+        CircularButton(
+          size: 80,
+          onPress: () => check(),
+          label: AppStrings.pets,
+          icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
+        ),
+        CircularButton(
+          size: 80,
+          onPress: () {},
+          label: AppStrings.collars,
+          icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
+        ),
+      ],
     );
   }
 }

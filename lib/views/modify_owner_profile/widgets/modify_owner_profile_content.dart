@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/data/shared_preferences/preferences.dart';
+import 'package:HealthPaw/models/user/user.dart';
+import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:HealthPaw/utils/widgets/app_text_field.dart';
@@ -6,6 +11,8 @@ import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class ModifyOwnerProfileContent extends StatefulWidget {
   ModifyOwnerProfileContent({Key key}) : super(key: key);
@@ -16,25 +23,66 @@ class ModifyOwnerProfileContent extends StatefulWidget {
 }
 
 class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
-  TextEditingController emailController =
-      TextEditingController(text: "jmcruz@hotmail.com");
-  TextEditingController phoneController =
-      TextEditingController(text: "957486878");
+  String name = "";
+  String documentNumber = "";
+  String secondLastName = "";
+  String lastName = "";
+  String email = "";
+  String phone = "";
+  String dayofRegistration = "";
+  String birthDay = "";
+  String namevar = "";
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   bool validEmail = true, validMobile = true;
 
-  bool get validatedEmail => Validators.validEmail(emailController.value.text.trim());
-  bool get validatedMobile => Validators.validNumber(phoneController.value.text.trim());
+  bool get validatedEmail =>
+      Validators.validEmail(emailController.value.text.trim());
+  bool get validatedMobile =>
+      Validators.validNumber(phoneController.value.text.trim());
 
-  void _submit() {
+  void _submit() async {
     if (validatedEmail && validatedMobile) {
-      showModifySuccessDialog();
+      if (await modifyRequest()) showModifySuccessDialog();
     } else {
       setState(() {
         validEmail = validatedEmail;
         validMobile = validatedMobile;
       });
     }
+  }
+
+  Future<bool> modifyRequest() async {
+    this.email = emailController.value.text.trim();
+    this.phone = phoneController.value.text.trim();
+    bool res = await UserService.updateDynamic(
+        documentNumber, {"email": email, "phone": phone});
+    return res;
+  }
+
+  void getData() async {
+    Map valueMap = json.decode(Preferences.getUser);
+    User user =
+        await UserService.getUser(User.fromJson(valueMap).documentNumber);
+    final DateFormat formatter = DateFormat('dd/MM/yyyy');
+    final String formatted = formatter.format(user.birthDay);
+    setState(() {
+      birthDay = formatted;
+      name = user.name;
+      lastName = user.lastName;
+      secondLastName = user.lastName;
+      email = user.email;
+      documentNumber = user.documentNumber;
+      phone = user.phone.toString();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
   }
 
   void showModifySuccessDialog() {
@@ -68,15 +116,18 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(height: 20),
-                      _buildOverviewField(
-                          label: AppStrings.names, text: "Jose Miguel"),
+                      _buildOverviewField(label: AppStrings.names, text: name),
                       SizedBox(height: 10),
                       _buildOverviewField(
-                          label: AppStrings.lastnames, text: "Cruz Muñoz"),
+                          label: AppStrings.lastnames,
+                          text: lastName + secondLastName),
                       SizedBox(height: 10),
                       AppSimpleTextField(
                           title: AppStrings.mobileNumber,
                           controller: phoneController,
+                          inputFormatters: [
+                            WhitelistingTextInputFormatter.digitsOnly
+                          ],
                           hint: AppStrings.enterMobile,
                           size: Size(160, 40),
                           errorMsg:
@@ -104,8 +155,7 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
                 ],
               ),
               SizedBox(height: 10),
-              _buildOverviewField(
-                  label: AppStrings.birthDay, text: "04/07/1994"),
+              _buildOverviewField(label: AppStrings.birthDay, text: birthDay),
               SizedBox(height: 10),
               AppSimpleTextField(
                   title: AppStrings.email,
@@ -133,7 +183,7 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
                     onPress: () => _submit(),
                   ),
                   RoundedButton(
-                    text: AppStrings.deactivate,
+                    text: AppStrings.cancel,
                     size: Size(150, 40),
                     style:
                         AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),

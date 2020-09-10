@@ -3,6 +3,7 @@ import 'package:HealthPaw/models/user/user.dart';
 import 'package:HealthPaw/services/authentication/authentication.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
+import 'package:HealthPaw/views/main_menu/main_menu.dart';
 import 'package:flutter/material.dart';
 
 class LoginRequest {
@@ -15,9 +16,10 @@ class LoginRequest {
         child: CustomDialog(
           backgroundColor: Colors.transparent,
           child: OkDialog(
-            title: AppStrings.successfulRegister,
+            title: AppStrings.successfulLogin,
             okText: AppStrings.close,
-            onPress: () => Navigator.pop(context),
+            onPress: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => MainMenuView())),
           ),
         ),
       );
@@ -27,7 +29,7 @@ class LoginRequest {
         child: CustomDialog(
           backgroundColor: Colors.transparent,
           child: OkDialog(
-            title: AppStrings.failedRegister,
+            title: AppStrings.failedLogin,
             okText: AppStrings.close,
             onPress: () => Navigator.pop(context),
           ),

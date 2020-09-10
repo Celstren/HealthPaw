@@ -3,14 +3,16 @@ import 'package:HealthPaw/services/config/dioClient.dart';
 import 'package:dio/dio.dart';
 
 class PetService {
-  static Future<bool> registerPet(Pet pet) async {
+  static Future<String> registerPet(Pet pet) async {
     try {
       Response response = await dioClient.post("pet", data: pet.toJson());
-      return response != null;
+      if (response.statusCode == 201) {
+        return response.data["id"];
+      }
+      return null;
     } catch (e) {
       print(e);
     }
-    return false;
   }
 
   static Future<List<Pet>> listPets() async {
