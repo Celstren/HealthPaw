@@ -181,12 +181,12 @@ class _PetInfoContentState extends State<PetInfoContent> {
                 style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
                 onPress: () => _submit(),
               ),
-              RoundedButton(
+              widget.pet != null ? RoundedButton(
                 text: AppStrings.deactivate,
                 size: Size(150, 40),
                 style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
                 onPress: () => Navigator.pop(context),
-              ),
+              ) : SizedBox(),
             ],
           ),
           SizedBox(height: 40),
