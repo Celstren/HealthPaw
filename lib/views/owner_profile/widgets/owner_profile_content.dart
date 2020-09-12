@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/user/user.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
@@ -130,9 +131,7 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
                     size: Size(150, 40),
                     style:
                         AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-                    onPress: () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (context) => ModifyOwnerProfileView())),
+                    onPress: () => NavigationMethods.of(context).navigateReplacement(ModifyOwnerProfileView()),
                   ),
                   RoundedButton(
                     text: AppStrings.deactivate,

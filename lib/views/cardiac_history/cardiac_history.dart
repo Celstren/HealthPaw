@@ -1,3 +1,4 @@
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/views/cardiac_history/widgets/cardiac_history_content.dart';
 import 'package:HealthPaw/views/cardiac_today/cardiac_today.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,7 @@ class _CardiacHistoryViewState extends State<CardiacHistoryView> {
     return WillPopScope(
       onWillPop: () async {
         if (widget.backToToday) {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (BuildContext context) => CardiacTodayView()));
+          NavigationMethods.of(context).navigateReplacement(CardiacTodayView());
           return false;
         }
         return true;
@@ -33,10 +33,7 @@ class _CardiacHistoryViewState extends State<CardiacHistoryView> {
                 title: AppStrings.cardiacHistory,
                 showHeader: true,
                 handleBack: widget.backToToday
-                    ? () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                CardiacTodayView()))
+                    ? () => NavigationMethods.of(context).navigateReplacement(CardiacTodayView())
                     : null,
               ),
               Expanded(child: CardiacHistoryContent()),

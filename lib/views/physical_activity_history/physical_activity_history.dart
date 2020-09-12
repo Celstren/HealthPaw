@@ -1,3 +1,4 @@
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/views/physical_activity_history/widgets/physical_activity_history_content.dart';
 import 'package:HealthPaw/views/physical_activity_today/physical_activity_today.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +23,7 @@ class _PhysicalActivityHistoryViewState
     return WillPopScope(
       onWillPop: () async {
         if (widget.backToToday) {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (BuildContext context) => PhysicalActivityTodayView()));
+          NavigationMethods.of(context).navigateReplacement(PhysicalActivityTodayView());
           return false;
         }
         return true;
@@ -36,10 +36,7 @@ class _PhysicalActivityHistoryViewState
                 title: AppStrings.physicalActivityHistory,
                 showHeader: true,
                 handleBack: widget.backToToday
-                    ? () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                PhysicalActivityTodayView()))
+                    ? () => NavigationMethods.of(context).navigateReplacement(PhysicalActivityTodayView())
                     : null,
               ),
               Expanded(child: PhysicalActivityHistoryContent()),

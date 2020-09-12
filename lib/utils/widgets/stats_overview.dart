@@ -1,4 +1,5 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -166,10 +167,7 @@ class _StatsOverviewState extends State<StatsOverview> {
                         text: AppStrings.history,
                         style: AppTextStyle.whiteStyle(
                             fontSize: AppFontSizes.text12),
-                        onPress: () => Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    widget.history)),
+                        onPress: () => NavigationMethods.of(context).navigateReplacement(widget.history),
                       ),
                     ],
                   )
@@ -215,8 +213,7 @@ class _StatsOverviewState extends State<StatsOverview> {
           size: Size(160, 30),
           text: AppStrings.history,
           style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text12),
-          onPress: () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (BuildContext context) => widget.history)),
+          onPress: () => NavigationMethods.of(context).navigateReplacement(widget.history),
         ),
       ],
     );

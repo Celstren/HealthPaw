@@ -1,3 +1,4 @@
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/general/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +20,7 @@ class _TestViewState extends State<TestView> {
       child: RoundedButton(
         style: AppTextStyle.whiteStyle(),
         text: text,
-        onPress: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => view)),
+        onPress: () => NavigationMethods.of(context).navigateTo(view),
       ),
     );
   }

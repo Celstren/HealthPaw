@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/user/user.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/circular_button.dart';
-import 'package:HealthPaw/views/pet_info/pet_info.dart';
 import 'package:HealthPaw/views/pet_list/pet_list.dart';
 import 'package:HealthPaw/views/select_pet_type/select_pet_type.dart';
 import 'package:flutter/material.dart';
@@ -21,11 +21,9 @@ class _MainMenuContentState extends State<MainMenuContent> {
   User user = User();
   void check() {
     if (user?.pets?.length == 0) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => SelectPetTypeView()));
+      NavigationMethods.of(context).navigateTo(SelectPetTypeView());
     } else {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => PetListView()));
+      NavigationMethods.of(context).navigateTo(PetListView());
     }
   }
 
@@ -42,8 +40,7 @@ class _MainMenuContentState extends State<MainMenuContent> {
       children: <Widget>[
         CircularButton(
           size: 80,
-          onPress: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => SelectPetTypeView())),
+          onPress: () => NavigationMethods.of(context).navigateTo(SelectPetTypeView()),
           label: AppStrings.registerPet,
           icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
         ),

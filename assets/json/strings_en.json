@@ -163,7 +163,7 @@
 
     "TheField": "The field",
     "IsInvalid": "is invalid",
-    "paswordConstraints": "Password must contain 8 characters minimum, 1 uppercase, 1 lowercase and 1 number",
+    "paswordConstraints": "Password must contain 8 characters minimum, 1 uppercase, 1 lowercase, 1 number and 1 special character",
 
     "EnterName": "Enter name",
     "EnterLastname": "Enter lastname",

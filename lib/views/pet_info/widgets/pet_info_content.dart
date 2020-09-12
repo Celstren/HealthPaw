@@ -4,6 +4,7 @@ import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/models/user/user.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/pet/pet.dart';
 import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
@@ -52,9 +53,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
               ? AppStrings.successfulModify
               : AppStrings.successfulRegister,
           okText: AppStrings.close,
-            onPress: () => Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                    builder: (BuildContext context) => MainMenuView()), (route) => false),
+            onPress: () => NavigationMethods.of(context).navigateAndRemoveUntil(MainMenuView()),
         ),
       ),
     );

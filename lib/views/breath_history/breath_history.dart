@@ -1,3 +1,4 @@
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/views/breath_history/widgets/breath_history_content.dart';
 import 'package:HealthPaw/views/breath_today/breath_today.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,7 @@ class _BreathHistoryViewState extends State<BreathHistoryView> {
     return WillPopScope(
       onWillPop: () async {
         if (widget.backToToday) {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (BuildContext context) => BreathTodayView()));
+          NavigationMethods.of(context).navigateReplacement(BreathTodayView());
           return false;
         }
         return true;
@@ -33,10 +33,7 @@ class _BreathHistoryViewState extends State<BreathHistoryView> {
                 title: AppStrings.breathHistory,
                 showHeader: true,
                 handleBack: widget.backToToday
-                    ? () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                BreathTodayView()))
+                    ? () => NavigationMethods.of(context).navigateReplacement(BreathTodayView())
                     : null,
               ),
               Expanded(child: BreathHistoryContent()),

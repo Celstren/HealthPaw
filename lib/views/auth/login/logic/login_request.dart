@@ -1,5 +1,6 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/models/user/user.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/authentication/authentication.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
@@ -20,8 +21,7 @@ class LoginRequest {
             okText: AppStrings.close,
             onPress: () {
               Navigator.pop(context);
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => MainMenuView()));
+              NavigationMethods.of(context).navigateReplacement(MainMenuView());
             },
           ),
         ),

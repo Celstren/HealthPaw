@@ -1,4 +1,5 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/views/owner_profile/owner_profile.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +21,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
         setState(() {
           indexSelected = index;
           if (index == 1) {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => OwnerProfileView()));
+            NavigationMethods.of(context).navigateTo(OwnerProfileView());
           }
         });
       },

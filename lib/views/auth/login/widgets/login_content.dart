@@ -1,4 +1,5 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/loading_screen.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
@@ -81,16 +82,13 @@ class _LoginContentState extends State<LoginContent> {
                   style:
                       AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
                   onPress: _submit,
-                  // onPress: () => Navigator.of(context).pushReplacement(
-                  //     MaterialPageRoute(builder: (context) => MainMenuView())),
                 ),
                 RoundedButton(
                   text: AppStrings.register,
                   size: Size(160, 50),
                   style:
                       AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-                  onPress: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => RegisterView())),
+                  onPress: () => NavigationMethods.of(context).navigateTo(RegisterView()),
                 ),
               ],
             ),
