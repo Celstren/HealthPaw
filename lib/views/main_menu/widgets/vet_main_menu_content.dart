@@ -1,6 +1,4 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
-import 'package:HealthPaw/data/shared_preferences/preferences.dart';
-import 'package:HealthPaw/models/user/user.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/circular_button.dart';
