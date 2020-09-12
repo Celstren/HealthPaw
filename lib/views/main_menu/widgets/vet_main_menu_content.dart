@@ -5,30 +5,22 @@ import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/circular_button.dart';
 import 'package:HealthPaw/views/pet_list/pet_list.dart';
-import 'package:HealthPaw/views/select_pet_type/select_pet_type.dart';
 import 'package:flutter/material.dart';
 
-class MainMenuContent extends StatefulWidget {
-  MainMenuContent({Key key}) : super(key: key);
+class VetMainMenuContent extends StatefulWidget {
+  VetMainMenuContent({Key key}) : super(key: key);
 
   @override
-  _MainMenuContentState createState() => _MainMenuContentState();
+  _VetMainMenuContentState createState() => _VetMainMenuContentState();
 }
 
-class _MainMenuContentState extends State<MainMenuContent> {
-  User user = User();
+class _VetMainMenuContentState extends State<VetMainMenuContent> {
+  User user = Preferences.getUser;
+
   void check() {
-    if (user?.pets?.length == 0) {
-      NavigationMethods.of(context).navigateTo(SelectPetTypeView());
-    } else {
+    if (user?.pets?.length != 0) {
       NavigationMethods.of(context).navigateTo(PetListView());
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    user = Preferences.getUser;
   }
 
   @override
@@ -38,13 +30,6 @@ class _MainMenuContentState extends State<MainMenuContent> {
       children: <Widget>[
         CircularButton(
           size: 80,
-          onPress: () =>
-              NavigationMethods.of(context).navigateTo(SelectPetTypeView()),
-          label: AppStrings.registerPet,
-          icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
-        ),
-        CircularButton(
-          size: 80,
           onPress: check,
           label: AppStrings.pets,
           icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
@@ -52,7 +37,7 @@ class _MainMenuContentState extends State<MainMenuContent> {
         CircularButton(
           size: 80,
           onPress: () {},
-          label: AppStrings.collars,
+          label: AppStrings.alerts,
           icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
         ),
       ],

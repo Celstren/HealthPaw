@@ -86,6 +86,7 @@ class AppStrings {
   static final String locationOf                        = AppConfig.commonStringsJson["LocationOf"] ?? "";
   static final String isLabel                           = AppConfig.commonStringsJson["is"] ?? "";
   static final String user                              = AppConfig.commonStringsJson["User"] ?? "";
+  static final String users                             = AppConfig.commonStringsJson["Users"] ?? "";
   static final String vets                              = AppConfig.commonStringsJson["Vets"] ?? "";
   static final String registerVet                       = AppConfig.commonStringsJson["RegisterVet"] ?? "";
   static final String lastnames                         = AppConfig.commonStringsJson["Lastnames"] ?? "";
