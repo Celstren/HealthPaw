@@ -152,7 +152,7 @@
     "SuccessfulRegister": "Registro exitoso",
     "SuccessfulLogin": "Ingreso exitoso",
     "FailedRegister": "Registro fallido. Vuelva a intentar",
-    "FailedLogeo": "Ingreso fallido. Vuelva a intentar",
+    "FailedLogin": "Ingreso fallido. Vuelva a intentar",
     "SuccessfulModify": "Modificación exitosa",
     "FailedModify": "Modificación fallida",
     "SuccessfulDeactivate": "Deshabilitación exitosa",

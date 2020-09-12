@@ -1,4 +1,5 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
 import 'package:HealthPaw/views/cardiac_history/widgets/cardiac_history_content.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/material.dart';
 
 class CardiacHistoryView extends StatefulWidget {
   final bool backToToday;
-  CardiacHistoryView({Key key, this.backToToday = false}) : super(key: key);
+  final Pet pet;
+  CardiacHistoryView({Key key, this.backToToday = false, this.pet}) : super(key: key);
 
   @override
   _CardiacHistoryViewState createState() => _CardiacHistoryViewState();
@@ -19,7 +21,7 @@ class _CardiacHistoryViewState extends State<CardiacHistoryView> {
     return WillPopScope(
       onWillPop: () async {
         if (widget.backToToday) {
-          NavigationMethods.of(context).navigateReplacement(CardiacTodayView());
+          NavigationMethods.of(context).navigateReplacement(CardiacTodayView(pet: widget.pet));
           return false;
         }
         return true;
@@ -33,10 +35,10 @@ class _CardiacHistoryViewState extends State<CardiacHistoryView> {
                 showHeader: true,
                 handleBack: widget.backToToday
                     ? () => NavigationMethods.of(context)
-                        .navigateReplacement(CardiacTodayView())
+                        .navigateReplacement(CardiacTodayView(pet: widget.pet))
                     : null,
               ),
-              Expanded(child: CardiacHistoryContent()),
+              Expanded(child: CardiacHistoryContent(pet: widget.pet)),
             ],
           ),
         ),

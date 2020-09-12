@@ -1,11 +1,13 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/utils/widgets/stats_overview.dart';
 import 'package:HealthPaw/views/sound_history/sound_history.dart';
 import 'package:flutter/material.dart';
 
 class SoundTodayContent extends StatefulWidget {
-  SoundTodayContent({Key key}) : super(key: key);
+  final Pet pet;
+  SoundTodayContent({Key key, this.pet}) : super(key: key);
 
   @override
   _SoundTodayContentState createState() => _SoundTodayContentState();
@@ -20,7 +22,7 @@ class _SoundTodayContentState extends State<SoundTodayContent> {
         child: Column(
           children: <Widget>[
             SizedBox(height: 20),
-            PetAvatar(name: "Firulays"),
+            PetAvatar(name: widget.pet.namevar),
             SizedBox(height: 10),
             StatsOverview(
               metricUnit: AppStrings.decibelsAbb,
