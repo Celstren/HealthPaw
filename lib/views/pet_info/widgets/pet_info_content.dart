@@ -16,6 +16,7 @@ import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/views/main_menu/main_menu.dart';
 import 'package:HealthPaw/views/select_pet_type/widgets/select_pet_type_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PetInfoContent extends StatefulWidget {
   final PetType petType;
@@ -143,6 +144,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
               title: "${AppStrings.names}:",
               controller: petNameController,
               hint: AppStrings.enterName,
+              inputFormatters: [ LengthLimitingTextInputFormatter(30)],
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.names} ${AppStrings.isInvalid}",
               isValid: validatedPetNameValue,
@@ -170,7 +172,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
           ),
           SizedBox(height: 20),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: widget.pet != null ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.center,
             children: <Widget>[
               RoundedButton(
                 text: widget.pet != null
