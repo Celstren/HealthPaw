@@ -25,6 +25,7 @@ class _BreathHistoryContentState extends State<BreathHistoryContent> {
             PetAvatar(name: widget.pet.namevar),
             SizedBox(height: 10),
             StatsOverview(
+              pet: widget.pet,
               metricUnit: AppStrings.breathsPerMinuteUnits,
               units: AppUnits.breathMetricUnits,
               subtitle: AppStrings.breathFrequencyHistory,

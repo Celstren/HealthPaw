@@ -1,7 +1,9 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
+import 'package:HealthPaw/utils/widgets/stats_field.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +17,7 @@ class StatsOverview extends StatefulWidget {
   final bool min;
   final Widget history;
   final bool reduceData;
+  @required final Pet pet;
   StatsOverview(
       {Key key,
       this.metricUnit = "",
@@ -25,7 +28,8 @@ class StatsOverview extends StatefulWidget {
       this.max = true,
       this.min = true,
       this.history,
-      this.reduceData = false})
+      this.reduceData = false, 
+      this.pet})
       : super(key: key);
 
   @override
@@ -136,7 +140,7 @@ class _StatsOverviewState extends State<StatsOverview> {
         SizedBox(
           height: 200,
           width: 320,
-          child: Placeholder(),
+          child: StatsField(data: widget.pet.statsSample.first.history),
         ),
         SizedBox(height: 50),
         Row(
@@ -167,7 +171,8 @@ class _StatsOverviewState extends State<StatsOverview> {
                         text: AppStrings.history,
                         style: AppTextStyle.whiteStyle(
                             fontSize: AppFontSizes.text12),
-                        onPress: () => NavigationMethods.of(context).navigateReplacement(widget.history),
+                        onPress: () => NavigationMethods.of(context)
+                            .navigateReplacement(widget.history),
                       ),
                     ],
                   )
@@ -213,7 +218,8 @@ class _StatsOverviewState extends State<StatsOverview> {
           size: Size(160, 30),
           text: AppStrings.history,
           style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text12),
-          onPress: () => NavigationMethods.of(context).navigateReplacement(widget.history),
+          onPress: () =>
+              NavigationMethods.of(context).navigateReplacement(widget.history),
         ),
       ],
     );
@@ -282,4 +288,11 @@ class _StatsOverviewState extends State<StatsOverview> {
       ),
     );
   }
+}
+
+class LinearSales {
+  final int year;
+  final int sales;
+
+  LinearSales(this.year, this.sales);
 }

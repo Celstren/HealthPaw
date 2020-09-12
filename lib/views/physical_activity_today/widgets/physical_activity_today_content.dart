@@ -25,6 +25,7 @@ class _PhysicalActivityTodayContentState extends State<PhysicalActivityTodayCont
             PetAvatar(name: widget.pet.namevar),
             SizedBox(height: 10),
             StatsOverview(
+              pet: widget.pet,
               metricUnit: AppStrings.minutesAbb,
               subtitle: AppStrings.hearthRateHistory,
               reduceData: true,

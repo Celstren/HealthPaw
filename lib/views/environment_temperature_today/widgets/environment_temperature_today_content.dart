@@ -26,6 +26,7 @@ class _EnvironmentTemperatureTodayContentState extends State<EnvironmentTemperat
             PetAvatar(name: widget.pet.namevar),
             SizedBox(height: 10),
             StatsOverview(
+              pet: widget.pet,
               metricUnit: AppStrings.temperatureUnits,
               units: AppUnits.temperatureMetricUnits,
               subtitle: AppStrings.todayEnvironmentalTemperature,

@@ -26,10 +26,11 @@ class _CardiacTodayContentState extends State<CardiacTodayContent> {
             PetAvatar(name: widget.pet.namevar),
             SizedBox(height: 10),
             StatsOverview(
+              pet: widget.pet,
               metricUnit: AppStrings.beatsPerMinuteUnits,
               units: AppUnits.beatMetricUnits,
               subtitle: AppStrings.todayHearthRate,
-              history: CardiacHistoryView(backToToday: true),
+              history: CardiacHistoryView(backToToday: true, pet: widget.pet),
             ),
           ],
         ),

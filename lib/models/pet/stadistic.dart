@@ -15,12 +15,14 @@ class Stadistic {
         this.minimum,
         this.maximum,
         this.history,
+        this.timestamp,
     });
 
     String variable;
     String status;
     int minimum;
     int maximum;
+    int timestamp;
     List<History> history;
 
     factory Stadistic.fromJson(Map<String, dynamic> json) => Stadistic(
@@ -29,6 +31,22 @@ class Stadistic {
         minimum: json["minimum"] ?? 0,
         maximum: json["maximum"] ?? 0,
         history: json["history"] != null ? List<History>.from(json["history"].map((x) => History.fromJson(x))) : [],
+        timestamp: json["timestamp"] ?? 0,
+    );
+
+    factory Stadistic.sample() => Stadistic(
+        variable: "Sample",
+        status: "Estable",
+        minimum: 10,
+        maximum: 100,
+        history: [
+          History(timestamp: 1599868800000, value: 50),
+          History(timestamp: 1599872400000, value: 30),
+          History(timestamp: 1599876000000, value: 75),
+          History(timestamp: 1599879600000, value: 10),
+          History(timestamp: 1599883200000, value: 90),
+        ],
+        timestamp: 1599868800000,
     );
 
     Map<String, dynamic> toJson() => {
@@ -47,7 +65,7 @@ class History {
     });
 
     int timestamp;
-    double value;
+    num value;
 
     factory History.fromJson(Map<String, dynamic> json) => History(
         timestamp: json["timestamp"] ?? 0,
@@ -58,4 +76,6 @@ class History {
         "timestamp": timestamp,
         "value": value,
     };
+
+    DateTime get date => DateTime.fromMillisecondsSinceEpoch(this.timestamp);
 }

@@ -67,4 +67,6 @@ class Pet {
         "birthDay": birthDay?.toIso8601String() ?? "",
         "petType": petType ?? "",
       };
+
+  List<Stadistic> get statsSample => [Stadistic.sample()];
 }

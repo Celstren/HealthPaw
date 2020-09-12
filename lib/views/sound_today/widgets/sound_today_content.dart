@@ -25,6 +25,7 @@ class _SoundTodayContentState extends State<SoundTodayContent> {
             PetAvatar(name: widget.pet.namevar),
             SizedBox(height: 10),
             StatsOverview(
+              pet: widget.pet,
               metricUnit: AppStrings.decibelsAbb,
               subtitle: AppStrings.todaySoundIntensity,
               history: SoundHistoryView(backToToday: true),
