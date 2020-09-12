@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:HealthPaw/models/pet/alert.dart';
+import 'package:HealthPaw/models/pet/recommendation.dart';
+import 'package:HealthPaw/models/pet/stadistic.dart';
+
 Pet petFromJson(String str) => Pet.fromJson(json.decode(str));
 
 String petToJson(Pet data) => json.encode(data.toJson());
@@ -14,6 +18,12 @@ class Pet {
     this.image = "",
     this.birthDay,
     this.petType = "",
+    this.alerts,
+    this.breathingFrequency,
+    this.recommendations,
+    this.heartRate,
+    this.sound,
+    this.temperature,
   });
 
   String id;
@@ -24,6 +34,12 @@ class Pet {
   String image;
   DateTime birthDay;
   String petType;
+  List<Alert> alerts = [];
+  List<Stadistic> breathingFrequency = [];
+  List<Recommendation> recommendations = [];
+  List<Stadistic> heartRate = [];
+  List<Stadistic> sound = [];
+  List<Stadistic> temperature = [];
 
   factory Pet.fromJson(Map<String, dynamic> json) => Pet(
         id: json["id"] ?? "",
@@ -34,6 +50,12 @@ class Pet {
         image: json["image"] ?? "",
         birthDay: DateTime.tryParse(json["birthDay"]),
         petType: json["petType"] ?? "",
+        alerts: json["alerts"] ?? "",
+        breathingFrequency: json["breathingFrequency"] != null ? List<Stadistic>.from(json["breathingFrequency"].map((x) => Stadistic.fromJson(x))) : [],
+        heartRate: json["heartRate"] != null ? List<Stadistic>.from(json["heartRate"].map((x) => Stadistic.fromJson(x))) : [],
+        sound: json["sound"] != null ? List<Stadistic>.from(json["sound"].map((x) => Stadistic.fromJson(x))) : [],
+        temperature: json["temperature"] != null ? List<Stadistic>.from(json["temperature"].map((x) => Stadistic.fromJson(x))) : [],
+        recommendations: json["recommendations"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
