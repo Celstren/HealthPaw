@@ -1,4 +1,5 @@
 import 'package:HealthPaw/models/user/user.dart';
+import 'package:HealthPaw/utils/general/constant_helper.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class RegisterForm {
   TextEditingController mobileController = TextEditingController();
   DateTime dateController;
   TextEditingController emailController = TextEditingController();
+  int userTypeController = ConstantHelper.USER_TYPE_ADMIN_ID;
 
   DateTime minDate = DateTime(DateTime.now().year - 100),
       maxDate = DateTime.now();
@@ -25,6 +27,7 @@ class RegisterForm {
   String get mobile => this.mobileController.value.text;
   DateTime get date => this.dateController;
   String get email => this.emailController.value.text;
+  int get userType => this.userTypeController;
 
   bool validNameValue = true;
   bool validLastnameValue = true;
@@ -70,6 +73,7 @@ class RegisterForm {
     this.validMobileValue = true;
     this.validDateValue = true;
     this.validEmailValue = true;
+    userTypeController = 1;
   }
 
   void validateValues() {
@@ -95,6 +99,6 @@ class RegisterForm {
         phone: int.tryParse(mobile),
         documentNumber: documentNumber,
         birthDay: dateController,
-        type: 1,
+        type: userType,
       );
 }

@@ -104,6 +104,7 @@
     "Password2": "Contraseña2",
     "MobileNumber": "Celular",
     "Email": "Correo Electrónico",
+    "UserType": "Tipo de usuario",
 
     "AdministratorProfile": "Perfil de Administrador",
 
@@ -113,6 +114,7 @@
     "ModifyPet": "Modificar mascota",
 
     "Administrator": "Administrador",
+    "Veterinarian": "Veterinario",
     "RegisterUsers": "Registro Usuarios",
 
     "LocatePet": "Localizar mascota",
@@ -173,6 +175,7 @@
     "EnterMobile": "Ingrese número de celular",
     "EnterBirthday": "Ingrese fecha de nacimiento",
     "EnterEmail": "Ingrese correo electrónico",
+    "SelectUserType": "Seleccione tipo de usuario",
 
     "AskDeactivateAccount": "¿Desea deshabilitar la cuenta?",
     "PetType": "Tipo de Mascota",

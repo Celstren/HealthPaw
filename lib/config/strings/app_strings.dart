@@ -92,11 +92,13 @@ class AppStrings {
   static final String password2                         = AppConfig.commonStringsJson["Password2"] ?? "";
   static final String mobileNumber                      = AppConfig.commonStringsJson["MobileNumber"] ?? "";
   static final String email                             = AppConfig.commonStringsJson["Email"] ?? "";
+  static final String userType                          = AppConfig.commonStringsJson["UserType"] ?? "";
   static final String administratorProfile              = AppConfig.commonStringsJson["AdministratorProfile"] ?? "";
   static final String registerForm                      = AppConfig.commonStringsJson["RegisterForm"] ?? "";
   static final String registerPet                       = AppConfig.commonStringsJson["RegisterPet"] ?? "";
   static final String modifyPet                         = AppConfig.commonStringsJson["ModifyPet"] ?? "";
   static final String administrator                     = AppConfig.commonStringsJson["Administrator"] ?? "";
+  static final String veterinarian                      = AppConfig.commonStringsJson["Veterinarian"] ?? "";
   static final String registerUsers                     = AppConfig.commonStringsJson["RegisterUsers"] ?? "";
   static final String locatePet                         = AppConfig.commonStringsJson["LocatePet"] ?? "";
   static final String sendMessage                       = AppConfig.commonStringsJson["SendMessage"] ?? "";
@@ -140,6 +142,7 @@ class AppStrings {
   static final String enterMobile                       = AppConfig.commonStringsJson["EnterMobile"] ?? "";
   static final String enterBirthday                     = AppConfig.commonStringsJson["EnterBirthday"] ?? "";
   static final String enterEmail                        = AppConfig.commonStringsJson["EnterEmail"] ?? "";
+  static final String selectUserType                    = AppConfig.commonStringsJson["SelectUserType"] ?? "";
   static final String ok                                = AppConfig.commonStringsJson["Ok"] ?? "";
   static final String askDeactivateAccount              = AppConfig.commonStringsJson["AskDeactivateAccount"] ?? "";
   static final String petType                           = AppConfig.commonStringsJson["PetType"] ?? "";

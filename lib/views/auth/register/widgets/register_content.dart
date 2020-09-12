@@ -1,6 +1,9 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:HealthPaw/utils/general/constant_helper.dart';
+import 'package:HealthPaw/utils/general/constant_methods_helper.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
+import 'package:HealthPaw/utils/widgets/dropdown.dart';
 import 'package:HealthPaw/utils/widgets/loading_screen.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
@@ -97,6 +100,19 @@ class _RegisterContentState extends State<RegisterContent> {
                     _registerForm.validUsernameValue = true;
                   });
                 }
+              },
+            ),
+            separation,
+            CustomSimpleDropdown(
+              elements: ConstantHelper.USER_TYPES.map((e) => CustomDropdownItem(id: e.toString(), text: ConstantMethodHelper.userTypeValue(e))).toList(),
+              itemSelected: CustomDropdownItem(id: _registerForm.userType.toString(), text: ConstantMethodHelper.userTypeValue(_registerForm.userType)),
+              hint: AppStrings.selectUserType,
+              title: AppStrings.userType,
+              size: Size(375, 40),
+              onChanged: (value) {
+                setState(() {
+                  _registerForm.userTypeController = int.tryParse(value.id);
+                });
               },
             ),
             separation,

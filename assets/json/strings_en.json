@@ -104,6 +104,7 @@
     "Password2": "Password2",
     "MobileNumber": "Mobile number",
     "Email": "Email",
+    "UserType": "User type",
 
     "AdministratorProfile": "Administrator profile",
 
@@ -113,6 +114,7 @@
     "ModifyPet": "Modify pet",
 
     "Administrator": "Administrator",
+    "Veterinarian": "veterinarian",
     "RegisterUsers": "Register users",
 
     "LocatePet": "Locate pet",
@@ -173,6 +175,7 @@
     "EnterMobile": "Enter mobile number",
     "EnterBirthday": "Enter birthday",
     "EnterEmail": "Enter email",
+    "SelectUserType": "Select user type",
 
     "AskDeactivateAccount": "Would you like to deactivate account?",
     "PetType": "Pet Type",

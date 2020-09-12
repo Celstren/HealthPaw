@@ -5,6 +5,7 @@
 import 'dart:convert';
 
 import 'package:HealthPaw/models/pet/pet.dart';
+import 'package:HealthPaw/utils/general/constant_methods_helper.dart';
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
 
@@ -67,6 +68,8 @@ class User {
         "type": type ?? 1,
         "active": active ?? true,
       };
+
+  void get userTypeValue => ConstantMethodHelper.userTypeValue(this.type);
 }
 
 class UserPet {
