@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
@@ -18,22 +18,21 @@ class AppSimpleTextField extends StatelessWidget {
   final String errorMsg;
   final Widget suffixIcon;
 
-  const AppSimpleTextField(
-      {Key key,
-      this.title = "",
-      this.size,
-      this.inputFormatters,
-      this.onChanged,
-      this.controller,
-      this.onSubmitted,
-      this.hint = "",
-      this.isValid = true,
-      this.errorMsg = "",
-      this.titleStyle,
-      this.obscureText = false,
-      this.suffixIcon,
-      })
-      : super(key: key);
+  const AppSimpleTextField({
+    Key key,
+    this.title = "",
+    this.size,
+    this.inputFormatters,
+    this.onChanged,
+    this.controller,
+    this.onSubmitted,
+    this.hint = "",
+    this.isValid = true,
+    this.errorMsg = "",
+    this.titleStyle,
+    this.obscureText = false,
+    this.suffixIcon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

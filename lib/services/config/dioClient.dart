@@ -6,8 +6,8 @@ Dio get dioClient {
   Dio _dio;
   if (_dio == null) {
     BaseOptions options = new BaseOptions(
-      connectTimeout: 30000,
-      receiveTimeout: 30000,
+      connectTimeout: 5000,
+      receiveTimeout: 5000,
       baseUrl: Core().server,
     );
     _dio = new Dio(options);

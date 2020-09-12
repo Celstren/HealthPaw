@@ -2,6 +2,7 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/user/user.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/config/dioClient.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
@@ -14,7 +15,11 @@ class AuthenticationService {
   static Future<bool> registerUser(User user) async {
     try {
       Response response = await dioClient.post("user", data: user.toJson());
-      return response != null;
+      if (response.statusCode == 201) {
+        Preferences.clear();
+        Preferences.setUser = User.fromJson(response.data);
+      }
+      return response.statusCode == 201;
     } catch (e) {
       print(e);
     }
@@ -27,8 +32,10 @@ class AuthenticationService {
         "documentNumber": user.documentNumber,
         "password": user.password
       });
-      if (response.statusCode == 201)
+      if (response.statusCode == 201) {
+        Preferences.clear();
         Preferences.setUser = User.fromJson(response.data);
+      }
       return response.statusCode == 201;
     } catch (e) {
       print(e);
@@ -40,7 +47,7 @@ class AuthenticationService {
     try {
       bool success = await Preferences.clear();
       if (success) {
-        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => LoginView()), (route) => false);
+        NavigationMethods.of(context).navigateAndRemoveUntil(LoginView());
         return;
       }
     } catch (e) {

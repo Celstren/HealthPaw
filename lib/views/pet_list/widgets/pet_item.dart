@@ -1,5 +1,6 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/models/pet/pet.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/pet/pet.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
@@ -18,7 +19,7 @@ class PetItem extends StatelessWidget {
     Pet petData = await PetService.getPet(pet.id);
     Navigator.pop(context);
     if (petData != null) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => PetInfoView(pet: petData)));
+      NavigationMethods.of(context).navigateTo(PetInfoView(pet: petData));
     } else {
       showCustomDialog(context: context, builder: (context) => OkDialog(title: AppStrings.fetchPetFail, okText: AppStrings.ok, onPress: () => Navigator.pop(context,)));
     }

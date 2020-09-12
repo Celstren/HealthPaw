@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/models/user/user.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/pet/pet.dart';
 import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
@@ -17,6 +16,7 @@ import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/views/main_menu/main_menu.dart';
 import 'package:HealthPaw/views/select_pet_type/widgets/select_pet_type_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PetInfoContent extends StatefulWidget {
   final PetType petType;
@@ -52,29 +52,28 @@ class _PetInfoContentState extends State<PetInfoContent> {
               ? AppStrings.successfulModify
               : AppStrings.successfulRegister,
           okText: AppStrings.close,
-            onPress: () => Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                    builder: (BuildContext context) => MainMenuView()), (route) => false),
+          onPress: () => NavigationMethods.of(context)
+              .navigateAndRemoveUntil(MainMenuView()),
         ),
       ),
     );
   }
 
-    void showModifyFailDialog() {
-      showCustomDialog(
-        context: context,
-        child: CustomDialog(
-          backgroundColor: Colors.transparent,
-          child: OkDialog(
-            title: widget.pet != null
-                ? AppStrings.failedModify
-                : AppStrings.failedRegister,
-            okText: AppStrings.close,
-            onPress: () => Navigator.pop(context),
-          ),
+  void showModifyFailDialog() {
+    showCustomDialog(
+      context: context,
+      child: CustomDialog(
+        backgroundColor: Colors.transparent,
+        child: OkDialog(
+          title: widget.pet != null
+              ? AppStrings.failedModify
+              : AppStrings.failedRegister,
+          okText: AppStrings.close,
+          onPress: () => Navigator.pop(context),
         ),
-      );
-    }
+      ),
+    );
+  }
 
   void _submit() async {
     if (validatedPetName && validatedBirthDay) {
@@ -119,7 +118,8 @@ class _PetInfoContentState extends State<PetInfoContent> {
     pet.birthDay = birthDayController;
     bool success = await PetService.updatePet(pet);
     if (!success) return false;
-    return await UserService.editPetToUser(user.documentNumber, pet.namevar, pet.id);
+    return await UserService.editPetToUser(
+        user.documentNumber, pet.namevar, pet.id);
   }
 
   @override
@@ -144,6 +144,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
               title: "${AppStrings.names}:",
               controller: petNameController,
               hint: AppStrings.enterName,
+              inputFormatters: [ LengthLimitingTextInputFormatter(30)],
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.names} ${AppStrings.isInvalid}",
               isValid: validatedPetNameValue,
@@ -171,7 +172,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
           ),
           SizedBox(height: 20),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: widget.pet != null ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.center,
             children: <Widget>[
               RoundedButton(
                 text: widget.pet != null
@@ -181,12 +182,15 @@ class _PetInfoContentState extends State<PetInfoContent> {
                 style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
                 onPress: () => _submit(),
               ),
-              widget.pet != null ? RoundedButton(
-                text: AppStrings.deactivate,
-                size: Size(150, 40),
-                style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-                onPress: () => Navigator.pop(context),
-              ) : SizedBox(),
+              widget.pet != null
+                  ? RoundedButton(
+                      text: AppStrings.deactivate,
+                      size: Size(150, 40),
+                      style: AppTextStyle.whiteStyle(
+                          fontSize: AppFontSizes.title18),
+                      onPress: () => Navigator.pop(context),
+                    )
+                  : SizedBox(),
             ],
           ),
           SizedBox(height: 40),

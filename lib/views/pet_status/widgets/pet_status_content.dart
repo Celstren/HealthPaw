@@ -1,4 +1,5 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/circular_button.dart';
 import 'package:HealthPaw/views/breath_history/breath_history.dart';
@@ -34,8 +35,7 @@ class _PetStatusContentState extends State<PetStatusContent> {
             SizedBox(height: divisionSize),
             CircularButton(
               size: 80,
-              onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => PetOverviewView())),
+              onPress: () => NavigationMethods.of(context).navigateTo(PetOverviewView()),
               label: AppStrings.viewOverview,
               icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
             ),
@@ -45,16 +45,14 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => CardiacTodayView())),
+                  onPress: () => NavigationMethods.of(context).navigateTo(CardiacTodayView()),
                   label: AppStrings.viewHearthRate,
                   icon: Icon(Icons.favorite,
                       size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => CardiacHistoryView())),
+                  onPress: () => NavigationMethods.of(context).navigateTo(CardiacHistoryView()),
                   label: AppStrings.historyHearthRate,
                   icon: Icon(Icons.favorite,
                       size: 30, color: AppColors.PrimaryBlack),
@@ -67,16 +65,14 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => BreathTodayView())),
+                  onPress: () => NavigationMethods.of(context).navigateTo(BreathTodayView()),
                   label: AppStrings.viewBreathRate,
                   icon: Icon(Icons.timer,
                       size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => BreathHistoryView())),
+                  onPress: () => NavigationMethods.of(context).navigateTo(BreathHistoryView()),
                   label: AppStrings.historyBreathRate,
                   icon: Icon(Icons.timer,
                       size: 30, color: AppColors.PrimaryBlack),
@@ -89,16 +85,14 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => PhysicalActivityTodayView())),
+                  onPress: () => NavigationMethods.of(context).navigateTo(PhysicalActivityTodayView()),
                   label: AppStrings.viewPhysicalActivity,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => PhysicalActivityHistoryView())),
+                  onPress: () => NavigationMethods.of(context).navigateTo(PhysicalActivityHistoryView()),
                   label: AppStrings.historyPhysicalActivity,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
@@ -111,16 +105,14 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => SoundTodayView())),
+                  onPress: () => NavigationMethods.of(context).navigateTo(SoundTodayView()),
                   label: AppStrings.viewSound,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => SoundHistoryView())),
+                  onPress: () => NavigationMethods.of(context).navigateTo(SoundHistoryView()),
                   label: AppStrings.historySound,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
@@ -133,16 +125,14 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => EnvironmentTemperatureTodayView())),
+                  onPress: () => NavigationMethods.of(context).navigateTo(EnvironmentTemperatureTodayView()),
                   label: AppStrings.viewTemperature,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => EnvironmentTemperatureHistoryView())),
+                  onPress: () => NavigationMethods.of(context).navigateTo(EnvironmentTemperatureHistoryView()),
                   label: AppStrings.historyTemperature,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),

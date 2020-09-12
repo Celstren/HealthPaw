@@ -1,8 +1,7 @@
-import 'package:HealthPaw/views/sounds/widgets/sounds_content.dart';
-import 'package:flutter/material.dart';
-
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
+import 'package:HealthPaw/views/sounds/widgets/sounds_content.dart';
+import 'package:flutter/material.dart';
 
 class SoundsView extends StatefulWidget {
   SoundsView({Key key}) : super(key: key);

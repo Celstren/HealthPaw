@@ -1,9 +1,9 @@
+import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
+import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
 import 'package:HealthPaw/views/sound_history/widgets/sound_history_content.dart';
 import 'package:HealthPaw/views/sound_today/sound_today.dart';
 import 'package:flutter/material.dart';
-
-import 'package:HealthPaw/config/strings/app_strings.dart';
-import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
 
 class SoundHistoryView extends StatefulWidget {
   final bool backToToday;
@@ -19,8 +19,7 @@ class _SoundHistoryViewState extends State<SoundHistoryView> {
     return WillPopScope(
       onWillPop: () async {
         if (widget.backToToday) {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (BuildContext context) => SoundTodayView()));
+          NavigationMethods.of(context).navigateReplacement(SoundTodayView());
           return false;
         }
         return true;
@@ -33,10 +32,8 @@ class _SoundHistoryViewState extends State<SoundHistoryView> {
                 title: AppStrings.sounds,
                 showHeader: true,
                 handleBack: widget.backToToday
-                    ? () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                SoundTodayView()))
+                    ? () => NavigationMethods.of(context)
+                        .navigateReplacement(SoundTodayView())
                     : null,
               ),
               Expanded(child: SoundHistoryContent()),
