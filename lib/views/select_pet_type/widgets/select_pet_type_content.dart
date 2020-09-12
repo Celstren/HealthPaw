@@ -16,7 +16,6 @@ class SelectPetTypeContent extends StatefulWidget {
 }
 
 class _SelectPetTypeContentState extends State<SelectPetTypeContent> {
-
   void displayModifyPetView(PetType petType) {
     NavigationMethods.of(context).navigateTo(PetInfoView());
   }

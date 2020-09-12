@@ -11,7 +11,29 @@ class UserService {
       return user;
     } catch (e) {
       print(e);
-      return e;
+      return null;
+    }
+  }
+
+  static Future<List<User>> get getUsers async {
+    try {
+      Response response = await dioClient.get("user");
+      if (response.statusCode != 200) return null;
+      List<User> users = response.data.map<User>((e) => User.fromJson(e)).toList();
+      return users;
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
+  static Future<bool> addUser(User user) async {
+    try {
+      Response response = await dioClient.post("user", data: user.toJson());
+      return response.statusCode == 201;
+    } catch (e) {
+      print(e);
+      return null;
     }
   }
 

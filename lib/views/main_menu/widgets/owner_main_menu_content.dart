@@ -8,27 +8,22 @@ import 'package:HealthPaw/views/pet_list/pet_list.dart';
 import 'package:HealthPaw/views/select_pet_type/select_pet_type.dart';
 import 'package:flutter/material.dart';
 
-class MainMenuContent extends StatefulWidget {
-  MainMenuContent({Key key}) : super(key: key);
+class OwnerMainMenuContent extends StatefulWidget {
+  OwnerMainMenuContent({Key key}) : super(key: key);
 
   @override
-  _MainMenuContentState createState() => _MainMenuContentState();
+  _OwnerMainMenuContentState createState() => _OwnerMainMenuContentState();
 }
 
-class _MainMenuContentState extends State<MainMenuContent> {
-  User user = User();
+class _OwnerMainMenuContentState extends State<OwnerMainMenuContent> {
+  User user = Preferences.getUser;
+  
   void check() {
     if (user?.pets?.length == 0) {
       NavigationMethods.of(context).navigateTo(SelectPetTypeView());
     } else {
       NavigationMethods.of(context).navigateTo(PetListView());
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    user = Preferences.getUser;
   }
 
   @override

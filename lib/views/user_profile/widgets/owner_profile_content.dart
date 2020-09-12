@@ -6,6 +6,7 @@ import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
+import 'package:HealthPaw/utils/widgets/overview_field.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/two_options_dialog.dart';
 import 'package:HealthPaw/views/modify_owner_profile/modify_owner_profile.dart';
@@ -26,9 +27,7 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
   String lastName = "";
   String email = "";
   String phone = "";
-  String dayofRegistration = "";
   String birthDay = "";
-  String namevar = "";
 
   void showAskDeactivateAccountDialog() {
     showCustomDialog(
@@ -69,6 +68,21 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
   }
 
   @override
+  void initState() {
+    User user = Preferences.getUser;
+    final DateFormat formatter = DateFormat('dd/MM/yyyy');
+    final String formatted = formatter.format(user.birthDay);
+    name = user.name;
+    documentNumber = user.documentNumber;
+    secondLastName = user.secondLastName;
+    lastName = user.lastName;
+    email = user.email;
+    phone = user.phone.toString();
+    birthDay = formatted;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
@@ -85,13 +99,13 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(height: 20),
-                      _buildOverviewField(label: AppStrings.names, text: name),
+                      OverviewField(label: AppStrings.names, text: name),
                       SizedBox(height: 10),
-                      _buildOverviewField(
+                      OverviewField(
                           label: AppStrings.lastnames,
                           text: lastName + secondLastName),
                       SizedBox(height: 10),
-                      _buildOverviewField(
+                      OverviewField(
                           label: AppStrings.mobileNumber, text: phone),
                     ],
                   ),
@@ -117,9 +131,9 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
                 ],
               ),
               SizedBox(height: 10),
-              _buildOverviewField(label: AppStrings.birthDay, text: birthDay),
+              OverviewField(label: AppStrings.birthDay, text: birthDay),
               SizedBox(height: 10),
-              _buildOverviewField(label: AppStrings.email, text: email),
+              OverviewField(label: AppStrings.email, text: email),
               SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -144,54 +158,6 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  void getData() async {
-    User user = await UserService.getUser(Preferences.getUser.documentNumber);
-    final DateFormat formatter = DateFormat('dd/MM/yyyy');
-    final String formatted = formatter.format(user.birthDay);
-    setState(() {
-      birthDay = formatted;
-      name = user.name;
-      lastName = user.lastName;
-      secondLastName = user.lastName;
-      email = user.email;
-      phone = user.phone.toString();
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
-  Widget _buildOverviewField({String label = "", String text = ""}) {
-    return SizedBox(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(
-            child: Text(
-              "$label:",
-              style: AppTextStyle.blackStyle(
-                fontSize: AppFontSizes.subitle18,
-                fontFamily: AppFonts.Montserrat_Bold,
-              ),
-            ),
-          ),
-          SizedBox(
-            child: Text(
-              "\t$text",
-              style: AppTextStyle.blackStyle(
-                fontSize: AppFontSizes.subitle18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -1,40 +1,53 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/general/constant_helper.dart';
-import 'package:HealthPaw/utils/general/constant_methods_helper.dart';
+import 'package:HealthPaw/utils/general/enums.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
-import 'package:HealthPaw/utils/widgets/dropdown.dart';
 import 'package:HealthPaw/utils/widgets/loading_screen.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
 import 'package:HealthPaw/views/auth/register/logic/register_form.dart';
-import 'package:HealthPaw/views/auth/register/logic/register_request.dart';
+import 'package:HealthPaw/views/manual_register/logic/manual_register_request.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-class RegisterContent extends StatefulWidget {
-  RegisterContent({Key key}) : super(key: key);
+class ManualRegisterContent extends StatefulWidget {
+  final UserType userType;
+  ManualRegisterContent({Key key, this.userType = UserType.Owner}) : super(key: key);
 
   @override
-  _RegisterContentState createState() => _RegisterContentState();
+  _ManualRegisterContentState createState() => _ManualRegisterContentState();
 }
 
-class _RegisterContentState extends State<RegisterContent> {
-  RegisterForm _registerForm = RegisterForm();
+class _ManualRegisterContentState extends State<ManualRegisterContent> {
+  RegisterForm _manualRegisterForm = RegisterForm();
   bool passwordsMatchs = false;
   bool obscurePassword1 = true;
   bool obscurePassword2 = true;
 
   void _submit() async {
-    if (_registerForm.validForm) {
+    if (_manualRegisterForm.validForm) {
       displayLoadingScreen(context);
-      RegisterRequest.createUserRequest(context, _registerForm.result);
+      ManualRegisterRequest.createUserRequest(context, _manualRegisterForm.result);
     } else {
       setState(() {
-        _registerForm.validateValues();
+        _manualRegisterForm.validateValues();
       });
     }
+  }
+
+  @override
+  void initState() {
+    switch (widget.userType) {
+      case UserType.Owner:
+        _manualRegisterForm.userTypeController = ConstantHelper.USER_TYPE_OWNER_ID;
+        break;
+      case UserType.Vet:
+        _manualRegisterForm.userTypeController = ConstantHelper.USER_TYPE_VET_ID;
+        break;
+    }
+    super.initState();
   }
 
   @override
@@ -47,98 +60,85 @@ class _RegisterContentState extends State<RegisterContent> {
           children: <Widget>[
             SizedBox(height: 160),
             _registerTextField(
-              controller: _registerForm.nameController,
+              controller: _manualRegisterForm.nameController,
               title: "${AppStrings.names}:",
               hint: AppStrings.enterName,
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.names} ${AppStrings.isInvalid}",
-              isValid: _registerForm.validNameValue,
+              isValid: _manualRegisterForm.validNameValue,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(50),
                 FilteringTextInputFormatter.deny(Validators.numberRegex)
               ],
               onChanged: (value) {
-                if (!_registerForm.validNameValue) {
+                if (!_manualRegisterForm.validNameValue) {
                   setState(() {
-                    _registerForm.validNameValue = true;
+                    _manualRegisterForm.validNameValue = true;
                   });
                 }
               },
             ),
             separation,
             _registerTextField(
-              controller: _registerForm.lastnameController,
+              controller: _manualRegisterForm.lastnameController,
               title: "${AppStrings.lastnames}:",
               hint: AppStrings.enterLastname,
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.lastnames} ${AppStrings.isInvalid}",
-              isValid: _registerForm.validLastnameValue,
+              isValid: _manualRegisterForm.validLastnameValue,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(50),
                 FilteringTextInputFormatter.deny(Validators.numberRegex)
               ],
               onChanged: (value) {
-                if (!_registerForm.validLastnameValue) {
+                if (!_manualRegisterForm.validLastnameValue) {
                   setState(() {
-                    _registerForm.validLastnameValue = true;
+                    _manualRegisterForm.validLastnameValue = true;
                   });
                 }
               },
             ),
             separation,
             _registerTextField(
-              controller: _registerForm.usernameController,
+              controller: _manualRegisterForm.usernameController,
               title: "${AppStrings.username}:",
               hint: AppStrings.enterUsername,
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.username} ${AppStrings.isInvalid}",
-              isValid: _registerForm.validUsernameValue,
+              isValid: _manualRegisterForm.validUsernameValue,
               inputFormatters: [LengthLimitingTextInputFormatter(20)],
               onChanged: (value) {
-                if (!_registerForm.validUsernameValue) {
+                if (!_manualRegisterForm.validUsernameValue) {
                   setState(() {
-                    _registerForm.validUsernameValue = true;
+                    _manualRegisterForm.validUsernameValue = true;
                   });
                 }
               },
             ),
             separation,
-            CustomSimpleDropdown(
-              elements: ConstantHelper.USER_TYPES.map((e) => CustomDropdownItem(id: e.toString(), text: ConstantMethodHelper.userTypeValue(e))).toList(),
-              itemSelected: CustomDropdownItem(id: _registerForm.userType.toString(), text: ConstantMethodHelper.userTypeValue(_registerForm.userType)),
-              hint: AppStrings.selectUserType,
-              title: AppStrings.userType,
-              size: Size(375, 40),
-              onChanged: (value) {
-                setState(() {
-                  _registerForm.userTypeController = int.tryParse(value.id);
-                });
-              },
-            ),
-            separation,
             _registerTextField(
-              controller: _registerForm.documentNumberController,
+              controller: _manualRegisterForm.documentNumberController,
               title: "${AppStrings.documentNumber}:",
               hint: AppStrings.enterDocumentNumber,
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.documentNumber} ${AppStrings.isInvalid}",
-              isValid: _registerForm.validDocumentNumberValue,
+              isValid: _manualRegisterForm.validDocumentNumberValue,
               onChanged: (value) {
-                if (!_registerForm.validDocumentNumberValue) {
+                if (!_manualRegisterForm.validDocumentNumberValue) {
                   setState(() {
-                    _registerForm.validDocumentNumberValue = true;
+                    _manualRegisterForm.validDocumentNumberValue = true;
                   });
                 }
               },
             ),
             separation,
             _registerTextField(
-              controller: _registerForm.passwordController,
+              controller: _manualRegisterForm.passwordController,
               title: "${AppStrings.password}:",
               hint: AppStrings.enterPassword,
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.password} ${AppStrings.isInvalid}",
-              isValid: _registerForm.validPasswordValue,
+              isValid: _manualRegisterForm.validPasswordValue,
               inputFormatters: [LengthLimitingTextInputFormatter(20)],
               obscureText: obscurePassword1,
               suffixIcon: SizedBox(
@@ -159,9 +159,9 @@ class _RegisterContentState extends State<RegisterContent> {
                 ),
               ),
               onChanged: (value) {
-                if (!_registerForm.validPasswordValue) {
+                if (!_manualRegisterForm.validPasswordValue) {
                   setState(() {
-                    _registerForm.validPasswordValue = true;
+                    _manualRegisterForm.validPasswordValue = true;
                   });
                 }
               },
@@ -170,19 +170,19 @@ class _RegisterContentState extends State<RegisterContent> {
               width: 375,
               child: Text(
                 AppStrings.passwordConstraints,
-                style: _registerForm.validPasswordValue
+                style: _manualRegisterForm.validPasswordValue
                     ? AppTextStyle.blackStyle(fontSize: AppFontSizes.text12)
                     : AppTextStyle.redStyle(fontSize: AppFontSizes.text12),
               ),
             ),
             separation,
             _registerTextField(
-              controller: _registerForm.password2Controller,
+              controller: _manualRegisterForm.password2Controller,
               title: "${AppStrings.password2}:",
               hint: AppStrings.enterPassword,
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.password2} ${AppStrings.isInvalid}",
-              isValid: _registerForm.validPassword2Value,
+              isValid: _manualRegisterForm.validPassword2Value,
               inputFormatters: [LengthLimitingTextInputFormatter(20)],
               obscureText: obscurePassword2,
               suffixIcon: SizedBox(
@@ -204,9 +204,9 @@ class _RegisterContentState extends State<RegisterContent> {
               ),
               isPasswordConfirmation: true,
               onChanged: (value) {
-                if (!_registerForm.validPassword2) {
+                if (!_manualRegisterForm.validPassword2) {
                   setState(() {
-                    _registerForm.validPassword2Value = true;
+                    _manualRegisterForm.validPassword2Value = true;
                     passwordsMatchs = false;
                   });
                 }
@@ -214,42 +214,42 @@ class _RegisterContentState extends State<RegisterContent> {
             ),
             separation,
             _registerTextField(
-              controller: _registerForm.mobileController,
+              controller: _manualRegisterForm.mobileController,
               title: "${AppStrings.mobileNumber}:",
               hint: AppStrings.enterMobile,
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.mobileNumber} ${AppStrings.isInvalid}",
-              isValid: _registerForm.validMobileValue,
+              isValid: _manualRegisterForm.validMobileValue,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(9),
                 FilteringTextInputFormatter.digitsOnly,
               ],
               onChanged: (value) {
-                if (!_registerForm.validMobileValue) {
+                if (!_manualRegisterForm.validMobileValue) {
                   setState(() {
-                    _registerForm.validMobileValue = true;
+                    _manualRegisterForm.validMobileValue = true;
                   });
                 }
               },
             ),
             separation,
             _registerDateField(
-              controller: _registerForm.dateController,
+              controller: _manualRegisterForm.dateController,
               title: "${AppStrings.birthDay}:",
-              isValid: _registerForm.validDateValue,
+              isValid: _manualRegisterForm.validDateValue,
             ),
             separation,
             _registerTextField(
-              controller: _registerForm.emailController,
+              controller: _manualRegisterForm.emailController,
               title: "${AppStrings.email}:",
               hint: AppStrings.enterEmail,
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.email} ${AppStrings.isInvalid}",
-              isValid: _registerForm.validEmailValue,
+              isValid: _manualRegisterForm.validEmailValue,
               onChanged: (value) {
-                if (!_registerForm.validEmailValue) {
+                if (!_manualRegisterForm.validEmailValue) {
                   setState(() {
-                    _registerForm.validEmailValue = true;
+                    _manualRegisterForm.validEmailValue = true;
                   });
                 }
               },
@@ -301,8 +301,8 @@ class _RegisterContentState extends State<RegisterContent> {
                   lastDate: DateTime.now());
               if (dateSelected != null) {
                 setState(() {
-                  _registerForm.dateController = dateSelected;
-                  _registerForm.validDateValue = _registerForm.validDate;
+                  _manualRegisterForm.dateController = dateSelected;
+                  _manualRegisterForm.validDateValue = _manualRegisterForm.validDate;
                 });
               }
             },
@@ -353,7 +353,7 @@ class _RegisterContentState extends State<RegisterContent> {
       _validationSection = Text(errorMsg,
           style: AppTextStyle.redStyle(fontSize: AppFontSizes.text12));
     } else {
-      if (isPasswordConfirmation && _registerForm.validPassword2) {
+      if (isPasswordConfirmation && _manualRegisterForm.validPassword2) {
         _validationSection = Text(AppStrings.passwordsMatch,
             style: AppTextStyle.greenStyle(fontSize: AppFontSizes.text12));
       }

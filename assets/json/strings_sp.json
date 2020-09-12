@@ -33,6 +33,8 @@
     "Calibrated": "Calibrado",
     "Synchronize": "Sincronizar",
     "Average": "Promedio",
+    "Activated": "Habilitado",
+    "Deactivated": "Deshabilitado",
 
     "Pets": "Mascotas",
     "Collars": "Collares",
@@ -97,6 +99,7 @@
     "is": "es",
 
     "User": "Usuario",
+    "Users": "Usuarios",
     "Vets": "Veterinarios",
 
     "RegisterVet": "Registrar Veterinario",
@@ -104,8 +107,10 @@
     "Password2": "Contraseña2",
     "MobileNumber": "Celular",
     "Email": "Correo Electrónico",
+    "UserType": "Tipo de usuario",
 
     "AdministratorProfile": "Perfil de Administrador",
+    "VeterinarianProfile": "Perfil de veterinario",
 
     "RegisterForm": "Formato de Registro",
 
@@ -113,7 +118,9 @@
     "ModifyPet": "Modificar mascota",
 
     "Administrator": "Administrador",
-    "RegisterUsers": "Registro Usuarios",
+    "Veterinarian": "Veterinario",
+    "RegisterUsers": "Registrar Usuarios",
+    "RegisterOwner": "Registrar Dueño",
 
     "LocatePet": "Localizar mascota",
 
@@ -173,6 +180,7 @@
     "EnterMobile": "Ingrese número de celular",
     "EnterBirthday": "Ingrese fecha de nacimiento",
     "EnterEmail": "Ingrese correo electrónico",
+    "SelectUserType": "Seleccione tipo de usuario",
 
     "AskDeactivateAccount": "¿Desea deshabilitar la cuenta?",
     "PetType": "Tipo de Mascota",
