@@ -15,14 +15,6 @@ class VetMainMenuContent extends StatefulWidget {
 }
 
 class _VetMainMenuContentState extends State<VetMainMenuContent> {
-  User user = Preferences.getUser;
-
-  void check() {
-    if (user?.pets?.length != 0) {
-      NavigationMethods.of(context).navigateTo(PetListView());
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,9 +22,9 @@ class _VetMainMenuContentState extends State<VetMainMenuContent> {
       children: <Widget>[
         CircularButton(
           size: 80,
-          onPress: check,
-          label: AppStrings.pets,
-          icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
+          onPress: () => NavigationMethods.of(context).navigateTo(PetListView()),
+          label: AppStrings.petsAssigned,
+          icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
         ),
         CircularButton(
           size: 80,
