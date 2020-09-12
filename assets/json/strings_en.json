@@ -33,6 +33,8 @@
     "Calibrated": "Calibrated",
     "Synchronize": "Synchronize",
     "Average": "Average",
+    "Activated": "Activated",
+    "Deactivated": "Deactivated",
 
     "Pets": "Pets",
     "Collars": "Collars",
@@ -108,6 +110,7 @@
     "UserType": "User type",
 
     "AdministratorProfile": "Administrator profile",
+    "VeterinarianProfile": "Veterinarian profile",
 
     "RegisterForm": "Register form",
 
@@ -117,6 +120,7 @@
     "Administrator": "Administrator",
     "Veterinarian": "veterinarian",
     "RegisterUsers": "Register users",
+    "RegisterOwner": "Registrer owner",
 
     "LocatePet": "Locate pet",
 

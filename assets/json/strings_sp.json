@@ -33,6 +33,8 @@
     "Calibrated": "Calibrado",
     "Synchronize": "Sincronizar",
     "Average": "Promedio",
+    "Activated": "Habilitado",
+    "Deactivated": "Deshabilitado",
 
     "Pets": "Mascotas",
     "Collars": "Collares",
@@ -108,6 +110,7 @@
     "UserType": "Tipo de usuario",
 
     "AdministratorProfile": "Perfil de Administrador",
+    "VeterinarianProfile": "Perfil de veterinario",
 
     "RegisterForm": "Formato de Registro",
 
@@ -116,7 +119,8 @@
 
     "Administrator": "Administrador",
     "Veterinarian": "Veterinario",
-    "RegisterUsers": "Registro Usuarios",
+    "RegisterUsers": "Registrar Usuarios",
+    "RegisterOwner": "Registrar Dueño",
 
     "LocatePet": "Localizar mascota",
 

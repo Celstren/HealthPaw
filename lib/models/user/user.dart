@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/utils/general/constant_methods_helper.dart';
 
@@ -21,6 +22,7 @@ class User {
       this.password,
       this.email,
       this.phone,
+      this.username,
       this.documentNumber,
       this.birthDay,
       this.type,
@@ -32,6 +34,7 @@ class User {
   String image;
   String password;
   String email;
+  String username;
   int phone;
   String documentNumber;
   DateTime birthDay;
@@ -44,6 +47,7 @@ class User {
         lastName: json["lastName"] ?? "",
         pets: json["pets"] != null ? json["pets"].map<UserPet>((x) => UserPet.fromJson(x)).toList() : [],
         secondLastName: json["secondLastName"] ?? "",
+        username: json["username"] ?? "",
         image: json["image"] ?? "",
         password: json["password"] ?? "",
         email: json["email"] ?? "",
@@ -57,6 +61,7 @@ class User {
   Map<String, dynamic> toJson() => {
         "namevar": name ?? "",
         "lastName": lastName ?? "",
+        "username": username ?? "",
         "pets": List<dynamic>.from(pets.map((x) => x.toJson())),
         "secondLastName": secondLastName ?? "",
         "image": image ?? "",
@@ -69,7 +74,11 @@ class User {
         "active": active ?? true,
       };
 
-  void get userTypeValue => ConstantMethodHelper.userTypeValue(this.type);
+  String get userTypeValue => ConstantMethodHelper.userTypeValue(this.type);
+
+  String get userFullName => (this.name ?? "") + " " + (this.lastName ?? "") + " " + (this.secondLastName ?? "");
+
+  String get userStatus => this.active ? AppStrings.activated : AppStrings.deactivated;
 }
 
 class UserPet {

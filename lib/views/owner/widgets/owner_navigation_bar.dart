@@ -1,6 +1,7 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
-import 'package:HealthPaw/views/owner_profile/owner_profile.dart';
+import 'package:HealthPaw/views/main_menu/main_menu.dart';
+import 'package:HealthPaw/views/user_profile/user_profile.dart';
 import 'package:flutter/material.dart';
 
 class MainNavigationBar extends StatefulWidget {
@@ -21,7 +22,9 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
         setState(() {
           indexSelected = index;
           if (index == 1) {
-            NavigationMethods.of(context).navigateTo(OwnerProfileView());
+            NavigationMethods.of(context).navigateTo(UserProfileView());
+          } else {
+            NavigationMethods.of(context).navigateAndRemoveUntil(MainMenuView());
           }
         });
       },

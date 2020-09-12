@@ -12,6 +12,8 @@ class AppStrings {
   static final String modify                            = AppConfig.commonStringsJson["Modify"] ?? "";
   static final String cancel                            = AppConfig.commonStringsJson["Cancel"] ?? "";
   static final String deactivate                        = AppConfig.commonStringsJson["Deactivate"] ?? "";
+  static final String deactivated                       = AppConfig.commonStringsJson["Deactivated"] ?? "";
+  static final String activated                         = AppConfig.commonStringsJson["Activated"] ?? "";
   static final String sounds                            = AppConfig.commonStringsJson["Sounds"] ?? "";
   static final String alerts                            = AppConfig.commonStringsJson["Alerts"] ?? "";
   static final String record                            = AppConfig.commonStringsJson["Record"] ?? "";
@@ -95,12 +97,14 @@ class AppStrings {
   static final String email                             = AppConfig.commonStringsJson["Email"] ?? "";
   static final String userType                          = AppConfig.commonStringsJson["UserType"] ?? "";
   static final String administratorProfile              = AppConfig.commonStringsJson["AdministratorProfile"] ?? "";
+  static final String veterinarianProfile               = AppConfig.commonStringsJson["VeterinarianProfile"] ?? "";
   static final String registerForm                      = AppConfig.commonStringsJson["RegisterForm"] ?? "";
   static final String registerPet                       = AppConfig.commonStringsJson["RegisterPet"] ?? "";
   static final String modifyPet                         = AppConfig.commonStringsJson["ModifyPet"] ?? "";
   static final String administrator                     = AppConfig.commonStringsJson["Administrator"] ?? "";
   static final String veterinarian                      = AppConfig.commonStringsJson["Veterinarian"] ?? "";
   static final String registerUsers                     = AppConfig.commonStringsJson["RegisterUsers"] ?? "";
+  static final String registerOwner                     = AppConfig.commonStringsJson["RegisterOwner"] ?? "";
   static final String locatePet                         = AppConfig.commonStringsJson["LocatePet"] ?? "";
   static final String sendMessage                       = AppConfig.commonStringsJson["SendMessage"] ?? "";
   static final String sendNotification                  = AppConfig.commonStringsJson["SendNotification"] ?? "";

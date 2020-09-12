@@ -3,7 +3,7 @@ import 'package:HealthPaw/utils/general/constant_helper.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:flutter/material.dart';
 
-class RegisterForm {
+class ManualRegisterForm {
   TextEditingController nameController = TextEditingController();
   TextEditingController lastnameController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
@@ -93,8 +93,8 @@ class RegisterForm {
         lastName: lastname,
         pets: [],
         secondLastName: "",
-        image: "",
         username: username,
+        image: "",
         password: password,
         email: email,
         phone: int.tryParse(mobile),
