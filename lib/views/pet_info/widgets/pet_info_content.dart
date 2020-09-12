@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/pet/pet.dart';
@@ -53,27 +51,28 @@ class _PetInfoContentState extends State<PetInfoContent> {
               ? AppStrings.successfulModify
               : AppStrings.successfulRegister,
           okText: AppStrings.close,
-            onPress: () => NavigationMethods.of(context).navigateAndRemoveUntil(MainMenuView()),
+          onPress: () => NavigationMethods.of(context)
+              .navigateAndRemoveUntil(MainMenuView()),
         ),
       ),
     );
   }
 
-    void showModifyFailDialog() {
-      showCustomDialog(
-        context: context,
-        child: CustomDialog(
-          backgroundColor: Colors.transparent,
-          child: OkDialog(
-            title: widget.pet != null
-                ? AppStrings.failedModify
-                : AppStrings.failedRegister,
-            okText: AppStrings.close,
-            onPress: () => Navigator.pop(context),
-          ),
+  void showModifyFailDialog() {
+    showCustomDialog(
+      context: context,
+      child: CustomDialog(
+        backgroundColor: Colors.transparent,
+        child: OkDialog(
+          title: widget.pet != null
+              ? AppStrings.failedModify
+              : AppStrings.failedRegister,
+          okText: AppStrings.close,
+          onPress: () => Navigator.pop(context),
         ),
-      );
-    }
+      ),
+    );
+  }
 
   void _submit() async {
     if (validatedPetName && validatedBirthDay) {
@@ -118,7 +117,8 @@ class _PetInfoContentState extends State<PetInfoContent> {
     pet.birthDay = birthDayController;
     bool success = await PetService.updatePet(pet);
     if (!success) return false;
-    return await UserService.editPetToUser(user.documentNumber, pet.namevar, pet.id);
+    return await UserService.editPetToUser(
+        user.documentNumber, pet.namevar, pet.id);
   }
 
   @override
@@ -180,12 +180,15 @@ class _PetInfoContentState extends State<PetInfoContent> {
                 style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
                 onPress: () => _submit(),
               ),
-              widget.pet != null ? RoundedButton(
-                text: AppStrings.deactivate,
-                size: Size(150, 40),
-                style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-                onPress: () => Navigator.pop(context),
-              ) : SizedBox(),
+              widget.pet != null
+                  ? RoundedButton(
+                      text: AppStrings.deactivate,
+                      size: Size(150, 40),
+                      style: AppTextStyle.whiteStyle(
+                          fontSize: AppFontSizes.title18),
+                      onPress: () => Navigator.pop(context),
+                    )
+                  : SizedBox(),
             ],
           ),
           SizedBox(height: 40),

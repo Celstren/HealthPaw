@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/user/user.dart';
@@ -63,8 +61,7 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
   }
 
   void getData() async {
-    User user =
-        await UserService.getUser(Preferences.getUser.documentNumber);
+    User user = await UserService.getUser(Preferences.getUser.documentNumber);
     final DateFormat formatter = DateFormat('dd/MM/yyyy');
     final String formatted = formatter.format(user.birthDay);
     setState(() {

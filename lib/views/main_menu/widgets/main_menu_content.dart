@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/user/user.dart';
@@ -40,7 +38,8 @@ class _MainMenuContentState extends State<MainMenuContent> {
       children: <Widget>[
         CircularButton(
           size: 80,
-          onPress: () => NavigationMethods.of(context).navigateTo(SelectPetTypeView()),
+          onPress: () =>
+              NavigationMethods.of(context).navigateTo(SelectPetTypeView()),
           label: AppStrings.registerPet,
           icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
         ),

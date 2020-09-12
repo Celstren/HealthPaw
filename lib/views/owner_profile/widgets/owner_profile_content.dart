@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/user/user.dart';
@@ -65,8 +63,8 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
   }
 
   Future<bool> deactivateRequest() async {
-    bool res =
-        await UserService.updateDynamic(Preferences.getUser.documentNumber, {"active": false});
+    bool res = await UserService.updateDynamic(
+        Preferences.getUser.documentNumber, {"active": false});
     return res;
   }
 
@@ -131,7 +129,8 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
                     size: Size(150, 40),
                     style:
                         AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-                    onPress: () => NavigationMethods.of(context).navigateReplacement(ModifyOwnerProfileView()),
+                    onPress: () => NavigationMethods.of(context)
+                        .navigateReplacement(ModifyOwnerProfileView()),
                   ),
                   RoundedButton(
                     text: AppStrings.deactivate,
@@ -150,8 +149,7 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
   }
 
   void getData() async {
-    User user =
-        await UserService.getUser(Preferences.getUser.documentNumber);
+    User user = await UserService.getUser(Preferences.getUser.documentNumber);
     final DateFormat formatter = DateFormat('dd/MM/yyyy');
     final String formatted = formatter.format(user.birthDay);
     setState(() {

@@ -1,9 +1,8 @@
 import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/general/app_text_styles.dart';
-import 'package:flutter/material.dart';
-
-import 'package:HealthPaw/views/pet_status/pet_status.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
+import 'package:HealthPaw/views/pet_status/pet_status.dart';
+import 'package:flutter/material.dart';
 
 class TestView extends StatefulWidget {
   TestView({Key key}) : super(key: key);
@@ -13,7 +12,6 @@ class TestView extends StatefulWidget {
 }
 
 class _TestViewState extends State<TestView> {
-
   Widget widgetOption({String text, Widget view}) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20),
@@ -27,7 +25,8 @@ class _TestViewState extends State<TestView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
+    return SafeArea(
+      child: Scaffold(
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: SingleChildScrollView(
@@ -39,6 +38,7 @@ class _TestViewState extends State<TestView> {
             ),
           ),
         ),
-      ),);
+      ),
+    );
   }
 }

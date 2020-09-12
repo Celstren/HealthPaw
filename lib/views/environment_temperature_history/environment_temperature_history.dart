@@ -1,10 +1,9 @@
+import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
+import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
 import 'package:HealthPaw/views/environment_temperature_history/widgets/environment_temperature_history_content.dart';
 import 'package:HealthPaw/views/environment_temperature_today/environment_temperature_today.dart';
 import 'package:flutter/material.dart';
-
-import 'package:HealthPaw/config/strings/app_strings.dart';
-import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
 
 class EnvironmentTemperatureHistoryView extends StatefulWidget {
   final bool backToToday;
@@ -23,7 +22,8 @@ class _EnvironmentTemperatureHistoryViewState
     return WillPopScope(
       onWillPop: () async {
         if (widget.backToToday) {
-          NavigationMethods.of(context).navigateReplacement(EnvironmentTemperatureTodayView());
+          NavigationMethods.of(context)
+              .navigateReplacement(EnvironmentTemperatureTodayView());
           return false;
         }
         return true;
@@ -36,7 +36,8 @@ class _EnvironmentTemperatureHistoryViewState
                 title: AppStrings.temperatureHistory,
                 showHeader: true,
                 handleBack: widget.backToToday
-                    ? () => NavigationMethods.of(context).navigateReplacement(EnvironmentTemperatureTodayView())
+                    ? () => NavigationMethods.of(context)
+                        .navigateReplacement(EnvironmentTemperatureTodayView())
                     : null,
               ),
               Expanded(child: EnvironmentTemperatureHistoryContent()),
