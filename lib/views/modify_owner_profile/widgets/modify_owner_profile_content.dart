@@ -6,6 +6,7 @@ import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:HealthPaw/utils/widgets/app_text_field.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
+import 'package:HealthPaw/utils/widgets/loading_screen.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,6 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
   String documentNumber = "";
   String secondLastName = "";
   String lastName = "";
-  String email = "";
-  String phone = "";
   String dayofRegistration = "";
   String birthDay = "";
   String namevar = "";
@@ -43,7 +42,17 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
 
   void _submit() async {
     if (validatedEmail && validatedMobile) {
-      if (await modifyRequest()) showModifySuccessDialog();
+      displayLoadingScreen(context);
+      bool success = await modifyRequest();
+      Navigator.pop(context);
+      if (success) {
+        showModifySuccessDialog();
+        User currentUser = Preferences.getUser;
+        currentUser.email = emailController.value.text;
+        currentUser.phone = int.tryParse(phoneController.value.text);
+        Preferences.setUser = currentUser;
+      }
+      else showModifyFailedDialog();
     } else {
       setState(() {
         validEmail = validatedEmail;
@@ -53,26 +62,23 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
   }
 
   Future<bool> modifyRequest() async {
-    this.email = emailController.value.text.trim();
-    this.phone = phoneController.value.text.trim();
-    bool res = await UserService.updateDynamic(
-        documentNumber, {"email": email, "phone": phone});
+    String email = emailController.value.text.trim();
+    String phone = phoneController.value.text.trim();
+    bool res = await UserService.updateDynamic(documentNumber, {"email": email, "phone": phone});
     return res;
   }
 
-  void getData() async {
-    User user = await UserService.getUser(Preferences.getUser.documentNumber);
+  void getData() {
+    User user = Preferences.getUser;
     final DateFormat formatter = DateFormat('dd/MM/yyyy');
     final String formatted = formatter.format(user.birthDay);
-    setState(() {
-      birthDay = formatted;
-      name = user.name;
-      lastName = user.lastName;
-      secondLastName = user.lastName;
-      email = user.email;
-      documentNumber = user.documentNumber;
-      phone = user.phone.toString();
-    });
+    birthDay = formatted;
+    name = user.name;
+    lastName = user.lastName;
+    secondLastName = user.lastName;
+    emailController = TextEditingController(text: user.email);
+    documentNumber = user.documentNumber;
+    phoneController = TextEditingController(text: user.phone.toString());
   }
 
   @override
@@ -84,10 +90,29 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
   void showModifySuccessDialog() {
     showCustomDialog(
       context: context,
+      barrierDismissible: false,
       child: CustomDialog(
         backgroundColor: Colors.transparent,
         child: OkDialog(
+          dismissible: false,
           title: AppStrings.successfulModify,
+          okText: AppStrings.close,
+          onPress: () {
+            Navigator.pop(context);
+            Navigator.pop(context);
+          },
+        ),
+      ),
+    );
+  }
+
+  void showModifyFailedDialog() {
+    showCustomDialog(
+      context: context,
+      child: CustomDialog(
+        backgroundColor: Colors.transparent,
+        child: OkDialog(
+          title: AppStrings.failedModify,
           okText: AppStrings.close,
           onPress: () => Navigator.pop(context),
         ),

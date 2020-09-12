@@ -105,10 +105,10 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
                       ),
                       SizedBox(height: 10),
                       RoundedButton(
-                        size: Size(150, 30),
+                        size: Size(130, 30),
                         text: AppStrings.deactivateUser,
                         style: AppTextStyle.whiteStyle(
-                            fontSize: AppFontSizes.text12,
+                            fontSize: AppFontSizes.text10,
                             fontWeight: FontWeight.bold),
                         onPress: showAskDeactivateAccountDialog,
                       ),
@@ -130,7 +130,7 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
                     style:
                         AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
                     onPress: () => NavigationMethods.of(context)
-                        .navigateReplacement(ModifyOwnerProfileView()),
+                        .navigateTo(ModifyOwnerProfileView()),
                   ),
                   RoundedButton(
                     text: AppStrings.deactivate,
