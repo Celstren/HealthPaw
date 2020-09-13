@@ -24,7 +24,8 @@ class _SoundsContentState extends State<SoundsContent> {
             PetAvatar(name: widget.pet.namevar),
             SizedBox(height: 10),
             StatsOverview(
-              pet: widget.pet,
+              stadistic: widget.pet.sound,
+              type: StadisticType.HISTORY,
               metricUnit: AppStrings.decibelsAbb,
               subtitle: AppStrings.todaySoundIntensity,
               min: false,

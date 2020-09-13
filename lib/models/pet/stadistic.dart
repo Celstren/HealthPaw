@@ -14,15 +14,17 @@ class Stadistic {
         this.status,
         this.minimum,
         this.maximum,
+        this.average,
+        this.todayHistory,
         this.history,
-        this.timestamp,
     });
 
     String variable;
     String status;
-    int minimum;
-    int maximum;
-    int timestamp;
+    num minimum;
+    num maximum;
+    num average;
+    List<History> todayHistory;
     List<History> history;
 
     factory Stadistic.fromJson(Map<String, dynamic> json) => Stadistic(
@@ -30,23 +32,9 @@ class Stadistic {
         status: json["status"] ?? "",
         minimum: json["minimum"] ?? 0,
         maximum: json["maximum"] ?? 0,
+        average: json["average"] ?? 0,
+        todayHistory: json["todayHistory"] != null ? List<History>.from(json["todayHistory"].map((x) => History.fromJson(x))) : [],
         history: json["history"] != null ? List<History>.from(json["history"].map((x) => History.fromJson(x))) : [],
-        timestamp: json["timestamp"] ?? 0,
-    );
-
-    factory Stadistic.sample() => Stadistic(
-        variable: "Sample",
-        status: "Estable",
-        minimum: 10,
-        maximum: 100,
-        history: [
-          History(timestamp: 1599868800000, value: 50),
-          History(timestamp: 1599872400000, value: 30),
-          History(timestamp: 1599876000000, value: 75),
-          History(timestamp: 1599879600000, value: 10),
-          History(timestamp: 1599883200000, value: 90),
-        ],
-        timestamp: 1599868800000,
     );
 
     Map<String, dynamic> toJson() => {
@@ -54,8 +42,39 @@ class Stadistic {
         "status": status,
         "minimum": minimum,
         "maximum": maximum,
-        "history": history != null ? List<dynamic>.from(history.map((x) => x.toJson())) : [],
+        "average": average,
+        "todayHistory": List<dynamic>.from(todayHistory.map((x) => x.toJson())),
+        "history": List<dynamic>.from(history.map((x) => x.toJson())),
     };
+
+    StatOverview get todayOverview => StatOverview(minimum: this.minimum, maximum: this.maximum, average: this.average, lastValue: this.todayHistory != null && this.todayHistory.isNotEmpty ? this.todayHistory.last.value : 0);
+    StatOverview get historyOverview {
+      num mini = 0, maxi = 0, last = 0, ave = 0, total = 0;
+      if (this.history != null && this.history.isNotEmpty) {
+        mini = this.history.first.value;
+        last = this.history.last.value;
+      }
+      this.history.forEach((element) {
+        total += element.value;
+        if (mini > element.value) {
+          mini = element.value;
+        }
+        if (maxi < element.value) {
+          maxi = element.value;
+        }
+      });
+      ave = this.history.length != 0 ? total / this.history.length : 0;
+      return StatOverview(minimum: mini, maximum: maxi, average: ave, lastValue: last);
+    }
+}
+
+class StatOverview {
+    final num minimum;
+    final num maximum;
+    final num average;
+    final num lastValue;
+
+  StatOverview({this.minimum, this.maximum, this.average, this.lastValue});
 }
 
 class History {
@@ -65,11 +84,11 @@ class History {
     });
 
     int timestamp;
-    num value;
+    double value;
 
     factory History.fromJson(Map<String, dynamic> json) => History(
         timestamp: json["timestamp"] ?? 0,
-        value: json["value"]?.toDouble() ?? 0.0,
+        value: json["value"]?.toDouble() ?? 0,
     );
 
     Map<String, dynamic> toJson() => {

@@ -25,7 +25,8 @@ class _CardiacHistoryContentState extends State<CardiacHistoryContent> {
             PetAvatar(name: widget.pet.namevar),
             SizedBox(height: 10),
             StatsOverview(
-              pet: widget.pet,
+              stadistic: widget.pet.heartRate,
+              type: StadisticType.HISTORY,
               metricUnit: AppStrings.beatsPerMinuteUnits,
               units: AppUnits.beatMetricUnits,
               subtitle: AppStrings.hearthRateHistory,

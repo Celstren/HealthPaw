@@ -25,7 +25,8 @@ class _EnvironmentTemperatureHistoryContentState extends State<EnvironmentTemper
             PetAvatar(name: widget.pet.namevar),
             SizedBox(height: 10),
             StatsOverview(
-              pet: widget.pet,
+              stadistic: widget.pet.temperature,
+              type: StadisticType.HISTORY,
               metricUnit: AppStrings.temperatureUnits,
               units: AppUnits.temperatureMetricUnits,
               subtitle: AppStrings.environmentalTemperatureHistory,

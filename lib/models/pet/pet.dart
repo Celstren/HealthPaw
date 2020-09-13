@@ -35,11 +35,11 @@ class Pet {
   DateTime birthDay;
   String petType;
   List<Alert> alerts = [];
-  List<Stadistic> breathingFrequency = [];
+  Stadistic breathingFrequency;
   List<Recommendation> recommendations = [];
-  List<Stadistic> heartRate = [];
-  List<Stadistic> sound = [];
-  List<Stadistic> temperature = [];
+  Stadistic heartRate;
+  Stadistic sound;
+  Stadistic temperature;
 
   factory Pet.fromJson(Map<String, dynamic> json) => Pet(
         id: json["id"] ?? "",
@@ -51,10 +51,10 @@ class Pet {
         birthDay: DateTime.tryParse(json["birthDay"]),
         petType: json["petType"] ?? "",
         alerts: json["alerts"] ?? "",
-        breathingFrequency: json["breathingFrequency"] != null ? List<Stadistic>.from(json["breathingFrequency"].map((x) => Stadistic.fromJson(x))) : [],
-        heartRate: json["heartRate"] != null ? List<Stadistic>.from(json["heartRate"].map((x) => Stadistic.fromJson(x))) : [],
-        sound: json["sound"] != null ? List<Stadistic>.from(json["sound"].map((x) => Stadistic.fromJson(x))) : [],
-        temperature: json["temperature"] != null ? List<Stadistic>.from(json["temperature"].map((x) => Stadistic.fromJson(x))) : [],
+        breathingFrequency: json["breathingFrequency"] != null ? Stadistic.fromJson(json["breathingFrequency"]) : [],
+        heartRate: json["heartRate"] != null ? Stadistic.fromJson(json["heartRate"]) : [],
+        sound: json["sound"] != null ? Stadistic.fromJson(json["sound"]) : [],
+        temperature: json["temperature"] != null ? Stadistic.fromJson(json["temperature"]) : [],
         recommendations: json["recommendations"] ?? "",
       );
 
@@ -67,6 +67,4 @@ class Pet {
         "birthDay": birthDay?.toIso8601String() ?? "",
         "petType": petType ?? "",
       };
-
-  List<Stadistic> get statsSample => [Stadistic.sample()];
 }

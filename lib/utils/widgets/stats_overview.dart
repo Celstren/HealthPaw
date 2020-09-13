@@ -1,11 +1,14 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/models/pet/pet.dart';
+import 'package:HealthPaw/models/pet/stadistic.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/stats_field.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+
+enum StadisticType { TODAY, HISTORY }
 
 class StatsOverview extends StatefulWidget {
   final String subtitle;
@@ -17,7 +20,8 @@ class StatsOverview extends StatefulWidget {
   final bool min;
   final Widget history;
   final bool reduceData;
-  @required final Pet pet;
+  final StadisticType type;
+  @required final Stadistic stadistic;
   StatsOverview(
       {Key key,
       this.metricUnit = "",
@@ -29,7 +33,7 @@ class StatsOverview extends StatefulWidget {
       this.min = true,
       this.history,
       this.reduceData = false, 
-      this.pet})
+      this.stadistic, this.type = StadisticType.TODAY})
       : super(key: key);
 
   @override
@@ -39,6 +43,8 @@ class StatsOverview extends StatefulWidget {
 class _StatsOverviewState extends State<StatsOverview> {
   List<int> _units;
   Widget _iconStat = Placeholder();
+  num media = 0, min = 0, max = 0, lastValue = 0;
+  List<History> histories = [];
 
   @override
   void initState() {
@@ -49,6 +55,21 @@ class _StatsOverviewState extends State<StatsOverview> {
       _iconStat = widget.iconStat;
     }
     super.initState();
+  }
+
+  void setData() {
+    if (widget.type == StadisticType.TODAY) {
+      media = widget.stadistic.todayOverview.average;
+      min = widget.stadistic.todayOverview.minimum;
+      max = widget.stadistic.todayOverview.maximum;
+      lastValue = widget.stadistic.todayOverview.lastValue;
+    } else {
+      StatOverview stat = widget.stadistic.historyOverview;
+      media = stat.average;
+      min = stat.minimum;
+      max = stat.maximum;
+      lastValue = stat.lastValue;
+    }
   }
 
   Widget _buildUnitMetrics(int unit) {
@@ -105,7 +126,7 @@ class _StatsOverviewState extends State<StatsOverview> {
     );
   }
 
-  Widget _buildRate({String label = "", double unit = 0.0}) {
+  Widget _buildRate({String label = "", num unit = 0.0}) {
     return SizedBox(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -140,7 +161,7 @@ class _StatsOverviewState extends State<StatsOverview> {
         SizedBox(
           height: 200,
           width: 320,
-          child: StatsField(data: widget.pet.statsSample.first.history),
+          child: StatsField(data: histories),
         ),
         SizedBox(height: 50),
         Row(
@@ -150,13 +171,13 @@ class _StatsOverviewState extends State<StatsOverview> {
           children: <Widget>[
             Column(children: <Widget>[
               widget.media
-                  ? _buildRate(label: AppStrings.media, unit: 20)
+                  ? _buildRate(label: AppStrings.media, unit: media)
                   : SizedBox(),
               widget.max
-                  ? _buildRate(label: AppStrings.maximumAbb, unit: 20)
+                  ? _buildRate(label: AppStrings.maximumAbb, unit: max)
                   : SizedBox(),
               widget.min
-                  ? _buildRate(label: AppStrings.minimumAbb, unit: 20)
+                  ? _buildRate(label: AppStrings.minimumAbb, unit: min)
                   : SizedBox(),
               !widget.media && !widget.max && !widget.min
                   ? SizedBox()
@@ -251,7 +272,7 @@ class _StatsOverviewState extends State<StatsOverview> {
                         child: Padding(
                           padding: EdgeInsets.only(bottom: 10),
                           child: AutoSizeText(
-                            "200 ${widget.metricUnit}",
+                            "$lastValue ${widget.metricUnit}",
                             maxLines: 1,
                             style: AppTextStyle.blackStyle(
                               fontSize: 36,
