@@ -1,10 +1,12 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
 import 'package:HealthPaw/views/physical_activity_today/widgets/physical_activity_today_content.dart';
 import 'package:flutter/material.dart';
 
 class PhysicalActivityTodayView extends StatefulWidget {
-  PhysicalActivityTodayView({Key key}) : super(key: key);
+  final Pet pet;
+  PhysicalActivityTodayView({Key key, this.pet}) : super(key: key);
 
   @override
   _PhysicalActivityTodayViewState createState() =>
@@ -19,7 +21,7 @@ class _PhysicalActivityTodayViewState extends State<PhysicalActivityTodayView> {
         body: Column(
           children: <Widget>[
             CommonAppBar(title: AppStrings.physicalActivity, showHeader: true),
-            Expanded(child: PhysicalActivityTodayContent()),
+            Expanded(child: PhysicalActivityTodayContent(pet: widget.pet)),
           ],
         ),
       ),

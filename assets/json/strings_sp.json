@@ -152,11 +152,12 @@
     "SuccessfulRegister": "Registro exitoso",
     "SuccessfulLogin": "Ingreso exitoso",
     "FailedRegister": "Registro fallido. Vuelva a intentar",
+
     "FailedLogeo": "Ingreso fallido. Vuelva a intentar",
     "NoConectivity": "No se pudo contactar al servidor, revise su conexión a internet",
     "ServiceFailure": "Hubo un problema al contactar a nuestro servicio. Contacte al administrador",
     "NonAuthorized": "Usuario y/o contraseña incorrecta. Intente de nuevo",
-    "FailedLogin": "",
+    "FailedLogin": "Ingreso fallido. Vuelva a intentar",
     "SuccessfulModify": "Modificación exitosa",
     "FailedModify": "Modificación fallida",
     "SuccessfulDeactivate": "Deshabilitación exitosa",

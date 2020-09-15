@@ -11,6 +11,7 @@ import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/views/pet_info/pet_info.dart';
 import 'package:HealthPaw/views/pet_list/widgets/pet_dialog.dart';
+import 'package:HealthPaw/views/pet_status/pet_status.dart';
 import 'package:flutter/material.dart';
 
 class PetItem extends StatelessWidget {
@@ -24,17 +25,29 @@ class PetItem extends StatelessWidget {
     if (petData != null) {
       NavigationMethods.of(context).navigateTo(PetInfoView(pet: petData));
     } else {
-      showCustomDialog(context: context, builder: (context) => OkDialog(title: AppStrings.fetchPetFail, okText: AppStrings.ok, onPress: () => Navigator.pop(context,)));
+      showCustomDialog(
+          context: context,
+          builder: (context) => OkDialog(
+              title: AppStrings.fetchPetFail,
+              okText: AppStrings.ok,
+              onPress: () => Navigator.pop(
+                    context,
+                  )));
     }
   }
 
   void showPetDialog(BuildContext context) {
-    showCustomDialog(context: context, builder: (context) => CustomDialog(child: PetDialog(petName: pet.namevar)));
+    showCustomDialog(
+        context: context,
+        builder: (context) =>
+            CustomDialog(child: PetDialog(petName: pet.namevar)));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Preferences.getUser.type == ConstantHelper.USER_TYPE_VET_ID ? _vetItem(context) : _ownerItem(context);
+    return Preferences.getUser.type == ConstantHelper.USER_TYPE_VET_ID
+        ? _vetItem(context)
+        : _ownerItem(context);
   }
 
   Widget _vetItem(BuildContext context) {
@@ -53,23 +66,24 @@ class PetItem extends StatelessWidget {
         ],
       ),
       child: FlatButton(
-        onPressed: () => showPetDialog(context), 
+        onPressed: () => showPetDialog(context),
         child: Row(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 30),
-            child: PetAvatar(size: 60),
-          ),
-          Expanded(
-            child: Text(
-              pet?.namevar ?? "",
-              style: AppTextStyle.blackStyle(
-                  fontSize: AppFontSizes.subitle18,
-                  fontWeight: FontWeight.bold),
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left: 10, right: 30),
+              child: PetAvatar(size: 60),
             ),
-          ),
-        ],
-      ),),
+            Expanded(
+              child: Text(
+                pet?.namevar ?? "",
+                style: AppTextStyle.blackStyle(
+                    fontSize: AppFontSizes.subitle18,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -88,34 +102,37 @@ class PetItem extends StatelessWidget {
               spreadRadius: 5.0)
         ],
       ),
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 30),
-            child: PetAvatar(size: 60),
-          ),
-          Expanded(
-            child: Text(
-              pet?.namevar ?? "",
-              style: AppTextStyle.blackStyle(
-                  fontSize: AppFontSizes.subitle18,
-                  fontWeight: FontWeight.bold),
+      child: FlatButton(
+        onPressed: () => NavigationMethods.of(context).navigateTo(PetStatusView(pet: pet)),
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left: 10, right: 30),
+              child: PetAvatar(size: 60),
             ),
-          ),
-          Container(
-            height: 80,
-            width: 80,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
+            Expanded(
+              child: Text(
+                pet?.namevar ?? "",
+                style: AppTextStyle.blackStyle(
+                    fontSize: AppFontSizes.subitle18,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-            child: FlatButton(
-                padding: EdgeInsets.zero,
-                onPressed: () => fetchPetData(context),
-                child: Center(
-                    child: Icon(Icons.edit,
-                        size: 30, color: AppColors.PrimaryBlack))),
-          )
-        ],
+            Container(
+              height: 80,
+              width: 80,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: FlatButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () => fetchPetData(context),
+                  child: Center(
+                      child: Icon(Icons.edit,
+                          size: 30, color: AppColors.PrimaryBlack))),
+            )
+          ],
+        ),
       ),
     );
   }
