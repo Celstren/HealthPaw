@@ -1,4 +1,5 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/overview_field.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
@@ -6,7 +7,8 @@ import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
 class PetOverviewContent extends StatefulWidget {
-  PetOverviewContent({Key key}) : super(key: key);
+  final Pet pet;
+  PetOverviewContent({Key key, this.pet}) : super(key: key);
 
   @override
   _PetOverviewContentState createState() => _PetOverviewContentState();
@@ -23,7 +25,7 @@ class _PetOverviewContentState extends State<PetOverviewContent> {
           child: Column(
             children: <Widget>[
               SizedBox(height: 20),
-              PetAvatar(name: "Firulays"),
+              PetAvatar(name: widget.pet.namevar),
               SizedBox(height: 40),
               OverviewField(
                   width: 400,

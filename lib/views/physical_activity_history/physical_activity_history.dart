@@ -1,4 +1,5 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
 import 'package:HealthPaw/views/physical_activity_history/widgets/physical_activity_history_content.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/material.dart';
 
 class PhysicalActivityHistoryView extends StatefulWidget {
   final bool backToToday;
-  PhysicalActivityHistoryView({Key key, this.backToToday = false})
+  final Pet pet;
+  PhysicalActivityHistoryView({Key key, this.backToToday = false, this.pet})
       : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class _PhysicalActivityHistoryViewState
       onWillPop: () async {
         if (widget.backToToday) {
           NavigationMethods.of(context)
-              .navigateReplacement(PhysicalActivityTodayView());
+              .navigateReplacement(PhysicalActivityTodayView(pet: widget.pet));
           return false;
         }
         return true;
@@ -37,10 +39,10 @@ class _PhysicalActivityHistoryViewState
                 showHeader: true,
                 handleBack: widget.backToToday
                     ? () => NavigationMethods.of(context)
-                        .navigateReplacement(PhysicalActivityTodayView())
+                        .navigateReplacement(PhysicalActivityTodayView(pet: widget.pet))
                     : null,
               ),
-              Expanded(child: PhysicalActivityHistoryContent()),
+              Expanded(child: PhysicalActivityHistoryContent(pet: widget.pet)),
             ],
           ),
         ),
