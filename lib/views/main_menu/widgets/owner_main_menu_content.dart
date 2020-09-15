@@ -6,6 +6,7 @@ import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/circular_button.dart';
 import 'package:HealthPaw/views/pet_list/pet_list.dart';
 import 'package:HealthPaw/views/select_pet_type/select_pet_type.dart';
+import 'package:HealthPaw/views/sync_wearable/sync_wearable.dart';
 import 'package:flutter/material.dart';
 
 class OwnerMainMenuContent extends StatefulWidget {
@@ -46,7 +47,7 @@ class _OwnerMainMenuContentState extends State<OwnerMainMenuContent> {
         ),
         CircularButton(
           size: 80,
-          onPress: () {},
+          onPress: () => NavigationMethods.of(context).navigateTo(SyncWearableView()),
           label: AppStrings.collars,
           icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
         ),

@@ -1,3 +1,4 @@
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/authentication/authentication.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:flutter/material.dart';
@@ -108,8 +109,12 @@ class CommonAppBar extends StatelessWidget {
             width: 40,
             child: Stack(
               children: <Widget>[
-                Icon(Icons.notifications,
-                    size: 35, color: AppColors.PrimaryGrey),
+                IconButton(
+                  icon: Icon(Icons.notifications,
+                      size: 35,
+                      color: AppColors.PrimaryGrey),
+                  onPressed: () => {},
+                ),
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(

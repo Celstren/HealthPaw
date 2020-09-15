@@ -1,9 +1,12 @@
 //import 'package:HealthPaw/data/shared_preferences/preferences.dart';
+import 'dart:developer';
+
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/user/user.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/config/dioClient.dart';
+import 'package:HealthPaw/utils/general/enums.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/views/auth/login/login.dart';
@@ -26,21 +29,33 @@ class AuthenticationService {
     return false;
   }
 
-  static Future<bool> loginUser(User user) async {
+  static Future<RespuestasLogin> loginUser(User user) async {
     try {
       Response response = await dioClient.post("user/login/", data: {
         "documentNumber": user.documentNumber,
         "password": user.password
       });
-      if (response.statusCode == 201) {
-        Preferences.clear();
-        Preferences.setUser = User.fromJson(response.data);
+      print("que ongo: " + response.statusCode.toString());
+
+      switch(response.statusCode){
+        case 201:
+          {
+            Preferences.clear();
+            Preferences.setUser = User.fromJson(response.data);
+            return RespuestasLogin.okay;
+          }
+        case 401:
+          return RespuestasLogin.NoAutorizado;
+        case 501:
+          return RespuestasLogin.ErrorServicio;
+        default:
+          return RespuestasLogin.SinConexion;
       }
-      return response.statusCode == 201;
+
     } catch (e) {
       print(e);
     }
-    return false;
+    return RespuestasLogin.SinConexion;
   }
 
   static Future<void> logoutUser(BuildContext context) async {

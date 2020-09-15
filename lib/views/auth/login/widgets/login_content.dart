@@ -60,6 +60,7 @@ class _LoginContentState extends State<LoginContent> {
             SizedBox(height: 40),
             _registerTextField(
                 controller: _loginForm.passwordController,
+                obscureText: true,
                 title: "${AppStrings.password}",
                 hint: AppStrings.enterPassword,
                 errorMsg:

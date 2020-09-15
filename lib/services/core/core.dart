@@ -11,7 +11,7 @@ class Core {
   static CoreBuilder _builder = new CoreBuilder();
 
   Core._internal() {
-    _builder.environment = BuildEnvironment.LOCAL_ANDROID;
+    _builder.environment = BuildEnvironment.TEST_API;
   }
 
   set builder(CoreBuilder coreBuilder) => _builder = coreBuilder;

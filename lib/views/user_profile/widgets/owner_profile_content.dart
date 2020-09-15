@@ -88,7 +88,7 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -114,7 +114,7 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
                     children: <Widget>[
                       SizedBox(
                         height: 110,
-                        width: 90,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         child: Placeholder(),
                       ),
                       SizedBox(height: 10),
