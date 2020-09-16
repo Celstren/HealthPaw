@@ -2,9 +2,7 @@ import 'package:HealthPaw/config/app_config.dart';
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/user/user.dart';
-import 'package:HealthPaw/services/user/user.dart';
-import 'package:HealthPaw/views/auth/login/login.dart';
-import 'package:HealthPaw/views/main_menu/main_menu.dart';
+import 'package:HealthPaw/views/sound_manager/sound_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -28,17 +26,21 @@ class _HealthPawAppState extends State<HealthPawApp> {
     await AppConfig.setAppLanguage();
     await Preferences.initPrefs();
     User user = Preferences.getUser;
-    if (user != null) {
-      await UserService.updateUserLocalData;
+    if (mounted) {
       setState(() {
-        view = MainMenuView();
+        view = SoundManagerView();
       });
-    } else {
-      setState(() {
-        view = LoginView();
-      });
+      // if (user != null) {
+      //   await UserService.updateUserLocalData;
+      //   setState(() {
+      //     view = MainMenuView();
+      //   });
+      // } else {
+      //   setState(() {
+      //     view = LoginView();
+      //   });
+      // }
     }
-    
   }
 
   @override

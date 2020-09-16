@@ -1,5 +1,4 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
-import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/models/pet/stadistic.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';

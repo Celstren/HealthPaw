@@ -128,8 +128,7 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => SoundManagerView())),
+                  onPress: () => NavigationMethods.of(context).navigateTo(SoundManagerView()),
                   label: AppStrings.sounds,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
@@ -142,8 +141,6 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => EnvironmentTemperatureTodayView())),
                   onPress: () => NavigationMethods.of(context).navigateTo(EnvironmentTemperatureTodayView(pet: widget.pet)),
                   label: AppStrings.viewTemperature,
                   icon:
