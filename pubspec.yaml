@@ -31,6 +31,7 @@ dependencies:
   intl: ^0.16.1
   auto_size_text: ^2.1.0
   dio: ^3.0.10
+  flutter_audio_recorder: ^0.5.5
 
 dev_dependencies:
   flutter_test:

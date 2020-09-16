@@ -11,6 +11,7 @@ import 'package:HealthPaw/views/pet_overview/pet_overview.dart';
 import 'package:HealthPaw/views/physical_activity_history/physical_activity_history.dart';
 import 'package:HealthPaw/views/physical_activity_today/physical_activity_today.dart';
 import 'package:HealthPaw/views/sound_history/sound_history.dart';
+import 'package:HealthPaw/views/sound_manager/sound_manager.dart';
 import 'package:HealthPaw/views/sound_today/sound_today.dart';
 import 'package:flutter/material.dart';
 
@@ -122,6 +123,20 @@ class _PetStatusContentState extends State<PetStatusContent> {
                   onPress: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => SoundHistoryView())),
                   label: AppStrings.historySound,
+                  icon:
+                      Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
+                ),
+              ],
+            ),
+            SizedBox(height: divisionSize),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                CircularButton(
+                  size: 80,
+                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => SoundManagerView())),
+                  label: AppStrings.sounds,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
                 ),
