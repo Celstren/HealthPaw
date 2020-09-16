@@ -1,25 +1,29 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/models/user/user.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/authentication/authentication.dart';
+import 'package:HealthPaw/utils/general/enums.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
+import 'package:HealthPaw/views/main_menu/main_menu.dart';
 import 'package:flutter/material.dart';
 
 class LoginRequest {
-  static void createUserRequest(BuildContext context, User user) async {
-    bool success = await AuthenticationService.loginUser(user);
-    print("HTTP OKE?");
-    print(success);
+  static void verifyUser(BuildContext context, User user) async {
+    RespuestasLogin respuesta = await AuthenticationService.loginUser(user);
     Navigator.pop(context);
-    if (success) {
+    if (respuesta == RespuestasLogin.okay) {
       showCustomDialog(
         context: context,
         child: CustomDialog(
           backgroundColor: Colors.transparent,
           child: OkDialog(
-            title: AppStrings.successfulRegister,
+            title: AppStrings.successfulLogin,
             okText: AppStrings.close,
-            onPress: () => Navigator.pop(context),
+            onPress: () {
+              Navigator.pop(context);
+              NavigationMethods.of(context).navigateReplacement(MainMenuView());
+            },
           ),
         ),
       );
@@ -29,7 +33,7 @@ class LoginRequest {
         child: CustomDialog(
           backgroundColor: Colors.transparent,
           child: OkDialog(
-            title: AppStrings.failedRegister,
+            title: DeterminarMensajeRespuesta(respuesta),
             okText: AppStrings.close,
             onPress: () => Navigator.pop(context),
           ),
@@ -38,32 +42,18 @@ class LoginRequest {
     }
   }
 
-  static void createTestUserRequest(BuildContext context, User user) async {
-    bool success = await AuthenticationService.registerTestUser();
-    if (success) {
-      showCustomDialog(
-        context: context,
-        child: CustomDialog(
-          backgroundColor: Colors.transparent,
-          child: OkDialog(
-            title: AppStrings.successfulRegister,
-            okText: AppStrings.close,
-            onPress: () {},
-          ),
-        ),
-      );
-    } else {
-      showCustomDialog(
-        context: context,
-        child: CustomDialog(
-          backgroundColor: Colors.transparent,
-          child: OkDialog(
-            title: AppStrings.failedRegister,
-            okText: AppStrings.close,
-            onPress: () {},
-          ),
-        ),
-      );
+  static String DeterminarMensajeRespuesta(RespuestasLogin respuesta){
+    switch(respuesta){
+      case RespuestasLogin.SinConexion:
+        return AppStrings.noConectivity;
+      case RespuestasLogin.ErrorServicio:
+        return AppStrings.serviceFailure;
+      case RespuestasLogin.NoAutorizado:
+        return AppStrings.nonAuthorized;
+      default:
+        return AppStrings.serviceFailure;
     }
   }
+
+
 }

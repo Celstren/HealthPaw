@@ -1,3 +1,5 @@
+import 'package:HealthPaw/navigation/navigation_methods.dart';
+import 'package:HealthPaw/services/authentication/authentication.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:flutter/material.dart';
 
@@ -30,13 +32,13 @@ class CommonAppBar extends StatelessWidget {
   }
 
   Widget _content(BuildContext context) {
-    if (!showHeader) return _bottomContent();
+    if (!showHeader) return _bottomContent(context);
     return SizedBox(
       height: 120,
       child: Column(
         children: [
           _headerContent(context),
-          _bottomContent(),
+          _bottomContent(context),
         ],
       ),
     );
@@ -50,13 +52,13 @@ class CommonAppBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           FlatButton(onPressed: () => handleBack != null ? handleBack() : Navigator.pop(context), child: Icon(Icons.arrow_back, size: 40, color: AppColors.PrimaryWhite)),
-          _actions(),
+          _actions(context),
         ],
       ),
     );
   }
 
-  Widget _bottomContent() {
+  Widget _bottomContent(BuildContext context) {
     return Container(
       height: showHeader ? 70 : 100,
       padding: EdgeInsets.only(bottom: 30),
@@ -70,7 +72,7 @@ class CommonAppBar extends StatelessWidget {
                       fontSize: AppFontSizes.title24,
                       fontFamily: AppFonts.Montserrat_Black),
                 ),
-                _actions(),
+                _actions(context),
               ],
             )
           : Align(
@@ -85,13 +87,21 @@ class CommonAppBar extends StatelessWidget {
     );
   }
 
-  Widget _actions() {
+  Widget _actions(BuildContext context) {
     return SizedBox(
       height: 50,
       child: Row(
         children: <Widget>[
           showLogout
-              ? Icon(Icons.exit_to_app, size: 40, color: AppColors.PrimaryWhite)
+              ? SizedBox(
+                height: 50,
+                width: 50,
+                child: FlatButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () => AuthenticationService.logoutUser(context),
+                  child: Icon(Icons.exit_to_app, size: 40, color: AppColors.PrimaryWhite),
+                ),
+              )
               : Container(),
           SizedBox(width: 10),
           SizedBox(
@@ -99,8 +109,12 @@ class CommonAppBar extends StatelessWidget {
             width: 40,
             child: Stack(
               children: <Widget>[
-                Icon(Icons.notifications,
-                    size: 35, color: AppColors.PrimaryGrey),
+                IconButton(
+                  icon: Icon(Icons.notifications,
+                      size: 35,
+                      color: AppColors.PrimaryGrey),
+                  onPressed: () => {},
+                ),
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(

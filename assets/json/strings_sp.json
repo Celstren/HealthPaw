@@ -33,6 +33,8 @@
     "Calibrated": "Calibrado",
     "Synchronize": "Sincronizar",
     "Average": "Promedio",
+    "Activated": "Habilitado",
+    "Deactivated": "Deshabilitado",
 
     "Pets": "Mascotas",
     "Collars": "Collares",
@@ -97,6 +99,7 @@
     "is": "es",
 
     "User": "Usuario",
+    "Users": "Usuarios",
     "Vets": "Veterinarios",
 
     "RegisterVet": "Registrar Veterinario",
@@ -104,8 +107,10 @@
     "Password2": "Contraseña2",
     "MobileNumber": "Celular",
     "Email": "Correo Electrónico",
+    "UserType": "Tipo de usuario",
 
     "AdministratorProfile": "Perfil de Administrador",
+    "VeterinarianProfile": "Perfil de veterinario",
 
     "RegisterForm": "Formato de Registro",
 
@@ -113,7 +118,9 @@
     "ModifyPet": "Modificar mascota",
 
     "Administrator": "Administrador",
-    "RegisterUsers": "Registro Usuarios",
+    "Veterinarian": "Veterinario",
+    "RegisterUsers": "Registrar Usuarios",
+    "RegisterOwner": "Registrar Dueño",
 
     "LocatePet": "Localizar mascota",
 
@@ -143,8 +150,16 @@
     "Hour": "Horas",
 
     "SuccessfulRegister": "Registro exitoso",
+    "SuccessfulLogin": "Ingreso exitoso",
     "FailedRegister": "Registro fallido. Vuelva a intentar",
+
+    "FailedLogeo": "Ingreso fallido. Vuelva a intentar",
+    "NoConectivity": "No se pudo contactar al servidor, revise su conexión a internet",
+    "ServiceFailure": "Hubo un problema al contactar a nuestro servicio. Contacte al administrador",
+    "NonAuthorized": "Usuario y/o contraseña incorrecta. Intente de nuevo",
+    "FailedLogin": "Ingreso fallido. Vuelva a intentar",
     "SuccessfulModify": "Modificación exitosa",
+    "FailedModify": "Modificación fallida",
     "SuccessfulDeactivate": "Deshabilitación exitosa",
     "CompleteFields": "Completar campos",
     "PasswordsMatch": "Contraseñas coinciden",
@@ -155,10 +170,12 @@
     "ConnectionFailed": "Conexión fallida",
     "ConnectionWaiting": "Esperando conexión",
     "AlertSend": "Alerta Enviada",
+    "FetchPetFail": "Fallo traer datos de mascota",
+    "LogoutFail": "Fallo al cerrar sesión",
 
     "TheField": "El campo",
     "IsInvalid": "es inválido",
-    "paswordConstraints": "La contraseña debe tener mínimo 8 caracteres, 1 mayúscula, 1 minúscula y 1 número",
+    "paswordConstraints": "La contraseña debe tener mínimo 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial",
 
     "EnterName": "Ingrese nombre",
     "EnterLastname": "Ingrese apellido",
@@ -168,6 +185,7 @@
     "EnterMobile": "Ingrese número de celular",
     "EnterBirthday": "Ingrese fecha de nacimiento",
     "EnterEmail": "Ingrese correo electrónico",
+    "SelectUserType": "Seleccione tipo de usuario",
 
     "AskDeactivateAccount": "¿Desea deshabilitar la cuenta?",
     "PetType": "Tipo de Mascota",

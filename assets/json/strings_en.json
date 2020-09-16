@@ -33,6 +33,8 @@
     "Calibrated": "Calibrated",
     "Synchronize": "Synchronize",
     "Average": "Average",
+    "Activated": "Activated",
+    "Deactivated": "Deactivated",
 
     "Pets": "Pets",
     "Collars": "Collars",
@@ -97,6 +99,7 @@
     "is": "is",
 
     "User": "User",
+    "Users": "Users",
     "Vets": "Vets",
 
     "RegisterVet": "Register vet",
@@ -104,8 +107,10 @@
     "Password2": "Password2",
     "MobileNumber": "Mobile number",
     "Email": "Email",
+    "UserType": "User type",
 
     "AdministratorProfile": "Administrator profile",
+    "VeterinarianProfile": "Veterinarian profile",
 
     "RegisterForm": "Register form",
 
@@ -113,7 +118,9 @@
     "ModifyPet": "Modify pet",
 
     "Administrator": "Administrator",
+    "Veterinarian": "veterinarian",
     "RegisterUsers": "Register users",
+    "RegisterOwner": "Registrer owner",
 
     "LocatePet": "Locate pet",
 
@@ -143,8 +150,11 @@
     "Hour": "Hours",
 
     "SuccessfulRegister": "Successful Register",
+    "SuccessfulLogin": "Successful Login",
     "FailedRegister": "Failed register. Try again",
-    "SuccessfulModify": "Successful Modify",
+    "FailedLogin": "Failed login. Try again",
+    "SuccessfulModify": "Successful Edit",
+    "FailedModify": "Edit Failed",
     "SuccessfulDeactivate": "Successful Deactivate",
     "CompleteFields": "Complete Fields",
     "PasswordsMatch": "Passwords Match",
@@ -155,10 +165,12 @@
     "ConnectionFailed": "Conexión failed",
     "ConnectionWaiting": "Waiting connection",
     "AlertSend": "Alert Send",
+    "FetchPetFail": "Failed to fetch pet data",
+    "LogoutFail": "Logout failed",
 
     "TheField": "The field",
     "IsInvalid": "is invalid",
-    "paswordConstraints": "Password must contain 8 characters minimum, 1 uppercase, 1 lowercase and 1 number",
+    "paswordConstraints": "Password must contain 8 characters minimum, 1 uppercase, 1 lowercase, 1 number and 1 special character",
 
     "EnterName": "Enter name",
     "EnterLastname": "Enter lastname",
@@ -168,6 +180,7 @@
     "EnterMobile": "Enter mobile number",
     "EnterBirthday": "Enter birthday",
     "EnterEmail": "Enter email",
+    "SelectUserType": "Select user type",
 
     "AskDeactivateAccount": "Would you like to deactivate account?",
     "PetType": "Pet Type",

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
@@ -14,21 +14,25 @@ class AppSimpleTextField extends StatelessWidget {
   final Function(String) onSubmitted;
   final String hint;
   final bool isValid;
+  final bool obscureText;
   final String errorMsg;
+  final Widget suffixIcon;
 
-  const AppSimpleTextField(
-      {Key key,
-      this.title = "",
-      this.size,
-      this.inputFormatters,
-      this.onChanged,
-      this.controller,
-      this.onSubmitted,
-      this.hint = "",
-      this.isValid = true,
-      this.errorMsg = "",
-      this.titleStyle})
-      : super(key: key);
+  const AppSimpleTextField({
+    Key key,
+    this.title = "",
+    this.size,
+    this.inputFormatters,
+    this.onChanged,
+    this.controller,
+    this.onSubmitted,
+    this.hint = "",
+    this.isValid = true,
+    this.errorMsg = "",
+    this.titleStyle,
+    this.obscureText = false,
+    this.suffixIcon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +57,7 @@ class AppSimpleTextField extends StatelessWidget {
             inputFormatters: inputFormatters,
             onChanged: onChanged,
             onSubmitted: onSubmitted,
+            obscureText: obscureText,
             backgroundColor: AppColors.PrimaryWhite,
             hint: hint,
             hintStyle:
@@ -61,6 +66,7 @@ class AppSimpleTextField extends StatelessWidget {
             borderRadius: AppBorderRadius.all(radius: AppRadius.radius5),
             border: AppBorder.blackBorder,
             collapsed: true,
+            suffixIcon: suffixIcon,
           ),
           _validationSection,
         ],

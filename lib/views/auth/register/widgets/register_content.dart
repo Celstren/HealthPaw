@@ -1,5 +1,9 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:HealthPaw/utils/general/constant_helper.dart';
+import 'package:HealthPaw/utils/general/constant_methods_helper.dart';
+import 'package:HealthPaw/utils/helpers/validators.dart';
+import 'package:HealthPaw/utils/widgets/dropdown.dart';
 import 'package:HealthPaw/utils/widgets/loading_screen.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
@@ -49,7 +53,10 @@ class _RegisterContentState extends State<RegisterContent> {
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.names} ${AppStrings.isInvalid}",
               isValid: _registerForm.validNameValue,
-              inputFormatters: [LengthLimitingTextInputFormatter(50)],
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(50),
+                FilteringTextInputFormatter.deny(Validators.numberRegex)
+              ],
               onChanged: (value) {
                 if (!_registerForm.validNameValue) {
                   setState(() {
@@ -66,7 +73,10 @@ class _RegisterContentState extends State<RegisterContent> {
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.lastnames} ${AppStrings.isInvalid}",
               isValid: _registerForm.validLastnameValue,
-              inputFormatters: [LengthLimitingTextInputFormatter(50)],
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(50),
+                FilteringTextInputFormatter.deny(Validators.numberRegex)
+              ],
               onChanged: (value) {
                 if (!_registerForm.validLastnameValue) {
                   setState(() {
@@ -93,6 +103,19 @@ class _RegisterContentState extends State<RegisterContent> {
               },
             ),
             separation,
+            CustomSimpleDropdown(
+              elements: ConstantHelper.USER_TYPES.map((e) => CustomDropdownItem(id: e.toString(), text: ConstantMethodHelper.userTypeValue(e))).toList(),
+              itemSelected: CustomDropdownItem(id: _registerForm.userType.toString(), text: ConstantMethodHelper.userTypeValue(_registerForm.userType)),
+              hint: AppStrings.selectUserType,
+              title: AppStrings.userType,
+              size: Size(375, 40),
+              onChanged: (value) {
+                setState(() {
+                  _registerForm.userTypeController = int.tryParse(value.id);
+                });
+              },
+            ),
+            separation,
             _registerTextField(
               controller: _registerForm.documentNumberController,
               title: "${AppStrings.documentNumber}:",
@@ -100,7 +123,6 @@ class _RegisterContentState extends State<RegisterContent> {
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.documentNumber} ${AppStrings.isInvalid}",
               isValid: _registerForm.validDocumentNumberValue,
-              inputFormatters: [LengthLimitingTextInputFormatter(20)],
               onChanged: (value) {
                 if (!_registerForm.validDocumentNumberValue) {
                   setState(() {
@@ -198,7 +220,10 @@ class _RegisterContentState extends State<RegisterContent> {
               errorMsg:
                   "${AppStrings.theField} ${AppStrings.mobileNumber} ${AppStrings.isInvalid}",
               isValid: _registerForm.validMobileValue,
-              inputFormatters: [LengthLimitingTextInputFormatter(9)],
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(9),
+                FilteringTextInputFormatter.digitsOnly,
+              ],
               onChanged: (value) {
                 if (!_registerForm.validMobileValue) {
                   setState(() {

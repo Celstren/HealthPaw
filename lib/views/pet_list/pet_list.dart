@@ -1,4 +1,6 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/data/shared_preferences/preferences.dart';
+import 'package:HealthPaw/utils/general/constant_helper.dart';
 import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
 import 'package:HealthPaw/views/pet_list/widgets/pet_list_content.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +13,13 @@ class PetListView extends StatefulWidget {
 }
 
 class _PetListViewState extends State<PetListView> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Column(
           children: <Widget>[
-            CommonAppBar(title: AppStrings.petsList),
+            CommonAppBar(title: Preferences.getUser.type == ConstantHelper.USER_TYPE_VET_ID? AppStrings.petsAssigned : AppStrings.petsList),
             Expanded(child: PetListContent()),
           ],
         ),

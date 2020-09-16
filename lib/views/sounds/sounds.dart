@@ -1,11 +1,12 @@
+import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/models/pet/pet.dart';
+import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
 import 'package:HealthPaw/views/sounds/widgets/sounds_content.dart';
 import 'package:flutter/material.dart';
 
-import 'package:HealthPaw/config/strings/app_strings.dart';
-import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
-
 class SoundsView extends StatefulWidget {
-  SoundsView({Key key}) : super(key: key);
+  final Pet pet;
+  SoundsView({Key key, this.pet}) : super(key: key);
 
   @override
   _SoundsViewState createState() => _SoundsViewState();
@@ -19,7 +20,7 @@ class _SoundsViewState extends State<SoundsView> {
         body: Column(
           children: <Widget>[
             CommonAppBar(title: AppStrings.breathHistory, showHeader: true),
-            Expanded(child: SoundsContent()),
+            Expanded(child: SoundsContent(pet: widget.pet)),
           ],
         ),
       ),

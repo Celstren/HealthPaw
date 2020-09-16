@@ -16,18 +16,16 @@ class _SoundManagerContentState extends State<SoundManagerContent> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-       children: <Widget>[
-         PetAvatar(),
-         
-                CircularButton(
-                  size: 80,
-                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => Container())),
-                  label: AppStrings.historySound,
-                  icon:
-                      Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
-                ),
-       ],
+      children: <Widget>[
+        PetAvatar(),
+        CircularButton(
+          size: 80,
+          onPress: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => Container())),
+          label: AppStrings.historySound,
+          icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
+        ),
+      ],
     );
   }
 }

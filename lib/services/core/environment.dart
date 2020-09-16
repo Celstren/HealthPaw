@@ -14,4 +14,9 @@ class BuildEnvironment<String> extends Enum<String> {
   /// LOCAL Android
   static const LOCAL_ANDROID =
       const BuildEnvironment('http://10.0.2.2:3000/api/');
+
+  /// TESTING
+  static const TEST_API=
+      const BuildEnvironment('http://54.202.190.121:57065/api/');
+
 }
