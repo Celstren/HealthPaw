@@ -29,10 +29,10 @@ class StatsField extends StatelessWidget {
         return date.hour;
         break;
       case PeriodType.Minutes:
-        return date.minute;
+        return date.minute + date.hour * 60;
         break;
       case PeriodType.Seconds:
-        return date.second;
+        return date.second + date.minute * 60 + date.hour * 3600;
         break;
       default:
         return date.hour;
