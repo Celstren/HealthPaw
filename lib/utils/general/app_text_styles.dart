@@ -68,4 +68,48 @@ class AppTextStyle {
         wordSpacing: wordSpacing,
         decoration: decoration,
       );
+
+  static TextStyle redStyle({
+    String fontFamily = AppFonts.Montserrat_Regular,
+    double fontSize = 16,
+    List<Shadow> shadows,
+    FontWeight fontWeight,
+    FontStyle fontStyle,
+    double letterSpacing,
+    double wordSpacing,
+    TextDecoration decoration,
+  }) =>
+      TextStyle(
+        color: AppColors.PrimaryRed,
+        fontFamily: fontFamily,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        shadows: shadows,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+        decoration: decoration,
+      );
+
+  static TextStyle greenStyle({
+    String fontFamily = AppFonts.Montserrat_Regular,
+    double fontSize = 16,
+    List<Shadow> shadows,
+    FontWeight fontWeight,
+    FontStyle fontStyle,
+    double letterSpacing,
+    double wordSpacing,
+    TextDecoration decoration,
+  }) =>
+      TextStyle(
+        color: AppColors.PrimaryGreen,
+        fontFamily: fontFamily,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        shadows: shadows,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+        decoration: decoration,
+      );
 }
