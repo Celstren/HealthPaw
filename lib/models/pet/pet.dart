@@ -50,12 +50,12 @@ class Pet {
         image: json["image"] ?? "",
         birthDay: DateTime.tryParse(json["birthDay"]),
         petType: json["petType"] ?? "",
-        alerts: json["alerts"] ?? "",
+        alerts: json["alerts"] != null ? json["alerts"].map<Alert>((e) => Alert.fromJson(e)).toList() : [],
         breathingFrequency: json["breathingFrequency"] != null ? Stadistic.fromJson(json["breathingFrequency"]) : [],
         heartRate: json["heartRate"] != null ? Stadistic.fromJson(json["heartRate"]) : [],
         sound: json["sound"] != null ? Stadistic.fromJson(json["sound"]) : [],
         temperature: json["temperature"] != null ? Stadistic.fromJson(json["temperature"]) : [],
-        recommendations: json["recommendations"] ?? "",
+        recommendations: json["recommendations"] != null ? json["recommendations"].map<Recommendation>((e) => Recommendation.fromJson(e)).toList() : [],
       );
 
   Map<String, dynamic> toJson() => {

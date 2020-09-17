@@ -1,8 +1,8 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
-import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/models/pet/stadistic.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:HealthPaw/utils/general/app_enums.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/stats_field.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -21,7 +21,8 @@ class StatsOverview extends StatefulWidget {
   final Widget history;
   final bool reduceData;
   final StadisticType type;
-  @required final Stadistic stadistic;
+  @required
+  final Stadistic stadistic;
   StatsOverview(
       {Key key,
       this.metricUnit = "",
@@ -32,8 +33,9 @@ class StatsOverview extends StatefulWidget {
       this.max = true,
       this.min = true,
       this.history,
-      this.reduceData = false, 
-      this.stadistic, this.type = StadisticType.TODAY})
+      this.reduceData = false,
+      this.stadistic,
+      this.type = StadisticType.TODAY})
       : super(key: key);
 
   @override
@@ -45,6 +47,7 @@ class _StatsOverviewState extends State<StatsOverview> {
   Widget _iconStat = Placeholder();
   num media = 0, min = 0, max = 0, lastValue = 0;
   List<History> histories = [];
+  PeriodType periodTypeSelected = PeriodType.Hours;
 
   @override
   void initState() {
@@ -54,6 +57,7 @@ class _StatsOverviewState extends State<StatsOverview> {
     if (widget.iconStat != null) {
       _iconStat = widget.iconStat;
     }
+    setData();
     super.initState();
   }
 
@@ -63,12 +67,14 @@ class _StatsOverviewState extends State<StatsOverview> {
       min = widget.stadistic.todayOverview.minimum;
       max = widget.stadistic.todayOverview.maximum;
       lastValue = widget.stadistic.todayOverview.lastValue;
+      histories = widget.stadistic.todayHistory;
     } else {
       StatOverview stat = widget.stadistic.historyOverview;
       media = stat.average;
       min = stat.minimum;
       max = stat.maximum;
       lastValue = stat.lastValue;
+      histories = widget.stadistic.history;
     }
   }
 
@@ -143,7 +149,7 @@ class _StatsOverviewState extends State<StatsOverview> {
           ),
           SizedBox(
             child: Text(
-              "$unit ${widget.metricUnit}",
+              "${unit.toStringAsFixed(3)} ${widget.metricUnit}",
               style: AppTextStyle.blackStyle(
                 fontSize: AppFontSizes.subitle18,
                 fontWeight: FontWeight.w500,
@@ -155,15 +161,76 @@ class _StatsOverviewState extends State<StatsOverview> {
     );
   }
 
+  Widget _buildPeriodButton(
+      PositionOrientation positionOrientation, PeriodType periodType) {
+    String text = AppStrings.hour;
+    Border border;
+    Color background = AppColors.PrimaryWhite;
+
+    switch (positionOrientation) {
+      case PositionOrientation.Start:
+        {
+          text = AppStrings.seconds;
+          border = AppBorder.blackStartBorder;
+        }
+        break;
+      case PositionOrientation.Middle:
+        {
+          text = AppStrings.minutes;
+          border = AppBorder.blackBorder;
+          // radius = null;
+        }
+        break;
+      case PositionOrientation.End:
+        {
+          text = AppStrings.hour;
+          border = AppBorder.blackEndBorder;
+        }
+        break;
+    }
+
+    if (periodTypeSelected == periodType) {
+      background = AppColors.PrimaryLightBlue;
+    }
+
+    return GestureDetector(
+      onTap: () => setState(() => periodTypeSelected = periodType),
+      child: Container(
+        height: 30,
+        width: 90,
+        decoration: BoxDecoration(
+          color: background,
+          border: border,
+        ),
+        child: Center(
+          child: Text(text, style: AppTextStyle.blackStyle()),
+        ),
+      ),
+    );
+  }
+
   Widget _buildGraphStadistics() {
     return Column(
       children: <Widget>[
         SizedBox(
           height: 200,
           width: 320,
-          child: StatsField(data: histories),
+          child: StatsField(data: histories, periodType: periodTypeSelected),
         ),
-        SizedBox(height: 50),
+        SizedBox(height: 20),
+        SizedBox(
+          height: 30,
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _buildPeriodButton(PositionOrientation.Start, PeriodType.Seconds),
+              _buildPeriodButton(PositionOrientation.Middle, PeriodType.Minutes),
+              _buildPeriodButton(PositionOrientation.End, PeriodType.Hours),
+            ],
+          ),
+        ),
+        SizedBox(height: 20),
         Row(
           mainAxisAlignment: widget.history != null
               ? MainAxisAlignment.spaceEvenly
@@ -309,11 +376,4 @@ class _StatsOverviewState extends State<StatsOverview> {
       ),
     );
   }
-}
-
-class LinearSales {
-  final int year;
-  final int sales;
-
-  LinearSales(this.year, this.sales);
 }

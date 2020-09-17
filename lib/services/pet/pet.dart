@@ -23,7 +23,7 @@ class PetService {
       return pets;
     } catch (e) {
       print(e);
-      return e;
+      return null;
     }
   }
 
@@ -34,7 +34,7 @@ class PetService {
       return pet;
     } catch (e) {
       print(e);
-      return e;
+      return null;
     }
   }
 
