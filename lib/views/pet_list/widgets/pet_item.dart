@@ -18,7 +18,7 @@ class PetItem extends StatelessWidget {
   final Pet pet;
   const PetItem({Key key, this.pet}) : super(key: key);
 
-  void fetchPetData(BuildContext context) async {
+  void displayPetData(BuildContext context) async {
     displayLoadingScreen(context);
     Pet petData = await PetService.getPet(pet.id);
     Navigator.pop(context);
@@ -27,12 +27,34 @@ class PetItem extends StatelessWidget {
     } else {
       showCustomDialog(
           context: context,
-          builder: (context) => OkDialog(
+          builder: (context) => CustomDialog(
+            child: OkDialog(
               title: AppStrings.fetchPetFail,
               okText: AppStrings.ok,
               onPress: () => Navigator.pop(
                     context,
-                  )));
+                  )),
+          ));
+    }
+  }
+
+  void displayPetStatus(BuildContext context) async {
+    displayLoadingScreen(context);
+    Pet petData = await PetService.getPet(pet.id);
+    Navigator.pop(context);
+    if (petData != null) {
+      NavigationMethods.of(context).navigateTo(PetStatusView(pet: petData));
+    } else {
+      showCustomDialog(
+          context: context,
+          builder: (context) => CustomDialog(
+            child: OkDialog(
+              title: AppStrings.fetchPetFail,
+              okText: AppStrings.ok,
+              onPress: () => Navigator.pop(
+                    context,
+                  )),
+          ));
     }
   }
 
@@ -103,7 +125,7 @@ class PetItem extends StatelessWidget {
         ],
       ),
       child: FlatButton(
-        onPressed: () => NavigationMethods.of(context).navigateTo(PetStatusView(pet: pet)),
+        onPressed: () => displayPetStatus(context),
         child: Row(
           children: <Widget>[
             Padding(
@@ -126,7 +148,7 @@ class PetItem extends StatelessWidget {
               ),
               child: FlatButton(
                   padding: EdgeInsets.zero,
-                  onPressed: () => fetchPetData(context),
+                  onPressed: () => displayPetData(context),
                   child: Center(
                       child: Icon(Icons.edit,
                           size: 30, color: AppColors.PrimaryBlack))),
