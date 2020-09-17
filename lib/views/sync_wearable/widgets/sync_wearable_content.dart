@@ -3,7 +3,6 @@ import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/views/sync_wearable/widgets/sync_wearable_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
 class SyncWearableContent extends StatefulWidget {
@@ -15,32 +14,7 @@ class SyncWearableContent extends StatefulWidget {
 
 class _SyncWearableContentState extends State<SyncWearableContent> {
   FlutterBlue flutterBlue = FlutterBlue.instance;
-
-  static const platform = const MethodChannel('com.example.HealthPaw/mbientlab');
-
-  Future<void> _connectBoard() async {
-    try {
-      await platform.invokeMethod('connectBoard', {"boardId": "F0:80:F6:C8:E0:75"});
-    } on PlatformException catch (e) {
-      print("Fail to connect: $e");
-    }
-  }
-
-  Future<void> _turnOffLed() async {
-    try {
-      await platform.invokeMethod('turnOffLed');
-    } on PlatformException catch (e) {
-      print("Fail to turn off: $e");
-    }
-  }
-
-  Future<void> _turnOnLed() async {
-    try {
-      await platform.invokeMethod('turnOnLed', {"colorId": 0});
-    } on PlatformException catch (e) {
-      print("Fail to turn on: $e");
-    }
-  }
+  String selectedDeviceId;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +44,15 @@ class _SyncWearableContentState extends State<SyncWearableContent> {
       initialData: [],
       stream: flutterBlue.scanResults,
       builder: (BuildContext context, AsyncSnapshot<List<ScanResult>> snapshot){
-        return snapshot.hasData? Column(children: snapshot.data.map<Widget>((e) => SyncWearableItem(scanResult: e)).toList()) : SizedBox();
+        return snapshot.hasData? Column(children: snapshot.data.map<Widget>((e) => SyncWearableItem(
+          scanResult: e, 
+          enabled: (selectedDeviceId == null || selectedDeviceId == e.device.id.id),
+          onConnected: (value) {
+            setState(() {
+              selectedDeviceId = e.device.id.id;
+            });
+          },
+          )).toList()) : SizedBox();
     });
   }
 
@@ -101,7 +83,11 @@ class _SyncWearableContentState extends State<SyncWearableContent> {
             style: AppTextStyle.whiteStyle(
                 fontSize: AppFontSizes.title18,
                 fontFamily: AppFonts.Montserrat_Bold),
-            onPress: snapshot?.data == true ? () => flutterBlue.scan(timeout: Duration(seconds: 5)) : null,
+            onPress: () {
+              if (snapshot?.data == false) {
+                flutterBlue.startScan(timeout: Duration(seconds: 4));
+              }
+            },
           );
         });
   }

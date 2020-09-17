@@ -81,9 +81,8 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
             }
           } else if (call.method.equals("connectBoard")) {
             String boardId = call.argument("boardId");
-            if (boardId != null && !boardId.isEmpty()) {
+            if (boardId != null) {
               connectBoard(boardId);
-              result.success(true);
             } else {
               Log.i(TAG, "Invalid board id");
               result.success(false);
@@ -308,6 +307,7 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
         accelModule = mwBoard.getModule(Bmi160Accelerometer.class);
         gyroModule = mwBoard.getModule(Bmi160Gyro.class);
         loggingModule = mwBoard.getModule(Logging.class);
+        Log.i(TAG, "Connected");
       } catch (UnsupportedModuleException e) {
         e.printStackTrace();
       }
@@ -329,10 +329,8 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
   /// SET CONNECTION TO SELECTED BOARD
 
   public void retrieveBoard() {
-    final BluetoothManager btManager=
-            (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-    final BluetoothDevice remoteDevice=
-            btManager.getAdapter().getRemoteDevice(MW_MAC_ADDRESS);
+    final BluetoothManager btManager= (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+    final BluetoothDevice remoteDevice= btManager.getAdapter().getRemoteDevice(MW_MAC_ADDRESS);
 
     // Create a MetaWear board object for the Bluetooth Device
     mwBoard= serviceBinder.getMetaWearBoard(remoteDevice);
