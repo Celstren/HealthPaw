@@ -23,8 +23,16 @@ class _SynWearableItemState extends State<SyncWearableItem> {
 
   Future<void> _connectBoard() async {
     try {
-      await platform
-          .invokeMethod('connectBoard', {"boardId": widget.scanResult.device.id.id});
+      await platform.invokeMethod(
+          'connectBoard', {"boardId": widget.scanResult.device.id.id});
+    } on PlatformException catch (e) {
+      print("Fail to connect: $e");
+    }
+  }
+
+  Future<void> _disconnectBoard() async {
+    try {
+      await platform.invokeMethod('disconnectBoard');
     } on PlatformException catch (e) {
       print("Fail to connect: $e");
     }
@@ -102,9 +110,8 @@ class _SynWearableItemState extends State<SyncWearableItem> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: AppColors.PrimaryBlack)
-          ),
+          decoration:
+              BoxDecoration(border: Border.all(color: AppColors.PrimaryBlack)),
           height: 40,
           child: GestureDetector(
             onTap: _connectBoard,
@@ -120,11 +127,28 @@ class _SynWearableItemState extends State<SyncWearableItem> {
           ),
         ),
         Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: AppColors.PrimaryBlack)
-          ),
+          decoration:
+              BoxDecoration(border: Border.all(color: AppColors.PrimaryBlack)),
           height: 40,
           child: GestureDetector(
+            onTap: _connectBoard,
+            child: Center(
+              child: Text(
+                "Desconectar",
+                style: AppTextStyle.blackStyle(
+                  fontSize: AppFontSizes.text14,
+                  fontFamily: AppFonts.Montserrat_Bold,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Container(
+          decoration:
+              BoxDecoration(border: Border.all(color: AppColors.PrimaryBlack)),
+          height: 40,
+          child: GestureDetector(
+            onTap: _turnOnLed,
             child: Center(
               child: Text(
                 "Prender LED",
@@ -137,11 +161,11 @@ class _SynWearableItemState extends State<SyncWearableItem> {
           ),
         ),
         Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: AppColors.PrimaryBlack)
-          ),
+          decoration:
+              BoxDecoration(border: Border.all(color: AppColors.PrimaryBlack)),
           height: 40,
           child: GestureDetector(
+            onTap: _turnOffLed,
             child: Center(
               child: Text(
                 "Apagar LED",
