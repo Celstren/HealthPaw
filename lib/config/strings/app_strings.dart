@@ -6,6 +6,7 @@ class AppStrings {
   static final String owner                             = AppConfig.commonStringsJson["Owner"] ?? "";
   static final String accept                            = AppConfig.commonStringsJson["Accept"] ?? "";
   static final String search                            = AppConfig.commonStringsJson["Search"] ?? "";
+  static final String searching                         = AppConfig.commonStringsJson["Searching"] ?? "";
   static final String connect                           = AppConfig.commonStringsJson["Connect"] ?? "";
   static final String close                             = AppConfig.commonStringsJson["Close"] ?? "";
   static final String register                          = AppConfig.commonStringsJson["Register"] ?? "";
@@ -52,6 +53,8 @@ class AppStrings {
   static final String defaultSound                      = AppConfig.commonStringsJson["DefaultSound"] ?? "";
   static final String playingSound                      = AppConfig.commonStringsJson["PlayingSound"] ?? "";
   static final String stopPlaying                       = AppConfig.commonStringsJson["StopPlaying"] ?? "";
+  static final String stop                              = AppConfig.commonStringsJson["Stop"] ?? "";
+  static final String stopped                           = AppConfig.commonStringsJson["Stoppped"] ?? "";
   static final String play                              = AppConfig.commonStringsJson["Play"] ?? "";
   static final String sendAudio                         = AppConfig.commonStringsJson["SendAudio"] ?? "";
   static final String sendVoiceNote                     = AppConfig.commonStringsJson["SendVoiceNote"] ?? "";
