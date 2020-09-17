@@ -55,7 +55,8 @@ class _RegisterContentState extends State<RegisterContent> {
               isValid: _registerForm.validNameValue,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(50),
-                FilteringTextInputFormatter.deny(Validators.numberRegex)
+                // FilteringTextInputFormatter.deny(Validators.numberRegex)
+                BlacklistingTextInputFormatter(Validators.numberRegex)
               ],
               onChanged: (value) {
                 if (!_registerForm.validNameValue) {
@@ -75,7 +76,8 @@ class _RegisterContentState extends State<RegisterContent> {
               isValid: _registerForm.validLastnameValue,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(50),
-                FilteringTextInputFormatter.deny(Validators.numberRegex)
+                // FilteringTextInputFormatter.deny(Validators.numberRegex)
+                BlacklistingTextInputFormatter(Validators.numberRegex)
               ],
               onChanged: (value) {
                 if (!_registerForm.validLastnameValue) {
@@ -222,7 +224,8 @@ class _RegisterContentState extends State<RegisterContent> {
               isValid: _registerForm.validMobileValue,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(9),
-                FilteringTextInputFormatter.digitsOnly,
+                // FilteringTextInputFormatter.digitsOnly,
+                WhitelistingTextInputFormatter.digitsOnly
               ],
               onChanged: (value) {
                 if (!_registerForm.validMobileValue) {
