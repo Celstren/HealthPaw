@@ -31,13 +31,13 @@ class _PetOverviewContentState extends State<PetOverviewContent> {
                   width: 400,
                   orientation: OverviewFieldOrientation.Horizontal,
                   label: AppStrings.cardiacFrequency,
-                  text: "100 ${AppStrings.beatsPerMinuteUnits}"),
+                  text: "${widget.pet?.heartRate?.average?.toStringAsFixed(3) ?? 0} ${AppStrings.beatsPerMinuteUnits}"),
               SizedBox(height: 40),
               OverviewField(
                 width: 400,
                 orientation: OverviewFieldOrientation.Horizontal,
                 label: AppStrings.breathFrequency,
-                text: "20 ${AppStrings.breathsPerMinuteUnits}",
+                text: "${widget.pet?.breathingFrequency?.average?.toStringAsFixed(3) ?? 0} ${AppStrings.breathsPerMinuteUnits}",
               ),
               SizedBox(height: 40),
               OverviewField(
