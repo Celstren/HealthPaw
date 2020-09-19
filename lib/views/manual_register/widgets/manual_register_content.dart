@@ -46,6 +46,9 @@ class _ManualRegisterContentState extends State<ManualRegisterContent> {
       case UserType.Vet:
         _manualRegisterForm.userTypeController = ConstantHelper.USER_TYPE_VET_ID;
         break;
+      case UserType.Admin:
+        _manualRegisterForm.userTypeController = ConstantHelper.USER_TYPE_ADMIN_ID;
+        break;
     }
     super.initState();
   }

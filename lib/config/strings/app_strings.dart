@@ -91,6 +91,7 @@ class AppStrings {
   static final String users                             = AppConfig.commonStringsJson["Users"] ?? "";
   static final String vets                              = AppConfig.commonStringsJson["Vets"] ?? "";
   static final String registerVet                       = AppConfig.commonStringsJson["RegisterVet"] ?? "";
+  static final String registerAdmin                       = AppConfig.commonStringsJson["RegisterAdmin"] ?? "";
   static final String lastnames                         = AppConfig.commonStringsJson["Lastnames"] ?? "";
   static final String password2                         = AppConfig.commonStringsJson["Password2"] ?? "";
   static final String mobileNumber                      = AppConfig.commonStringsJson["MobileNumber"] ?? "";
