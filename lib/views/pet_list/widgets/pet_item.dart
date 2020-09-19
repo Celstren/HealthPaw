@@ -111,12 +111,15 @@ class PetItem extends StatelessWidget {
               child: PetAvatar(size: 60),
             ),
             Expanded(
-              child: Text(
-                pet?.namevar ?? "",
-                style: AppTextStyle.blackStyle(
-                    fontSize: AppFontSizes.subitle18,
-                    fontWeight: FontWeight.bold),
-              ),
+              child: InkWell(
+                  child: Text(
+                    pet?.namevar ?? "",
+                      style: AppTextStyle.blackStyle(
+                        fontSize: AppFontSizes.subitle18,
+                        fontWeight: FontWeight.bold),
+                   ),
+                   onTap: (){showPetDialog(context);},
+                ),
             ),
             Container(
               height: 80,
