@@ -6,7 +6,6 @@ import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:HealthPaw/utils/widgets/app_text_field.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
-import 'package:HealthPaw/utils/widgets/loading_screen.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +41,7 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
 
   void _submit() async {
     if (validatedEmail && validatedMobile) {
-      displayLoadingScreen(context);
       bool success = await modifyRequest();
-      Navigator.pop(context);
       if (success) {
         showModifySuccessDialog();
         User currentUser = Preferences.getUser;
@@ -52,7 +49,6 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
         currentUser.phone = int.tryParse(phoneController.value.text);
         Preferences.setUser = currentUser;
       }
-      else showModifyFailedDialog();
     } else {
       setState(() {
         validEmail = validatedEmail;
@@ -101,20 +97,6 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
             Navigator.pop(context);
             Navigator.pop(context);
           },
-        ),
-      ),
-    );
-  }
-
-  void showModifyFailedDialog() {
-    showCustomDialog(
-      context: context,
-      child: CustomDialog(
-        backgroundColor: Colors.transparent,
-        child: OkDialog(
-          title: AppStrings.failedModify,
-          okText: AppStrings.close,
-          onPress: () => Navigator.pop(context),
         ),
       ),
     );

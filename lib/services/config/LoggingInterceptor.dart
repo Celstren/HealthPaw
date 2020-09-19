@@ -1,3 +1,4 @@
+import 'package:HealthPaw/utils/widgets/global_dialogs.dart';
 import 'package:dio/dio.dart';
 
 class LoggingInterceptors extends Interceptor {
@@ -5,6 +6,7 @@ class LoggingInterceptors extends Interceptor {
 
   @override
   Future<dynamic> onRequest(RequestOptions options) {
+    GlobalDialogs.displayLoading();
     start = DateTime.now();
     print("--> REQUEST ${options.method != null ? options.method.toUpperCase() : 'METHOD'} ${"" + (options.baseUrl ?? "") + (options.path ?? "")}");
     print("Headers:");
@@ -23,6 +25,8 @@ class LoggingInterceptors extends Interceptor {
 
   @override
   Future<dynamic> onError(DioError dioError) {
+    GlobalDialogs.popContext();
+    GlobalDialogs.displayConnectionError();
     DateTime now = DateTime.now();
     print("<-- ERROR ${dioError.message} ${(dioError.request != null ? (dioError.request.baseUrl + dioError.request.path) : 'URL')}");
     print("Headers:");
@@ -43,6 +47,7 @@ class LoggingInterceptors extends Interceptor {
 
   @override
   Future<dynamic> onResponse(Response response) {
+    GlobalDialogs.popContext();
     DateTime now = DateTime.now();
     print("<-- RESPONSE ${response?.statusCode} ${(response.request != null ? (response.request.baseUrl + response.request.path) : 'URL')}");
     print("Response Headers:");
