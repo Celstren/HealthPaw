@@ -43,7 +43,7 @@ class StatsOverview extends StatefulWidget {
 }
 
 class _StatsOverviewState extends State<StatsOverview> {
-  List<int> _units;
+  List<int> _units = [];
   Widget _iconStat = Placeholder();
   num media = 0, min = 0, max = 0, lastValue = 0;
   List<History> histories = [];
@@ -57,7 +57,9 @@ class _StatsOverviewState extends State<StatsOverview> {
     if (widget.iconStat != null) {
       _iconStat = widget.iconStat;
     }
-    setData();
+    if (widget.stadistic != null) {
+      setData();
+    }
     super.initState();
   }
 
@@ -290,7 +292,7 @@ class _StatsOverviewState extends State<StatsOverview> {
                 SizedBox(
                   height: 50,
                   child: Text(
-                    "42 ${widget.metricUnit}",
+                    "0 ${widget.metricUnit}",
                     style: AppTextStyle.blackStyle(
                       fontSize: AppFontSizes.title24,
                       fontFamily: AppFonts.Montserrat_Bold,
