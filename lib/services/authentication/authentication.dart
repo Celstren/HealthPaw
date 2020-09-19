@@ -1,6 +1,3 @@
-//import 'package:HealthPaw/data/shared_preferences/preferences.dart';
-import 'dart:developer';
-
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/user/user.dart';

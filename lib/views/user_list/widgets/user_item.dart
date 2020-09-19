@@ -1,12 +1,8 @@
-import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/models/user/user.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/general/enums.dart';
-import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
-import 'package:HealthPaw/utils/widgets/loading_screen.dart';
-import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/views/user_info/user_info.dart';
 import 'package:flutter/material.dart';
@@ -18,19 +14,10 @@ class UserItem extends StatelessWidget {
       : super(key: key);
 
   void fetchPetData(BuildContext context) async {
-    displayLoadingScreen(context);
     User userData = await UserService.getUser(user.documentNumber);
-    Navigator.pop(context);
     if (userData != null) {
       NavigationMethods.of(context)
           .navigateTo(UserInfoView(user: userData, userType: userType));
-    } else {
-      showCustomDialog(
-          context: context,
-          builder: (context) => OkDialog(
-              title: AppStrings.fetchPetFail,
-              okText: AppStrings.ok,
-              onPress: () => Navigator.pop(context)));
     }
   }
 

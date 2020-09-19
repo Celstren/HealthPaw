@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 class LoginRequest {
   static void verifyUser(BuildContext context, User user) async {
     RespuestasLogin respuesta = await AuthenticationService.loginUser(user);
-    Navigator.pop(context);
     if (respuesta == RespuestasLogin.okay) {
       showCustomDialog(
         context: context,
@@ -24,18 +23,6 @@ class LoginRequest {
               Navigator.pop(context);
               NavigationMethods.of(context).navigateReplacement(MainMenuView());
             },
-          ),
-        ),
-      );
-    } else {
-      showCustomDialog(
-        context: context,
-        child: CustomDialog(
-          backgroundColor: Colors.transparent,
-          child: OkDialog(
-            title: DeterminarMensajeRespuesta(respuesta),
-            okText: AppStrings.close,
-            onPress: () => Navigator.pop(context),
           ),
         ),
       );

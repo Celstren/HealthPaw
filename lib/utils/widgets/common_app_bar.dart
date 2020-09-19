@@ -1,4 +1,3 @@
-import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/authentication/authentication.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:flutter/material.dart';

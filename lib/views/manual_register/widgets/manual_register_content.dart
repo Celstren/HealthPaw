@@ -3,7 +3,6 @@ import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/general/constant_helper.dart';
 import 'package:HealthPaw/utils/general/enums.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
-import 'package:HealthPaw/utils/widgets/loading_screen.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
 import 'package:HealthPaw/views/auth/register/logic/register_form.dart';
@@ -28,7 +27,6 @@ class _ManualRegisterContentState extends State<ManualRegisterContent> {
 
   void _submit() async {
     if (_manualRegisterForm.validForm) {
-      displayLoadingScreen(context);
       ManualRegisterRequest.createUserRequest(context, _manualRegisterForm.result);
     } else {
       setState(() {
