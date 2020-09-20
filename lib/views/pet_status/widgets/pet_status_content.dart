@@ -130,7 +130,7 @@ class _PetStatusContentState extends State<PetStatusContent> {
                       validateRedirection(SoundTodayView(pet: widget.pet)),
                   label: AppStrings.viewSound,
                   icon:
-                      Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
+                      Icon(Icons.music_note, size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
@@ -138,7 +138,7 @@ class _PetStatusContentState extends State<PetStatusContent> {
                       validateRedirection(SoundHistoryView(pet: widget.pet)),
                   label: AppStrings.historySound,
                   icon:
-                      Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
+                      Icon(Icons.music_note, size: 30, color: AppColors.PrimaryBlack),
                 ),
               ],
             ),
