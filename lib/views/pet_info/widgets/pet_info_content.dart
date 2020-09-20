@@ -6,6 +6,7 @@ import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/pet/pet.dart';
 import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:HealthPaw/utils/general/constant_methods_helper.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:HealthPaw/utils/widgets/app_text_field.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
@@ -16,6 +17,7 @@ import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/views/main_menu/main_menu.dart';
 import 'package:HealthPaw/views/pet_info/widgets/pet_recommendation_item.dart';
 import 'package:HealthPaw/views/pet_status/pet_status.dart';
+import 'package:HealthPaw/views/report_pet_status/report_pet_status_view.dart';
 import 'package:HealthPaw/views/select_pet_type/widgets/select_pet_type_content.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +98,9 @@ class _PetInfoContentState extends State<PetInfoContent> {
   Future<bool> createPetRequest() async {
     Pet pet = Pet(
         namevar: petNameController.value.text.trim(),
-        birthDay: birthDayController);
+        birthDay: birthDayController,
+        petType: ConstantMethodHelper.petTypeValue(widget.petType),
+        );
     String id = await PetService.registerPet(pet);
     if (id != null) {
       return await UserService.addPetToUser(
@@ -252,10 +256,10 @@ class _PetInfoContentState extends State<PetInfoContent> {
               },
             ),
             RoundedButton(
-              text: AppStrings.sendStatusRecord,
+              text: AppStrings.reportStatus,
               size: Size(150, 40),
               style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
-              onPress: () => validateRedirection(PetStatusView()),
+              onPress: () => validateRedirection(ReportPetStatusView(pet: widget.pet)),
             ),
           ],
         ),

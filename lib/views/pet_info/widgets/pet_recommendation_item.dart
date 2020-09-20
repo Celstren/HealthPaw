@@ -1,7 +1,8 @@
+import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/models/pet/recommendation.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
-import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
+import 'package:HealthPaw/utils/widgets/description_dialog.dart';
 import 'package:flutter/material.dart';
 
 class PetRecommendationItem extends StatelessWidget {
@@ -13,8 +14,9 @@ class PetRecommendationItem extends StatelessWidget {
       context: context,
       child: CustomDialog(
         backgroundColor: Colors.transparent,
-        child: OkDialog(
-          okText: recommendation.description,
+        child: DescriptionDialog(
+          description: recommendation?.description ?? "",
+          okText: AppStrings.ok,
           onPress: () => Navigator.pop(context),
         ),
       ),
@@ -25,6 +27,7 @@ class PetRecommendationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 80,
+      width: 350,
       margin: EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
         color: AppColors.PrimaryWhite,
@@ -45,7 +48,7 @@ class PetRecommendationItem extends StatelessWidget {
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
           style: AppTextStyle.blackStyle(
-              fontSize: AppFontSizes.subitle18, fontWeight: FontWeight.bold),
+              fontSize: AppFontSizes.text12, fontWeight: FontWeight.bold),
         ),
       ),
     );

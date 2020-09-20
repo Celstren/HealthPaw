@@ -127,7 +127,7 @@
 
     "SendMessage": "Enviar mensaje",
     "SendNotification": "Redactar notificación",
-    "SendStatusRecord": "Enviar registro de estado",
+    "ReportStatus": "Reportar estado",
 
     "PetsAssigned": "Mascotas asignadas",
 
@@ -151,6 +151,7 @@
     "Minutes": "Minutos",
     "Hour": "Horas",
 
+    "SuccessfulReport": "Reporte exitoso",
     "SuccessfulRegister": "Registro exitoso",
     "SuccessfulLogin": "Ingreso exitoso",
     "FailedRegister": "Registro fallido. Vuelva a intentar",

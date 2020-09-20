@@ -1,14 +1,19 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
+import 'package:HealthPaw/models/pet/pet.dart';
+import 'package:HealthPaw/models/pet/recommendation.dart';
+import 'package:HealthPaw/services/pet/pet.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
+import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
 class PetDialog extends StatefulWidget {
-  final String petName;
+  final Pet pet;
   PetDialog({
     Key key,
-    this.petName = "",
+    this.pet,
   }) : super(key: key);
 
   @override
@@ -17,8 +22,35 @@ class PetDialog extends StatefulWidget {
 
 class _PetDialogState extends State<PetDialog> {
 
+  bool isValid = false;
+
   bool isCollapsed = true;
   TextEditingController controller = TextEditingController();
+
+  void submit() async {
+    Recommendation newRecommendation = Recommendation(description: controller.value.text, date: DateTime.now());
+    Pet petUpdated = widget.pet;
+    petUpdated.recommendations ??= [];
+    petUpdated.recommendations.add(newRecommendation);
+    bool success = await PetService.updatePet(petUpdated);
+    if (success) {
+      showCustomDialog(
+        context: context,
+        barrierDismissible: false,
+        child: CustomDialog(
+          backgroundColor: Colors.transparent,
+          child: OkDialog(
+            title: AppStrings.messageSent,
+            okText: AppStrings.close,
+            onPress: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +87,7 @@ class _PetDialogState extends State<PetDialog> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  widget.petName,
+                  widget.pet?.namevar ?? "",
                   style: AppTextStyle.blackStyle(
                       fontSize: AppFontSizes.title24,
                       fontWeight: FontWeight.w700),
@@ -93,7 +125,7 @@ class _PetDialogState extends State<PetDialog> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  widget.petName,
+                  widget.pet?.namevar ?? "",
                   style: AppTextStyle.blackStyle(
                       fontSize: AppFontSizes.title24,
                       fontWeight: FontWeight.w700),
@@ -107,8 +139,21 @@ class _PetDialogState extends State<PetDialog> {
                     borderRadius: AppBorderRadius.all(radius: AppRadius.radius20),
                   ),
                   margin: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(20),
                   child: TextField(
                     controller: controller,
+                    maxLines: null,
+                    onChanged: (value) {
+                      bool old = isValid;
+                      if (controller.value.text != null && controller.value.text.trim().isNotEmpty) {
+                        isValid = true;
+                      } else {
+                        isValid = false;
+                      }
+                      if (old != isValid) {
+                        setState(() {});
+                      }
+                    },
                     decoration: InputDecoration.collapsed(hintText: ""),
                   ),
                 ),
@@ -120,7 +165,7 @@ class _PetDialogState extends State<PetDialog> {
                   style: AppTextStyle.whiteStyle(
                       fontSize: AppFontSizes.text12,
                       fontWeight: FontWeight.w500),
-                  onPress: () {},
+                  onPress: isValid? submit : null,
                 ),
               ],
             ),

@@ -25,7 +25,7 @@ class PetItem extends StatelessWidget {
     showCustomDialog(
         context: context,
         builder: (context) =>
-            CustomDialog(child: PetDialog(petName: pet.namevar)));
+            CustomDialog(child: PetDialog(pet: pet)));
   }
 
   @override
