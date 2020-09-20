@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/utils/general/constant_helper.dart';
@@ -9,6 +11,7 @@ import 'package:HealthPaw/views/user_profile/widgets/admin_profile_content.dart'
 import 'package:HealthPaw/views/user_profile/widgets/owner_profile_content.dart';
 import 'package:HealthPaw/views/user_profile/widgets/vet_profile_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class ConstantMethodHelper {
   static String userTypeValue(int userTypeId) {

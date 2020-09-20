@@ -40,6 +40,7 @@ dependencies:
   audioplayers: "^0.16.1"
   connectivity: ^0.4.9+2
   wheel_chooser: ^0.1.1
+  hive: ^1.4.4
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +61,7 @@ flutter:
   assets:
     - assets/json/
     - assets/avatars/pets/
+    - assets/audios/
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -70,7 +70,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
     if (connectivity != ConnectivityResult.none) {
       NavigationMethods.of(context).navigateTo(widget);
     } else {
-      GlobalDialogs.displayConnectionError();
+      GlobalDialogs.displayConnectionError(0);
     }
   }
 
@@ -97,10 +97,10 @@ class _PetInfoContentState extends State<PetInfoContent> {
 
   Future<bool> createPetRequest() async {
     Pet pet = Pet(
-        namevar: petNameController.value.text.trim(),
-        birthDay: birthDayController,
-        petType: ConstantMethodHelper.petTypeValue(widget.petType),
-        );
+      namevar: petNameController.value.text.trim(),
+      birthDay: birthDayController,
+      petType: ConstantMethodHelper.petTypeValue(widget.petType),
+    );
     String id = await PetService.registerPet(pet);
     if (id != null) {
       return await UserService.addPetToUser(
@@ -259,7 +259,8 @@ class _PetInfoContentState extends State<PetInfoContent> {
               text: AppStrings.reportStatus,
               size: Size(150, 40),
               style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
-              onPress: () => validateRedirection(ReportPetStatusView(pet: widget.pet)),
+              onPress: () =>
+                  validateRedirection(ReportPetStatusView(pet: widget.pet)),
             ),
           ],
         ),

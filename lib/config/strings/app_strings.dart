@@ -50,9 +50,16 @@ class AppStrings {
   static final String password                          = AppConfig.commonStringsJson["Password"] ?? "";
   static final String termsConditionsLabel              = AppConfig.commonStringsJson["Terms&ConditionsLabel"] ?? "";
   static final String defaultSound                      = AppConfig.commonStringsJson["DefaultSound"] ?? "";
+  static final String defaultSounds                     = AppConfig.commonStringsJson["DefaultSounds"] ?? "";
+  static final String savedSound                        = AppConfig.commonStringsJson["SavedSounds"] ?? "";
   static final String playingSound                      = AppConfig.commonStringsJson["PlayingSound"] ?? "";
   static final String stopPlaying                       = AppConfig.commonStringsJson["StopPlaying"] ?? "";
   static final String play                              = AppConfig.commonStringsJson["Play"] ?? "";
+  static final String stop                              = AppConfig.commonStringsJson["Stop"] ?? "";
+  static final String start                             = AppConfig.commonStringsJson["Start"] ?? "";
+  static final String pause                             = AppConfig.commonStringsJson["Pause"] ?? "";
+  static final String resume                            = AppConfig.commonStringsJson["Resume"] ?? "";
+  static final String createNewAudio                    = AppConfig.commonStringsJson["CreateNewAudio"] ?? "";
   static final String sendAudio                         = AppConfig.commonStringsJson["SendAudio"] ?? "";
   static final String sendVoiceNote                     = AppConfig.commonStringsJson["SendVoiceNote"] ?? "";
   static final String recordVoiceNote                   = AppConfig.commonStringsJson["RecordVoiceNote"] ?? "";

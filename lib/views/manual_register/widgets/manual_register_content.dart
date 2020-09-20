@@ -13,7 +13,8 @@ import 'package:intl/intl.dart';
 
 class ManualRegisterContent extends StatefulWidget {
   final UserType userType;
-  ManualRegisterContent({Key key, this.userType = UserType.Owner}) : super(key: key);
+  ManualRegisterContent({Key key, this.userType = UserType.Owner})
+      : super(key: key);
 
   @override
   _ManualRegisterContentState createState() => _ManualRegisterContentState();
@@ -27,7 +28,8 @@ class _ManualRegisterContentState extends State<ManualRegisterContent> {
 
   void _submit() async {
     if (_manualRegisterForm.validForm) {
-      ManualRegisterRequest.createUserRequest(context, _manualRegisterForm.result);
+      ManualRegisterRequest.createUserRequest(
+          context, _manualRegisterForm.result);
     } else {
       setState(() {
         _manualRegisterForm.validateValues();
@@ -39,10 +41,16 @@ class _ManualRegisterContentState extends State<ManualRegisterContent> {
   void initState() {
     switch (widget.userType) {
       case UserType.Owner:
-        _manualRegisterForm.userTypeController = ConstantHelper.USER_TYPE_OWNER_ID;
+        _manualRegisterForm.userTypeController =
+            ConstantHelper.USER_TYPE_OWNER_ID;
         break;
       case UserType.Vet:
-        _manualRegisterForm.userTypeController = ConstantHelper.USER_TYPE_VET_ID;
+        _manualRegisterForm.userTypeController =
+            ConstantHelper.USER_TYPE_VET_ID;
+        break;
+      case UserType.Admin:
+        _manualRegisterForm.userTypeController =
+            ConstantHelper.USER_TYPE_ADMIN_ID;
         break;
       case UserType.Admin:
         _manualRegisterForm.userTypeController = ConstantHelper.USER_TYPE_ADMIN_ID;
@@ -303,7 +311,8 @@ class _ManualRegisterContentState extends State<ManualRegisterContent> {
               if (dateSelected != null) {
                 setState(() {
                   _manualRegisterForm.dateController = dateSelected;
-                  _manualRegisterForm.validDateValue = _manualRegisterForm.validDate;
+                  _manualRegisterForm.validDateValue =
+                      _manualRegisterForm.validDate;
                 });
               }
             },
