@@ -29,7 +29,7 @@ class GlobalDialogs {
         child: CustomDialog(
           backgroundColor: Colors.transparent,
           child: OkDialog(
-            title: _DeterminarMensajeRespuesta(statusCode),
+            title: _determinarMensajeRespuesta(statusCode),
             okText: AppStrings.close,
             onPress: () => Navigator.pop(_context),
           ),
@@ -38,7 +38,7 @@ class GlobalDialogs {
     }
   }
 
-  static String _DeterminarMensajeRespuesta(int statusCode) {
+  static String _determinarMensajeRespuesta(int statusCode) {
     switch (statusCode) {
       case 501:
         return AppStrings.serviceFailure;
