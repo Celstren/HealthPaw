@@ -1,6 +1,7 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/config/strings/app_units.dart';
 import 'package:HealthPaw/models/pet/pet.dart';
+import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/utils/widgets/stats_overview.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,17 @@ class CardiacHistoryContent extends StatefulWidget {
 class _CardiacHistoryContentState extends State<CardiacHistoryContent> {
   @override
   Widget build(BuildContext context) {
+
+    if(widget.pet.heartRate.isEmpty){
+      showCustomDialog(
+        context: context,
+        child: CustomDialog(
+          backgroundColor: Colors.transparent,
+          child: Text(AppStrings.noDataChartMessage),
+        ),
+      );
+    }
+
     return SingleChildScrollView(
       child: Container(
         width: MediaQuery.of(context).size.width,

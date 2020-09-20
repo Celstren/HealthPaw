@@ -171,4 +171,5 @@ class AppStrings {
   static final String todayHearthRate                   = AppConfig.commonStringsJson["TodayHearthRate"] ?? "";
   static final String soundHistory                      = AppConfig.commonStringsJson["SoundHistory"] ?? "";
   static final String environmentalTemperatureHistory   = AppConfig.commonStringsJson["EnvironmentalTemperatureHistory"] ?? "";
+  static final String noDataChartMessage                = AppConfig.commonStringsJson["NoDataChartMessage"] ?? "";
 }

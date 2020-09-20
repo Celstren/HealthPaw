@@ -26,6 +26,7 @@ class Stadistic {
     num average;
     List<History> todayHistory;
     List<History> history;
+    bool isEmpty;
 
     factory Stadistic.fromJson(Map<String, dynamic> json) => Stadistic(
         variable: json["variable"] ?? "",
