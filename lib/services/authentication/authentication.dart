@@ -9,6 +9,7 @@ import 'package:HealthPaw/views/auth/login/login.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class AuthenticationService {
   static Future<bool> registerUser(User user) async {
@@ -37,6 +38,9 @@ class AuthenticationService {
   static Future<void> logoutUser(BuildContext context) async {
     try {
       bool success = await Preferences.clear();
+      var box = await Hive.openBox("audios");
+      box.clear();
+      box.close();
       if (success) {
         NavigationMethods.of(context).navigateAndRemoveUntil(LoginView());
         return;
