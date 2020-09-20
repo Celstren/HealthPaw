@@ -19,7 +19,12 @@ class _PetListViewState extends State<PetListView> {
       child: Scaffold(
         body: Column(
           children: <Widget>[
-            CommonAppBar(title: Preferences.getUser.type == ConstantHelper.USER_TYPE_VET_ID? AppStrings.petsAssigned : AppStrings.petsList),
+            CommonAppBar(
+              title: Preferences.getUser.type == ConstantHelper.USER_TYPE_VET_ID
+                  ? AppStrings.petsAssigned
+                  : AppStrings.petsList,
+              showHeader: true,
+            ),
             Expanded(child: PetListContent()),
           ],
         ),
