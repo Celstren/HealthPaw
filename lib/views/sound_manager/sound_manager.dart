@@ -25,8 +25,7 @@ class _SoundManagerViewState extends State<SoundManagerView> {
         } else {
           appDocDirectory = await getExternalStorageDirectory();
         }
-
-        // can add extension like ".mp4" ".wav" ".m4a" ".aac"
+        
         customPath = appDocDirectory.path;
         return customPath;
       } else {

@@ -110,7 +110,7 @@ class _RecordAudioContentState extends State<RecordAudioContent> {
   _init() async {
     try {
       if (await FlutterAudioRecorder.hasPermissions) {
-        String fileNamePath = widget.customPath + ConstantHelper.AUDIO_DEFAULT_NAME + DateTime.now().millisecondsSinceEpoch.toString();
+        String fileNamePath = widget.customPath + ConstantHelper.AUDIO_DEFAULT_NAME + DateTime.now().millisecondsSinceEpoch.toString() + ".mp4";
 
         // .wav <---> AudioFormat.WAV
         // .mp4 .m4a .aac <---> AudioFormat.AAC
