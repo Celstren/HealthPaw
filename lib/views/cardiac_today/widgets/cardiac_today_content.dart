@@ -19,7 +19,7 @@ class _CardiacTodayContentState extends State<CardiacTodayContent> {
   @override
   Widget build(BuildContext context) {
 
-    if(widget.pet.heartRate.isEmpty){
+    if(widget.pet.heartRate.isEmpty ?? true){
       showCustomDialog(
         context: context,
         child: CustomDialog(
