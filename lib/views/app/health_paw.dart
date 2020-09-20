@@ -33,23 +33,20 @@ class _HealthPawAppState extends State<HealthPawApp> {
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
     if (mounted) {
-      setState(() {
-        view = SoundManagerView();
-      });
+      User user = Preferences.getUser;
+      if (mounted) {
+        if (user != null) {
+          await UserService.updateUserLocalData;
+          setState(() {
+            view = MainMenuView();
+          });
+        } else {
+          setState(() {
+            view = LoginView();
+          });
+        }
+      }
     }
-    // User user = Preferences.getUser;
-    // if (mounted) {
-    //   if (user != null) {
-    //     await UserService.updateUserLocalData;
-    //     setState(() {
-    //       view = MainMenuView();
-    //     });
-    //   } else {
-    //     setState(() {
-    //       view = LoginView();
-    //     });
-    //   }
-    // }
   }
 
   @override
