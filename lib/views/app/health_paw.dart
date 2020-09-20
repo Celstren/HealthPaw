@@ -5,7 +5,6 @@ import 'package:HealthPaw/models/user/user.dart';
 import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/views/auth/login/login.dart';
 import 'package:HealthPaw/views/main_menu/main_menu.dart';
-import 'package:HealthPaw/views/sound_manager/sound_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

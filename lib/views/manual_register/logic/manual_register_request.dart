@@ -24,7 +24,7 @@ class ManualRegisterRequest {
               onPress: () {
                 /*Navigator.pop(context);
                 Navigator.pop(context);*/
-                NavigationMethods.of(context).navigateReplacement(MainMenuView());
+                NavigationMethods.of(context).navigateAndRemoveUntil(MainMenuView());
               },
             ),
           ),

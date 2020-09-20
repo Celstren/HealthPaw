@@ -14,7 +14,6 @@ import 'package:HealthPaw/views/pet_overview/pet_overview.dart';
 import 'package:HealthPaw/views/physical_activity_history/physical_activity_history.dart';
 import 'package:HealthPaw/views/physical_activity_today/physical_activity_today.dart';
 import 'package:HealthPaw/views/sound_history/sound_history.dart';
-import 'package:HealthPaw/views/sound_manager/sound_manager.dart';
 import 'package:HealthPaw/views/sound_today/sound_today.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
