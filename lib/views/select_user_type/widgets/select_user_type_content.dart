@@ -51,6 +51,18 @@ class _SelectUserTypeContentState extends State<SelectUserTypeContent> {
               },
               icon: Icon(Icons.person, size: 30, color: AppColors.PrimaryBlack),
             ),
+            CircularButton(
+              size: 80,
+              label: AppStrings.administrator,
+              onPress: () {
+                if (widget.selectType == SelectType.Register) {
+                  NavigationMethods.of(context).navigateTo(ManualRegisterView(userType: UserType.Admin));
+                } else {
+                  NavigationMethods.of(context).navigateTo(UserListView(userType: UserType.Admin));
+                }
+              },
+              icon: Icon(Icons.face, size: 30, color: AppColors.PrimaryBlack),
+            ),
           ],
         ))
       ],

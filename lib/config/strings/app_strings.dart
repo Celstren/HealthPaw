@@ -91,6 +91,7 @@ class AppStrings {
   static final String users                             = AppConfig.commonStringsJson["Users"] ?? "";
   static final String vets                              = AppConfig.commonStringsJson["Vets"] ?? "";
   static final String registerVet                       = AppConfig.commonStringsJson["RegisterVet"] ?? "";
+  static final String registerAdmin                       = AppConfig.commonStringsJson["RegisterAdmin"] ?? "";
   static final String lastnames                         = AppConfig.commonStringsJson["Lastnames"] ?? "";
   static final String password2                         = AppConfig.commonStringsJson["Password2"] ?? "";
   static final String mobileNumber                      = AppConfig.commonStringsJson["MobileNumber"] ?? "";
@@ -108,6 +109,7 @@ class AppStrings {
   static final String locatePet                         = AppConfig.commonStringsJson["LocatePet"] ?? "";
   static final String sendMessage                       = AppConfig.commonStringsJson["SendMessage"] ?? "";
   static final String sendNotification                  = AppConfig.commonStringsJson["SendNotification"] ?? "";
+  static final String reportStatus                      = AppConfig.commonStringsJson["ReportStatus"] ?? "";
   static final String petsAssigned                      = AppConfig.commonStringsJson["PetsAssigned"] ?? "";
   static final String beatsPerMinuteUnits               = AppConfig.commonStringsJson["BeatsPerMinuteUnits"] ?? "";
   static final String breathsPerMinuteUnits             = AppConfig.commonStringsJson["BreathsPerMinuteUnits"] ?? "";
@@ -124,6 +126,7 @@ class AppStrings {
   static final String seconds                           = AppConfig.commonStringsJson["Seconds"] ?? "";
   static final String minutes                           = AppConfig.commonStringsJson["Minutes"] ?? "";
   static final String hour                              = AppConfig.commonStringsJson["Hour"] ?? "";
+  static final String successfulReport                = AppConfig.commonStringsJson["SuccessfulReport"] ?? "";
   static final String successfulRegister                = AppConfig.commonStringsJson["SuccessfulRegister"] ?? "";
   static final String successfulLogin                   = AppConfig.commonStringsJson["SuccessfulLogin"] ?? "";
   static final String failedLogin                       = AppConfig.commonStringsJson["FailedLogin"] ?? "";
@@ -171,4 +174,5 @@ class AppStrings {
   static final String todayHearthRate                   = AppConfig.commonStringsJson["TodayHearthRate"] ?? "";
   static final String soundHistory                      = AppConfig.commonStringsJson["SoundHistory"] ?? "";
   static final String environmentalTemperatureHistory   = AppConfig.commonStringsJson["EnvironmentalTemperatureHistory"] ?? "";
+  static final String noDataChartMessage                = AppConfig.commonStringsJson["NoDataChartMessage"] ?? "";
 }

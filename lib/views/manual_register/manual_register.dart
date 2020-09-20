@@ -29,7 +29,7 @@ class _ManualRegisterViewState extends State<ManualRegisterView> {
       body: Stack(
         children: <Widget>[
           ManualRegisterContent(userType: widget.userType),
-          CommonAppBar(title: widget.userType == UserType.Owner ? AppStrings.registerOwner : AppStrings.registerVet),
+          CommonAppBar(title: widget.userType == UserType.Owner ? AppStrings.registerOwner : (widget.userType == UserType.Vet ? AppStrings.registerVet : AppStrings.registerAdmin)),
         ],
       ),
       backgroundColor: AppColors.PrimaryWhite,

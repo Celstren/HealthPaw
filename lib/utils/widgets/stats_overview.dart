@@ -227,7 +227,8 @@ class _StatsOverviewState extends State<StatsOverview> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               _buildPeriodButton(PositionOrientation.Start, PeriodType.Seconds),
-              _buildPeriodButton(PositionOrientation.Middle, PeriodType.Minutes),
+              _buildPeriodButton(
+                  PositionOrientation.Middle, PeriodType.Minutes),
               _buildPeriodButton(PositionOrientation.End, PeriodType.Hours),
             ],
           ),
@@ -317,65 +318,76 @@ class _StatsOverviewState extends State<StatsOverview> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 330,
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 80,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+    return widget.stadistic == null || widget.stadistic.history.isEmpty
+        ? SizedBox(
+            height: 300,
+            width: 400,
+            child: Center(
+              child: Text(
+                AppStrings.noDataChartMessage,
+                style: AppTextStyle.blackStyle(fontSize: 20),
+              ),
+            ),
+          )
+        : SizedBox(
+            width: 330,
+            child: Column(
               children: <Widget>[
-                SizedBox(height: 70, width: 100, child: _iconStat),
-                SizedBox(width: 10),
                 SizedBox(
                   height: 80,
-                  width: 140,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      ConstrainedBox(
-                        constraints: BoxConstraints(maxWidth: 140),
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 10),
-                          child: AutoSizeText(
-                            "$lastValue ${widget.metricUnit}",
-                            maxLines: 1,
-                            style: AppTextStyle.blackStyle(
-                              fontSize: 36,
-                              fontFamily: AppFonts.Montserrat_Bold,
+                      SizedBox(height: 70, width: 100, child: _iconStat),
+                      SizedBox(width: 10),
+                      SizedBox(
+                        height: 80,
+                        width: 140,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            ConstrainedBox(
+                              constraints: BoxConstraints(maxWidth: 140),
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 10),
+                                child: AutoSizeText(
+                                  "$lastValue ${widget.metricUnit}",
+                                  maxLines: 1,
+                                  style: AppTextStyle.blackStyle(
+                                    fontSize: 36,
+                                    fontFamily: AppFonts.Montserrat_Bold,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
+                SizedBox(height: 10),
+                widget.units != null && widget.units.isNotEmpty
+                    ? _buildRuleMetric()
+                    : SizedBox(),
+                SizedBox(height: 20),
+                Center(
+                  child: Text(
+                    widget.subtitle,
+                    style: AppTextStyle.blackStyle(
+                      fontSize: AppFontSizes.subitle18,
+                      fontFamily: AppFonts.Montserrat_Bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                widget.reduceData
+                    ? _buildShortStadisctics()
+                    : _buildGraphStadistics(),
               ],
             ),
-          ),
-          SizedBox(height: 10),
-          widget.units != null && widget.units.isNotEmpty
-              ? _buildRuleMetric()
-              : SizedBox(),
-          SizedBox(height: 20),
-          Center(
-            child: Text(
-              widget.subtitle,
-              style: AppTextStyle.blackStyle(
-                fontSize: AppFontSizes.subitle18,
-                fontFamily: AppFonts.Montserrat_Bold,
-              ),
-            ),
-          ),
-          SizedBox(height: 20),
-          widget.reduceData
-              ? _buildShortStadisctics()
-              : _buildGraphStadistics(),
-        ],
-      ),
-    );
+          );
   }
 }

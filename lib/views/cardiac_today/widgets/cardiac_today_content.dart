@@ -23,7 +23,7 @@ class _CardiacTodayContentState extends State<CardiacTodayContent> {
         child: Column(
           children: <Widget>[
             SizedBox(height: 20),
-            PetAvatar(name: widget.pet.namevar),
+            PetAvatar(name: widget.pet?.namevar ?? ""),
             SizedBox(height: 10),
             StatsOverview(
               stadistic: widget.pet.heartRate,
