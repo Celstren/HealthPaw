@@ -47,4 +47,19 @@ class PetService {
     }
     return false;
   }
+
+  static Future<bool> reportStatus(String id, num breathFrecuency, num cardiacFrequency) async {
+    try {
+      Response response = await dioClient.put("pet/stadistics/$id", data: {
+        "breathingFrequency": breathFrecuency,
+        "heartRate": cardiacFrequency,
+        "sound":0,
+        "temperature":0
+      });
+      return response.statusCode == 200;
+    } catch (e) {
+      print(e);
+    }
+    return false;
+  }
 }

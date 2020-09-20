@@ -130,7 +130,7 @@ class _LoginContentState extends State<LoginContent> {
         controller: controller,
         inputFormatters: inputFormatters,
         onChanged: onChanged,
-        onSubmitted: (value) => _submit(),
+        // onSubmitted: (value) => _submit(),
         obscureText: obscureText,
         backgroundColor: AppColors.PrimaryLightBlue,
         hint: hint,

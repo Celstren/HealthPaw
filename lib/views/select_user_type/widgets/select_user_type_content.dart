@@ -67,8 +67,8 @@ class _SelectUserTypeContentState extends State<SelectUserTypeContent> {
                       .navigateTo(UserListView(userType: UserType.Admin));
                 }
               },
-              icon: Icon(Icons.person, size: 30, color: AppColors.PrimaryBlack),
-            )
+              icon: Icon(Icons.face, size: 30, color: AppColors.PrimaryBlack),
+            ),
           ],
         ))
       ],
