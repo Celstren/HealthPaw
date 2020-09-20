@@ -38,6 +38,7 @@ dependencies:
   flutter_blue: "^0.7.2"
   path_provider: "^1.6.14"
   audioplayers: "^0.16.1"
+  connectivity: ^0.4.9+2
 
 dev_dependencies:
   flutter_test:

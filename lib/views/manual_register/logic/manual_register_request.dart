@@ -11,7 +11,6 @@ class ManualRegisterRequest {
   static void createUserRequest(BuildContext context, User user) async {
     bool success =
           await UserService.addUser(user);
-    Navigator.pop(context);
       if (success) {
         showCustomDialog(
           context: context,
@@ -27,18 +26,6 @@ class ManualRegisterRequest {
                 Navigator.pop(context);*/
                 NavigationMethods.of(context).navigateReplacement(MainMenuView());
               },
-            ),
-          ),
-        );
-      } else {
-        showCustomDialog(
-          context: context,
-          child: CustomDialog(
-            backgroundColor: Colors.transparent,
-            child: OkDialog(
-              title: AppStrings.failedRegister,
-              okText: AppStrings.close,
-              onPress: () => Navigator.pop(context),
             ),
           ),
         );

@@ -204,6 +204,8 @@
     "HistorySound": "Historial Sonido",
     "ViewTemperature": "Visualizar Temperatura",
     "HistoryTemperature": "Historial Temperatura",
-    
+
+    "NoDataChartMessage": "No existen datos para la mascota",
+
     "Ok": "Ok"
 }

@@ -9,7 +9,6 @@ import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:HealthPaw/utils/widgets/app_text_field.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
-import 'package:HealthPaw/utils/widgets/loading_screen.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
@@ -59,32 +58,12 @@ class _PetInfoContentState extends State<PetInfoContent> {
     );
   }
 
-  void showModifyFailDialog() {
-    showCustomDialog(
-      context: context,
-      child: CustomDialog(
-        backgroundColor: Colors.transparent,
-        child: OkDialog(
-          title: widget.pet != null
-              ? AppStrings.failedModify
-              : AppStrings.failedRegister,
-          okText: AppStrings.close,
-          onPress: () => Navigator.pop(context),
-        ),
-      ),
-    );
-  }
-
   void _submit() async {
     if (validatedPetName && validatedBirthDay) {
-      displayLoadingScreen(context);
       if (widget.pet != null) {
         bool success = await modifyPetRequest();
-        Navigator.pop(context);
         if (success) {
           showModifySuccessDialog();
-        } else {
-          showModifyFailDialog();
         }
         return;
       } else if (await createPetRequest()) {

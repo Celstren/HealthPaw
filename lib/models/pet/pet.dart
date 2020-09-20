@@ -50,12 +50,12 @@ class Pet {
         image: json["image"] ?? "",
         birthDay: DateTime.tryParse(json["birthDay"]),
         petType: json["petType"] ?? "",
-        alerts: json["alerts"] ?? "",
-        breathingFrequency: json["breathingFrequency"] != null ? Stadistic.fromJson(json["breathingFrequency"]) : [],
-        heartRate: json["heartRate"] != null ? Stadistic.fromJson(json["heartRate"]) : [],
-        sound: json["sound"] != null ? Stadistic.fromJson(json["sound"]) : [],
-        temperature: json["temperature"] != null ? Stadistic.fromJson(json["temperature"]) : [],
-        recommendations: json["recommendations"] ?? "",
+        alerts: json["alerts"] != null ? json["alerts"].map<Alert>((e) => Alert.fromJson(e)).toList() : null,
+        breathingFrequency: json["breathingFrequency"] != null  && json["breathingFrequency"] is Map? Stadistic.fromJson(json["breathingFrequency"]) : null,
+        heartRate: json["heartRate"] != null  && json["heartRate"] is Map? Stadistic.fromJson(json["heartRate"]) : null,
+        sound: json["sound"] != null && json["sound"] is Map? Stadistic.fromJson(json["sound"]) : null,
+        temperature: json["temperature"] != null && json["temperature"] is Map? Stadistic.fromJson(json["temperature"]) : null,
+        recommendations: json["recommendations"] != null && json["recommendations"] is Map? json["recommendations"].map<Recommendation>((e) => Recommendation.fromJson(e)).toList() : null,
       );
 
   Map<String, dynamic> toJson() => {

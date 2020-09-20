@@ -3,6 +3,7 @@ import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/circular_button.dart';
+import 'package:HealthPaw/utils/widgets/global_dialogs.dart';
 import 'package:HealthPaw/views/breath_history/breath_history.dart';
 import 'package:HealthPaw/views/breath_today/breath_today.dart';
 import 'package:HealthPaw/views/cardiac_history/cardiac_history.dart';
@@ -15,6 +16,7 @@ import 'package:HealthPaw/views/physical_activity_today/physical_activity_today.
 import 'package:HealthPaw/views/sound_history/sound_history.dart';
 import 'package:HealthPaw/views/sound_manager/sound_manager.dart';
 import 'package:HealthPaw/views/sound_today/sound_today.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 
 class PetStatusContent extends StatefulWidget {
@@ -28,6 +30,15 @@ class PetStatusContent extends StatefulWidget {
 class _PetStatusContentState extends State<PetStatusContent> {
   double divisionSize = 30;
 
+  void validateRedirection(Widget widget) async {
+    ConnectivityResult connectivity = await (Connectivity().checkConnectivity());
+    if(connectivity != ConnectivityResult.none) {
+      NavigationMethods.of(context).navigateTo(widget);
+    } else {
+      GlobalDialogs.displayConnectionError();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -38,7 +49,7 @@ class _PetStatusContentState extends State<PetStatusContent> {
             SizedBox(height: divisionSize),
             CircularButton(
               size: 80,
-              onPress: () => NavigationMethods.of(context).navigateTo(PetOverviewView(pet: widget.pet)),
+              onPress: () => validateRedirection(PetOverviewView(pet: widget.pet)),
               label: AppStrings.viewOverview,
               icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
             ),
@@ -48,14 +59,14 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => NavigationMethods.of(context).navigateTo(CardiacTodayView(pet: widget.pet)),
+                  onPress: () => validateRedirection(CardiacTodayView(pet: widget.pet)),
                   label: AppStrings.viewHearthRate,
                   icon: Icon(Icons.favorite,
                       size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => NavigationMethods.of(context).navigateTo(CardiacHistoryView(pet: widget.pet)),
+                  onPress: () => validateRedirection(CardiacHistoryView(pet: widget.pet)),
                   label: AppStrings.historyHearthRate,
                   icon: Icon(Icons.favorite,
                       size: 30, color: AppColors.PrimaryBlack),
@@ -68,14 +79,14 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => NavigationMethods.of(context).navigateTo(BreathTodayView(pet: widget.pet)),
+                  onPress: () => validateRedirection(BreathTodayView(pet: widget.pet)),
                   label: AppStrings.viewBreathRate,
                   icon: Icon(Icons.timer,
                       size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => NavigationMethods.of(context).navigateTo(BreathHistoryView(pet: widget.pet)),
+                  onPress: () => validateRedirection(BreathHistoryView(pet: widget.pet)),
                   label: AppStrings.historyBreathRate,
                   icon: Icon(Icons.timer,
                       size: 30, color: AppColors.PrimaryBlack),
@@ -88,14 +99,14 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => NavigationMethods.of(context).navigateTo(PhysicalActivityTodayView(pet: widget.pet)),
+                  onPress: () => validateRedirection(PhysicalActivityTodayView(pet: widget.pet)),
                   label: AppStrings.viewPhysicalActivity,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => NavigationMethods.of(context).navigateTo(PhysicalActivityHistoryView(pet: widget.pet)),
+                  onPress: () => validateRedirection(PhysicalActivityHistoryView(pet: widget.pet)),
                   label: AppStrings.historyPhysicalActivity,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
@@ -108,14 +119,14 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => NavigationMethods.of(context).navigateTo(SoundTodayView(pet: widget.pet)),
+                  onPress: () => validateRedirection(SoundTodayView(pet: widget.pet)),
                   label: AppStrings.viewSound,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => NavigationMethods.of(context).navigateTo(SoundHistoryView(pet: widget.pet)),
+                  onPress: () => validateRedirection(SoundHistoryView(pet: widget.pet)),
                   label: AppStrings.historySound,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
@@ -128,27 +139,14 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => NavigationMethods.of(context).navigateTo(SoundManagerView()),
-                  label: AppStrings.sounds,
-                  icon:
-                      Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
-                ),
-              ],
-            ),
-            SizedBox(height: divisionSize),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                CircularButton(
-                  size: 80,
-                  onPress: () => NavigationMethods.of(context).navigateTo(EnvironmentTemperatureTodayView(pet: widget.pet)),
+                  onPress: () => validateRedirection(EnvironmentTemperatureTodayView(pet: widget.pet)),
                   label: AppStrings.viewTemperature,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => NavigationMethods.of(context).navigateTo(EnvironmentTemperatureHistoryView(pet: widget.pet)),
+                  onPress: () => validateRedirection(EnvironmentTemperatureHistoryView(pet: widget.pet)),
                   label: AppStrings.historyTemperature,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
