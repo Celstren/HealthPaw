@@ -9,8 +9,8 @@ class LoginForm {
   DateTime minDate = DateTime(DateTime.now().year - 100),
       maxDate = DateTime.now();
 
-  String get documentNumber => this.documentNumberController.value.text;
-  String get password => this.passwordController.value.text;
+  String get documentNumber => this.documentNumberController.value.text.trim();
+  String get password => this.passwordController.value.text.trim();
 
   bool validDocumentNumberValue = true;
   bool validPasswordValue = true;
