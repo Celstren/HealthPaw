@@ -22,19 +22,32 @@ class GlobalDialogs {
 
   static initContext(BuildContext context) => _context = context;
 
-  static displayConnectionError() {
+  static displayConnectionError(int statusCode) {
     if (_context != null) {
       showCustomDialog(
         context: _context,
         child: CustomDialog(
           backgroundColor: Colors.transparent,
           child: OkDialog(
-            title: AppStrings.connectionFailed,
+            title: _determinarMensajeRespuesta(statusCode),
             okText: AppStrings.close,
             onPress: () => Navigator.pop(_context),
           ),
         ),
       );
+    }
+  }
+
+  static String _determinarMensajeRespuesta(int statusCode) {
+    switch (statusCode) {
+      case 501:
+        return AppStrings.serviceFailure;
+      case 401:
+        return AppStrings.nonAuthorized;
+      case 201:
+        return AppStrings.successfulLogin;
+      default:
+        return AppStrings.noConectivity;
     }
   }
 
@@ -49,5 +62,4 @@ class GlobalDialogs {
       Navigator.pop(_context);
     }
   }
-
 }

@@ -30,11 +30,12 @@ class _PetStatusContentState extends State<PetStatusContent> {
   double divisionSize = 30;
 
   void validateRedirection(Widget widget) async {
-    ConnectivityResult connectivity = await (Connectivity().checkConnectivity());
-    if(connectivity != ConnectivityResult.none) {
+    ConnectivityResult connectivity =
+        await (Connectivity().checkConnectivity());
+    if (connectivity != ConnectivityResult.none) {
       NavigationMethods.of(context).navigateTo(widget);
     } else {
-      GlobalDialogs.displayConnectionError();
+      GlobalDialogs.displayConnectionError(0);
     }
   }
 
@@ -48,7 +49,8 @@ class _PetStatusContentState extends State<PetStatusContent> {
             SizedBox(height: divisionSize),
             CircularButton(
               size: 80,
-              onPress: () => validateRedirection(PetOverviewView(pet: widget.pet)),
+              onPress: () =>
+                  validateRedirection(PetOverviewView(pet: widget.pet)),
               label: AppStrings.viewOverview,
               icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
             ),
@@ -58,14 +60,16 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => validateRedirection(CardiacTodayView(pet: widget.pet)),
+                  onPress: () =>
+                      validateRedirection(CardiacTodayView(pet: widget.pet)),
                   label: AppStrings.viewHearthRate,
                   icon: Icon(Icons.favorite,
                       size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => validateRedirection(CardiacHistoryView(pet: widget.pet)),
+                  onPress: () =>
+                      validateRedirection(CardiacHistoryView(pet: widget.pet)),
                   label: AppStrings.historyHearthRate,
                   icon: Icon(Icons.favorite,
                       size: 30, color: AppColors.PrimaryBlack),
@@ -78,14 +82,16 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => validateRedirection(BreathTodayView(pet: widget.pet)),
+                  onPress: () =>
+                      validateRedirection(BreathTodayView(pet: widget.pet)),
                   label: AppStrings.viewBreathRate,
                   icon: Icon(Icons.timer,
                       size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => validateRedirection(BreathHistoryView(pet: widget.pet)),
+                  onPress: () =>
+                      validateRedirection(BreathHistoryView(pet: widget.pet)),
                   label: AppStrings.historyBreathRate,
                   icon: Icon(Icons.timer,
                       size: 30, color: AppColors.PrimaryBlack),
@@ -98,14 +104,16 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => validateRedirection(PhysicalActivityTodayView(pet: widget.pet)),
+                  onPress: () => validateRedirection(
+                      PhysicalActivityTodayView(pet: widget.pet)),
                   label: AppStrings.viewPhysicalActivity,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => validateRedirection(PhysicalActivityHistoryView(pet: widget.pet)),
+                  onPress: () => validateRedirection(
+                      PhysicalActivityHistoryView(pet: widget.pet)),
                   label: AppStrings.historyPhysicalActivity,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
@@ -118,17 +126,19 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => validateRedirection(SoundTodayView(pet: widget.pet)),
+                  onPress: () =>
+                      validateRedirection(SoundTodayView(pet: widget.pet)),
                   label: AppStrings.viewSound,
                   icon:
-                      Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
+                      Icon(Icons.music_note, size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => validateRedirection(SoundHistoryView(pet: widget.pet)),
+                  onPress: () =>
+                      validateRedirection(SoundHistoryView(pet: widget.pet)),
                   label: AppStrings.historySound,
                   icon:
-                      Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
+                      Icon(Icons.music_note, size: 30, color: AppColors.PrimaryBlack),
                 ),
               ],
             ),
@@ -138,14 +148,16 @@ class _PetStatusContentState extends State<PetStatusContent> {
               children: <Widget>[
                 CircularButton(
                   size: 80,
-                  onPress: () => validateRedirection(EnvironmentTemperatureTodayView(pet: widget.pet)),
+                  onPress: () => validateRedirection(
+                      EnvironmentTemperatureTodayView(pet: widget.pet)),
                   label: AppStrings.viewTemperature,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
                 ),
                 CircularButton(
                   size: 80,
-                  onPress: () => validateRedirection(EnvironmentTemperatureHistoryView(pet: widget.pet)),
+                  onPress: () => validateRedirection(
+                      EnvironmentTemperatureHistoryView(pet: widget.pet)),
                   label: AppStrings.historyTemperature,
                   icon:
                       Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
