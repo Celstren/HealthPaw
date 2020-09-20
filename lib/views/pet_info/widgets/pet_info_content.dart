@@ -9,11 +9,15 @@ import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:HealthPaw/utils/widgets/app_text_field.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
+import 'package:HealthPaw/utils/widgets/global_dialogs.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/views/main_menu/main_menu.dart';
+import 'package:HealthPaw/views/pet_info/widgets/pet_recommendation_item.dart';
+import 'package:HealthPaw/views/pet_status/pet_status.dart';
 import 'package:HealthPaw/views/select_pet_type/widgets/select_pet_type_content.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -56,6 +60,16 @@ class _PetInfoContentState extends State<PetInfoContent> {
         ),
       ),
     );
+  }
+
+  void validateRedirection(Widget widget) async {
+    ConnectivityResult connectivity =
+        await (Connectivity().checkConnectivity());
+    if (connectivity != ConnectivityResult.none) {
+      NavigationMethods.of(context).navigateTo(widget);
+    } else {
+      GlobalDialogs.displayConnectionError();
+    }
   }
 
   void _submit() async {
@@ -114,67 +128,162 @@ class _PetInfoContentState extends State<PetInfoContent> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          SizedBox(height: 20),
-          PetAvatar(),
-          SizedBox(height: 20),
-          AppSimpleTextField(
-              title: "${AppStrings.names}:",
-              controller: petNameController,
-              hint: AppStrings.enterName,
-              inputFormatters: [ LengthLimitingTextInputFormatter(30)],
-              errorMsg:
-                  "${AppStrings.theField} ${AppStrings.names} ${AppStrings.isInvalid}",
-              isValid: validatedPetNameValue,
-              onChanged: (value) {
-                if (!validatedPetNameValue) {
-                  setState(() {
-                    validatedPetNameValue = true;
-                  });
-                }
-              }),
-          SizedBox(height: 20),
-          AppDateTextField(
-            title: "${AppStrings.birthDay}:",
-            controller: birthDayController,
-            onSelected: (_date) {
-              setState(() {
-                birthDayController = _date;
-                validatedBirthDayValue = true;
-              });
-            },
-            hint: AppStrings.enterBirthday,
-            isValid: validatedBirthDayValue,
+      child: widget.pet != null ? _buildModifyPet() : _buildCreatePet(),
+    );
+  }
+
+  Widget _buildCreatePet() {
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 20),
+        PetAvatar(),
+        SizedBox(height: 20),
+        AppSimpleTextField(
+            title: "${AppStrings.names}:",
+            controller: petNameController,
+            hint: AppStrings.enterName,
+            inputFormatters: [LengthLimitingTextInputFormatter(30)],
             errorMsg:
-                "${AppStrings.theField} ${AppStrings.birthDay} ${AppStrings.isInvalid}",
+                "${AppStrings.theField} ${AppStrings.names} ${AppStrings.isInvalid}",
+            isValid: validatedPetNameValue,
+            onChanged: (value) {
+              if (!validatedPetNameValue) {
+                setState(() {
+                  validatedPetNameValue = true;
+                });
+              }
+            }),
+        SizedBox(height: 20),
+        AppDateTextField(
+          title: "${AppStrings.birthDay}:",
+          controller: birthDayController,
+          onSelected: (_date) {
+            setState(() {
+              birthDayController = _date;
+              validatedBirthDayValue = true;
+            });
+          },
+          hint: AppStrings.enterBirthday,
+          isValid: validatedBirthDayValue,
+          errorMsg:
+              "${AppStrings.theField} ${AppStrings.birthDay} ${AppStrings.isInvalid}",
+        ),
+        SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RoundedButton(
+              text: AppStrings.register,
+              size: Size(150, 40),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              onPress: () => _submit(),
+            )
+          ],
+        ),
+        SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget _buildModifyPet() {
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 20),
+        PetAvatar(),
+        SizedBox(height: 20),
+        AppSimpleTextField(
+            title: "${AppStrings.names}:",
+            controller: petNameController,
+            hint: AppStrings.enterName,
+            inputFormatters: [LengthLimitingTextInputFormatter(30)],
+            errorMsg:
+                "${AppStrings.theField} ${AppStrings.names} ${AppStrings.isInvalid}",
+            isValid: validatedPetNameValue,
+            onChanged: (value) {
+              if (!validatedPetNameValue) {
+                setState(() {
+                  validatedPetNameValue = true;
+                });
+              }
+            }),
+        SizedBox(height: 20),
+        AppDateTextField(
+          title: "${AppStrings.birthDay}:",
+          controller: birthDayController,
+          onSelected: (_date) {
+            setState(() {
+              birthDayController = _date;
+              validatedBirthDayValue = true;
+            });
+          },
+          hint: AppStrings.enterBirthday,
+          isValid: validatedBirthDayValue,
+          errorMsg:
+              "${AppStrings.theField} ${AppStrings.birthDay} ${AppStrings.isInvalid}",
+        ),
+        SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            RoundedButton(
+              text: AppStrings.modify,
+              size: Size(150, 40),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              onPress: () => _submit(),
+            ),
+            RoundedButton(
+              text: AppStrings.deactivate,
+              size: Size(150, 40),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              onPress: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+        SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            RoundedButton(
+              text: AppStrings.status,
+              size: Size(150, 40),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              onPress: () {
+                validateRedirection(PetStatusView(pet: widget.pet));
+              },
+            ),
+            RoundedButton(
+              text: AppStrings.sendStatusRecord,
+              size: Size(150, 40),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              onPress: () => validateRedirection(PetStatusView()),
+            ),
+          ],
+        ),
+        widget.pet?.recommendations != null &&
+                widget.pet.recommendations.isNotEmpty
+            ? _buildRecommendations()
+            : SizedBox(),
+      ],
+    );
+  }
+
+  Widget _buildRecommendations() {
+    return Column(
+      children: [
+        SizedBox(
+          height: 60,
+          child: Center(
+            child: Text(
+              AppStrings.recommendations,
+              style: AppTextStyle.blackStyle(fontSize: AppFontSizes.title18),
+            ),
           ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: widget.pet != null ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.center,
-            children: <Widget>[
-              RoundedButton(
-                text: widget.pet != null
-                    ? AppStrings.modify
-                    : AppStrings.register,
-                size: Size(150, 40),
-                style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-                onPress: () => _submit(),
-              ),
-              widget.pet != null
-                  ? RoundedButton(
-                      text: AppStrings.deactivate,
-                      size: Size(150, 40),
-                      style: AppTextStyle.whiteStyle(
-                          fontSize: AppFontSizes.title18),
-                      onPress: () => Navigator.pop(context),
-                    )
-                  : SizedBox(),
-            ],
-          ),
-          SizedBox(height: 40),
-        ],
-      ),
+        ),
+        Column(
+            children: widget.pet.recommendations
+                .map((e) => PetRecommendationItem(recommendation: e))
+                .toList()),
+      ],
     );
   }
 }

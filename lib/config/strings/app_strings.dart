@@ -109,6 +109,7 @@ class AppStrings {
   static final String locatePet                         = AppConfig.commonStringsJson["LocatePet"] ?? "";
   static final String sendMessage                       = AppConfig.commonStringsJson["SendMessage"] ?? "";
   static final String sendNotification                  = AppConfig.commonStringsJson["SendNotification"] ?? "";
+  static final String sendStatusRecord                  = AppConfig.commonStringsJson["SendStatusRecord"] ?? "";
   static final String petsAssigned                      = AppConfig.commonStringsJson["PetsAssigned"] ?? "";
   static final String beatsPerMinuteUnits               = AppConfig.commonStringsJson["BeatsPerMinuteUnits"] ?? "";
   static final String breathsPerMinuteUnits             = AppConfig.commonStringsJson["BreathsPerMinuteUnits"] ?? "";

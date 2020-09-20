@@ -8,7 +8,6 @@ import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/views/pet_info/pet_info.dart';
 import 'package:HealthPaw/views/pet_list/widgets/pet_dialog.dart';
-import 'package:HealthPaw/views/pet_status/pet_status.dart';
 import 'package:flutter/material.dart';
 
 class PetItem extends StatelessWidget {
@@ -22,14 +21,7 @@ class PetItem extends StatelessWidget {
     }
   }
 
-  void displayPetStatus(BuildContext context) async {
-    Pet petData = await PetService.getPet(pet.id);
-    if (petData != null) {
-      NavigationMethods.of(context).navigateTo(PetStatusView(pet: petData));
-    }
-  }
-
-  void showPetDialog(BuildContext context) {
+  void displayAddRecommendation(BuildContext context) {
     showCustomDialog(
         context: context,
         builder: (context) =>
@@ -59,7 +51,7 @@ class PetItem extends StatelessWidget {
         ],
       ),
       child: FlatButton(
-        onPressed: () => showPetDialog(context),
+        onPressed: () => displayAddRecommendation(context),
         child: Row(
           children: <Widget>[
             Padding(
@@ -67,14 +59,11 @@ class PetItem extends StatelessWidget {
               child: PetAvatar(size: 60),
             ),
             Expanded(
-              child: InkWell(
-                child: Text(
-                  pet?.namevar ?? "",
-                  style: AppTextStyle.blackStyle(
-                      fontSize: AppFontSizes.subitle18,
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: (){showPetDialog(context);},
+              child: Text(
+                pet?.namevar ?? "",
+                style: AppTextStyle.blackStyle(
+                    fontSize: AppFontSizes.subitle18,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ],
@@ -99,7 +88,7 @@ class PetItem extends StatelessWidget {
         ],
       ),
       child: FlatButton(
-        onPressed: () => displayPetStatus(context),
+        onPressed: () => displayPetData(context),
         child: Row(
           children: <Widget>[
             Padding(
@@ -107,15 +96,12 @@ class PetItem extends StatelessWidget {
               child: PetAvatar(size: 60),
             ),
             Expanded(
-              child: InkWell(
-                  child: Text(
-                    pet?.namevar ?? "",
-                      style: AppTextStyle.blackStyle(
-                        fontSize: AppFontSizes.subitle18,
-                        fontWeight: FontWeight.bold),
-                   ),
-                   onTap: (){showPetDialog(context);},
-                ),
+              child: Text(
+                pet?.namevar ?? "",
+                style: AppTextStyle.blackStyle(
+                    fontSize: AppFontSizes.subitle18,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             Container(
               height: 80,
@@ -123,12 +109,10 @@ class PetItem extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
               ),
-              child: FlatButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: () => displayPetData(context),
-                  child: Center(
-                      child: Icon(Icons.edit,
-                          size: 30, color: AppColors.PrimaryBlack))),
+              child: Center(
+                child:
+                    Icon(Icons.edit, size: 30, color: AppColors.PrimaryBlack),
+              ),
             )
           ],
         ),
