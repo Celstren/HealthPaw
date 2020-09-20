@@ -103,6 +103,7 @@
     "Vets": "Veterinarios",
 
     "RegisterVet": "Registrar Veterinario",
+    "RegisterAdmin": "Registrar Administrador",
     "Lastnames": "Apellidos",
     "Password2": "Contraseña2",
     "MobileNumber": "Celular",
@@ -126,6 +127,7 @@
 
     "SendMessage": "Enviar mensaje",
     "SendNotification": "Redactar notificación",
+    "ReportStatus": "Reportar estado",
 
     "PetsAssigned": "Mascotas asignadas",
 
@@ -149,6 +151,7 @@
     "Minutes": "Minutos",
     "Hour": "Horas",
 
+    "SuccessfulReport": "Reporte exitoso",
     "SuccessfulRegister": "Registro exitoso",
     "SuccessfulLogin": "Ingreso exitoso",
     "FailedRegister": "Registro fallido. Vuelva a intentar",

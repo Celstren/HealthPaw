@@ -126,6 +126,8 @@
 
     "SendMessage": "Send message",
     "SendNotification": "Send notification",
+    "ReportStatus": "Report status",
+
 
     "PetsAssigned": "Pets assigned",
 
@@ -149,6 +151,7 @@
     "Minutes": "Minutes",
     "Hour": "Hours",
 
+    "SuccessfulReport": "Successful Report",
     "SuccessfulRegister": "Successful Register",
     "SuccessfulLogin": "Successful Login",
     "FailedRegister": "Failed register. Try again",

@@ -28,17 +28,18 @@ class _HealthPawAppState extends State<HealthPawApp> {
     await AppConfig.setAppLanguage();
     await Preferences.initPrefs();
     User user = Preferences.getUser;
-    if (user != null) {
-      await UserService.updateUserLocalData;
-      setState(() {
-        view = MainMenuView();
-      });
-    } else {
-      setState(() {
-        view = LoginView();
-      });
+    if (mounted) {
+      if (user != null) {
+        await UserService.updateUserLocalData;
+        setState(() {
+          view = MainMenuView();
+        });
+      } else {
+        setState(() {
+          view = LoginView();
+        });
+      }
     }
-    
   }
 
   @override
