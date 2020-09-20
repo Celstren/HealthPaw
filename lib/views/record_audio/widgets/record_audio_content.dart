@@ -1,12 +1,14 @@
 import 'dart:async';
+import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/general/constant_helper.dart';
+import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_recorder/flutter_audio_recorder.dart';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:file/file.dart';
 import 'package:file/local.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hive/hive.dart';
 
 class RecordAudioContent extends StatefulWidget {
   final LocalFileSystem localFileSystem;
@@ -22,11 +24,18 @@ class _RecordAudioContentState extends State<RecordAudioContent> {
   FlutterAudioRecorder _recorder;
   Recording _current;
   RecordingStatus _currentStatus = RecordingStatus.Unset;
+  Box<List<String>> box;
 
   @override
   void initState() {
     super.initState();
     _init();
+  }
+
+  @override
+  void dispose() {
+    box?.close();
+    super.dispose();
   }
 
   @override
@@ -38,7 +47,27 @@ class _RecordAudioContentState extends State<RecordAudioContent> {
         child: new Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              new Row(
+              PetAvatar(),
+              _currentStatus == RecordingStatus.Stopped ? new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: new FlatButton(
+                      onPressed: _init,
+                      child: Text(AppStrings.createNewAudio, style: TextStyle(color: Colors.white)),
+                      color: Colors.lightBlue,
+                    ),
+                  ),
+                  _current?.path != null ? new FlatButton(
+                    onPressed: onPlayAudio,
+                    child:
+                        new Text("Play", style: TextStyle(color: Colors.white)),
+                    color: Colors.blueAccent.withOpacity(0.5),
+                  ) : SizedBox(),
+                ],
+              ) : SizedBox(),
+              _currentStatus != RecordingStatus.Stopped ? new Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
@@ -46,28 +75,10 @@ class _RecordAudioContentState extends State<RecordAudioContent> {
                     child: new FlatButton(
                       onPressed: () {
                         switch (_currentStatus) {
-                          case RecordingStatus.Initialized:
-                            {
-                              _start();
-                              break;
-                            }
-                          case RecordingStatus.Recording:
-                            {
-                              _pause();
-                              break;
-                            }
-                          case RecordingStatus.Paused:
-                            {
-                              _resume();
-                              break;
-                            }
-                          case RecordingStatus.Stopped:
-                            {
-                              _init();
-                              break;
-                            }
-                          default:
-                            break;
+                          case RecordingStatus.Initialized: _start(); break;
+                          case RecordingStatus.Recording: _pause(); break;
+                          case RecordingStatus.Paused: _resume(); break;
+                          default: break;
                         }
                       },
                       child: _buildText(_currentStatus),
@@ -84,38 +95,23 @@ class _RecordAudioContentState extends State<RecordAudioContent> {
                   SizedBox(
                     width: 8,
                   ),
-                  new FlatButton(
-                    onPressed: onPlayAudio,
-                    child:
-                        new Text("Play", style: TextStyle(color: Colors.white)),
-                    color: Colors.blueAccent.withOpacity(0.5),
-                  ),
                 ],
-              ),
-              new Text("Status : $_currentStatus"),
-              new Text('Avg Power: ${_current?.metering?.averagePower}'),
-              new Text('Peak Power: ${_current?.metering?.peakPower}'),
-              new Text("File path of the record: ${_current?.path}"),
-              new Text("Format: ${_current?.audioFormat}"),
-              new Text(
-                  "isMeteringEnabled: ${_current?.metering?.isMeteringEnabled}"),
-              new Text("Extension : ${_current?.extension}"),
-              new Text(
-                  "Audio recording duration : ${_current?.duration.toString()}")
+              ) : SizedBox(),
             ]),
       ),
     );
   }
 
   _init() async {
+    box = await Hive.openBox<List<String>>("audios");
     try {
       if (await FlutterAudioRecorder.hasPermissions) {
-        String fileNamePath = widget.customPath + ConstantHelper.AUDIO_DEFAULT_NAME + DateTime.now().millisecondsSinceEpoch.toString() + ".mp4";
+        String fileNamePath = widget.customPath + ConstantHelper.AUDIO_DEFAULT_NAME + DateTime.now().millisecondsSinceEpoch.toString();
 
         // .wav <---> AudioFormat.WAV
         // .mp4 .m4a .aac <---> AudioFormat.AAC
         // AudioFormat is optional, if given value, will overwrite path extension when there is conflicts.
-        _recorder = FlutterAudioRecorder(fileNamePath, audioFormat: AudioFormat.AAC);
+        _recorder = FlutterAudioRecorder(fileNamePath, audioFormat: AudioFormat.WAV);
 
         await _recorder.initialized;
         // after initialization
@@ -172,10 +168,11 @@ class _RecordAudioContentState extends State<RecordAudioContent> {
 
   _stop() async {
     var result = await _recorder.stop();
-    print("Stop recording: ${result.path}");
-    print("Stop recording: ${result.duration}");
-    File file = widget.localFileSystem.file(result.path);
-    print("File length: ${await file.length()}");
+    if (box != null) {
+      List<String> audios = box.get("audios", defaultValue: []);
+      audios.add(result.path);
+      box.put("audios", audios);
+    }
     setState(() {
       _current = result;
       _currentStatus = _current.status;
@@ -185,28 +182,10 @@ class _RecordAudioContentState extends State<RecordAudioContent> {
   Widget _buildText(RecordingStatus status) {
     var text = "";
     switch (_currentStatus) {
-      case RecordingStatus.Initialized:
-        {
-          text = 'Start';
-          break;
-        }
-      case RecordingStatus.Recording:
-        {
-          text = 'Pause';
-          break;
-        }
-      case RecordingStatus.Paused:
-        {
-          text = 'Resume';
-          break;
-        }
-      case RecordingStatus.Stopped:
-        {
-          text = 'Init';
-          break;
-        }
-      default:
-        break;
+      case RecordingStatus.Initialized: text = AppStrings.start; break;
+      case RecordingStatus.Recording: text =  AppStrings.pause; break;
+      case RecordingStatus.Paused: text =  AppStrings.resume; break;
+      default: break;
     }
     return Text(text, style: TextStyle(color: Colors.white));
   }
