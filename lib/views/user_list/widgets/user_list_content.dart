@@ -28,16 +28,32 @@ class _UserListContentState extends State<UserListContent> {
     if (users != null) {
       setState(() {
         isLoading = false;
-        if (widget.userType == UserType.Owner) {
-          _users = users
-              .where((element) =>
-                  element.type == ConstantHelper.USER_TYPE_OWNER_ID)
-              .toList();
-        } else if (widget.userType == UserType.Vet) {
-          _users = users
-              .where(
-                  (element) => element.type == ConstantHelper.USER_TYPE_VET_ID)
-              .toList();
+
+        switch (widget.userType) {
+          case UserType.Owner:
+            {
+              _users = users
+                  .where((element) =>
+                      element.type == ConstantHelper.USER_TYPE_OWNER_ID)
+                  .toList();
+            }
+            break;
+          case UserType.Vet:
+            {
+              _users = users
+                  .where((element) =>
+                      element.type == ConstantHelper.USER_TYPE_VET_ID)
+                  .toList();
+            }
+            break;
+          case UserType.Admin:
+            {
+              _users = users
+                  .where((element) =>
+                      element.type == ConstantHelper.USER_TYPE_ADMIN_ID)
+                  .toList();
+            }
+            break;
         }
       });
     }
@@ -45,9 +61,12 @@ class _UserListContentState extends State<UserListContent> {
 
   @override
   Widget build(BuildContext context) {
-    return !isLoading ? ListView.builder(
-        padding: EdgeInsets.only(top: 20, left: 30, right: 10),
-        itemCount: _users.length,
-        itemBuilder: (context, index) => UserItem(user: _users[index], userType: widget.userType)) : Center(child: CircularProgressIndicator());
+    return !isLoading
+        ? ListView.builder(
+            padding: EdgeInsets.only(top: 20, left: 30, right: 10),
+            itemCount: _users.length,
+            itemBuilder: (context, index) =>
+                UserItem(user: _users[index], userType: widget.userType))
+        : Center(child: CircularProgressIndicator());
   }
 }

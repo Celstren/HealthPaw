@@ -15,5 +15,5 @@ class BuildEnvironment<String> extends Enum<String> {
 
   /// TESTING
   static const TEST_API =
-      const BuildEnvironment('http://34.219.152.128:56511/api/');
+      const BuildEnvironment('http://54.149.206.203:57320/api/');
 }
