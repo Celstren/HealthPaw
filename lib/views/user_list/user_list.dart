@@ -13,14 +13,20 @@ class UserListView extends StatefulWidget {
 }
 
 class _UserListViewState extends State<UserListView> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Column(
           children: <Widget>[
-            CommonAppBar(title: widget.userType == UserType.Owner?  AppStrings.owners : AppStrings.vets),
+            CommonAppBar(
+              title: widget.userType == UserType.Owner
+                  ? AppStrings.owners
+                  : (widget.userType == UserType.Vet
+                      ? AppStrings.vets
+                      : AppStrings.administrator),
+              showHeader: true,
+            ),
             Expanded(child: UserListContent(userType: widget.userType)),
           ],
         ),

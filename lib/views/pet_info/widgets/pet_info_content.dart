@@ -47,7 +47,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
   bool get validatedBirthDay =>
       birthDayController != null && birthDayController.isBefore(DateTime.now());
 
-  void showModifySuccessDialog() {
+  void showModifySuccessDialog(bool debeVolverInicio) {
     showCustomDialog(
       context: context,
       child: CustomDialog(
@@ -57,8 +57,14 @@ class _PetInfoContentState extends State<PetInfoContent> {
               ? AppStrings.successfulModify
               : AppStrings.successfulRegister,
           okText: AppStrings.close,
-          onPress: () => NavigationMethods.of(context)
-              .navigateAndRemoveUntil(MainMenuView()),
+          onPress: () {
+            if (debeVolverInicio) {
+              NavigationMethods.of(context)
+                  .navigateAndRemoveUntil(MainMenuView());
+            } else {
+              Navigator.pop(context);
+            }
+          },
         ),
       ),
     );
@@ -79,12 +85,12 @@ class _PetInfoContentState extends State<PetInfoContent> {
       if (widget.pet != null) {
         bool success = await modifyPetRequest();
         if (success) {
-          showModifySuccessDialog();
+          showModifySuccessDialog(false);
         }
         return;
       } else if (await createPetRequest()) {
-        Navigator.pop(context);
-        showModifySuccessDialog();
+        showModifySuccessDialog(true);
+
         return;
       }
     } else {
