@@ -88,7 +88,7 @@ class History {
     double value;
 
     factory History.fromJson(Map<String, dynamic> json) => History(
-        timestamp: json["timestamp"] ?? 0,
+        timestamp: (json["timestamp"] ?? 0) * 1000,
         value: json["value"]?.toDouble() ?? 0,
     );
 
