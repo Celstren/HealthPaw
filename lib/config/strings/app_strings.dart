@@ -58,7 +58,6 @@ class AppStrings {
   static final String stop                              = AppConfig.commonStringsJson["Stop"] ?? "";
   static final String stopped                           = AppConfig.commonStringsJson["Stoppped"] ?? "";
   static final String play                              = AppConfig.commonStringsJson["Play"] ?? "";
-  static final String stop                              = AppConfig.commonStringsJson["Stop"] ?? "";
   static final String start                             = AppConfig.commonStringsJson["Start"] ?? "";
   static final String pause                             = AppConfig.commonStringsJson["Pause"] ?? "";
   static final String resume                            = AppConfig.commonStringsJson["Resume"] ?? "";
