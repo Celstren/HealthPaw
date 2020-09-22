@@ -33,13 +33,13 @@ class _OkDialogState extends State<OkDialog> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              widget.title != null && widget.title.isNotEmpty? Text(
                 widget.title,
                 style: AppTextStyle.blackStyle(
                     fontSize: AppFontSizes.title18,
                     fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
-              ),
+              ) : SizedBox(),
               SizedBox(height: 20),
               RoundedButton(
                 text: widget.okText,

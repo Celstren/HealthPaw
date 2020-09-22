@@ -51,11 +51,17 @@
     "Terms&ConditionsLabel": "Al continuar, estás aceptando nuestros Términos y Condiciones",
 
     "DefaultSound": "Sonido Predeterminado",
+    "DefaultSounds": "Sonidos predeterminado",
+    "SavedSounds": "Sonidos guardados",
     "PlayingSound": "Reproduciendo Sonido",
     "StopPlaying": "Dejar de reproducir",
     "Play": "Reproducir",
     "Stop": "Detener",
     "Stopped": "Detenido",
+    "Start": "Iniciar",
+    "Pause": "Pausar",
+    "Resume": "Continuar",
+    "CreateNewAudio": "Crear nuevo audio",
     "SendAudio": "Enviar audio",
     "SendVoiceNote": "Enviar nota de voz",
     "RecordVoiceNote": "Grabar nota de voz",
@@ -106,6 +112,7 @@
     "Vets": "Veterinarios",
 
     "RegisterVet": "Registrar Veterinario",
+    "RegisterAdmin": "Registrar Administrador",
     "Lastnames": "Apellidos",
     "Password2": "Contraseña2",
     "MobileNumber": "Celular",
@@ -129,6 +136,7 @@
 
     "SendMessage": "Enviar mensaje",
     "SendNotification": "Redactar notificación",
+    "ReportStatus": "Reportar estado",
 
     "PetsAssigned": "Mascotas asignadas",
 
@@ -152,6 +160,7 @@
     "Minutes": "Minutos",
     "Hour": "Horas",
 
+    "SuccessfulReport": "Reporte exitoso",
     "SuccessfulRegister": "Registro exitoso",
     "SuccessfulLogin": "Ingreso exitoso",
     "FailedRegister": "Registro fallido. Vuelva a intentar",
@@ -206,6 +215,8 @@
     "HistorySound": "Historial Sonido",
     "ViewTemperature": "Visualizar Temperatura",
     "HistoryTemperature": "Historial Temperatura",
-    
+
+    "NoDataChartMessage": "No existen datos para la mascota",
+
     "Ok": "Ok"
 }

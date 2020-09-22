@@ -51,11 +51,17 @@
     "Terms&ConditionsLabel": "By continuing, you agree to Terms & Conditions",
 
     "DefaultSound": "Default sound",
+    "DefaultSounds": "Default sounds",
+    "SavedSounds": "Default sound",
     "PlayingSound": "Playing sound",
     "StopPlaying": "Stop playing",
     "Play": "Play",
     "Stop": "Stop",
     "Stopped": "Stopped",
+    "Start": "Start",
+    "Pause": "Pause",
+    "Resume": "Resume",
+    "CreateNewAudio": "Create new audio",
     "SendAudio": "Send audio",
     "SendVoiceNote": "Send voice note",
     "RecordVoiceNote": "Record voice note",
@@ -129,6 +135,8 @@
 
     "SendMessage": "Send message",
     "SendNotification": "Send notification",
+    "ReportStatus": "Report status",
+
 
     "PetsAssigned": "Pets assigned",
 
@@ -152,6 +160,7 @@
     "Minutes": "Minutes",
     "Hour": "Hours",
 
+    "SuccessfulReport": "Successful Report",
     "SuccessfulRegister": "Successful Register",
     "SuccessfulLogin": "Successful Login",
     "FailedRegister": "Failed register. Try again",

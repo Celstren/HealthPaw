@@ -4,7 +4,6 @@ import 'package:HealthPaw/utils/general/constant_helper.dart';
 import 'package:HealthPaw/utils/general/constant_methods_helper.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:HealthPaw/utils/widgets/dropdown.dart';
-import 'package:HealthPaw/utils/widgets/loading_screen.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
 import 'package:HealthPaw/views/auth/register/logic/register_form.dart';
@@ -28,7 +27,6 @@ class _RegisterContentState extends State<RegisterContent> {
 
   void _submit() async {
     if (_registerForm.validForm) {
-      displayLoadingScreen(context);
       RegisterRequest.createUserRequest(context, _registerForm.result);
     } else {
       setState(() {

@@ -11,7 +11,6 @@ class RegisterRequest {
   static void createUserRequest(BuildContext context, User user) async {
     bool success =
           await AuthenticationService.registerUser(user);
-    Navigator.pop(context);
       if (success) {
         showCustomDialog(
           context: context,
@@ -23,18 +22,6 @@ class RegisterRequest {
               title: AppStrings.successfulRegister,
               okText: AppStrings.close,
               onPress: () => NavigationMethods.of(context).navigateAndRemoveUntil(MainMenuView()),
-            ),
-          ),
-        );
-      } else {
-        showCustomDialog(
-          context: context,
-          child: CustomDialog(
-            backgroundColor: Colors.transparent,
-            child: OkDialog(
-              title: AppStrings.failedRegister,
-              okText: AppStrings.close,
-              onPress: () => Navigator.pop(context),
             ),
           ),
         );

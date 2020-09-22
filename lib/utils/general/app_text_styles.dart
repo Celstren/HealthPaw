@@ -47,6 +47,50 @@ class AppTextStyle {
         decoration: decoration,
       );
 
+  static TextStyle greyStyle({
+    String fontFamily = AppFonts.Montserrat_Regular,
+    double fontSize = 16,
+    List<Shadow> shadows,
+    FontWeight fontWeight,
+    FontStyle fontStyle,
+    double letterSpacing,
+    double wordSpacing,
+    TextDecoration decoration,
+  }) =>
+      TextStyle(
+        color: AppColors.PrimaryGrey,
+        fontFamily: fontFamily,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        shadows: shadows,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+        decoration: decoration,
+      );
+
+  static TextStyle darkGreyStyle({
+    String fontFamily = AppFonts.Montserrat_Regular,
+    double fontSize = 16,
+    List<Shadow> shadows,
+    FontWeight fontWeight,
+    FontStyle fontStyle,
+    double letterSpacing,
+    double wordSpacing,
+    TextDecoration decoration,
+  }) =>
+      TextStyle(
+        color: AppColors.PrimaryDarkGrey,
+        fontFamily: fontFamily,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        shadows: shadows,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+        decoration: decoration,
+      );
+
   static TextStyle transparentStyle({
     String fontFamily = AppFonts.Montserrat_Regular,
     double fontSize = 16,

@@ -1,4 +1,3 @@
-import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
 import 'package:HealthPaw/models/pet/pet.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
@@ -6,12 +5,9 @@ import 'package:HealthPaw/services/pet/pet.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/general/constant_helper.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
-import 'package:HealthPaw/utils/widgets/loading_screen.dart';
-import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/views/pet_info/pet_info.dart';
 import 'package:HealthPaw/views/pet_list/widgets/pet_dialog.dart';
-import 'package:HealthPaw/views/pet_status/pet_status.dart';
 import 'package:flutter/material.dart';
 
 class PetItem extends StatelessWidget {
@@ -19,50 +15,17 @@ class PetItem extends StatelessWidget {
   const PetItem({Key key, this.pet}) : super(key: key);
 
   void displayPetData(BuildContext context) async {
-    displayLoadingScreen(context);
     Pet petData = await PetService.getPet(pet.id);
-    Navigator.pop(context);
     if (petData != null) {
       NavigationMethods.of(context).navigateTo(PetInfoView(pet: petData));
-    } else {
-      showCustomDialog(
-          context: context,
-          builder: (context) => CustomDialog(
-            child: OkDialog(
-              title: AppStrings.fetchPetFail,
-              okText: AppStrings.ok,
-              onPress: () => Navigator.pop(
-                    context,
-                  )),
-          ));
     }
   }
 
-  void displayPetStatus(BuildContext context) async {
-    displayLoadingScreen(context);
-    Pet petData = await PetService.getPet(pet.id);
-    Navigator.pop(context);
-    if (petData != null) {
-      NavigationMethods.of(context).navigateTo(PetStatusView(pet: petData));
-    } else {
-      showCustomDialog(
-          context: context,
-          builder: (context) => CustomDialog(
-            child: OkDialog(
-              title: AppStrings.fetchPetFail,
-              okText: AppStrings.ok,
-              onPress: () => Navigator.pop(
-                    context,
-                  )),
-          ));
-    }
-  }
-
-  void showPetDialog(BuildContext context) {
+  void displayAddRecommendation(BuildContext context) {
     showCustomDialog(
         context: context,
         builder: (context) =>
-            CustomDialog(child: PetDialog(petName: pet.namevar)));
+            CustomDialog(child: PetDialog(pet: pet)));
   }
 
   @override
@@ -88,7 +51,7 @@ class PetItem extends StatelessWidget {
         ],
       ),
       child: FlatButton(
-        onPressed: () => showPetDialog(context),
+        onPressed: () => displayAddRecommendation(context),
         child: Row(
           children: <Widget>[
             Padding(
@@ -125,7 +88,7 @@ class PetItem extends StatelessWidget {
         ],
       ),
       child: FlatButton(
-        onPressed: () => displayPetStatus(context),
+        onPressed: () => displayPetData(context),
         child: Row(
           children: <Widget>[
             Padding(
@@ -146,12 +109,10 @@ class PetItem extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
               ),
-              child: FlatButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: () => displayPetData(context),
-                  child: Center(
-                      child: Icon(Icons.edit,
-                          size: 30, color: AppColors.PrimaryBlack))),
+              child: Center(
+                child:
+                    Icon(Icons.edit, size: 30, color: AppColors.PrimaryBlack),
+              ),
             )
           ],
         ),

@@ -1,7 +1,6 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
-import 'package:HealthPaw/utils/widgets/loading_screen.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/utils/widgets/text_field_container.dart';
 import 'package:HealthPaw/views/auth/login/logic/login_form.dart';
@@ -23,7 +22,6 @@ class _LoginContentState extends State<LoginContent> {
 
   void _submit() async {
     if (_loginForm.validForm) {
-      displayLoadingScreen(context);
       LoginRequest.verifyUser(context, _loginForm.result);
     } else {
       setState(() {
@@ -132,7 +130,7 @@ class _LoginContentState extends State<LoginContent> {
         controller: controller,
         inputFormatters: inputFormatters,
         onChanged: onChanged,
-        onSubmitted: (value) => _submit(),
+        // onSubmitted: (value) => _submit(),
         obscureText: obscureText,
         backgroundColor: AppColors.PrimaryLightBlue,
         hint: hint,
