@@ -1,9 +1,13 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
+import 'package:HealthPaw/views/sync_wearable/logic/device_controller.dart';
 import 'package:HealthPaw/views/sync_wearable/widgets/sync_wearable_item.dart';
+import 'package:HealthPaw/views/sync_wearable/widgets/sync_wearable_report_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SyncWearableContent extends StatefulWidget {
   SyncWearableContent({Key key}) : super(key: key);
@@ -25,7 +29,9 @@ class _SyncWearableContentState extends State<SyncWearableContent> {
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.PrimaryBlack, width: 2.0),
         ),
-        child: Column(children: _buildItemList()),
+        child: SingleChildScrollView(
+          child: Column(children: _buildItemList()),
+        ),
       ),
     );
   }
@@ -35,6 +41,8 @@ class _SyncWearableContentState extends State<SyncWearableContent> {
     _children.add(_buildScanResultList());
     _children.add(_buildConnectionStatus());
     _children.add(_buildConnectionButton());
+    _children.add(SizedBox(height: 20));
+    _children.add(_buildReportButton());
     _children.add(SizedBox(height: 40));
     return _children;
   }
@@ -90,6 +98,23 @@ class _SyncWearableContentState extends State<SyncWearableContent> {
             },
           );
         });
+  }
+
+  Widget _buildReportButton() {
+    return RoundedButton(
+      text: AppStrings.reportStatusWithSensor,
+      size: Size(200, 50),
+      style: AppTextStyle.whiteStyle(
+          fontSize: AppFontSizes.text14,
+          fontFamily: AppFonts.Montserrat_Bold),
+      onPress: () {
+        if (DeviceController.isConnected) {
+          showCustomDialog(context: context, builder: (context) => CustomDialog(child: SyncWearableReportDialog()));
+        } else {
+          Fluttertoast.showToast(msg: "Por favor conecte el dispositivo primero");
+        }
+      },
+    );
   }
 
 }

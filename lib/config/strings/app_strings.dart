@@ -184,4 +184,12 @@ class AppStrings {
   static final String soundHistory                      = AppConfig.commonStringsJson["SoundHistory"] ?? "";
   static final String environmentalTemperatureHistory   = AppConfig.commonStringsJson["EnvironmentalTemperatureHistory"] ?? "";
   static final String noDataChartMessage                = AppConfig.commonStringsJson["NoDataChartMessage"] ?? "";
+  static final String waitUntilConnect                  = AppConfig.commonStringsJson["WaitUntilConnect"] ?? "";
+  static final String turnOffLed                        = AppConfig.commonStringsJson["TurnOffLed"] ?? "";
+  static final String turnOnLed                         = AppConfig.commonStringsJson["TurnOnLed"] ?? "";
+  static final String disconnect                        = AppConfig.commonStringsJson["Disconnect"] ?? "";
+  static final String connected                         = AppConfig.commonStringsJson["Connected"] ?? "";
+  static final String continueLabel                     = AppConfig.commonStringsJson["Continue"] ?? "";
+  static final String retry                             = AppConfig.commonStringsJson["Retry"] ?? "";
+  static final String reportStatusWithSensor            = AppConfig.commonStringsJson["ReportStatusWithSensor"] ?? "";
 }

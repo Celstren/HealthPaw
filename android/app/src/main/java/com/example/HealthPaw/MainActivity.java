@@ -27,9 +27,9 @@ import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.RouteManager;
 import com.mbientlab.metawear.UnsupportedModuleException;
 import com.mbientlab.metawear.data.CartesianFloat;
-import com.mbientlab.metawear.data.CartesianShort;
 import com.mbientlab.metawear.module.Bmi160Accelerometer;
 import com.mbientlab.metawear.module.Bmi160Gyro;
+import com.mbientlab.metawear.module.Temperature;
 import com.mbientlab.metawear.module.Led;
 import com.mbientlab.metawear.module.Logging;
 
@@ -41,20 +41,19 @@ import java.util.Map;
 public class MainActivity extends FlutterActivity implements ServiceConnection {
 
   // RESULT VARIABLES
-  private List<String> accelResults = new ArrayList<>();
-  private List<String> gyroResults = new ArrayList<>();
+  private List<Map<String, Float>> accelResults = new ArrayList<>();
+  private List<Map<String, Float>> gyroResults = new ArrayList<>();
 
   // METAWEAR VARIABLES
   private String MW_MAC_ADDRESS;
-  //private final String MW_MAC_ADDRESS= "F0:80:F6:C8:E0:75";
-  private boolean isConnected;
+  private boolean isConnected = false;
 
   // METAWEAR CONSTANTS
   private static final String TAG = "MetaWear";
   private static final float ACC_RANGE = 8.f, ACC_FREQ = 50.f;
   private static final String STREAM_KEY = "accel_stream";
-  private static final String LOG_KEY = "accel_log";
   private static final String GYRO_STREAM_KEY = "gyro_stream";
+  private static final String TEMP_STREAM_KEY = "temp_stream";
   private static final String CHANNEL = "com.example.HealthPaw/mbientlab";
 
   // METAWEAR OBJECTS
@@ -72,73 +71,79 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
           .setMethodCallHandler(
           (call, result) -> {
               // Note: this method is invoked on the main thread.
-          if (call.method.equals("getBatteryLevel")) {
-            int batteryLevel = getBatteryLevel();
-            if (batteryLevel != -1) {
-              result.success(batteryLevel);
-            } else {
-              result.error("UNAVAILABLE", "Battery level not available.", null);
-            }
-          } else if (call.method.equals("connectBoard")) {
-            String boardId = call.argument("boardId");
-            if (boardId != null) {
-              connectBoard(boardId);
-            } else {
-              Log.i(TAG, "Invalid board id");
-              result.success(false);
-            }
-          } else if (call.method.equals("disconnectBoard")) {
-            if (isConnected) {
-              disconnectBoard();
-              result.success(true);
-            } else {
-              Log.i(TAG, "Board is not connected");
-              result.success(false);
-            }
-          } else if (call.method.equals("turnOnLed")) {
-            int colorId = call.argument("colorId");
-            if (isConnected) {
-              turnOnLed(colorId);
-              result.success(null);
-            } else {
-              Log.i(TAG, "Board is not connected");
-            }
-          } else if (call.method.equals("turnOffLed")) {
-            if (isConnected) {
-              turnOffLed();
-              result.success(null);
-            } else {
-              Log.i(TAG, "Board is not connected");
-            }
-          } else if (call.method.equals("activateLogs")) {
-            if (isConnected) {
-              activateLogs();
-              result.success(true);
-            } else {
-              Log.i(TAG, "Board is not connected");
-              result.success(false);
-            }
-          } else if (call.method.equals("deactivateLogs")) {
-            if (isConnected) {
-              deactivateLogs();
-              Map<String, List<String>> logs = new HashMap<>();
-              logs.put("accelerometer", accelResults);
-              logs.put("gyroscope", gyroResults);
-              result.success(logs);
-            } else {
-              Log.i(TAG, "Board is not connected");
-              result.success(null);
-            }
-          } else if (call.method.equals("clearEntries")) {
-            if (isConnected) {
-              clearEntries();
-              result.success(null);
-            } else {
-              Log.i(TAG, "Board is not connected");
-              result.success(null);
-            }
-          } else {
-              result.notImplemented();
+            switch (call.method) {
+              case "getBatteryLevel":
+                int batteryLevel = getBatteryLevel();
+                if (batteryLevel != -1) {
+                  result.success(batteryLevel);
+                } else {
+                  result.error("UNAVAILABLE", "Battery level not available.", null);
+                }
+                break;
+              case "connectBoard":
+                String boardId = call.argument("boardId");
+                if (boardId != null) {
+                  connectBoard(boardId);
+                  result.success(true);
+                } else {
+                  Log.i(TAG, "Invalid board id");
+                  result.success(false);
+                }
+                break;
+              case "disconnectBoard":
+                if (isConnected) {
+                  disconnectBoard();
+                  result.success(true);
+                } else {
+                  Log.i(TAG, "Board is not connected");
+                  result.success(false);
+                }
+                break;
+              case "turnOnLed":
+                int colorId = call.argument("colorId");
+                if (isConnected) {
+                  turnOnLed(colorId);
+                  result.success(null);
+                } else {
+                  Log.i(TAG, "Board is not connected");
+                }
+                break;
+              case "turnOffLed":
+                if (isConnected) {
+                  turnOffLed();
+                  result.success(null);
+                } else {
+                  Log.i(TAG, "Board is not connected");
+                }
+                break;
+              case "activateLogs":
+                if (isConnected) {
+                  activateLogs();
+                  result.success(true);
+                } else {
+                  Log.i(TAG, "Board is not connected");
+                  result.success(false);
+                }
+                break;
+              case "deactivateLogs":
+                if (isConnected) {
+                  deactivateLogs();
+                  Map<String, List<Map<String, Float>>> logs = new HashMap<>();
+                  List<Map<String, Float>> _accelResults = new ArrayList<>(accelResults);
+                  List<Map<String, Float>> _gyroResults = new ArrayList<>(gyroResults);
+                  logs.put("accelerometer", _accelResults);
+                  logs.put("gyroscope", _gyroResults);
+                  result.success(logs);
+                } else {
+                  Log.i(TAG, "Board is not connected");
+                  result.success(null);
+                }
+                accelResults = new ArrayList<>();
+                gyroResults = new ArrayList<>();
+                break;
+              default:
+                result.notImplemented();
+                break;
             }
           }
       );
@@ -184,6 +189,7 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
 
   public void disconnectBoard() {
     Log.i(TAG, "Disconnecting board");
+    turnOffLed();
     mwBoard.disconnect();
   }
 
@@ -213,8 +219,6 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
   /// LOGS METHODS
 
   public void clearEntries() {
-    accelResults = new ArrayList<>();
-    gyroResults = new ArrayList<>();
     loggingModule.clearEntries();
   }
 
@@ -236,8 +240,11 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
           @Override
           public void process(Message msg) {
             final CartesianFloat axes = msg.getData(CartesianFloat.class);
-            Log.i(TAG, String.format("Accelerometer: %s", axes.toString()));
-            sensorMsg(String.format(axes.toString()), "accel");
+            final Map<String, Float> data = new HashMap<String, Float>();
+            data.put("x", axes.x());
+            data.put("y", axes.y());
+            data.put("z", axes.z());
+            accelResults.add(data);
           }
         });
       }
@@ -250,32 +257,16 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
           @Override
           public void process(Message msg) {
             final CartesianFloat spinData = msg.getData(CartesianFloat.class);
-            Log.i(TAG, String.format("Gyroscope: %s", spinData.toString()));
-            sensorMsg(String.format(spinData.toString()), "gyro");
+            final Map<String, Float> data = new HashMap<String, Float>();
+            data.put("x", spinData.x());
+            data.put("y", spinData.y());
+            data.put("z", spinData.z());
+            gyroResults.add(data);
           }
         });
       }
     });
 
-    accelModule.routeData()
-            .fromAxes().stream(STREAM_KEY)
-            .commit().onComplete(new AsyncOperation.CompletionHandler<RouteManager>() {
-      @Override
-      public void success(RouteManager result) {
-        result.setLogMessageHandler(LOG_KEY, new RouteManager.MessageHandler() {
-          @Override
-          public void process(Message msg) {
-            final CartesianShort axisData = msg.getData(CartesianShort.class);
-            Log.i(TAG, String.format("Log: %s", axisData.toString()));
-          }
-        });
-      }
-
-      @Override
-      public void failure(Throwable error) {
-        Log.e(TAG, "Error committing route", error);
-      }
-    });
     loggingModule.startLogging(true);
     accelModule.enableAxisSampling();
     accelModule.start();
@@ -295,6 +286,7 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
       }
     });
     Log.i(TAG, "Log size: " + loggingModule.getLogCapacity());
+    clearEntries();
   }
 
   /// MANAGE CONNECTION STATES
@@ -307,6 +299,7 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
         accelModule = mwBoard.getModule(Bmi160Accelerometer.class);
         gyroModule = mwBoard.getModule(Bmi160Gyro.class);
         loggingModule = mwBoard.getModule(Logging.class);
+        turnOnLed(0);
         Log.i(TAG, "Connected");
       } catch (UnsupportedModuleException e) {
         e.printStackTrace();
@@ -339,15 +332,19 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
 
   /// MANAGE MESSAGES FROM BOARD
 
-  public void sensorMsg(String msg, final String sensor) {
-    final String reading = msg;
+  public void sensorMsg(CartesianFloat cartesianFloat, final String sensor) {
+
+    final Map<String, Float> data = new HashMap<String, Float>();
+    data.put("x", cartesianFloat.x());
+    data.put("y", cartesianFloat.y());
+    data.put("z", cartesianFloat.z());
     runOnUiThread(new Runnable() {
       @Override
       public void run() {
-        if (sensor == "accel") {
-          accelResults.add(reading);
+        if (sensor.equals("accel")) {
+          accelResults.add(data);
         } else {
-          gyroResults.add(reading);
+          gyroResults.add(data);
         }
       }
     });

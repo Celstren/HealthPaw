@@ -100,6 +100,8 @@
     "SoundHistory": "Historial de intensidad de sonido",
     "EnvironmentalTemperatureHistory": "Historial de Temperatura Ambiente",
 
+    "WaitUntilConnect": "Presiona continuar cuando se encienda la luz led",
+
     "AssignOwner": "Asignar Dueño",
     "OwnerMail": "Correo Dueño",
     "OwnerAssigned": "Dueño asignados",
@@ -132,11 +134,19 @@
     "RegisterUsers": "Registrar Usuarios",
     "RegisterOwner": "Registrar Dueño",
 
+    "TurnOffLed": "Apagar led",
+    "TurnOnLed": "Encender led",
+    "Disconnect": "Desconectar",
+    "Connected": "Conectado",
+    "Continue": "Continuar",
+    "Retry": "Reintentar",
+
     "LocatePet": "Localizar mascota",
 
     "SendMessage": "Enviar mensaje",
     "SendNotification": "Redactar notificación",
     "ReportStatus": "Reportar estado",
+    "ReportStatusWithSensor": "Reportar estado con sensor",
 
     "PetsAssigned": "Mascotas asignadas",
 
