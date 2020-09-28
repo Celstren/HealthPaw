@@ -53,7 +53,7 @@ class _SyncWearableContentState extends State<SyncWearableContent> {
       stream: flutterBlue.scanResults,
       builder: (BuildContext context, AsyncSnapshot<List<ScanResult>> snapshot){
         return snapshot.hasData? Column(children: snapshot.data.map<Widget>((e) => SyncWearableItem(
-          scanResult: e, 
+          scanResult: e,
           enabled: (selectedDeviceId == null || selectedDeviceId == e.device.id.id),
           onConnected: (value) {
             setState(() {

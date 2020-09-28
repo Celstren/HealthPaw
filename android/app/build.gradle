@@ -54,6 +54,6 @@ flutter {
 }
 
 dependencies {
-    implementation 'com.mbientlab:metawear:2.4.0'
-    implementation 'com.mbientlab.bletoolbox:scanner:0.2.0'
+    implementation 'com.mbientlab:metawear:3.4.0'
+    implementation 'com.mbientlab.bletoolbox:scanner:0.2.3'
 }

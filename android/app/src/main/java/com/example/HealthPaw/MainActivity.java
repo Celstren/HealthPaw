@@ -1,5 +1,7 @@
 package com.example.HealthPaw;
 
+import bolts.Continuation;
+import bolts.Task;
 import io.flutter.embedding.android.FlutterActivity;
 import androidx.annotation.NonNull;
 import io.flutter.embedding.engine.FlutterEngine;
@@ -20,16 +22,18 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.mbientlab.metawear.AsyncOperation;
-import com.mbientlab.metawear.Message;
-import com.mbientlab.metawear.MetaWearBleService;
+import com.mbientlab.metawear.Data;
 import com.mbientlab.metawear.MetaWearBoard;
-import com.mbientlab.metawear.RouteManager;
-import com.mbientlab.metawear.UnsupportedModuleException;
-import com.mbientlab.metawear.data.CartesianFloat;
-import com.mbientlab.metawear.module.Bmi160Accelerometer;
-import com.mbientlab.metawear.module.Bmi160Gyro;
+import com.mbientlab.metawear.Route;
+import com.mbientlab.metawear.Subscriber;
+import com.mbientlab.metawear.android.BtleService;
+import com.mbientlab.metawear.builder.RouteBuilder;
+import com.mbientlab.metawear.builder.RouteComponent;
+import com.mbientlab.metawear.data.Acceleration;
+import com.mbientlab.metawear.module.Accelerometer;
 import com.mbientlab.metawear.module.Temperature;
+import com.mbientlab.metawear.module.Temperature.SensorType;
+import com.mbientlab.metawear.module.GyroBmi160;
 import com.mbientlab.metawear.module.Led;
 import com.mbientlab.metawear.module.Logging;
 
@@ -51,18 +55,17 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
   // METAWEAR CONSTANTS
   private static final String TAG = "MetaWear";
   private static final float ACC_RANGE = 8.f, ACC_FREQ = 50.f;
-  private static final String STREAM_KEY = "accel_stream";
-  private static final String GYRO_STREAM_KEY = "gyro_stream";
-  private static final String TEMP_STREAM_KEY = "temp_stream";
   private static final String CHANNEL = "com.example.HealthPaw/mbientlab";
 
   // METAWEAR OBJECTS
-  private MetaWearBleService.LocalBinder serviceBinder;
+  private BtleService.LocalBinder serviceBinder;
   private Led ledModule;
   private MetaWearBoard mwBoard;
-  private Bmi160Gyro gyroModule;
+  private GyroBmi160 gyroModule;
   private Logging loggingModule;
-  private Bmi160Accelerometer accelModule;
+  private Accelerometer accelerometer;
+  private Temperature temperature;
+  private Temperature.Sensor tempSensor;
 
   @Override
   public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
@@ -100,9 +103,8 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
                 }
                 break;
               case "turnOnLed":
-                int colorId = call.argument("colorId");
                 if (isConnected) {
-                  turnOnLed(colorId);
+                  turnOnLed();
                   result.success(null);
                 } else {
                   Log.i(TAG, "Board is not connected");
@@ -127,7 +129,6 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
                 break;
               case "deactivateLogs":
                 if (isConnected) {
-                  deactivateLogs();
                   Map<String, List<Map<String, Float>>> logs = new HashMap<>();
                   List<Map<String, Float>> _accelResults = new ArrayList<>(accelResults);
                   List<Map<String, Float>> _gyroResults = new ArrayList<>(gyroResults);
@@ -155,7 +156,7 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     ///< Bind the service when the activity is created
-    getApplicationContext().bindService(new Intent(this, MetaWearBleService.class),
+    getApplicationContext().bindService(new Intent(this, BtleService.class),
             this, Context.BIND_AUTO_CREATE);
   }
 
@@ -170,7 +171,7 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
 
   @Override
   public void onServiceConnected(ComponentName componentName, IBinder service) {
-    serviceBinder = (MetaWearBleService.LocalBinder) service;
+    serviceBinder = (BtleService.LocalBinder) service;
   }
 
   @Override
@@ -184,140 +185,64 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
     Log.i(TAG, String.format("Connecting to %s:", boardID));
     MW_MAC_ADDRESS = boardID;
     retrieveBoard();
-    mwBoard.connect();
   }
 
   public void disconnectBoard() {
     Log.i(TAG, "Disconnecting board");
     turnOffLed();
-    mwBoard.disconnect();
+    accelerometer.stop();
+    accelerometer.acceleration().stop();
+    mwBoard.tearDown();
   }
 
   /// LED METHODS
 
-  public void turnOnLed(int colorId) {
-    Led.ColorChannel ledColor;
-    if (colorId == 0) {
-      ledColor = Led.ColorChannel.RED;
-    } else if (colorId == 1) {
-      ledColor = Led.ColorChannel.BLUE;
-    } else {
-      ledColor = Led.ColorChannel.GREEN;
-    }
-    ledModule.configureColorChannel(ledColor)
-            .setRiseTime((short) 0).setPulseDuration((short) 1000)
-            .setRepeatCount((byte) -1).setHighTime((short) 500)
-            .setHighIntensity((byte) 16).setLowIntensity((byte) 16)
-            .commit();
-    ledModule.play(true);
+  public void turnOnLed() {
+    ledModule.editPattern(Led.Color.BLUE);
+    ledModule.play();
   }
 
   public void turnOffLed() {
     ledModule.stop(true);
   }
 
-  /// LOGS METHODS
-
-  public void clearEntries() {
-    loggingModule.clearEntries();
-  }
-
   public void activateLogs() {
-    accelModule.setOutputDataRate(ACC_FREQ);
-    accelModule.setAxisSamplingRange(ACC_RANGE);
-    gyroModule.configure()
-            .setOutputDataRate(Bmi160Gyro.OutputDataRate.ODR_50_HZ)
-            .setFullScaleRange(Bmi160Gyro.FullScaleRange.FSR_500)
-            .commit();
-
-    AsyncOperation<RouteManager> routeManagerResultAccel = accelModule.routeData().fromAxes().stream(STREAM_KEY).commit();
-    AsyncOperation<RouteManager> routeManagerResultGyro = gyroModule.routeData().fromAxes().stream(GYRO_STREAM_KEY).commit();
-
-    routeManagerResultAccel.onComplete(new AsyncOperation.CompletionHandler<RouteManager>() {
+    accelerometer.acceleration().addRouteAsync(new RouteBuilder() {
       @Override
-      public void success(RouteManager result) {
-        result.subscribe(STREAM_KEY, new RouteManager.MessageHandler() {
+      public void configure(RouteComponent source) {
+        source.stream(new Subscriber() {
           @Override
-          public void process(Message msg) {
-            final CartesianFloat axes = msg.getData(CartesianFloat.class);
-            final Map<String, Float> data = new HashMap<String, Float>();
-            data.put("x", axes.x());
-            data.put("y", axes.y());
-            data.put("z", axes.z());
-            accelResults.add(data);
+          public void apply(Data data, Object... env) {
+            Log.i("MainActivity", data.value(Acceleration.class).toString());
           }
         });
       }
-    });
-
-    routeManagerResultGyro.onComplete(new AsyncOperation.CompletionHandler<RouteManager>() {
+    }).continueWith(new Continuation<Route, Void>() {
       @Override
-      public void success(RouteManager result) {
-        result.subscribe(GYRO_STREAM_KEY, new RouteManager.MessageHandler() {
+      public Void then(Task<Route> task) throws Exception {
+        accelerometer.acceleration().start();
+        accelerometer.start();
+        return null;
+      }
+    });
+    tempSensor.addRouteAsync(new RouteBuilder() {
+      @Override
+      public void configure(RouteComponent source) {
+        source.stream(new Subscriber() {
           @Override
-          public void process(Message msg) {
-            final CartesianFloat spinData = msg.getData(CartesianFloat.class);
-            final Map<String, Float> data = new HashMap<String, Float>();
-            data.put("x", spinData.x());
-            data.put("y", spinData.y());
-            data.put("z", spinData.z());
-            gyroResults.add(data);
+          public void apply(Data data, Object ... env) {
+            Log.i("MainActivity", "Temperature (C) = " + data.value(Float.class).toString());
           }
         });
       }
-    });
-
-    loggingModule.startLogging(true);
-    accelModule.enableAxisSampling();
-    accelModule.start();
-    gyroModule.start();
-  }
-
-  public void deactivateLogs() {
-    loggingModule.stopLogging();
-    gyroModule.stop();
-    accelModule.disableAxisSampling();
-    accelModule.stop();
-    loggingModule.downloadLog(0.05f, new Logging.DownloadHandler() {
+    }).continueWith(new Continuation<Route, Void>() {
       @Override
-      public void onProgressUpdate(int nEntriesLeft, int totalEntries) {
-        Log.i(TAG, String.format("Progress= %d / %d", nEntriesLeft,
-                totalEntries));
+      public Void then(Task<Route> task) throws Exception {
+        tempSensor.read();
+        return null;
       }
     });
-    Log.i(TAG, "Log size: " + loggingModule.getLogCapacity());
-    clearEntries();
   }
-
-  /// MANAGE CONNECTION STATES
-
-  private final MetaWearBoard.ConnectionStateHandler stateHandler= new MetaWearBoard.ConnectionStateHandler() {
-    @Override
-    public void connected() {
-      try {
-        ledModule = mwBoard.getModule(Led.class);
-        accelModule = mwBoard.getModule(Bmi160Accelerometer.class);
-        gyroModule = mwBoard.getModule(Bmi160Gyro.class);
-        loggingModule = mwBoard.getModule(Logging.class);
-        turnOnLed(0);
-        Log.i(TAG, "Connected");
-      } catch (UnsupportedModuleException e) {
-        e.printStackTrace();
-      }
-      isConnected = true;
-    }
-
-    @Override
-    public void disconnected() {
-      isConnected = false;
-      Log.i(TAG, "Connected Lost");
-    }
-
-    @Override
-    public void failure(int status, Throwable error) {
-      Log.e(TAG, "Error connecting", error);
-    }
-  };
 
   /// SET CONNECTION TO SELECTED BOARD
 
@@ -326,28 +251,16 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
     final BluetoothDevice remoteDevice= btManager.getAdapter().getRemoteDevice(MW_MAC_ADDRESS);
 
     // Create a MetaWear board object for the Bluetooth Device
-    mwBoard= serviceBinder.getMetaWearBoard(remoteDevice);
-    mwBoard.setConnectionStateHandler(stateHandler);
-  }
+    mwBoard = serviceBinder.getMetaWearBoard(remoteDevice);
 
-  /// MANAGE MESSAGES FROM BOARD
+//    accelerometer = mwBoard.getModule(Accelerometer.class);
+//    accelerometer.configure()
+//            .odr(25f)       // Set sampling frequency to 25Hz, or closest valid ODR
+//            .commit();
+//    temperature = mwBoard.getModule(Temperature.class);
+//    tempSensor = temperature.findSensors(SensorType.PRESET_THERMISTOR)[0];
 
-  public void sensorMsg(CartesianFloat cartesianFloat, final String sensor) {
-
-    final Map<String, Float> data = new HashMap<String, Float>();
-    data.put("x", cartesianFloat.x());
-    data.put("y", cartesianFloat.y());
-    data.put("z", cartesianFloat.z());
-    runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
-        if (sensor.equals("accel")) {
-          accelResults.add(data);
-        } else {
-          gyroResults.add(data);
-        }
-      }
-    });
+    mwBoard.connectAsync();
   }
 
   /// GET BATTERY LEVEL (THIS IS JUST FOR A TEST)
