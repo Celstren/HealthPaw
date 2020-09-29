@@ -198,7 +198,7 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
   /// LED METHODS
 
   public void turnOnLed() {
-    ledModule.editPattern(Led.Color.RED);
+    Log.i(TAG, String.valueOf(isConnected));
     ledModule.play();
   }
 
@@ -261,7 +261,16 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
         } else {
           Log.i("MainActivity", "Connected");
           ledModule = mwBoard.getModule(Led.class);
-          turnOnLed();
+          if ((ledModule= mwBoard.getModule(Led.class)) != null) {
+            ledModule.editPattern(Led.Color.RED, Led.PatternPreset.PULSE)
+                    .repeatCount((byte) 3)
+                    .commit();
+            ledModule.play();
+
+            isConnected = mwBoard.isConnected();
+
+            Log.i(TAG, String.valueOf(mwBoard.isConnected()));
+          }
 //          accelerometer = mwBoard.getModule(Accelerometer.class);
 //          accelerometer.configure()
 //                  .odr(25f)       // Set sampling frequency to 25Hz, or closest valid ODR
