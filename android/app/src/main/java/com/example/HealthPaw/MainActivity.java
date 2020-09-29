@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends FlutterActivity implements ServiceConnection {
 
@@ -86,8 +87,8 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
               case "connectBoard":
                 String boardId = call.argument("boardId");
                 if (boardId != null) {
-                  connectBoard(boardId);
-                  result.success(true);
+                  boolean success = connectBoard(boardId);
+                  result.success(success);
                 } else {
                   Log.i(TAG, "Invalid board id");
                   result.success(false);
@@ -181,10 +182,10 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
 
   /// BOARD CONNECTION METHODS
 
-  public void connectBoard(String boardID) {
+  public boolean connectBoard(String boardID) {
     Log.i(TAG, String.format("Connecting to %s:", boardID));
     MW_MAC_ADDRESS = boardID;
-    retrieveBoard();
+    return retrieveBoard();
   }
 
   public void disconnectBoard() {
@@ -246,41 +247,44 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
 
   /// SET CONNECTION TO SELECTED BOARD
 
-  public void retrieveBoard() {
+  public boolean retrieveBoard() {
     final BluetoothManager btManager= (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
     final BluetoothDevice remoteDevice= btManager.getAdapter().getRemoteDevice(MW_MAC_ADDRESS);
 
     // Create a MetaWear board object for the Bluetooth Device
     mwBoard = serviceBinder.getMetaWearBoard(remoteDevice);
 
-    mwBoard.connectAsync().continueWith(new Continuation<Void, Void>() {
-      @Override
-      public Void then(Task<Void> task) throws Exception {
-        if (task.isFaulted()) {
-          Log.i("MainActivity", "Failed to connect");
-        } else {
-          Log.i("MainActivity", "Connected");
-          ledModule = mwBoard.getModule(Led.class);
-          if ((ledModule= mwBoard.getModule(Led.class)) != null) {
-            ledModule.editPattern(Led.Color.RED, Led.PatternPreset.PULSE)
-                    .repeatCount((byte) 3)
-                    .commit();
-            ledModule.play();
+    try {
+      if (mwBoard.isConnected()) {
+        mwBoard.disconnectAsync().waitForCompletion(500, TimeUnit.MILLISECONDS);
+        Log.i("MainActivity", "Disconnected");
+        Log.i("MainActivity", "Failed to disconnect");
+      }
+      mwBoard.connectAsync().waitForCompletion(3, TimeUnit.SECONDS);
+      Log.i("MainActivity", "Connected");
+      ledModule = mwBoard.getModule(Led.class);
+      if ((ledModule= mwBoard.getModule(Led.class)) != null) {
+        ledModule.editPattern(Led.Color.RED, Led.PatternPreset.PULSE)
+                .repeatCount((byte) 3)
+                .commit();
+        ledModule.play();
 
-            isConnected = mwBoard.isConnected();
+        isConnected = mwBoard.isConnected();
 
-            Log.i(TAG, String.valueOf(mwBoard.isConnected()));
-          }
+        Log.i(TAG, String.valueOf(mwBoard.isConnected()));
+      }
 //          accelerometer = mwBoard.getModule(Accelerometer.class);
 //          accelerometer.configure()
 //                  .odr(25f)       // Set sampling frequency to 25Hz, or closest valid ODR
 //                  .commit();
 //          temperature = mwBoard.getModule(Temperature.class);
 //          tempSensor = temperature.findSensors(SensorType.PRESET_THERMISTOR)[0];
-        }
-        return null;
-      }
-    });
+      return true;
+    } catch (InterruptedException e) {
+      Log.i(TAG, e.toString());
+      Log.i("MainActivity", "Failed to connect");
+      return false;
+    }
   }
 
   /// GET BATTERY LEVEL (THIS IS JUST FOR A TEST)

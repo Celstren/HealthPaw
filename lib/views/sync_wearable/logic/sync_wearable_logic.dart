@@ -7,24 +7,33 @@ class SyncWearableLogic {
       const MethodChannel('com.example.HealthPaw/mbientlab');
   bool expanded = false;
 
-  static Future<void> connectBoard(String id) async {
+  static Future<bool> connectBoard(String id) async {
     try {
-      await platform.invokeMethod(
+      bool value = await platform.invokeMethod(
           'connectBoard', {"boardId": id});
-      DeviceController.deviceId = id;
+      DeviceController.updatedIsConnected = value;
+      if (value) {
+        DeviceController.updatedDeviceId = id;
+      }
+      return value;
     } on PlatformException catch (e) {
       print("Fail to connect: $e");
     }
+    return false;
   }
 
-  static Future<void> disconnectBoard() async {
+  static Future<bool> disconnectBoard() async {
     try {
-      await platform.invokeMethod('disconnectBoard');
-      DeviceController.isConnected = false;
-      DeviceController.deviceId = null;
+      bool success = await platform.invokeMethod('disconnectBoard');
+      if (success) {
+        DeviceController.updatedIsConnected = false;
+        DeviceController.updatedDeviceId = null;
+        return true;
+      }
     } on PlatformException catch (e) {
       print("Fail to connect: $e");
     }
+    return false;
   }
 
   static Future<void> turnOffLed() async {

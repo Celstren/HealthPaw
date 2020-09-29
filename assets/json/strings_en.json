@@ -100,7 +100,7 @@
     "SoundHistory": "History of intensity of sound",
     "EnvironmentalTemperatureHistory": "Environmental Temperature History",
 
-    "WaitUntilConnect": "Press continue when led is turn on",
+    "WaitUntilConnect": "Press continue when led is turn on. If not, try again",
 
     "AssignOwner": "Assign owner",
     "OwnerMail": "Owner mail",
@@ -146,6 +146,10 @@
     "SendNotification": "Send notification",
     "ReportStatus": "Report status",
     "ReportStatusWithSensor": "Report status with sensor",
+    "SensorConnectedSuccessfully": "Sensor connected successfully",
+    "SensorConnectedFailed": "Sensor connected failed",
+    "SensorDisconnectedSuccessfully": "Sensor disconnected successfully",
+    "SensorDisconnectedFailed": "Sensor disconnected failed",
 
 
     "PetsAssigned": "Pets assigned",

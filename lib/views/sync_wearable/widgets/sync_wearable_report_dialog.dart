@@ -30,7 +30,7 @@ class _SyncWearableReportDialogState extends State<SyncWearableReportDialog> {
     setState(() {
       isActive = true;
     });
-    if (DeviceController.isConnected) {
+    if (DeviceController.isConnectedValue) {
       SyncWearableLogic.activateLogs();
     }
     await Future.delayed(Duration(seconds: 2));
@@ -38,7 +38,7 @@ class _SyncWearableReportDialogState extends State<SyncWearableReportDialog> {
   }
 
   Future<void> deactivateRecord() async {
-    if (DeviceController.isConnected && isActive) {
+    if (DeviceController.isConnectedValue && isActive) {
       setState(() {
         isActive = false;
       });

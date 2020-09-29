@@ -1,16 +1,18 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
-import 'package:HealthPaw/views/sync_wearable/logic/device_controller.dart';
 import 'package:HealthPaw/views/sync_wearable/logic/sync_wearable_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SyncWearableDialog extends StatefulWidget {
   final String deviceId;
   final bool alreadyConnected;
-  final Function onConnected;
-  final Function onDisconnected;
-  SyncWearableDialog({Key key, this.deviceId = "", this.alreadyConnected = false, this.onConnected, this.onDisconnected}) : super(key: key);
+  SyncWearableDialog({
+    Key key,
+    this.deviceId = "",
+    this.alreadyConnected = false,
+  }) : super(key: key);
 
   @override
   _SyncWearableDialogState createState() => _SyncWearableDialogState();
@@ -26,6 +28,16 @@ class _SyncWearableDialogState extends State<SyncWearableDialog> {
       currentDialog = 2;
     }
     super.initState();
+  }
+
+  void connectToSensor() async {
+    setState(() {
+      currentDialog = 1;
+    });
+    await SyncWearableLogic.connectBoard(widget.deviceId);
+    setState(() {
+      continueIsAvailable = true;
+    });
   }
 
   @override
@@ -65,16 +77,7 @@ class _SyncWearableDialogState extends State<SyncWearableDialog> {
             color: AppColors.PrimaryLightBlue,
             style: AppTextStyle.whiteStyle(
                 fontSize: AppFontSizes.text16, fontWeight: FontWeight.w500),
-            onPress: () async {
-              await SyncWearableLogic.connectBoard(widget.deviceId);
-              setState(() {
-                currentDialog = 1;
-              });
-              await Future.delayed(Duration(seconds: 2));
-              setState(() {
-                continueIsAvailable = true;
-              });
-            },
+            onPress: connectToSensor,
           ),
         ],
       ),
@@ -83,8 +86,9 @@ class _SyncWearableDialogState extends State<SyncWearableDialog> {
 
   Widget _buildConnecting() {
     return Container(
-      height: 200,
+      height: 220,
       width: 360,
+      padding: EdgeInsets.symmetric(horizontal: 10),
       margin: EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(
         borderRadius: AppBorderRadius.all(radius: AppRadius.radius20),
@@ -103,45 +107,33 @@ class _SyncWearableDialogState extends State<SyncWearableDialog> {
           ),
           continueIsAvailable
               ? Column(
-            children: <Widget>[
-              RoundedButton(
-                text: AppStrings.continueLabel,
-                size: Size(160, 40),
-                color: AppColors.PrimaryLightBlue,
-                style: AppTextStyle.whiteStyle(
-                    fontSize: AppFontSizes.text16,
-                    fontWeight: FontWeight.w500),
-                onPress: () {
-                  setState(() {
-                    currentDialog = 2;
-                  });
-                  DeviceController.isConnected = true;
-                  if (widget.onConnected != null) {
-                    widget.onConnected();
-                  }
-                },
-              ),
-              SizedBox(height: 20),
-              RoundedButton(
-                text: AppStrings.retry,
-                size: Size(160, 40),
-                color: AppColors.PrimaryLightBlue,
-                style: AppTextStyle.whiteStyle(
-                    fontSize: AppFontSizes.text16,
-                    fontWeight: FontWeight.w500),
-                onPress: () async {
-                  setState(() {
-                    continueIsAvailable = false;
-                  });
-                  await SyncWearableLogic.connectBoard(widget.deviceId);
-                  await Future.delayed(Duration(seconds: 2));
-                  setState(() {
-                    continueIsAvailable = true;
-                  });
-                },
-              )
-            ],
-          )
+                  children: <Widget>[
+                    RoundedButton(
+                      text: AppStrings.continueLabel,
+                      size: Size(160, 40),
+                      color: AppColors.PrimaryLightBlue,
+                      style: AppTextStyle.whiteStyle(
+                          fontSize: AppFontSizes.text16,
+                          fontWeight: FontWeight.w500),
+                      onPress: () {
+                        setState(() {
+                          currentDialog = 2;
+                        });
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    RoundedButton(
+                      text: AppStrings.retry,
+                      size: Size(160, 40),
+                      color: AppColors.PrimaryLightBlue,
+                      style: AppTextStyle.whiteStyle(
+                          fontSize: AppFontSizes.text16,
+                          fontWeight: FontWeight.w500),
+                      onPress: connectToSensor,
+                    ),
+                    SizedBox(height: 20),
+                  ],
+                )
               : SizedBox(
                   height: 40,
                   width: 160,
@@ -156,7 +148,7 @@ class _SyncWearableDialogState extends State<SyncWearableDialog> {
 
   Widget _buildOptions() {
     return Container(
-      height: 400,
+      height: 420,
       width: 360,
       margin: EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(
@@ -183,13 +175,24 @@ class _SyncWearableDialogState extends State<SyncWearableDialog> {
                 color: AppColors.PrimaryLightBlue,
                 style: AppTextStyle.whiteStyle(
                     fontSize: AppFontSizes.text16, fontWeight: FontWeight.w500),
-                onPress: () {
-                  if (widget.onDisconnected != null) {
-                    widget.onDisconnected();
+                onPress: () async {
+                  bool success = await SyncWearableLogic.disconnectBoard();
+                  if (success) {
+                    Navigator.pop(context);
+                    Fluttertoast.showToast(
+                        msg: AppStrings.sensorDisconnectedSuccessfully);
                   }
-                  Navigator.pop(context);
-                  SyncWearableLogic.disconnectBoard();
+                  Fluttertoast.showToast(
+                      msg: AppStrings.sensorDisconnectedFailed);
                 },
+              ),
+              RoundedButton(
+                text: AppStrings.retry,
+                size: Size(160, 40),
+                color: AppColors.PrimaryLightBlue,
+                style: AppTextStyle.whiteStyle(
+                    fontSize: AppFontSizes.text16, fontWeight: FontWeight.w500),
+                onPress: connectToSensor,
               ),
               RoundedButton(
                 text: AppStrings.turnOnLed,

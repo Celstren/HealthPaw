@@ -192,4 +192,8 @@ class AppStrings {
   static final String continueLabel                     = AppConfig.commonStringsJson["Continue"] ?? "";
   static final String retry                             = AppConfig.commonStringsJson["Retry"] ?? "";
   static final String reportStatusWithSensor            = AppConfig.commonStringsJson["ReportStatusWithSensor"] ?? "";
+  static final String sensorConnectedSuccessfully       = AppConfig.commonStringsJson["SensorConnectedSuccessfully"] ?? "";
+  static final String sensorConnectedFailed             = AppConfig.commonStringsJson["SensorConnectedFailed"] ?? "";
+  static final String sensorDisconnectedSuccessfully    = AppConfig.commonStringsJson["SensorDisconnectedSuccessfully"] ?? "";
+  static final String sensorDisconnectedFailed          = AppConfig.commonStringsJson["SensorDisconnectedFailed"] ?? "";
 }

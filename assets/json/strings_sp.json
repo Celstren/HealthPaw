@@ -100,7 +100,7 @@
     "SoundHistory": "Historial de intensidad de sonido",
     "EnvironmentalTemperatureHistory": "Historial de Temperatura Ambiente",
 
-    "WaitUntilConnect": "Presiona continuar cuando se encienda la luz led",
+    "WaitUntilConnect": "Presiona continuar cuando se encienda la luz led. Sino, vuelva a intentar",
 
     "AssignOwner": "Asignar Dueño",
     "OwnerMail": "Correo Dueño",
@@ -147,6 +147,10 @@
     "SendNotification": "Redactar notificación",
     "ReportStatus": "Reportar estado",
     "ReportStatusWithSensor": "Reportar estado con sensor",
+    "SensorConnectedSuccessfully": "Conexión éxitosa",
+    "SensorConnectedFailed": "Conexión fallida",
+    "SensorDisconnectedSuccessfully": "Desconexión éxitosa",
+    "SensorDisconnectedFailed": "Desconexión fallida",
 
     "PetsAssigned": "Mascotas asignadas",
 

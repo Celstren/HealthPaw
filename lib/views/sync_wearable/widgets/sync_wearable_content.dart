@@ -108,7 +108,7 @@ class _SyncWearableContentState extends State<SyncWearableContent> {
           fontSize: AppFontSizes.text14,
           fontFamily: AppFonts.Montserrat_Bold),
       onPress: () {
-        if (DeviceController.isConnected) {
+        if (DeviceController.isConnectedValue) {
           showCustomDialog(context: context, builder: (context) => CustomDialog(child: SyncWearableReportDialog()));
         } else {
           Fluttertoast.showToast(msg: "Por favor conecte el dispositivo primero");
