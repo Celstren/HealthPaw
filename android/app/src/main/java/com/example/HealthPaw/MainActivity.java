@@ -189,16 +189,16 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
 
   public void disconnectBoard() {
     Log.i(TAG, "Disconnecting board");
-    turnOffLed();
-    accelerometer.stop();
-    accelerometer.acceleration().stop();
+//    turnOffLed();
+//    accelerometer.stop();
+//    accelerometer.acceleration().stop();
     mwBoard.tearDown();
   }
 
   /// LED METHODS
 
   public void turnOnLed() {
-    ledModule.editPattern(Led.Color.BLUE);
+    ledModule.editPattern(Led.Color.RED);
     ledModule.play();
   }
 
@@ -253,14 +253,25 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
     // Create a MetaWear board object for the Bluetooth Device
     mwBoard = serviceBinder.getMetaWearBoard(remoteDevice);
 
-//    accelerometer = mwBoard.getModule(Accelerometer.class);
-//    accelerometer.configure()
-//            .odr(25f)       // Set sampling frequency to 25Hz, or closest valid ODR
-//            .commit();
-//    temperature = mwBoard.getModule(Temperature.class);
-//    tempSensor = temperature.findSensors(SensorType.PRESET_THERMISTOR)[0];
-
-    mwBoard.connectAsync();
+    mwBoard.connectAsync().continueWith(new Continuation<Void, Void>() {
+      @Override
+      public Void then(Task<Void> task) throws Exception {
+        if (task.isFaulted()) {
+          Log.i("MainActivity", "Failed to connect");
+        } else {
+          Log.i("MainActivity", "Connected");
+          ledModule = mwBoard.getModule(Led.class);
+          turnOnLed();
+//          accelerometer = mwBoard.getModule(Accelerometer.class);
+//          accelerometer.configure()
+//                  .odr(25f)       // Set sampling frequency to 25Hz, or closest valid ODR
+//                  .commit();
+//          temperature = mwBoard.getModule(Temperature.class);
+//          tempSensor = temperature.findSensors(SensorType.PRESET_THERMISTOR)[0];
+        }
+        return null;
+      }
+    });
   }
 
   /// GET BATTERY LEVEL (THIS IS JUST FOR A TEST)
