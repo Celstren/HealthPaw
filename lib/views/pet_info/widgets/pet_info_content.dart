@@ -35,17 +35,37 @@ class PetInfoContent extends StatefulWidget {
 
 class _PetInfoContentState extends State<PetInfoContent> {
   TextEditingController petNameController = TextEditingController();
+  TextEditingController petBreedController = TextEditingController();
+  TextEditingController petWeightController = TextEditingController();
+  TextEditingController petDNIOwnerController = TextEditingController();
+  TextEditingController petDNIVetController = TextEditingController();
   DateTime birthDayController;
 
   User user;
 
+  String petSize = null;
   bool validatedPetNameValue = true;
+  bool validatedPetBreedValue = true;
+  bool validatedPetWeightValue = true;
+  bool validatedPetDNIOwnerValue = true;
+  bool validatedPetDNIVetValue = true;
   bool validatedBirthDayValue = true;
 
   bool get validatedPetName =>
       Validators.validString(petNameController.value.text.trim());
+  bool get validatedPetBreed =>
+      Validators.validString(petBreedController.value.text.trim());
+  bool get validatedPetWeight =>
+      Validators.validNumber(petWeightController.value.text.trim());
+  bool get validatedPetDNIOwner =>
+      Validators.validNumber(petDNIOwnerController.value.text.trim());
+  bool get validatedPetDNIVet =>
+      Validators.validNumber(petDNIVetController.value.text.trim());
   bool get validatedBirthDay =>
       birthDayController != null && birthDayController.isBefore(DateTime.now());
+  bool validatedSize() {
+    return petSize != null;
+  }
 
   void showModifySuccessDialog(bool debeVolverInicio) {
     showCustomDialog(
@@ -81,7 +101,14 @@ class _PetInfoContentState extends State<PetInfoContent> {
   }
 
   void _submit() async {
-    if (validatedPetName && validatedBirthDay) {
+    if (validatedPetName &&
+        validatedBirthDay &&
+        validatedPetDNIOwnerValue &&
+        validatedPetDNIVetValue &&
+        validatedPetNameValue &&
+        validatedPetBreedValue &&
+        validatedPetWeightValue &&
+        validatedSize()) {
       if (widget.pet != null) {
         bool success = await modifyPetRequest();
         if (success) {
@@ -97,6 +124,10 @@ class _PetInfoContentState extends State<PetInfoContent> {
       setState(() {
         validatedPetNameValue = validatedPetName;
         validatedBirthDayValue = validatedBirthDay;
+        validatedPetBreedValue = validatedPetBreed;
+        validatedPetWeightValue = validatedPetWeight;
+        validatedPetDNIOwnerValue = validatedPetDNIOwner;
+        validatedPetDNIVetValue = validatedPetDNIVet;
       });
     }
   }
@@ -104,13 +135,18 @@ class _PetInfoContentState extends State<PetInfoContent> {
   Future<bool> createPetRequest() async {
     Pet pet = Pet(
       namevar: petNameController.value.text.trim(),
+      size: petSize,
+      weight: num.tryParse(petWeightController.value.text.trim()),
+      breed: petBreedController.value.text.trim(),
       birthDay: birthDayController,
       petType: ConstantMethodHelper.petTypeValue(widget.petType),
     );
     String id = await PetService.registerPet(pet);
     if (id != null) {
+      await UserService.addPetToUser(
+          petDNIOwnerController.value.text.trim(), pet.namevar, id);
       return await UserService.addPetToUser(
-          user.documentNumber, pet.namevar, id);
+          petDNIVetController.value.text.trim(), pet.namevar, id);
     } else
       return false;
   }
@@ -119,8 +155,13 @@ class _PetInfoContentState extends State<PetInfoContent> {
     Pet pet = widget.pet;
     pet.namevar = petNameController.value.text.trim();
     pet.birthDay = birthDayController;
+    pet.weight = num.tryParse(petWeightController.value.text.trim());
+    pet.breed = petBreedController.value.text.trim();
+    pet.size = petSize;
     bool success = await PetService.updatePet(pet);
     if (!success) return false;
+    await UserService.editPetToUser(
+        petDNIVetController.value.text.trim(), pet.namevar, pet.id);
     return await UserService.editPetToUser(
         user.documentNumber, pet.namevar, pet.id);
   }
@@ -129,6 +170,9 @@ class _PetInfoContentState extends State<PetInfoContent> {
   void initState() {
     if (widget.pet != null) {
       petNameController = TextEditingController(text: widget.pet.namevar);
+      petBreedController = TextEditingController(text: widget.pet.breed);
+      petWeightController =
+          TextEditingController(text: widget.pet.weight.toString());
       birthDayController = widget.pet.birthDay;
     }
     user = Preferences.getUser;
@@ -179,15 +223,120 @@ class _PetInfoContentState extends State<PetInfoContent> {
               "${AppStrings.theField} ${AppStrings.birthDay} ${AppStrings.isInvalid}",
         ),
         SizedBox(height: 20),
+        AppSimpleTextField(
+            title: "${AppStrings.breed}:",
+            controller: petBreedController,
+            hint: AppStrings.enterBreed,
+            inputFormatters: [LengthLimitingTextInputFormatter(30)],
+            errorMsg:
+                "${AppStrings.theField} ${AppStrings.breed} ${AppStrings.isInvalid}",
+            isValid: validatedPetBreedValue,
+            onChanged: (value) {
+              if (!validatedPetBreedValue) {
+                setState(() {
+                  validatedPetBreedValue = true;
+                });
+              }
+            }),
+        SizedBox(height: 20),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            RoundedButton(
+              text: AppStrings.small,
+              size: Size(100, 40),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              onPress: () => {
+                setState(() {
+                  petSize = "Small";
+                })
+              },
+            ),
+            RoundedButton(
+              text: AppStrings.medium,
+              size: Size(100, 40),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              onPress: () => {
+                setState(() {
+                  petSize = "Medium";
+                })
+              },
+            ),
+            RoundedButton(
+              text: AppStrings.big,
+              size: Size(100, 40),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              onPress: () => {
+                setState(() {
+                  petSize = "Big";
+                })
+              },
+            ),
+          ],
+        ),
+        SizedBox(height: 20),
+        AppSimpleTextField(
+            title: "${AppStrings.weight}:",
+            controller: petWeightController,
+            hint: AppStrings.enterWeight,
+            inputFormatters: [LengthLimitingTextInputFormatter(30)],
+            errorMsg:
+                "${AppStrings.theField} ${AppStrings.weight} ${AppStrings.isInvalid}",
+            isValid: validatedPetWeightValue,
+            onChanged: (value) {
+              if (!validatedPetWeightValue) {
+                setState(() {
+                  validatedPetWeightValue = true;
+                });
+              }
+            }),
+        SizedBox(height: 20),
+        AppSimpleTextField(
+            title: "${AppStrings.dniOwner}:",
+            controller: petDNIOwnerController,
+            hint: AppStrings.enterDNIOwner,
+            inputFormatters: [LengthLimitingTextInputFormatter(30)],
+            errorMsg:
+                "${AppStrings.theField} ${AppStrings.dniOwner} ${AppStrings.isInvalid}",
+            isValid: validatedPetDNIOwnerValue,
+            onChanged: (value) {
+              if (!validatedPetDNIOwnerValue) {
+                setState(() {
+                  validatedPetDNIOwnerValue = true;
+                });
+              }
+            }),
+        AppSimpleTextField(
+            title: "${AppStrings.dniVet}:",
+            controller: petDNIVetController,
+            hint: AppStrings.enterDNIVet,
+            inputFormatters: [LengthLimitingTextInputFormatter(30)],
+            errorMsg:
+                "${AppStrings.theField} ${AppStrings.dniVet} ${AppStrings.isInvalid}",
+            isValid: validatedPetDNIVetValue,
+            onChanged: (value) {
+              if (!validatedPetDNIVetValue) {
+                setState(() {
+                  validatedPetDNIVetValue = true;
+                });
+              }
+            }),
+        SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             RoundedButton(
               text: AppStrings.register,
               size: Size(150, 40),
               style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
               onPress: () => _submit(),
-            )
+            ),
+            RoundedButton(
+              text: AppStrings.cancel,
+              size: Size(150, 40),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              onPress: () => Navigator.pop(context),
+            ),
           ],
         ),
         SizedBox(height: 20),
@@ -231,6 +380,90 @@ class _PetInfoContentState extends State<PetInfoContent> {
           errorMsg:
               "${AppStrings.theField} ${AppStrings.birthDay} ${AppStrings.isInvalid}",
         ),
+        SizedBox(height: 20),
+        AppSimpleTextField(
+            title: "${AppStrings.breed}:",
+            controller: petBreedController,
+            hint: AppStrings.enterBreed,
+            inputFormatters: [LengthLimitingTextInputFormatter(30)],
+            errorMsg:
+                "${AppStrings.theField} ${AppStrings.breed} ${AppStrings.isInvalid}",
+            isValid: validatedPetBreedValue,
+            onChanged: (value) {
+              if (!validatedPetBreedValue) {
+                setState(() {
+                  validatedPetBreedValue = true;
+                });
+              }
+            }),
+        SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            RoundedButton(
+              text: AppStrings.small,
+              size: Size(100, 40),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              onPress: () => {
+                setState(() {
+                  petSize = "Small";
+                })
+              },
+            ),
+            RoundedButton(
+              text: AppStrings.medium,
+              size: Size(100, 40),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              onPress: () => {
+                setState(() {
+                  petSize = "Medium";
+                })
+              },
+            ),
+            RoundedButton(
+              text: AppStrings.big,
+              size: Size(100, 40),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              onPress: () => {
+                setState(() {
+                  petSize = "Big";
+                })
+              },
+            ),
+          ],
+        ),
+        SizedBox(height: 20),
+        AppSimpleTextField(
+            title: "${AppStrings.weight}:",
+            controller: petWeightController,
+            hint: AppStrings.enterWeight,
+            inputFormatters: [LengthLimitingTextInputFormatter(30)],
+            errorMsg:
+                "${AppStrings.theField} ${AppStrings.weight} ${AppStrings.isInvalid}",
+            isValid: validatedPetWeightValue,
+            onChanged: (value) {
+              if (!validatedPetWeightValue) {
+                setState(() {
+                  validatedPetWeightValue = true;
+                });
+              }
+            }),
+        SizedBox(height: 20),
+        AppSimpleTextField(
+            title: "${AppStrings.dniVet}:",
+            controller: petDNIVetController,
+            hint: AppStrings.enterDNIVet,
+            inputFormatters: [LengthLimitingTextInputFormatter(30)],
+            errorMsg:
+                "${AppStrings.theField} ${AppStrings.dniVet} ${AppStrings.isInvalid}",
+            isValid: validatedPetDNIVetValue,
+            onChanged: (value) {
+              if (!validatedPetDNIVetValue) {
+                setState(() {
+                  validatedPetDNIVetValue = true;
+                });
+              }
+            }),
         SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
