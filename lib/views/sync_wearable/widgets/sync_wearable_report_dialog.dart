@@ -1,21 +1,15 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
-import 'package:HealthPaw/views/sync_wearable/logic/device_controller.dart';
 import 'package:HealthPaw/views/sync_wearable/logic/sync_wearable_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 
 class SyncWearableReportDialog extends StatefulWidget {
   final String deviceId;
-  final bool alreadyConnected;
-  final Function onConnected;
-  final Function onDisconnected;
   SyncWearableReportDialog(
       {Key key,
       this.deviceId = "",
-      this.alreadyConnected = false,
-      this.onConnected,
-      this.onDisconnected})
+      })
       : super(key: key);
 
   @override
@@ -26,28 +20,17 @@ class SyncWearableReportDialog extends StatefulWidget {
 class _SyncWearableReportDialogState extends State<SyncWearableReportDialog> {
   bool isActive = false;
 
-  void activateRecord() async {
+  Future<void> activateRecord() async {
     setState(() {
       isActive = true;
     });
-    if (DeviceController.isConnectedValue) {
-      SyncWearableLogic.activateLogs();
-    }
-    await Future.delayed(Duration(seconds: 2));
-    await deactivateRecord();
-  }
-
-  Future<void> deactivateRecord() async {
-    if (DeviceController.isConnectedValue && isActive) {
-      setState(() {
-        isActive = false;
-      });
-      dynamic value = await SyncWearableLogic.deactivateLogs();
-      if (value != null) {
-        print(value["accelerometer"]);
-        print(value["gyroscope"]);
-      }
-    }
+    await SyncWearableLogic.activateLogs();
+    await Future.delayed(Duration(seconds: 1));
+    dynamic value = await SyncWearableLogic.deactivateLogs();
+    print(value);
+    setState(() {
+      isActive = false;
+    });
   }
 
   @override
@@ -80,7 +63,7 @@ class _SyncWearableReportDialogState extends State<SyncWearableReportDialog> {
                 style: AppTextStyle.whiteStyle(
                     fontSize: AppFontSizes.text16,
                     fontWeight: FontWeight.w500),
-                onPress: activateRecord,
+                onPress: () async => await activateRecord(),
               )
                   : SizedBox(
                 width: 160,

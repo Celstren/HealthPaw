@@ -3,7 +3,6 @@ import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/views/sync_wearable/logic/sync_wearable_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class SyncWearableDialog extends StatefulWidget {
   final String deviceId;
@@ -30,7 +29,7 @@ class _SyncWearableDialogState extends State<SyncWearableDialog> {
     super.initState();
   }
 
-  void connectToSensor() async {
+  Future<void> connectToSensor() async {
     setState(() {
       currentDialog = 1;
     });
@@ -77,7 +76,7 @@ class _SyncWearableDialogState extends State<SyncWearableDialog> {
             color: AppColors.PrimaryLightBlue,
             style: AppTextStyle.whiteStyle(
                 fontSize: AppFontSizes.text16, fontWeight: FontWeight.w500),
-            onPress: connectToSensor,
+            onPress: () async => await connectToSensor(),
           ),
         ],
       ),
@@ -181,6 +180,7 @@ class _SyncWearableDialogState extends State<SyncWearableDialog> {
                     Navigator.pop(context);
                     Fluttertoast.showToast(
                         msg: AppStrings.sensorDisconnectedSuccessfully);
+                    return;
                   }
                   Fluttertoast.showToast(
                       msg: AppStrings.sensorDisconnectedFailed);

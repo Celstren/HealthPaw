@@ -33,9 +33,7 @@ import com.mbientlab.metawear.data.Acceleration;
 import com.mbientlab.metawear.module.Accelerometer;
 import com.mbientlab.metawear.module.Temperature;
 import com.mbientlab.metawear.module.Temperature.SensorType;
-import com.mbientlab.metawear.module.GyroBmi160;
 import com.mbientlab.metawear.module.Led;
-import com.mbientlab.metawear.module.Logging;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,8 +44,9 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends FlutterActivity implements ServiceConnection {
 
   // RESULT VARIABLES
-  private List<Map<String, Float>> accelResults = new ArrayList<>();
-  private List<Map<String, Float>> gyroResults = new ArrayList<>();
+  private List<Map<String, Object>> accelResults = new ArrayList<>();
+  private List<Map<String, Object>> tempResults = new ArrayList<>();
+  private boolean trackTemperature = false;
 
   // METAWEAR VARIABLES
   private String MW_MAC_ADDRESS;
@@ -55,17 +54,13 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
 
   // METAWEAR CONSTANTS
   private static final String TAG = "MetaWear";
-  private static final float ACC_RANGE = 8.f, ACC_FREQ = 50.f;
   private static final String CHANNEL = "com.example.HealthPaw/mbientlab";
 
   // METAWEAR OBJECTS
   private BtleService.LocalBinder serviceBinder;
   private Led ledModule;
   private MetaWearBoard mwBoard;
-  private GyroBmi160 gyroModule;
-  private Logging loggingModule;
   private Accelerometer accelerometer;
-  private Temperature temperature;
   private Temperature.Sensor tempSensor;
 
   @Override
@@ -121,6 +116,7 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
                 break;
               case "activateLogs":
                 if (isConnected) {
+                  trackTemperature = true;
                   activateLogs();
                   result.success(true);
                 } else {
@@ -130,18 +126,20 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
                 break;
               case "deactivateLogs":
                 if (isConnected) {
-                  Map<String, List<Map<String, Float>>> logs = new HashMap<>();
-                  List<Map<String, Float>> _accelResults = new ArrayList<>(accelResults);
-                  List<Map<String, Float>> _gyroResults = new ArrayList<>(gyroResults);
-                  logs.put("accelerometer", _accelResults);
-                  logs.put("gyroscope", _gyroResults);
+                  trackTemperature = false;
+                  final List<Map<String, Object>> _accelResults = new ArrayList<>(accelResults);
+                  final List<Map<String, Object>> _tempResults = new ArrayList<>(tempResults);
+                  accelResults.clear();
+                  tempResults.clear();
+                  final Map<String, List<Map<String, Object>>> logs = new HashMap<>();
+                  logs.put("acelerometro", _accelResults);
+                  logs.put("temperatura", _tempResults);
+                  deactivateLogs();
                   result.success(logs);
                 } else {
                   Log.i(TAG, "Board is not connected");
                   result.success(null);
                 }
-                accelResults = new ArrayList<>();
-                gyroResults = new ArrayList<>();
                 break;
               default:
                 result.notImplemented();
@@ -208,12 +206,21 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
   }
 
   public void activateLogs() {
+    accelResults.clear();
+    tempResults.clear();
+
     accelerometer.acceleration().addRouteAsync(new RouteBuilder() {
       @Override
       public void configure(RouteComponent source) {
         source.stream(new Subscriber() {
           @Override
           public void apply(Data data, Object... env) {
+            Map<String, Object> value = new HashMap<String, Object>();
+            value.put("x", data.value(Acceleration.class).x());
+            value.put("y", data.value(Acceleration.class).y());
+            value.put("z", data.value(Acceleration.class).z());
+            value.put("timestamp", data.timestamp().getTimeInMillis());
+            accelResults.add(value);
             Log.i("MainActivity", data.value(Acceleration.class).toString());
           }
         });
@@ -232,7 +239,13 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
         source.stream(new Subscriber() {
           @Override
           public void apply(Data data, Object ... env) {
-            Log.i("MainActivity", "Temperature (C) = " + data.value(Float.class).toString());
+            if (trackTemperature) {
+              Map<String, Object> value = new HashMap<String, Object>();
+              value.put("value", data.value(Float.class));
+              value.put("timestamp", data.timestamp().getTimeInMillis());
+              tempResults.add(value);
+              Log.i("MainActivity", "Temperature (C) = " + data.value(Float.class).toString());
+            }
           }
         });
       }
@@ -243,6 +256,11 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
         return null;
       }
     });
+  }
+
+  public void deactivateLogs() {
+    accelerometer.stop();
+    accelerometer.acceleration().stop();
   }
 
   /// SET CONNECTION TO SELECTED BOARD
@@ -258,10 +276,15 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
       if (mwBoard.isConnected()) {
         mwBoard.disconnectAsync().waitForCompletion(500, TimeUnit.MILLISECONDS);
         Log.i("MainActivity", "Disconnected");
-        Log.i("MainActivity", "Failed to disconnect");
       }
       mwBoard.connectAsync().waitForCompletion(3, TimeUnit.SECONDS);
       Log.i("MainActivity", "Connected");
+      accelerometer = mwBoard.getModule(Accelerometer.class);
+      accelerometer.configure()
+              .odr(25f)       // Set sampling frequency to 25Hz, or closest valid ODR
+              .commit();
+      Temperature temperature = mwBoard.getModule(Temperature.class);
+      tempSensor = temperature.findSensors(SensorType.PRESET_THERMISTOR)[0];
       ledModule = mwBoard.getModule(Led.class);
       if ((ledModule= mwBoard.getModule(Led.class)) != null) {
         ledModule.editPattern(Led.Color.RED, Led.PatternPreset.PULSE)
@@ -273,18 +296,11 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
 
         Log.i(TAG, String.valueOf(mwBoard.isConnected()));
       }
-//          accelerometer = mwBoard.getModule(Accelerometer.class);
-//          accelerometer.configure()
-//                  .odr(25f)       // Set sampling frequency to 25Hz, or closest valid ODR
-//                  .commit();
-//          temperature = mwBoard.getModule(Temperature.class);
-//          tempSensor = temperature.findSensors(SensorType.PRESET_THERMISTOR)[0];
-      return true;
     } catch (InterruptedException e) {
       Log.i(TAG, e.toString());
       Log.i("MainActivity", "Failed to connect");
-      return false;
     }
+    return isConnected;
   }
 
   /// GET BATTERY LEVEL (THIS IS JUST FOR A TEST)
