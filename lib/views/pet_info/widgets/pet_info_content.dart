@@ -160,8 +160,6 @@ class _PetInfoContentState extends State<PetInfoContent> {
     pet.size = petSize;
     bool success = await PetService.updatePet(pet);
     if (!success) return false;
-    await UserService.editPetToUser(
-        petDNIVetController.value.text.trim(), pet.namevar, pet.id);
     return await UserService.editPetToUser(
         user.documentNumber, pet.namevar, pet.id);
   }
@@ -173,7 +171,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
       petBreedController = TextEditingController(text: widget.pet.breed);
       petWeightController =
           TextEditingController(text: widget.pet.weight.toString());
-      birthDayController = widget.pet.birthDay;
+      petSize = widget.pet.size;
     }
     user = Preferences.getUser;
     super.initState();
@@ -445,22 +443,6 @@ class _PetInfoContentState extends State<PetInfoContent> {
               if (!validatedPetWeightValue) {
                 setState(() {
                   validatedPetWeightValue = true;
-                });
-              }
-            }),
-        SizedBox(height: 20),
-        AppSimpleTextField(
-            title: "${AppStrings.dniVet}:",
-            controller: petDNIVetController,
-            hint: AppStrings.enterDNIVet,
-            inputFormatters: [LengthLimitingTextInputFormatter(30)],
-            errorMsg:
-                "${AppStrings.theField} ${AppStrings.dniVet} ${AppStrings.isInvalid}",
-            isValid: validatedPetDNIVetValue,
-            onChanged: (value) {
-              if (!validatedPetDNIVetValue) {
-                setState(() {
-                  validatedPetDNIVetValue = true;
                 });
               }
             }),
