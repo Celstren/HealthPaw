@@ -3,6 +3,7 @@ import 'package:HealthPaw/utils/widgets/rounded_button.dart';
 import 'package:HealthPaw/views/sync_wearable/logic/sync_wearable_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SyncWearableDialog extends StatefulWidget {
   final String deviceId;

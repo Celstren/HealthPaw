@@ -206,61 +206,13 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
   }
 
   public void activateLogs() {
-    accelResults.clear();
-    tempResults.clear();
-
-    accelerometer.acceleration().addRouteAsync(new RouteBuilder() {
-      @Override
-      public void configure(RouteComponent source) {
-        source.stream(new Subscriber() {
-          @Override
-          public void apply(Data data, Object... env) {
-            Map<String, Object> value = new HashMap<String, Object>();
-            value.put("x", data.value(Acceleration.class).x());
-            value.put("y", data.value(Acceleration.class).y());
-            value.put("z", data.value(Acceleration.class).z());
-            value.put("timestamp", data.timestamp().getTimeInMillis());
-            accelResults.add(value);
-            Log.i("MainActivity", data.value(Acceleration.class).toString());
-          }
-        });
-      }
-    }).continueWith(new Continuation<Route, Void>() {
-      @Override
-      public Void then(Task<Route> task) throws Exception {
-        accelerometer.acceleration().start();
-        accelerometer.start();
-        return null;
-      }
-    });
-    tempSensor.addRouteAsync(new RouteBuilder() {
-      @Override
-      public void configure(RouteComponent source) {
-        source.stream(new Subscriber() {
-          @Override
-          public void apply(Data data, Object ... env) {
-            if (trackTemperature) {
-              Map<String, Object> value = new HashMap<String, Object>();
-              value.put("value", data.value(Float.class));
-              value.put("timestamp", data.timestamp().getTimeInMillis());
-              tempResults.add(value);
-              Log.i("MainActivity", "Temperature (C) = " + data.value(Float.class).toString());
-            }
-          }
-        });
-      }
-    }).continueWith(new Continuation<Route, Void>() {
-      @Override
-      public Void then(Task<Route> task) throws Exception {
-        tempSensor.read();
-        return null;
-      }
-    });
+    accelerometer.acceleration().start();
+    accelerometer.start();
   }
 
   public void deactivateLogs() {
-    accelerometer.stop();
     accelerometer.acceleration().stop();
+    accelerometer.stop();
   }
 
   /// SET CONNECTION TO SELECTED BOARD
@@ -295,6 +247,45 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
         isConnected = mwBoard.isConnected();
 
         Log.i(TAG, String.valueOf(mwBoard.isConnected()));
+      }
+      if (accelerometer != null) {
+        accelerometer.acceleration().addRouteAsync(new RouteBuilder() {
+          @Override
+          public void configure(RouteComponent source) {
+            source.stream(new Subscriber() {
+              @Override
+              public void apply(Data data, Object... env) {
+                Map<String, Object> value = new HashMap<String, Object>();
+                value.put("x", data.value(Acceleration.class).x());
+                value.put("y", data.value(Acceleration.class).y());
+                value.put("z", data.value(Acceleration.class).z());
+                value.put("timestamp", data.timestamp().getTimeInMillis());
+                accelResults.add(value);
+                Log.i("MainActivity", data.value(Acceleration.class).toString());
+                tempSensor.read();
+              }
+            });
+          }
+        }).waitForCompletion(500, TimeUnit.MILLISECONDS);
+      }
+      if (tempSensor != null) {
+        tempSensor.addRouteAsync(new RouteBuilder() {
+          @Override
+          public void configure(RouteComponent source) {
+            source.stream(new Subscriber() {
+              @Override
+              public void apply(Data data, Object ... env) {
+                if (trackTemperature) {
+                  Map<String, Object> value = new HashMap<String, Object>();
+                  value.put("value", data.value(Float.class));
+                  value.put("timestamp", data.timestamp().getTimeInMillis());
+                  tempResults.add(value);
+                  Log.i("MainActivity", "Temperature (C) = " + data.value(Float.class).toString());
+                }
+              }
+            });
+          }
+        }).waitForCompletion(500, TimeUnit.MILLISECONDS);
       }
     } catch (InterruptedException e) {
       Log.i(TAG, e.toString());
