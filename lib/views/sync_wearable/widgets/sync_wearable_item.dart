@@ -1,39 +1,80 @@
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:HealthPaw/views/sync_wearable/logic/device_controller.dart';
+import 'package:HealthPaw/views/sync_wearable/widgets/sync_wearable_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
-class SyncWearableItem extends StatelessWidget {
-  final String deviceName;
-  const SyncWearableItem({Key key, this.deviceName = ""})
+import '../../../utils/widgets/custom_dialog.dart';
+
+class SyncWearableItem extends StatefulWidget {
+  final ScanResult scanResult;
+  final Function(String) onConnected;
+  final bool enabled;
+  SyncWearableItem(
+      {Key key, this.scanResult, this.onConnected, this.enabled = true})
       : super(key: key);
+
+  @override
+  _SynWearableItemState createState() => _SynWearableItemState();
+}
+
+class _SynWearableItemState extends State<SyncWearableItem> {
+  void displayRecordLogsDialog() {
+    showCustomDialog(
+      context: context,
+      builder: (context) => CustomDialog(
+        child: SyncWearableDialog(
+          deviceId: widget.scanResult.device.id.id,
+          alreadyConnected:
+              DeviceController.deviceIdValue == widget.scanResult.device.id.id,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 70,
-      child: Row(
-        children: <Widget>[
-          SizedBox(
-              width: 70, height: 50, child: Icon(Icons.device_hub, size: 40)),
-          Expanded(
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Text(
-                  deviceName,
-                  style: AppTextStyle.blackStyle(
-                    fontSize: AppFontSizes.text14,
-                    fontFamily: AppFonts.Montserrat_Bold,
-                  ),
+      child: FlatButton(
+        onPressed: displayRecordLogsDialog,
+        child: StreamBuilder<String>(
+            stream: DeviceController.deviceIdStream,
+            builder: (context, AsyncSnapshot<String> deviceIdSnapshot) {
+              return Material(
+                color: deviceIdSnapshot.data == widget.scanResult.device.id.id
+                    ? AppColors.PrimaryGreen
+                    : AppColors.PrimaryWhite,
+                child: Row(
+                  children: <Widget>[
+                    SizedBox(
+                      width: 70,
+                      height: 50,
+                      child: Icon(Icons.device_hub, size: 40),
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 20),
+                          child: Text(
+                            widget.scanResult.device.name,
+                            style: AppTextStyle.blackStyle(
+                              fontSize: AppFontSizes.text14,
+                              fontFamily: AppFonts.Montserrat_Bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                        width: 70,
+                        height: 70,
+                        child: Icon(Icons.signal_cellular_4_bar, size: 30)),
+                  ],
                 ),
-              ),
-            ),
-          ),
-          SizedBox(
-              width: 70,
-              height: 70,
-              child: Icon(Icons.signal_cellular_4_bar, size: 30)),
-        ],
+              );
+            }),
       ),
     );
   }

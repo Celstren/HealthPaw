@@ -6,6 +6,7 @@ class AppStrings {
   static final String owner                             = AppConfig.commonStringsJson["Owner"] ?? "";
   static final String accept                            = AppConfig.commonStringsJson["Accept"] ?? "";
   static final String search                            = AppConfig.commonStringsJson["Search"] ?? "";
+  static final String searching                         = AppConfig.commonStringsJson["Searching"] ?? "";
   static final String connect                           = AppConfig.commonStringsJson["Connect"] ?? "";
   static final String close                             = AppConfig.commonStringsJson["Close"] ?? "";
   static final String register                          = AppConfig.commonStringsJson["Register"] ?? "";
@@ -54,8 +55,9 @@ class AppStrings {
   static final String savedSound                        = AppConfig.commonStringsJson["SavedSounds"] ?? "";
   static final String playingSound                      = AppConfig.commonStringsJson["PlayingSound"] ?? "";
   static final String stopPlaying                       = AppConfig.commonStringsJson["StopPlaying"] ?? "";
-  static final String play                              = AppConfig.commonStringsJson["Play"] ?? "";
   static final String stop                              = AppConfig.commonStringsJson["Stop"] ?? "";
+  static final String stopped                           = AppConfig.commonStringsJson["Stoppped"] ?? "";
+  static final String play                              = AppConfig.commonStringsJson["Play"] ?? "";
   static final String start                             = AppConfig.commonStringsJson["Start"] ?? "";
   static final String pause                             = AppConfig.commonStringsJson["Pause"] ?? "";
   static final String resume                            = AppConfig.commonStringsJson["Resume"] ?? "";
@@ -182,4 +184,16 @@ class AppStrings {
   static final String soundHistory                      = AppConfig.commonStringsJson["SoundHistory"] ?? "";
   static final String environmentalTemperatureHistory   = AppConfig.commonStringsJson["EnvironmentalTemperatureHistory"] ?? "";
   static final String noDataChartMessage                = AppConfig.commonStringsJson["NoDataChartMessage"] ?? "";
+  static final String waitUntilConnect                  = AppConfig.commonStringsJson["WaitUntilConnect"] ?? "";
+  static final String turnOffLed                        = AppConfig.commonStringsJson["TurnOffLed"] ?? "";
+  static final String turnOnLed                         = AppConfig.commonStringsJson["TurnOnLed"] ?? "";
+  static final String disconnect                        = AppConfig.commonStringsJson["Disconnect"] ?? "";
+  static final String connected                         = AppConfig.commonStringsJson["Connected"] ?? "";
+  static final String continueLabel                     = AppConfig.commonStringsJson["Continue"] ?? "";
+  static final String retry                             = AppConfig.commonStringsJson["Retry"] ?? "";
+  static final String reportStatusWithSensor            = AppConfig.commonStringsJson["ReportStatusWithSensor"] ?? "";
+  static final String sensorConnectedSuccessfully       = AppConfig.commonStringsJson["SensorConnectedSuccessfully"] ?? "";
+  static final String sensorConnectedFailed             = AppConfig.commonStringsJson["SensorConnectedFailed"] ?? "";
+  static final String sensorDisconnectedSuccessfully    = AppConfig.commonStringsJson["SensorDisconnectedSuccessfully"] ?? "";
+  static final String sensorDisconnectedFailed          = AppConfig.commonStringsJson["SensorDisconnectedFailed"] ?? "";
 }

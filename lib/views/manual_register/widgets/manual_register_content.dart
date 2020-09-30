@@ -77,7 +77,8 @@ class _ManualRegisterContentState extends State<ManualRegisterContent> {
               isValid: _manualRegisterForm.validNameValue,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(50),
-                FilteringTextInputFormatter.deny(Validators.numberRegex)
+                // FilteringTextInputFormatter.deny(Validators.numberRegex)
+                BlacklistingTextInputFormatter(Validators.numberRegex)
               ],
               onChanged: (value) {
                 if (!_manualRegisterForm.validNameValue) {
@@ -97,7 +98,8 @@ class _ManualRegisterContentState extends State<ManualRegisterContent> {
               isValid: _manualRegisterForm.validLastnameValue,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(50),
-                FilteringTextInputFormatter.deny(Validators.numberRegex)
+                // FilteringTextInputFormatter.deny(Validators.numberRegex)
+                BlacklistingTextInputFormatter(Validators.numberRegex)
               ],
               onChanged: (value) {
                 if (!_manualRegisterForm.validLastnameValue) {
@@ -231,7 +233,8 @@ class _ManualRegisterContentState extends State<ManualRegisterContent> {
               isValid: _manualRegisterForm.validMobileValue,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(9),
-                FilteringTextInputFormatter.digitsOnly,
+                // FilteringTextInputFormatter.digitsOnly,
+                WhitelistingTextInputFormatter.digitsOnly
               ],
               onChanged: (value) {
                 if (!_manualRegisterForm.validMobileValue) {

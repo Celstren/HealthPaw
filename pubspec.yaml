@@ -41,6 +41,7 @@ dependencies:
   connectivity: ^0.4.9+2
   wheel_chooser: ^0.1.1
   hive: ^1.4.4
+  rxdart: ^0.24.1
 
 dev_dependencies:
   flutter_test:
