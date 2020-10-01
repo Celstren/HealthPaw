@@ -1,10 +1,14 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/models/pet/pet.dart';
+import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/pet/pet.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
+import 'package:HealthPaw/views/sync_wearable/logic/device_controller.dart';
+import 'package:HealthPaw/views/sync_wearable/sync_wearable.dart';
+import 'package:HealthPaw/views/sync_wearable/widgets/sync_wearable_report_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:wheel_chooser/wheel_chooser.dart';
 
@@ -44,7 +48,8 @@ class _ReportPetStatusContentState extends State<ReportPetStatusContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
+      child: SingleChildScrollView(
+        child: Column(
         children: <Widget>[
           SizedBox(height: 30),
           _buildCardiacStatfield(),
@@ -52,7 +57,10 @@ class _ReportPetStatusContentState extends State<ReportPetStatusContent> {
           _buildBreathingStatfield(),
           SizedBox(height: 30),
           _buildReportButton(),
+          SizedBox(height: 30),
+          _buildReportWithSensorButton(),
         ],
+      ),
       ),
     );
   }
@@ -194,11 +202,39 @@ class _ReportPetStatusContentState extends State<ReportPetStatusContent> {
   Widget _buildReportButton() {
     return RoundedButton(
       text: AppStrings.reportStatus,
-      size: Size(160, 40),
+      size: Size(200, 50),
       color: AppColors.PrimaryLightBlue,
       style: AppTextStyle.whiteStyle(
-          fontSize: AppFontSizes.text16, fontWeight: FontWeight.w500),
+          fontSize: AppFontSizes.text14,
+          fontFamily: AppFonts.Montserrat_Bold),
       onPress: reportStatus,
+    );
+  }
+
+  Widget _buildReportWithSensorButton() {
+    return RoundedButton(
+      text: AppStrings.reportStatusWithSensor,
+      size: Size(200, 50),
+      style: AppTextStyle.whiteStyle(
+          fontSize: AppFontSizes.text14,
+          fontFamily: AppFonts.Montserrat_Bold),
+      onPress: () {
+        if (DeviceController.isConnectedValue) {
+          showCustomDialog(context: context, builder: (context) => CustomDialog(child: SyncWearableReportDialog(pet: widget.pet)));
+        } else {
+          showCustomDialog(context: context, builder: (context) => CustomDialog(
+              child: OkDialog(
+                title: AppStrings.sensorIsNotConnected,
+                okText: AppStrings.syncDevice,
+                onPress: () {
+                  Navigator.pop(context);
+                  NavigationMethods.of(context).navigateTo(SyncWearableView());
+                },
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }

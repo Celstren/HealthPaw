@@ -204,4 +204,8 @@ class AppStrings {
   static final String turnOnLed =       AppConfig.commonStringsJson["TurnOnLed"] ?? "";
   static final String turnOffLed =       AppConfig.commonStringsJson["TurnOffLed"] ?? "";
   static final String disconnect =       AppConfig.commonStringsJson["Disconnect"] ?? "";
+  static final String sensorIsNotConnected =       AppConfig.commonStringsJson["SensorIsNotConnected"] ?? "";
+  static final String syncDevice =       AppConfig.commonStringsJson["SyncDevice"] ?? "";
+  static final String temperaturesTrack =       AppConfig.commonStringsJson["TemperaturesTrack"] ?? "";
+  static final String physicalActivitiesTrack =       AppConfig.commonStringsJson["PhysicalActivitiesTrack"] ?? "";
 }

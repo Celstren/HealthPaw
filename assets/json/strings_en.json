@@ -112,10 +112,15 @@
     "EnvironmentalTemperatureHistory": "Environmental Temperature History",
 
     "WaitUntilConnect": "Press continue when led is turn on. If not, try again",
+    "SensorIsNotConnected": "Sensor is not connected",
+    "SyncDevice": "Sync device",
 
     "AssignOwner": "Assign owner",
     "OwnerMail": "Owner mail",
     "OwnerAssigned": "Owner assigned",
+    
+    "TemperaturesTrack": "Temperatures log",
+    "PhysicalActivitiesTrack": "Physical activities logs",
 
     "LocationOf": "The localization of ",
     "is": "is",

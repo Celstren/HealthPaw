@@ -42,8 +42,6 @@ class _SyncWearableContentState extends State<SyncWearableContent> {
     _children.add(_buildConnectionStatus());
     _children.add(_buildConnectionButton());
     _children.add(SizedBox(height: 20));
-    _children.add(_buildReportButton());
-    _children.add(SizedBox(height: 40));
     return _children;
   }
 
@@ -99,22 +97,4 @@ class _SyncWearableContentState extends State<SyncWearableContent> {
           );
         });
   }
-
-  Widget _buildReportButton() {
-    return RoundedButton(
-      text: AppStrings.reportStatusWithSensor,
-      size: Size(200, 50),
-      style: AppTextStyle.whiteStyle(
-          fontSize: AppFontSizes.text14,
-          fontFamily: AppFonts.Montserrat_Bold),
-      onPress: () {
-        if (DeviceController.isConnectedValue) {
-          showCustomDialog(context: context, builder: (context) => CustomDialog(child: SyncWearableReportDialog()));
-        } else {
-          Fluttertoast.showToast(msg: "Por favor conecte el dispositivo primero");
-        }
-      },
-    );
-  }
-
 }
