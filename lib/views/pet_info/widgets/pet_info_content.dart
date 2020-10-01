@@ -6,6 +6,7 @@ import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/pet/pet.dart';
 import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
+import 'package:HealthPaw/utils/general/constant_helper.dart';
 import 'package:HealthPaw/utils/general/constant_methods_helper.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:HealthPaw/utils/widgets/app_text_field.dart';
@@ -144,9 +145,9 @@ class _PetInfoContentState extends State<PetInfoContent> {
     String id = await PetService.registerPet(pet);
     if (id != null) {
       await UserService.addPetToUser(
-          petDNIOwnerController.value.text.trim(), pet.namevar, id);
-      return await UserService.addPetToUser(
           petDNIVetController.value.text.trim(), pet.namevar, id);
+      return await UserService.addPetToUser(
+          petDNIOwnerController.value.text.trim(), pet.namevar, id);
     } else
       return false;
   }
