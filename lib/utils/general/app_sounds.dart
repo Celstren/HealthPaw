@@ -1,7 +1,3 @@
-import 'dart:io';
-
-import 'package:audioplayers/audioplayers.dart';
-
 class AppSounds {
   static const String Cat1   = "audios/cat1.wav";
   static const String Cat2   = "audios/cat2.wav";

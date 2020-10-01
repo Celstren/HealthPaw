@@ -7,6 +7,7 @@
     "Accept": "Aceptar",
     "Connect": "Conectar",
     "Search": "Buscar",
+    "Searching": "Buscando",
     "Close": "Cerrar",
     "Register": "Registrar",
     "Modify": "Modificar",
@@ -67,6 +68,7 @@
     "StopPlaying": "Dejar de reproducir",
     "Play": "Reproducir",
     "Stop": "Detener",
+    "Stopped": "Detenido",
     "Start": "Iniciar",
     "Pause": "Pausar",
     "Resume": "Continuar",
@@ -109,6 +111,8 @@
     "SoundHistory": "Historial de intensidad de sonido",
     "EnvironmentalTemperatureHistory": "Historial de Temperatura Ambiente",
 
+    "WaitUntilConnect": "Presiona continuar cuando se encienda la luz led. Sino, vuelva a intentar",
+
     "AssignOwner": "Asignar Dueño",
     "OwnerMail": "Correo Dueño",
     "OwnerAssigned": "Dueño asignados",
@@ -141,11 +145,23 @@
     "RegisterUsers": "Registrar Usuarios",
     "RegisterOwner": "Registrar Dueño",
 
+    "TurnOffLed": "Apagar led",
+    "TurnOnLed": "Encender led",
+    "Disconnect": "Desconectar",
+    "Connected": "Conectado",
+    "Continue": "Continuar",
+    "Retry": "Reintentar",
+
     "LocatePet": "Localizar mascota",
 
     "SendMessage": "Enviar mensaje",
     "SendNotification": "Redactar notificación",
     "ReportStatus": "Reportar estado",
+    "ReportStatusWithSensor": "Reportar estado con sensor",
+    "SensorConnectedSuccessfully": "Conexión éxitosa",
+    "SensorConnectedFailed": "Conexión fallida",
+    "SensorDisconnectedSuccessfully": "Desconexión éxitosa",
+    "SensorDisconnectedFailed": "Desconexión fallida",
 
     "PetsAssigned": "Mascotas asignadas",
 

@@ -36,7 +36,7 @@ class RoundedButton extends StatelessWidget {
             ),
           ),
         ) : Material(
-          color: AppColors.PrimaryDarkGrey,
+          color: AppColors.PrimaryGrey,
           child: Center(
             child: Text(
               text,

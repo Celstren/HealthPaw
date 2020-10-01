@@ -1,4 +1,3 @@
-import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/views/default_sounds/widgets/default_sounds_list.dart';
 import 'package:flutter/material.dart';
