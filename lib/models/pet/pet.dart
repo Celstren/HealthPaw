@@ -13,8 +13,8 @@ class Pet {
     this.id = "",
     this.namevar = "",
     this.breed = "",
-    this.size = 0,
-    this.weigth = 0,
+    this.size = "",
+    this.weight = 0,
     this.image = "",
     this.birthDay,
     this.petType = "",
@@ -29,8 +29,8 @@ class Pet {
   String id;
   String namevar;
   String breed;
-  num size;
-  num weigth;
+  String size;
+  num weight;
   String image;
   DateTime birthDay;
   String petType;
@@ -45,24 +45,40 @@ class Pet {
         id: json["id"] ?? "",
         namevar: json["namevar"] ?? "",
         breed: json["breed"] ?? "",
-        size: json["size"] ?? 0,
-        weigth: json["weigth"] ?? 0,
+        size: json["size"] ?? "",
+        weight: json["weight"] ?? 0,
         image: json["image"] ?? "",
         birthDay: DateTime.tryParse(json["birthDay"]),
         petType: json["petType"] ?? "",
-        alerts: json["alerts"] != null && json["alerts"] is List ? json["alerts"].map<Alert>((e) => Alert.fromJson(e)).toList() : null,
-        breathingFrequency: json["breathingFrequency"] != null  && json["breathingFrequency"] is Map? Stadistic.fromJson(json["breathingFrequency"]) : null,
-        heartRate: json["heartRate"] != null  && json["heartRate"] is Map? Stadistic.fromJson(json["heartRate"]) : null,
-        sound: json["sound"] != null && json["sound"] is Map? Stadistic.fromJson(json["sound"]) : null,
-        temperature: json["temperature"] != null && json["temperature"] is Map? Stadistic.fromJson(json["temperature"]) : null,
-        recommendations: json["recommendations"] != null && json["recommendations"] is List? json["recommendations"].map<Recommendation>((e) => Recommendation.fromJson(e)).toList() : null,
+        alerts: json["alerts"] != null && json["alerts"] is List
+            ? json["alerts"].map<Alert>((e) => Alert.fromJson(e)).toList()
+            : null,
+        breathingFrequency: json["breathingFrequency"] != null &&
+                json["breathingFrequency"] is Map
+            ? Stadistic.fromJson(json["breathingFrequency"])
+            : null,
+        heartRate: json["heartRate"] != null && json["heartRate"] is Map
+            ? Stadistic.fromJson(json["heartRate"])
+            : null,
+        sound: json["sound"] != null && json["sound"] is Map
+            ? Stadistic.fromJson(json["sound"])
+            : null,
+        temperature: json["temperature"] != null && json["temperature"] is Map
+            ? Stadistic.fromJson(json["temperature"])
+            : null,
+        recommendations:
+            json["recommendations"] != null && json["recommendations"] is List
+                ? json["recommendations"]
+                    .map<Recommendation>((e) => Recommendation.fromJson(e))
+                    .toList()
+                : null,
       );
 
   Map<String, dynamic> toJson() => {
         "namevar": namevar ?? "",
         "breed": breed ?? "",
-        "size": size ?? 0,
-        "weigth": weigth ?? 0,
+        "size": size ?? "",
+        "weight": weight ?? 0,
         "image": image ?? "",
         "birthDay": birthDay?.toIso8601String() ?? "",
         "petType": petType ?? "",
