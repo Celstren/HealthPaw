@@ -24,7 +24,7 @@ class _PhysicalActivityHistoryContentState extends State<PhysicalActivityHistory
             PetAvatar(name: widget.pet.namevar),
             SizedBox(height: 10),
             StatsOverview(
-              stadistic: widget.pet.sound,
+              stadistic: widget.pet.physicalActivity,
               type: StadisticType.HISTORY,
               metricUnit: AppStrings.minutesAbb,
               subtitle: AppStrings.physicalActivityHistory,

@@ -24,6 +24,7 @@ class Pet {
     this.heartRate,
     this.sound,
     this.temperature,
+    this.physicalActivity,
   });
 
   String id;
@@ -40,12 +41,13 @@ class Pet {
   Stadistic heartRate;
   Stadistic sound;
   Stadistic temperature;
+  Stadistic physicalActivity;
 
   factory Pet.fromJson(Map<String, dynamic> json) => Pet(
         id: json["id"] ?? "",
         namevar: json["namevar"] ?? "",
         breed: json["breed"] ?? "",
-        size: json["size"] ?? "",
+        size: json["size"] is String ? (json["size"] ?? "") : json["size"]?.toString() ?? "",
         weight: json["weight"] ?? 0,
         image: json["image"] ?? "",
         birthDay: DateTime.tryParse(json["birthDay"]),
@@ -64,6 +66,9 @@ class Pet {
             ? Stadistic.fromJson(json["sound"])
             : null,
         temperature: json["temperature"] != null && json["temperature"] is Map
+            ? Stadistic.fromJson(json["temperature"])
+            : null,
+        physicalActivity: json["temperature"] != null && json["temperature"] is Map
             ? Stadistic.fromJson(json["temperature"])
             : null,
         recommendations:
@@ -88,5 +93,6 @@ class Pet {
         "heartRate": heartRate ?? Stadistic().toJson(),
         "sound": sound ?? Stadistic().toJson(),
         "temperature": temperature ?? Stadistic().toJson(),
+        "physicalActivity": physicalActivity ?? Stadistic().toJson(),
       };
 }

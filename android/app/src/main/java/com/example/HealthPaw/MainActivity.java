@@ -132,8 +132,8 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
                   accelResults.clear();
                   tempResults.clear();
                   final Map<String, List<Map<String, Object>>> logs = new HashMap<>();
-                  logs.put("acelerometro", _accelResults);
-                  logs.put("temperatura", _tempResults);
+                  logs.put("accelerations", _accelResults);
+                  logs.put("temperature", _tempResults);
                   deactivateLogs();
                   result.success(logs);
                 } else {
@@ -233,7 +233,7 @@ public class MainActivity extends FlutterActivity implements ServiceConnection {
       Log.i("MainActivity", "Connected");
       accelerometer = mwBoard.getModule(Accelerometer.class);
       accelerometer.configure()
-              .odr(25f)       // Set sampling frequency to 25Hz, or closest valid ODR
+              .odr(1f)       // Set sampling frequency to 25Hz, or closest valid ODR
               .commit();
       Temperature temperature = mwBoard.getModule(Temperature.class);
       tempSensor = temperature.findSensors(SensorType.PRESET_THERMISTOR)[0];
