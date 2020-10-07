@@ -7,12 +7,17 @@ class OkDialog extends StatefulWidget {
   final String okText;
   final Function onPress;
   final bool dismissible;
+  final double height;
+  final double width;
   OkDialog(
       {Key key,
       this.title = "",
       this.okText = "",
       this.onPress,
-      this.dismissible = true})
+      this.dismissible = true,
+      this.height = 120,
+      this.width = 360,
+    })
       : super(key: key);
 
   @override
@@ -24,8 +29,8 @@ class _OkDialogState extends State<OkDialog> {
   Widget build(BuildContext context) {
     return WillPopScope(
         child: Container(
-          height: 120,
-          width: 360,
+          height: widget.height,
+          width: widget.width,
           decoration: BoxDecoration(
             borderRadius: AppBorderRadius.all(radius: AppRadius.radius20),
             color: AppColors.PrimaryWhite,

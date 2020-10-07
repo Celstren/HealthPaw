@@ -208,4 +208,5 @@ class AppStrings {
   static final String syncDevice =       AppConfig.commonStringsJson["SyncDevice"] ?? "";
   static final String temperaturesTrack =       AppConfig.commonStringsJson["TemperaturesTrack"] ?? "";
   static final String physicalActivitiesTrack =       AppConfig.commonStringsJson["PhysicalActivitiesTrack"] ?? "";
+  static final String connectionError =       AppConfig.commonStringsJson["ConnectionError"] ?? "";
 }

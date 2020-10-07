@@ -6,7 +6,6 @@ import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/pet/pet.dart';
 import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
-import 'package:HealthPaw/utils/general/constant_helper.dart';
 import 'package:HealthPaw/utils/general/constant_methods_helper.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:HealthPaw/utils/widgets/app_text_field.dart';
@@ -97,7 +96,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
     if (connectivity != ConnectivityResult.none) {
       NavigationMethods.of(context).navigateTo(widget);
     } else {
-      GlobalDialogs.displayConnectionError(0);
+      GlobalDialogs.displayErrorDialog(0);
     }
   }
 
@@ -159,6 +158,15 @@ class _PetInfoContentState extends State<PetInfoContent> {
     pet.weight = num.tryParse(petWeightController.value.text.trim());
     pet.breed = petBreedController.value.text.trim();
     pet.size = petSize;
+    bool success = await PetService.updatePet(pet);
+    if (!success) return false;
+    return await UserService.editPetToUser(
+        user.documentNumber, pet.namevar, pet.id);
+  }
+
+  Future<bool> deactivatePetRequest() async {
+    Pet pet = widget.pet;
+    //TODO: Deactivate pet
     bool success = await PetService.updatePet(pet);
     if (!success) return false;
     return await UserService.editPetToUser(
