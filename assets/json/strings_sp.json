@@ -12,6 +12,7 @@
     "Register": "Registrar",
     "Modify": "Modificar",
     "Deactivate": "Deshabilitar",
+    "Activate": "Habilitar",
     "Cancel": "Cancelar",
     "Sounds": "Sonidos",
     "Alerts": "Alertas",
@@ -96,6 +97,8 @@
     "OwnerProfile": "Perfil Dueño",
     "ModifyOwnerProfile": "Modificar Perfil Dueño",
     "DeactivateUser": "Deshabilitar usuario",
+    "AskDeactivatePet": "¿Deshabilitar mascota?",
+    "AskActivatePet": "¿Habilitar mascota?",
     
     "PetOverview": "Resumen de mascota",
     "CardiacFrequency": "Frecuencia cardiaca",
