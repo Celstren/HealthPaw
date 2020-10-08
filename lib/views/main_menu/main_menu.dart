@@ -1,3 +1,4 @@
+import 'package:HealthPaw/services/firebase/firebase_controller.dart';
 import 'package:HealthPaw/utils/general/constant_methods_helper.dart';
 import 'package:HealthPaw/utils/widgets/common_app_bar.dart';
 import 'package:HealthPaw/utils/widgets/global_dialogs.dart';
@@ -12,6 +13,13 @@ class MainMenuView extends StatefulWidget {
 }
 
 class _MainMenuViewState extends State<MainMenuView> {
+
+  @override
+  void initState() {
+    FirebaseController.init(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     GlobalDialogs.initContext(context);
