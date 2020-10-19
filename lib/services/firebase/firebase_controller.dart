@@ -1,5 +1,9 @@
 import 'dart:io';
 
+import 'package:HealthPaw/data/shared_preferences/preferences.dart';
+import 'package:HealthPaw/models/firebaseuser/firebaseuser.dart';
+import 'package:HealthPaw/models/user/user.dart';
+import 'package:HealthPaw/services/firebase/firebase_service.dart';
 import 'package:HealthPaw/services/firebase/methods.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +48,6 @@ class FirebaseController {
 
       ///METHOD RETURNS THE MESSAGE ONCE CLICKED ON NOTIFICATIONS
       onResume: (Map<String, dynamic> message) async {
-        onResumeMethod(message);
         print("onMessage: $message");
       },
     );
@@ -52,7 +55,9 @@ class FirebaseController {
 
   static void saveFMCToken() async {
     String fmcToken = await _firebaseMessaging.getToken();
-    /// For testing purposes print the Firebase Messaging token
+    User userLogged = Preferences.getUser;
+    FirebaseUser firebaseUser = FirebaseUser(userdocument: userLogged.documentNumber, firebaseKey: fmcToken);
     print("FirebaseMessaging token: $fmcToken");
+    await FirebaseService.registerKey(firebaseUser);
   }
 }

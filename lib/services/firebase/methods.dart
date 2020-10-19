@@ -18,8 +18,3 @@ void onMessageMethod(message, context) {
     });
   }
 }
-
-void onResumeMethod(message) async {
-  /// TODO: TEST ONLY DELETE THEN
-  print('message : $message');
-}

@@ -6,7 +6,6 @@ import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/pet/pet.dart';
 import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
-import 'package:HealthPaw/utils/general/constant_helper.dart';
 import 'package:HealthPaw/utils/general/constant_methods_helper.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:HealthPaw/utils/widgets/app_text_field.dart';
@@ -44,7 +43,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
 
   User user;
 
-  String petSize = null;
+  String petSize;
   bool validatedPetNameValue = true;
   bool validatedPetBreedValue = true;
   bool validatedPetWeightValue = true;
