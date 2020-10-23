@@ -26,7 +26,8 @@ class User {
       this.documentNumber,
       this.birthDay,
       this.type,
-      this.active});
+      this.active,
+      this.fmcToken});
 
   String name;
   String lastName;
@@ -41,6 +42,7 @@ class User {
   List<UserPet> pets;
   int type;
   bool active;
+  String fmcToken;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         name: json["namevar"] ?? "",
@@ -56,6 +58,7 @@ class User {
         birthDay: DateTime.parse(json["birthDay"]),
         type: json["type"] ?? 1,
         active: json["active"] ?? true,
+        fmcToken: json["fmcToken"] ?? null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -72,6 +75,20 @@ class User {
         "birthDay": birthDay.toIso8601String(),
         "type": type ?? 1,
         "active": active ?? true,
+        "fmcToken": fmcToken ?? null,
+      };
+
+  Map<String, dynamic> toJsonUpdate() => {
+        "namevar": name ?? "",
+        "lastName": lastName ?? "",
+        "secondLastName": secondLastName ?? "",
+        "image": image ?? "",
+        "password": password ?? "",
+        "email": email ?? "",
+        "phone": phone,
+        "birthDay": birthDay.toIso8601String(),
+        "active": active ?? true,
+        "fmcToken": fmcToken ?? null,
       };
 
   String get userTypeValue => ConstantMethodHelper.userTypeValue(this.type);

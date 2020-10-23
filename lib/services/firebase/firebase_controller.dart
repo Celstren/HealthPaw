@@ -1,10 +1,9 @@
 import 'dart:io';
 
 import 'package:HealthPaw/data/shared_preferences/preferences.dart';
-import 'package:HealthPaw/models/firebaseuser/firebaseuser.dart';
 import 'package:HealthPaw/models/user/user.dart';
-import 'package:HealthPaw/services/firebase/firebase_service.dart';
 import 'package:HealthPaw/services/firebase/methods.dart';
+import 'package:HealthPaw/services/user/user.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
@@ -56,8 +55,9 @@ class FirebaseController {
   static void saveFMCToken() async {
     String fmcToken = await _firebaseMessaging.getToken();
     User userLogged = Preferences.getUser;
-    FirebaseUser firebaseUser = FirebaseUser(userdocument: userLogged.documentNumber, firebaseKey: fmcToken);
+    userLogged.fmcToken = fmcToken;
+    Preferences.setUser = userLogged;
     print("FirebaseMessaging token: $fmcToken");
-    await FirebaseService.registerKey(firebaseUser);
+    await UserService.updateUser(userLogged.documentNumber, userLogged);
   }
 }
