@@ -12,6 +12,7 @@
     "Register": "Registrar",
     "Modify": "Modificar",
     "Deactivate": "Deshabilitar",
+    "Activate": "Habilitar",
     "Cancel": "Cancelar",
     "Sounds": "Sonidos",
     "Alerts": "Alertas",
@@ -55,7 +56,7 @@
     "HearthRate": "Ritmo Cardíaco",
     "PetStatus": "Estado Mascota",
 
-    "Login": "Ingresar",
+    "Login": "Login",
     "Username": "Nombre de usuario",
     "DocumentNumber": "Documento de Identidad",
     "Password": "Contraseña",
@@ -96,6 +97,8 @@
     "OwnerProfile": "Perfil Dueño",
     "ModifyOwnerProfile": "Modificar Perfil Dueño",
     "DeactivateUser": "Deshabilitar usuario",
+    "AskDeactivatePet": "¿Deshabilitar mascota?",
+    "AskActivatePet": "¿Habilitar mascota?",
     
     "PetOverview": "Resumen de mascota",
     "CardiacFrequency": "Frecuencia cardiaca",
@@ -198,7 +201,7 @@
     "FailedLogeo": "Ingreso fallido. Vuelva a intentar",
     "NoConectivity": "No se pudo contactar al servidor, revise su conexión a internet",
     "ServiceFailure": "Hubo un problema al contactar a nuestro servicio. Contacte al administrador",
-    "NonAuthorized": "Usuario y/o contraseña incorrecta. Intente de nuevo",
+    "NonAuthorized": "Usuario o contraseña incorrectos",
     "FailedLogin": "Ingreso fallido. Vuelva a intentar",
     "SuccessfulModify": "Modificación exitosa",
     "FailedModify": "Modificación fallida",
@@ -214,6 +217,8 @@
     "AlertSend": "Alerta Enviada",
     "FetchPetFail": "Fallo traer datos de mascota",
     "LogoutFail": "Fallo al cerrar sesión",
+
+    "ConnectionError": "Error de conexión",
 
     "TheField": "El campo",
     "IsInvalid": "es inválido",

@@ -13,6 +13,7 @@ class AppStrings {
   static final String modify = AppConfig.commonStringsJson["Modify"] ?? "";
   static final String cancel = AppConfig.commonStringsJson["Cancel"] ?? "";
   static final String deactivate =       AppConfig.commonStringsJson["Deactivate"] ?? "";
+  static final String activate =       AppConfig.commonStringsJson["Activate"] ?? "";
   static final String deactivated =       AppConfig.commonStringsJson["Deactivated"] ?? "";
   static final String activated =       AppConfig.commonStringsJson["Activated"] ?? "";
   static final String sounds = AppConfig.commonStringsJson["Sounds"] ?? "";
@@ -93,6 +94,8 @@ class AppStrings {
   static final String ownerProfile =       AppConfig.commonStringsJson["OwnerProfile"] ?? "";
   static final String modifyOwnerProfile =       AppConfig.commonStringsJson["ModifyOwnerProfile"] ?? "";
   static final String deactivateUser =       AppConfig.commonStringsJson["DeactivateUser"] ?? "";
+  static final String askDeactivatePet =       AppConfig.commonStringsJson["AskDeactivatePet"] ?? "";
+  static final String askActivatePet =       AppConfig.commonStringsJson["AskActivatePet"] ?? "";
   static final String petOverview =       AppConfig.commonStringsJson["PetOverview"] ?? "";
   static final String cardiacFrequency =       AppConfig.commonStringsJson["CardiacFrequency"] ?? "";
   static final String breathFrequency =       AppConfig.commonStringsJson["BreathFrequency"] ?? "";
@@ -208,4 +211,5 @@ class AppStrings {
   static final String syncDevice =       AppConfig.commonStringsJson["SyncDevice"] ?? "";
   static final String temperaturesTrack =       AppConfig.commonStringsJson["TemperaturesTrack"] ?? "";
   static final String physicalActivitiesTrack =       AppConfig.commonStringsJson["PhysicalActivitiesTrack"] ?? "";
+  static final String connectionError =       AppConfig.commonStringsJson["ConnectionError"] ?? "";
 }
