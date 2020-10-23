@@ -202,8 +202,6 @@ class _PetInfoContentState extends State<PetInfoContent> {
     if (success) {
       Navigator.pop(context);
       Navigator.pop(context);
-    } else {
-      showModifyFailedDialog();
     }
   }
 
