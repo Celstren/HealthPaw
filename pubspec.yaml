@@ -42,6 +42,7 @@ dependencies:
   wheel_chooser: ^0.1.1
   hive: ^1.4.4
   rxdart: ^0.24.1
+  firebase_messaging: ^7.0.3
 
 dev_dependencies:
   flutter_test:

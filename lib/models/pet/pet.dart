@@ -25,6 +25,7 @@ class Pet {
     this.sound,
     this.temperature,
     this.physicalActivity,
+    this.active = true,
   });
 
   String id;
@@ -42,6 +43,7 @@ class Pet {
   Stadistic sound;
   Stadistic temperature;
   Stadistic physicalActivity;
+  bool active;
 
   factory Pet.fromJson(Map<String, dynamic> json) => Pet(
         id: json["id"] ?? "",
@@ -77,6 +79,7 @@ class Pet {
                     .map<Recommendation>((e) => Recommendation.fromJson(e))
                     .toList()
                 : null,
+        active: json["active"] ?? true,
       );
 
   Map<String, dynamic> toJson() => {
@@ -94,5 +97,6 @@ class Pet {
         "sound": sound ?? Stadistic().toJson(),
         "temperature": temperature ?? Stadistic().toJson(),
         "physicalActivity": physicalActivity ?? Stadistic().toJson(),
+        "active": active ?? true,
       };
 }

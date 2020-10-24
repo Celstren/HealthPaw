@@ -12,6 +12,7 @@
     "Register": "Register",
     "Modify": "Modify",
     "Deactivate": "Deactivate",
+    "Activate": "Activate",
     "Cancel": "Cancel",
     "Sounds": "Sounds",
     "Alerts": "Alerts",
@@ -96,6 +97,8 @@
     "OwnerProfile": "Owner Profile",
     "ModifyOwnerProfile": "Modify Owner Profile",
     "DeactivateUser": "Deactivate user",
+    "AskDeactivatePet": "Deactivate pet?",
+    "AskActivatePet": "Activate pet?",
     
     "PetOverview": "Pet overview",
     "CardiacFrequency": "Cardiac fFrequency",
@@ -209,6 +212,8 @@
     "AlertSend": "Alert Send",
     "FetchPetFail": "Failed to fetch pet data",
     "LogoutFail": "Logout failed",
+
+    "ConnectionError": "Error de conexión",
 
     "TheField": "The field",
     "IsInvalid": "is invalid",

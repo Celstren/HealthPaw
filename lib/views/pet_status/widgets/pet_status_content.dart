@@ -35,7 +35,7 @@ class _PetStatusContentState extends State<PetStatusContent> {
     if (connectivity != ConnectivityResult.none) {
       NavigationMethods.of(context).navigateTo(widget);
     } else {
-      GlobalDialogs.displayConnectionError(0);
+      GlobalDialogs.displayErrorDialog(0);
     }
   }
 

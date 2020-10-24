@@ -3,6 +3,7 @@ import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
 import 'package:HealthPaw/utils/general/enums.dart';
 import 'package:HealthPaw/utils/widgets/circular_button.dart';
+import 'package:HealthPaw/utils/widgets/global_dialogs.dart';
 import 'package:HealthPaw/views/manual_register/manual_register.dart';
 import 'package:HealthPaw/views/user_list/user_list.dart';
 import 'package:flutter/material.dart';
@@ -30,13 +31,17 @@ class _SelectUserTypeContentState extends State<SelectUserTypeContent> {
             CircularButton(
               size: 80,
               label: AppStrings.veterinarian,
-              onPress: () {
-                if (widget.selectType == SelectType.Register) {
-                  NavigationMethods.of(context)
-                      .navigateTo(ManualRegisterView(userType: UserType.Vet));
-                } else {
-                  NavigationMethods.of(context)
-                      .navigateTo(UserListView(userType: UserType.Vet));
+              onPress: () async {
+                bool noConnection =
+                    await GlobalDialogs.displayOnConnectionError;
+                if (!noConnection) {
+                  if (widget.selectType == SelectType.Register) {
+                    NavigationMethods.of(context)
+                        .navigateTo(ManualRegisterView(userType: UserType.Vet));
+                  } else {
+                    NavigationMethods.of(context)
+                        .navigateTo(UserListView(userType: UserType.Vet));
+                  }
                 }
               },
               icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
@@ -44,13 +49,17 @@ class _SelectUserTypeContentState extends State<SelectUserTypeContent> {
             CircularButton(
               size: 80,
               label: AppStrings.owners,
-              onPress: () {
-                if (widget.selectType == SelectType.Register) {
-                  NavigationMethods.of(context)
-                      .navigateTo(ManualRegisterView(userType: UserType.Owner));
-                } else {
-                  NavigationMethods.of(context)
-                      .navigateTo(UserListView(userType: UserType.Owner));
+              onPress: () async {
+                bool noConnection =
+                    await GlobalDialogs.displayOnConnectionError;
+                if (!noConnection) {
+                  if (widget.selectType == SelectType.Register) {
+                    NavigationMethods.of(context).navigateTo(
+                        ManualRegisterView(userType: UserType.Owner));
+                  } else {
+                    NavigationMethods.of(context)
+                        .navigateTo(UserListView(userType: UserType.Owner));
+                  }
                 }
               },
               icon: Icon(Icons.person, size: 30, color: AppColors.PrimaryBlack),
@@ -58,13 +67,17 @@ class _SelectUserTypeContentState extends State<SelectUserTypeContent> {
             CircularButton(
               size: 80,
               label: AppStrings.administrator,
-              onPress: () {
-                if (widget.selectType == SelectType.Register) {
-                  NavigationMethods.of(context)
-                      .navigateTo(ManualRegisterView(userType: UserType.Admin));
-                } else {
-                  NavigationMethods.of(context)
-                      .navigateTo(UserListView(userType: UserType.Admin));
+              onPress: () async {
+                bool noConnection =
+                    await GlobalDialogs.displayOnConnectionError;
+                if (!noConnection) {
+                  if (widget.selectType == SelectType.Register) {
+                    NavigationMethods.of(context).navigateTo(
+                        ManualRegisterView(userType: UserType.Admin));
+                  } else {
+                    NavigationMethods.of(context)
+                        .navigateTo(UserListView(userType: UserType.Admin));
+                  }
                 }
               },
               icon: Icon(Icons.face, size: 30, color: AppColors.PrimaryBlack),

@@ -28,7 +28,7 @@ class LoggingInterceptors extends Interceptor {
   @override
   Future<dynamic> onError(DioError dioError) {
     GlobalDialogs.popContext();
-    GlobalDialogs.displayConnectionError(dioError.response.statusCode);
+    GlobalDialogs.displayErrorDialog(dioError?.response?.statusCode ?? 500);
     DateTime now = DateTime.now();
     print(
         "<-- ERROR ${dioError.message} ${(dioError.request != null ? (dioError.request.baseUrl + dioError.request.path) : 'URL')}");
