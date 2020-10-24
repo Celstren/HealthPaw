@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "977917543021",
+    "firebase_url": "https://healthpaw-63e98.firebaseio.com",
+    "project_id": "healthpaw-63e98",
+    "storage_bucket": "healthpaw-63e98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977917543021:android:9d4c2ee2d7df67e0713564",
+        "android_client_info": {
+          "package_name": "com.example.HealthPaw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977917543021-r2p78gi9cbdkpq9suq5s3uucg05igb5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR31XIcmTmLvl3jzdgebFFAHA-Yty-sSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977917543021-r2p78gi9cbdkpq9suq5s3uucg05igb5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
