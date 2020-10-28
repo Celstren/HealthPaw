@@ -48,6 +48,9 @@
     "Average": "Promedio",
     "Activated": "Habilitado",
     "Deactivated": "Deshabilitado",
+    "Message": "Mensaje",
+    "Date": "Fecha",
+    "Time": "Hora",
 
     "Pets": "Mascotas",
     "Collars": "Collares",
@@ -99,6 +102,8 @@
     "DeactivateUser": "Deshabilitar usuario",
     "AskDeactivatePet": "¿Deshabilitar mascota?",
     "AskActivatePet": "¿Habilitar mascota?",
+    
+    "RegisterAlert": "Registrar Alerta",
     
     "PetOverview": "Resumen de mascota",
     "CardiacFrequency": "Frecuencia cardiaca",
@@ -170,6 +175,8 @@
     "SensorConnectedFailed": "Conexión fallida",
     "SensorDisconnectedSuccessfully": "Desconexión éxitosa",
     "SensorDisconnectedFailed": "Desconexión fallida",
+    "RegisteredAlert": "Alerta Registrada",
+    "InvalidMessage": "Mensaje inválido",
 
     "PetsAssigned": "Mascotas asignadas",
 
@@ -232,6 +239,7 @@
     "EnterMobile": "Ingrese número de celular",
     "EnterBirthday": "Ingrese fecha de nacimiento",
     "EnterEmail": "Ingrese correo electrónico",
+    "EnterMessage": "Ingrese mensaje",
     "SelectUserType": "Seleccione tipo de usuario",
 
     "AskDeactivateAccount": "¿Desea deshabilitar la cuenta?",

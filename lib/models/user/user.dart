@@ -83,7 +83,6 @@ class User {
         "lastName": lastName ?? "",
         "secondLastName": secondLastName ?? "",
         "image": image ?? "",
-        "password": password ?? "",
         "email": email ?? "",
         "phone": phone,
         "birthDay": birthDay.toIso8601String(),
