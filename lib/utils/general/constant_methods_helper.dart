@@ -22,8 +22,8 @@ class ConstantMethodHelper {
 
   static String petTypeValue(PetType petType) {
     switch (petType) {
-      case PetType.Dog: return AppStrings.dog; break;
-      case PetType.Cat: return AppStrings.cat; break;
+      case PetType.Dog: return "Perro"; break;
+      case PetType.Cat: return "Gato"; break;
       default:          return "";
     }
   }

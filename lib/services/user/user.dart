@@ -40,7 +40,7 @@ class UserService {
   static Future<bool> updateUser(String id, User user) async {
     try {
       Response response =
-          await dioClient.put("user/" + id, data: user.toJson());
+          await dioClient.put("user/" + id, data: user.toJsonUpdate());
       return response.statusCode == 200;
     } catch (e) {
       print(e);

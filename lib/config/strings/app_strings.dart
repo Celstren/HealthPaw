@@ -10,11 +10,16 @@ class AppStrings {
   static final String connect = AppConfig.commonStringsJson["Connect"] ?? "";
   static final String close = AppConfig.commonStringsJson["Close"] ?? "";
   static final String register = AppConfig.commonStringsJson["Register"] ?? "";
+  static final String registerNotification = AppConfig.commonStringsJson["RegisterAlert"] ?? "";
   static final String modify = AppConfig.commonStringsJson["Modify"] ?? "";
   static final String cancel = AppConfig.commonStringsJson["Cancel"] ?? "";
   static final String deactivate =       AppConfig.commonStringsJson["Deactivate"] ?? "";
+  static final String activate =       AppConfig.commonStringsJson["Activate"] ?? "";
   static final String deactivated =       AppConfig.commonStringsJson["Deactivated"] ?? "";
   static final String activated =       AppConfig.commonStringsJson["Activated"] ?? "";
+  static final String message =       AppConfig.commonStringsJson["Message"] ?? "";
+  static final String date =       AppConfig.commonStringsJson["Date"] ?? "";
+  static final String time =       AppConfig.commonStringsJson["Time"] ?? "";
   static final String sounds = AppConfig.commonStringsJson["Sounds"] ?? "";
   static final String alerts = AppConfig.commonStringsJson["Alerts"] ?? "";
   static final String record = AppConfig.commonStringsJson["Record"] ?? "";
@@ -93,6 +98,8 @@ class AppStrings {
   static final String ownerProfile =       AppConfig.commonStringsJson["OwnerProfile"] ?? "";
   static final String modifyOwnerProfile =       AppConfig.commonStringsJson["ModifyOwnerProfile"] ?? "";
   static final String deactivateUser =       AppConfig.commonStringsJson["DeactivateUser"] ?? "";
+  static final String askDeactivatePet =       AppConfig.commonStringsJson["AskDeactivatePet"] ?? "";
+  static final String askActivatePet =       AppConfig.commonStringsJson["AskActivatePet"] ?? "";
   static final String petOverview =       AppConfig.commonStringsJson["PetOverview"] ?? "";
   static final String cardiacFrequency =       AppConfig.commonStringsJson["CardiacFrequency"] ?? "";
   static final String breathFrequency =       AppConfig.commonStringsJson["BreathFrequency"] ?? "";
@@ -173,6 +180,7 @@ class AppStrings {
   static final String enterMobile =       AppConfig.commonStringsJson["EnterMobile"] ?? "";
   static final String enterBirthday =       AppConfig.commonStringsJson["EnterBirthday"] ?? "";
   static final String enterEmail =       AppConfig.commonStringsJson["EnterEmail"] ?? "";
+  static final String enterMessage =       AppConfig.commonStringsJson["EnterMessage"] ?? "";
   static final String selectUserType =       AppConfig.commonStringsJson["SelectUserType"] ?? "";
   static final String ok = AppConfig.commonStringsJson["Ok"] ?? "";
   static final String askDeactivateAccount =       AppConfig.commonStringsJson["AskDeactivateAccount"] ?? "";
@@ -200,6 +208,8 @@ class AppStrings {
   static final String connected =       AppConfig.commonStringsJson["Connected"] ?? "";
   static final String sensorDisconnectedSuccessfully =       AppConfig.commonStringsJson["SensorDisconnectedSuccessfully"] ?? "";
   static final String sensorDisconnectedFailed =       AppConfig.commonStringsJson["SensorDisconnectedFailed"] ?? "";
+  static final String registeredAlert =       AppConfig.commonStringsJson["RegisteredAlert"] ?? "";
+  static final String invalidMessage =       AppConfig.commonStringsJson["InvalidMessage"] ?? "";
   static final String retry =       AppConfig.commonStringsJson["Retry"] ?? "";
   static final String turnOnLed =       AppConfig.commonStringsJson["TurnOnLed"] ?? "";
   static final String turnOffLed =       AppConfig.commonStringsJson["TurnOffLed"] ?? "";
@@ -208,4 +218,5 @@ class AppStrings {
   static final String syncDevice =       AppConfig.commonStringsJson["SyncDevice"] ?? "";
   static final String temperaturesTrack =       AppConfig.commonStringsJson["TemperaturesTrack"] ?? "";
   static final String physicalActivitiesTrack =       AppConfig.commonStringsJson["PhysicalActivitiesTrack"] ?? "";
+  static final String connectionError =       AppConfig.commonStringsJson["ConnectionError"] ?? "";
 }

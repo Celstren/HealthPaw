@@ -12,6 +12,7 @@
     "Register": "Register",
     "Modify": "Modify",
     "Deactivate": "Deactivate",
+    "Activate": "Activate",
     "Cancel": "Cancel",
     "Sounds": "Sounds",
     "Alerts": "Alerts",
@@ -47,6 +48,9 @@
     "Average": "Average",
     "Activated": "Activated",
     "Deactivated": "Deactivated",
+    "Message": "Message",
+    "Date": "Date",
+    "Time": "Time",
 
     "Pets": "Pets",
     "Collars": "Collars",
@@ -96,6 +100,10 @@
     "OwnerProfile": "Owner Profile",
     "ModifyOwnerProfile": "Modify Owner Profile",
     "DeactivateUser": "Deactivate user",
+    "AskDeactivatePet": "Deactivate pet?",
+    "AskActivatePet": "Activate pet?",
+    
+    "RegisterAlert": "Register Alert",
     
     "PetOverview": "Pet overview",
     "CardiacFrequency": "Cardiac fFrequency",
@@ -166,7 +174,8 @@
     "SensorConnectedFailed": "Sensor connected failed",
     "SensorDisconnectedSuccessfully": "Sensor disconnected successfully",
     "SensorDisconnectedFailed": "Sensor disconnected failed",
-
+    "RegisteredAlert": "Registered Alert",
+    "InvalidMessage": "Invalid Message",
 
     "PetsAssigned": "Pets assigned",
 
@@ -210,6 +219,8 @@
     "FetchPetFail": "Failed to fetch pet data",
     "LogoutFail": "Logout failed",
 
+    "ConnectionError": "Connection Error",
+
     "TheField": "The field",
     "IsInvalid": "is invalid",
     "paswordConstraints": "Password must contain 8 characters minimum, 1 uppercase, 1 lowercase, 1 number and 1 special character",
@@ -222,6 +233,7 @@
     "EnterMobile": "Enter mobile number",
     "EnterBirthday": "Enter birthday",
     "EnterEmail": "Enter email",
+    "EnterMessage": "Enter message",
     "SelectUserType": "Select user type",
 
     "AskDeactivateAccount": "Would you like to deactivate account?",

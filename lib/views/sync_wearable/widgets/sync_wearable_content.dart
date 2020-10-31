@@ -1,14 +1,11 @@
 import 'package:HealthPaw/config/strings/app_strings.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
-import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
-import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
-import 'package:HealthPaw/views/sync_wearable/logic/device_controller.dart';
 import 'package:HealthPaw/views/sync_wearable/widgets/sync_wearable_item.dart';
-import 'package:HealthPaw/views/sync_wearable/widgets/sync_wearable_report_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
+import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 
 class SyncWearableContent extends StatefulWidget {
   SyncWearableContent({Key key}) : super(key: key);

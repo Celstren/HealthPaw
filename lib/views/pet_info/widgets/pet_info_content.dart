@@ -6,7 +6,6 @@ import 'package:HealthPaw/navigation/navigation_methods.dart';
 import 'package:HealthPaw/services/pet/pet.dart';
 import 'package:HealthPaw/services/user/user.dart';
 import 'package:HealthPaw/utils/exports/app_design.dart';
-import 'package:HealthPaw/utils/general/constant_helper.dart';
 import 'package:HealthPaw/utils/general/constant_methods_helper.dart';
 import 'package:HealthPaw/utils/helpers/validators.dart';
 import 'package:HealthPaw/utils/widgets/app_text_field.dart';
@@ -15,6 +14,7 @@ import 'package:HealthPaw/utils/widgets/global_dialogs.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/pet_avatar.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
+import 'package:HealthPaw/utils/widgets/two_options_dialog.dart';
 import 'package:HealthPaw/views/main_menu/main_menu.dart';
 import 'package:HealthPaw/views/pet_info/widgets/pet_recommendation_item.dart';
 import 'package:HealthPaw/views/pet_status/pet_status.dart';
@@ -45,7 +45,7 @@ class _PetInfoContentState extends State<PetInfoContent> {
 
   User user;
 
-  String petSize = null;
+  String petSize;
   bool validatedPetNameValue = true;
   bool validatedPetBreedValue = true;
   bool validatedPetWeightValue = true;
@@ -92,13 +92,27 @@ class _PetInfoContentState extends State<PetInfoContent> {
     );
   }
 
+  void showModifyFailedDialog() {
+    showCustomDialog(
+      context: context,
+      child: CustomDialog(
+        backgroundColor: Colors.transparent,
+        child: OkDialog(
+          title: AppStrings.failedModify,
+          okText: AppStrings.close,
+          onPress: () => Navigator.pop(context),
+        ),
+      ),
+    );
+  }
+
   void validateRedirection(Widget widget) async {
     ConnectivityResult connectivity =
         await (Connectivity().checkConnectivity());
     if (connectivity != ConnectivityResult.none) {
       NavigationMethods.of(context).navigateTo(widget);
     } else {
-      GlobalDialogs.displayConnectionError(0);
+      GlobalDialogs.displayErrorDialog(0);
     }
   }
 
@@ -134,6 +148,22 @@ class _PetInfoContentState extends State<PetInfoContent> {
     }
   }
 
+  void askForDeactivation() {
+    showCustomDialog(
+      context: context,
+      child: CustomDialog(
+        backgroundColor: Colors.transparent,
+        child: TwoOptionsDialog(
+          title: widget.pet.active ? AppStrings.askDeactivatePet : AppStrings.askActivatePet,
+          leftOptionText: AppStrings.cancel,
+          onLeftPress: () => Navigator.pop(context),
+          rightOptionText: AppStrings.accept,
+          onRightPress: () => changePetStatusRequest(),
+        ),
+      ),
+    );
+  }
+
   Future<bool> createPetRequest() async {
     Pet pet = Pet(
       namevar: petNameController.value.text.trim(),
@@ -164,6 +194,16 @@ class _PetInfoContentState extends State<PetInfoContent> {
     if (!success) return false;
     return await UserService.editPetToUser(
         user.documentNumber, pet.namevar, pet.id);
+  }
+
+  void changePetStatusRequest() async {
+    Pet pet = widget.pet;
+    pet.active = !widget.pet.active;
+    bool success = await PetService.updatePet(pet);
+    if (success) {
+      Navigator.pop(context);
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -459,10 +499,10 @@ class _PetInfoContentState extends State<PetInfoContent> {
               onPress: () => _submit(),
             ),
             RoundedButton(
-              text: AppStrings.deactivate,
+              text: widget.pet.active ? AppStrings.deactivate : AppStrings.activate,
               size: Size(150, 40),
               style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
-              onPress: () => Navigator.pop(context),
+              onPress: askForDeactivation,
             ),
           ],
         ),
