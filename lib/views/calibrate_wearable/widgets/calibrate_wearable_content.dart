@@ -28,7 +28,9 @@ class _CalibrateWearableContentState extends State<CalibrateWearableContent> {
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.PrimaryBlack, width: 2.0),
         ),
-        child: Column(children: _buildItemList()),
+        child: Column(
+          children: _buildItemList()
+          ),
       ),
     );
   }

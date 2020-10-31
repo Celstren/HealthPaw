@@ -33,6 +33,14 @@ class _SyncWearableReportDialogState extends State<SyncWearableReportDialog> {
   List<Acceleration> accelerations = [];
   Timer timer;
 
+  static final String clase = "SyncWearableReportDialog";
+
+  @override
+  void initState() { 
+    super.initState();
+    print(clase);
+  }
+
   Future<void> activateRecord() async {
     setState(() {
       isActive = true;

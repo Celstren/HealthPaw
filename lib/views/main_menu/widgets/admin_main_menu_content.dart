@@ -16,24 +16,27 @@ class AdminMainMenuContent extends StatefulWidget {
 class _AdminMainMenuContentState extends State<AdminMainMenuContent> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        CircularButton(
-          size: 80,
-          onPress: () => NavigationMethods.of(context)
-              .navigateTo(SelectUserTypeView(selectType: SelectType.Register)),
-          label: AppStrings.registerUsers,
-          icon: Icon(Icons.person_add, size: 30, color: AppColors.PrimaryBlack),
-        ),
-        CircularButton(
-          size: 80,
-          onPress: () => NavigationMethods.of(context)
-              .navigateTo(SelectUserTypeView(selectType: SelectType.List)),
-          label: AppStrings.users,
-          icon: Icon(Icons.person, size: 30, color: AppColors.PrimaryBlack),
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          CircularButton(
+            size: 80,
+            onPress: () => NavigationMethods.of(context).navigateTo(
+                SelectUserTypeView(selectType: SelectType.Register)),
+            label: AppStrings.registerUsers,
+            icon:
+                Icon(Icons.person_add, size: 30, color: AppColors.PrimaryBlack),
+          ),
+          CircularButton(
+            size: 80,
+            onPress: () => NavigationMethods.of(context)
+                .navigateTo(SelectUserTypeView(selectType: SelectType.List)),
+            label: AppStrings.users,
+            icon: Icon(Icons.person, size: 30, color: AppColors.PrimaryBlack),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -20,7 +20,7 @@ class _MainMenuViewState extends State<MainMenuView> {
         body: Column(
           children: <Widget>[
             CommonAppBar(title: ConstantMethodHelper.mainTitle, showHeader: false, showLogout: true),
-            Expanded(child: ConstantMethodHelper.mainContent),
+            Expanded(child: ConstantMethodHelper.mainContent)
           ],
         ),
         bottomNavigationBar: MainNavigationBar(),

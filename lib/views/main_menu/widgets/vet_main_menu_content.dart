@@ -15,22 +15,25 @@ class VetMainMenuContent extends StatefulWidget {
 class _VetMainMenuContentState extends State<VetMainMenuContent> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        CircularButton(
-          size: 80,
-          onPress: () => NavigationMethods.of(context).navigateTo(PetListView()),
-          label: AppStrings.petsAssigned,
-          icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
-        ),
-        CircularButton(
-          size: 80,
-          onPress: () {},
-          label: AppStrings.alerts,
-          icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          CircularButton(
+            size: 80,
+            onPress: () =>
+                NavigationMethods.of(context).navigateTo(PetListView()),
+            label: AppStrings.petsAssigned,
+            icon: Icon(Icons.pets, size: 30, color: AppColors.PrimaryBlack),
+          ),
+          CircularButton(
+            size: 80,
+            onPress: () {},
+            label: AppStrings.alerts,
+            icon: Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -19,6 +19,7 @@ import 'package:HealthPaw/views/main_menu/main_menu.dart';
 import 'package:HealthPaw/views/pet_info/widgets/pet_recommendation_item.dart';
 import 'package:HealthPaw/views/pet_status/pet_status.dart';
 import 'package:HealthPaw/views/report_pet_status/report_pet_status_view.dart';
+import 'package:HealthPaw/views/report_pet_status/select_pet_status_report.dart';
 import 'package:HealthPaw/views/select_pet_type/widgets/select_pet_type_content.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -480,12 +481,13 @@ class _PetInfoContentState extends State<PetInfoContent> {
             RoundedButton(
               text: AppStrings.reportStatus,
               size: Size(150, 40),
-              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),
+              style: AppTextStyle.whiteStyle(fontSize: AppFontSizes.text14),              
               onPress: () =>
-                  validateRedirection(ReportPetStatusView(pet: widget.pet)),
+                  validateRedirection(SelectPetStatusReport(pet: widget.pet)),
             ),
           ],
         ),
+        SizedBox(height: 20),
         widget.pet?.recommendations != null &&
                 widget.pet.recommendations.isNotEmpty
             ? _buildRecommendations()
