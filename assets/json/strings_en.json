@@ -48,6 +48,9 @@
     "Average": "Average",
     "Activated": "Activated",
     "Deactivated": "Deactivated",
+    "Message": "Message",
+    "Date": "Date",
+    "Time": "Time",
 
     "Pets": "Pets",
     "Collars": "Collars",
@@ -99,6 +102,8 @@
     "DeactivateUser": "Deactivate user",
     "AskDeactivatePet": "Deactivate pet?",
     "AskActivatePet": "Activate pet?",
+    
+    "RegisterAlert": "Register Alert",
     
     "PetOverview": "Pet overview",
     "CardiacFrequency": "Cardiac fFrequency",
@@ -169,7 +174,8 @@
     "SensorConnectedFailed": "Sensor connected failed",
     "SensorDisconnectedSuccessfully": "Sensor disconnected successfully",
     "SensorDisconnectedFailed": "Sensor disconnected failed",
-
+    "RegisteredAlert": "Registered Alert",
+    "InvalidMessage": "Invalid Message",
 
     "PetsAssigned": "Pets assigned",
 
@@ -213,7 +219,7 @@
     "FetchPetFail": "Failed to fetch pet data",
     "LogoutFail": "Logout failed",
 
-    "ConnectionError": "Error de conexión",
+    "ConnectionError": "Connection Error",
 
     "TheField": "The field",
     "IsInvalid": "is invalid",
@@ -227,6 +233,7 @@
     "EnterMobile": "Enter mobile number",
     "EnterBirthday": "Enter birthday",
     "EnterEmail": "Enter email",
+    "EnterMessage": "Enter message",
     "SelectUserType": "Select user type",
 
     "AskDeactivateAccount": "Would you like to deactivate account?",
