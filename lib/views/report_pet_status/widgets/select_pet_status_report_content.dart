@@ -7,8 +7,8 @@ import 'package:HealthPaw/utils/widgets/circular_button.dart';
 import 'package:HealthPaw/utils/widgets/custom_dialog.dart';
 import 'package:HealthPaw/utils/widgets/ok_dialog.dart';
 import 'package:HealthPaw/utils/widgets/rounded_button.dart';
-import 'package:HealthPaw/views/report_pet_status/widgets/set_pet_breathing.dart';
-import 'package:HealthPaw/views/report_pet_status/widgets/set_pet_heart_rate.dart';
+import 'package:HealthPaw/views/report_pet_status/widgets/prev_set_breathing.dart';
+import 'package:HealthPaw/views/report_pet_status/widgets/prev_set_heart_rate.dart';
 import 'package:HealthPaw/views/sync_wearable/logic/device_controller.dart';
 import 'package:HealthPaw/views/sync_wearable/sync_wearable.dart';
 import 'package:HealthPaw/views/sync_wearable/widgets/sync_wearable_report_dialog.dart';
@@ -47,10 +47,15 @@ class _SelectPetStatusReportContentState
         child: Column(
           children: <Widget>[
             SizedBox(height: 30),
-            _buildOptionsButtons(),
-            SizedBox(height: 30),
+            _buildOptionsButtons(),            
+            Container(
+              child: Image.asset('assets/tutorials/both.jpeg'),
+              margin: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(10.0),
+              alignment: Alignment.center,
+            ),
             _buildReportButton(),
-            SizedBox(height: 30),
+            SizedBox(height: 30),            
             _buildReportWithSensorButton(),
             SizedBox(height: 30)
           ],
@@ -99,7 +104,7 @@ class _SelectPetStatusReportContentState
                 size: 80,
                 onPress: () =>
                     // redirect to set heart rate
-                    NavigationMethods.of(context).navigateTo(SetPetHeartRate()),
+                    NavigationMethods.of(context).navigateTo(PrevSetHeartrate()),
                 label: AppStrings.cardiacFrequency,
                 icon: Icon(Icons.favorite,
                     size: 30, color: AppColors.PrimaryBlack),
@@ -108,7 +113,7 @@ class _SelectPetStatusReportContentState
                 size: 80,
                 onPress: () =>
                     // redirect to set breathing freq
-                    NavigationMethods.of(context).navigateTo(SetPetBreathing()),
+                    NavigationMethods.of(context).navigateTo(PrevSetBreathing()),
                 label: AppStrings.breathFrequency,
                 icon:
                     Icon(Icons.timer, size: 30, color: AppColors.PrimaryBlack),

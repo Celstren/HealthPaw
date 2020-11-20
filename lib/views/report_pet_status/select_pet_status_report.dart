@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 
 class SelectPetStatusReport extends StatefulWidget {
   final Pet pet;
-  SelectPetStatusReport({Key key, this.pet}) : super(key: key);  
+  SelectPetStatusReport({Key key, this.pet}) : super(key: key);
 
   @override
   _SelectPetStatusReportState createState() => _SelectPetStatusReportState();
 }
+
+void _onClick() {}
 
 class _SelectPetStatusReportState extends State<SelectPetStatusReport> {
   @override
@@ -19,8 +21,12 @@ class _SelectPetStatusReportState extends State<SelectPetStatusReport> {
       child: Scaffold(
         body: Column(
           children: <Widget>[
-            CommonAppBar(title: AppStrings.petStatus, showHeader: true),
-            Expanded(child: SelectPetStatusReportContent(pet: widget.pet)),
+            CommonAppBar(
+              title: AppStrings.petStatus, showHeader: true
+            ),
+            Expanded(
+              child: SelectPetStatusReportContent(pet: widget.pet)
+            ),
           ],
         ),
       ),

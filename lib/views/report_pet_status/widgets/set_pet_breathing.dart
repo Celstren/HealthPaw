@@ -35,6 +35,7 @@ class _SetPetHeartRateState extends State<SetPetBreathing> {
           onPress: () {              
             Navigator.pop(context);
             Navigator.pop(context);
+            Navigator.pop(context);
           },
         ),
       ),
