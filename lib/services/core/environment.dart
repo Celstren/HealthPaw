@@ -4,7 +4,7 @@ class BuildEnvironment<String> extends Enum<String> {
   const BuildEnvironment(String val) : super(val);
 
   /// PROD
-  static const PROD_API = const BuildEnvironment('');
+  static const PROD_API = const BuildEnvironment('http://healthpawbackend-env.eba-dryccupf.us-east-1.elasticbeanstalk.com/api/');
 
   /// DEV
   static const DEV_API = const BuildEnvironment('http://localhost:3000/api/');

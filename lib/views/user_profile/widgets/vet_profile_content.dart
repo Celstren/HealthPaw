@@ -72,77 +72,84 @@ class _VetProfileContentState extends State<VetProfileContent> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
+        padding: EdgeInsets.only(left: 10.0, right: 5.0),
         width: MediaQuery.of(context).size.width,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 20),
-                      _buildOverviewField(label: AppStrings.names, text: name),
-                      SizedBox(height: 10),
-                      _buildOverviewField(
-                          label: AppStrings.lastnames,
-                          text: lastName + secondLastName),
-                      SizedBox(height: 10),
-                      _buildOverviewField(
-                          label: AppStrings.mobileNumber, text: phone),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 110,
-                        width: 90,
-                        child: Placeholder(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(height: 20),
+                    _buildOverviewField(label: AppStrings.names, text: name),
+                    SizedBox(height: 10),
+                    _buildOverviewField(
+                        label: AppStrings.lastnames,
+                        text: lastName + secondLastName),
+                    SizedBox(height: 10),
+                    _buildOverviewField(
+                        label: AppStrings.mobileNumber, text: phone),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(                     
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,                          
+                          border: Border.all(color: AppColors.PrimaryLightBlue, width: 1.0),
+                          image: DecorationImage(
+                            image: AssetImage('assets/icons/vet.png'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
-                      SizedBox(height: 10),
-                      RoundedButton(
-                        size: Size(130, 30),
-                        text: AppStrings.deactivateUser,
-                        style: AppTextStyle.whiteStyle(
-                            fontSize: AppFontSizes.text10,
-                            fontWeight: FontWeight.bold),
-                        onPress: showAskDeactivateAccountDialog,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(height: 10),
-              _buildOverviewField(label: AppStrings.birthDay, text: birthDay),
-              SizedBox(height: 10),
-              _buildOverviewField(label: AppStrings.email, text: email),
-              SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  RoundedButton(
-                    text: AppStrings.modify,
-                    size: Size(150, 40),
-                    style:
-                        AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-                    onPress: () => NavigationMethods.of(context)
-                        .navigateTo(ModifyOwnerProfileView()),
-                  ),
-                  RoundedButton(
-                    text: AppStrings.deactivate,
-                    size: Size(150, 40),
-                    style:
-                        AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
-                    onPress: showAskDeactivateAccountDialog,
-                  ),
-                ],
-              ),
-            ],
-          ),
+                    ),
+                    SizedBox(height: 10),
+                    RoundedButton(
+                      size: Size(130, 30),
+                      text: AppStrings.deactivateUser,
+                      style: AppTextStyle.whiteStyle(
+                          fontSize: AppFontSizes.text10,
+                          fontWeight: FontWeight.bold),
+                      onPress: showAskDeactivateAccountDialog,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            _buildOverviewField(label: AppStrings.birthDay, text: birthDay),
+            SizedBox(height: 10),
+            _buildOverviewField(label: AppStrings.email, text: email),
+            SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                RoundedButton(
+                  text: AppStrings.modify,
+                  size: Size(150, 40),
+                  style:
+                      AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
+                  onPress: () => NavigationMethods.of(context)
+                      .navigateTo(ModifyOwnerProfileView()),
+                ),
+                RoundedButton(
+                  text: AppStrings.deactivate,
+                  size: Size(150, 40),
+                  style:
+                      AppTextStyle.whiteStyle(fontSize: AppFontSizes.title18),
+                  onPress: showAskDeactivateAccountDialog,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

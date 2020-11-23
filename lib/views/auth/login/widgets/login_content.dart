@@ -38,9 +38,9 @@ class _LoginContentState extends State<LoginContent> {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            SizedBox(height: 160),
+            SizedBox(height: 120),
             LoginLogo(),
-            SizedBox(height: 60),
+            SizedBox(height: 20),
             _registerTextField(
                 controller: _loginForm.documentNumberController,
                 title: "${AppStrings.user}",
@@ -91,7 +91,7 @@ class _LoginContentState extends State<LoginContent> {
                 ),
               ],
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
@@ -102,6 +102,7 @@ class _LoginContentState extends State<LoginContent> {
                 ),
               ),
             ),
+            SizedBox(height: 20),
           ],
         ),
       ),

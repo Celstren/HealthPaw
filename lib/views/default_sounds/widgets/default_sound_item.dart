@@ -46,7 +46,12 @@ class _DefaultSoundItemState extends State<DefaultSoundItem> {
           SizedBox(
             height: 80,
             width: 80,
-            child: Placeholder(),
+            child: Container(
+              child: Image.asset('assets/icons/sound.png'),
+              margin: EdgeInsets.all(1.0),
+              padding: EdgeInsets.all(1.0),
+              alignment: Alignment.center,
+            ),
           ),
           StreamBuilder<AudioPlayerState>(
               initialData: AudioPlayerState.COMPLETED,

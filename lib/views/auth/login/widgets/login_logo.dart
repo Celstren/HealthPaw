@@ -5,13 +5,17 @@ class LoginLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
+    return Container(      
+      height: MediaQuery.of(context).size.width*0.40,
+      width: MediaQuery.of(context).size.width*0.7,
       child: Center(
         child: Container(
-          height: 80,
-          width: 160,
-          child: Placeholder(),
+          decoration: BoxDecoration(
+            // border: Border.all(color: Colors.black, width: 1.5),
+              image: DecorationImage(
+            image: AssetImage('assets/icons/logo.PNG'),
+            fit: BoxFit.fitWidth,
+          )),
         ),
       ),
     );

@@ -115,7 +115,14 @@ class _OwnerProfileContentState extends State<OwnerProfileContent> {
                       SizedBox(
                         height: 110,
                         width: MediaQuery.of(context).size.width * 0.35,
-                        child: Placeholder(),
+                        child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/icons/owner.png'),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
                       ),
                       SizedBox(height: 10),
                       RoundedButton(

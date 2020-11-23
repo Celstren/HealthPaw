@@ -15,7 +15,12 @@ class LocateMap extends StatelessWidget {
           SizedBox(
             height: 230,
             width: 280,
-            child: Placeholder(),
+            child: Container(
+              child: Image.asset('assets/icons/map-locate.png'),
+              margin: EdgeInsets.all(1.0),
+              padding: EdgeInsets.all(1.0),
+              alignment: Alignment.center,
+            ),
           ),
           SizedBox(height: 20),
           Container(

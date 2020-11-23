@@ -40,10 +40,16 @@ class _AdminProfileContentState extends State<AdminProfileContent> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
-                        height: 110,
-                        width: 90,
-                        child: Placeholder(),
-                      ),
+                          height: 110,
+                          width: 110,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/icons/admin.png'),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          )),
                     ],
                   ),
                 ],

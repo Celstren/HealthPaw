@@ -251,25 +251,26 @@ class _StatsOverviewState extends State<StatsOverview> {
                   : SizedBox(),
               !widget.media && !widget.max && !widget.min
                   ? SizedBox()
-                  : SizedBox(height: 50),
+                  : SizedBox(height: 20),
             ]),
-            widget.history != null
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      RoundedButton(
-                        size: Size(100, 30),
-                        text: AppStrings.history,
-                        style: AppTextStyle.whiteStyle(
-                            fontSize: AppFontSizes.text12),
-                        onPress: () => NavigationMethods.of(context)
-                            .navigateReplacement(widget.history),
-                      ),
-                    ],
-                  )
-                : SizedBox(),
           ],
-        )
+        ),
+        widget.history != null
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RoundedButton(
+                    size: Size(100, 30),
+                    text: AppStrings.history,
+                    style:
+                        AppTextStyle.whiteStyle(fontSize: AppFontSizes.text12),
+                    onPress: () => NavigationMethods.of(context)
+                        .navigateReplacement(widget.history),
+                  ),
+                ],
+              )
+            : SizedBox(),
+            SizedBox(height: 20),
       ],
     );
   }
@@ -339,7 +340,7 @@ class _StatsOverviewState extends State<StatsOverview> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(height: 70, width: 100, child: _iconStat),
+                      SizedBox(height: 150, width: 120, child: _iconStat),
                       SizedBox(width: 10),
                       SizedBox(
                         height: 80,

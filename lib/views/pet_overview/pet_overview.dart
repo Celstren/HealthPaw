@@ -18,6 +18,7 @@ class _PetOverviewViewState extends State<PetOverviewView> {
     return SafeArea(
       child: Scaffold(
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             CommonAppBar(title: AppStrings.petOverview, showHeader: true),
             Expanded(child: PetOverviewContent(pet: widget.pet)),

@@ -26,6 +26,14 @@ class _BreathTodayContentState extends State<BreathTodayContent> {
             PetAvatar(name: widget.pet.namevar),
             SizedBox(height: 10),
             StatsOverview(
+              iconStat: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/icons/stat-breathing.png'),
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
               stadistic: widget.pet.breathingFrequency,
               type: StadisticType.TODAY,
               metricUnit: AppStrings.breathsPerMinuteUnits,

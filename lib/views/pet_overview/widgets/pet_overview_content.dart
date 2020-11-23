@@ -21,7 +21,7 @@ class _PetOverviewContentState extends State<PetOverviewContent> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: <Widget>[
               SizedBox(height: 20),

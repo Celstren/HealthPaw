@@ -48,12 +48,7 @@ class _SelectPetStatusReportContentState
           children: <Widget>[
             SizedBox(height: 30),
             _buildOptionsButtons(),            
-            Container(
-              child: Image.asset('assets/tutorials/both.jpeg'),
-              margin: EdgeInsets.all(10.0),
-              padding: EdgeInsets.all(10.0),
-              alignment: Alignment.center,
-            ),
+            SizedBox(height: 30),
             _buildReportButton(),
             SizedBox(height: 30),            
             _buildReportWithSensorButton(),

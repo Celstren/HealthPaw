@@ -28,7 +28,7 @@ class _PrevSetBreathingState extends State<PrevSetBreathing> {
                     onTap: () => NavigationMethods.of(context)
                         .navigateTo(SetPetBreathing()),
                     child: Container(
-                      child: Image.asset('assets/tutorials/breathingfreq.jpeg'),
+                      child: Image.asset('assets/tutorials/breathingfreqV2.png'),
                       alignment: Alignment.center,
                     ),
                   ),

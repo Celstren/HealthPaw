@@ -28,7 +28,7 @@ class _PrevSetHeartrateState extends State<PrevSetHeartrate> {
                     onTap: () => NavigationMethods.of(context)
                         .navigateTo(SetPetHeartRate()),
                     child: Container(
-                      child: Image.asset('assets/tutorials/heartrate.jpeg'),
+                      child: Image.asset('assets/tutorials/heartrateV2.png'),
                       alignment: Alignment.center,
                     ),
                   ),

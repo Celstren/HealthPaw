@@ -151,7 +151,12 @@ class _ModifyOwnerProfileContentState extends State<ModifyOwnerProfileContent> {
                       SizedBox(
                         height: 110,
                         width: 90,
-                        child: Placeholder(),
+                        child: Container(
+                          child: Image.asset('assets/icons/owner.png'),
+                          margin: EdgeInsets.all(1.0),
+                          padding: EdgeInsets.all(1.0),
+                          alignment: Alignment.center,
+                        ),
                       ),
                     ],
                   ),

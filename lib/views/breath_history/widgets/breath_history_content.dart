@@ -25,6 +25,14 @@ class _BreathHistoryContentState extends State<BreathHistoryContent> {
             PetAvatar(name: widget.pet.namevar),
             SizedBox(height: 10),
             StatsOverview(
+              iconStat: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/icons/history-breathing.png'),
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
               stadistic: widget.pet.breathingFrequency,
               type: StadisticType.HISTORY,
               metricUnit: AppStrings.breathsPerMinuteUnits,
